@@ -17,14 +17,31 @@
     color: black;
   }
 
+  .items {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .itemRight {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+  }
+
+  .navcontainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
   .tabsGroup {
     border: 0.5px solid grey;
     border-radius: 100px;
-    height: 40px;
+    height: 30px;
   }
   .MuiTab-textColorInherit.Mui-selected {
     transition: background-color 1s ease-in-out;
-    background-color: yellow;
+    background-color: #fee73f;
     border-radius: 100px;
   }
   .PrivateTabIndicator-root-1 {
@@ -33,12 +50,12 @@
   .MuiTabs-root {
     justify-content: center;
     align-items: center;
-    min-height: 40px;
+    min-height: 30px;
   }
   .MuiTab-root {
     min-width: 0px;
-    width: 100px;
-    font-weight: 800;
+    width: 80px;
+    font-size: 10pt;
   }
   .Mui-selected {
     border: none;
