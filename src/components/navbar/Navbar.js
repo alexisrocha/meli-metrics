@@ -1,16 +1,18 @@
 import React from "react"
 import { Navbar, Nav } from "react-bootstrap"
+import { Link } from "react-router-dom"
 import "./Navbar.scss"
 
 export default () => (
-    <div className="nav">
-        <Navbar bg="light" variant="light">
-            <Navbar.Brand href="#home">MeliMetrics</Navbar.Brand>
-            <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-            </Nav>
+    <div className="navbar">
+        <Navbar variant="light">
+            <div className="container navcontainer">
+                <Navbar.Brand id="title">MeliMetrics</Navbar.Brand>
+                <Nav className="mr-auto"></Nav>
+                <Nav.Link >Nombre vista actual</Nav.Link>
+                <Nav.Link >Mi lista de kpis</Nav.Link>
+                <Nav.Link >Mis alarmas</Nav.Link>
+            </div>
         </Navbar>
     </div>
   )

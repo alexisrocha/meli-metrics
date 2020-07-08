@@ -1,4 +1,16 @@
 .navbar{
-    color: red;
+    background-color: white;
     width: 100%;
+    #title{
+        font-size: 200%;
+        font-weight: normal;
+    }
+    a{
+        color: #449FD7;
+        font-weight: bold;
+    }
+    .container{
+        margin-left: 10%;
+        margin-right: 10%;
+    }
 }
