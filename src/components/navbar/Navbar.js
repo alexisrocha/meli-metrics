@@ -19,13 +19,13 @@ export default function navbar() {
             <Navbar.Brand id="title">MeliMetrics</Navbar.Brand>
           </div>
           <div className="items">
-            <Nav.Link>Nombre vista actual</Nav.Link>
+            <Nav.Link className="selected">Nombre vista actual</Nav.Link>
             <Nav.Link>Mi lista de kpis</Nav.Link>
             <Nav.Link>Mis alarmas</Nav.Link>
           </div>
           <div className="itemRight">
-            <Nav.Item style={{ color: "black", marginRight: 10 }}>
-              Visualizacion
+            <Nav.Item id="mode">
+              Visualización
             </Nav.Item>
             <Tabs
               className="tabsGroup"

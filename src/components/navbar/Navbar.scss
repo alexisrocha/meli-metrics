@@ -1,20 +1,46 @@
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("../../styles/fonts/proximanova-bold-webfont.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Proxima Nova Regular";
+  src: url("../../styles/fonts/proximanova-regular-webfont.woff") format("woff");
+}
+
 .navbar {
+  background-color: white;
+  width: 100%;
+
   button:focus {
     outline: none;
   }
-  background-color: white;
-  width: 100%;
+
   #title {
     font-size: 200%;
     font-weight: normal;
   }
-  a {
+
+  .selected{
     color: #449fd7;
+  }
+
+  a {
+    color: #9E9E9E;
     font-weight: bold;
+    font-family:'Proxima Nova';
+    text-transform: uppercase;
   }
 
   a:active {
     color: black;
+  }
+
+  #mode{
+    font-family:'Proxima Nova';
+    color: black;
+    margin-right: 10px;
+    font-weight: bold;
   }
 
   .items {
@@ -59,5 +85,12 @@
   }
   .Mui-selected {
     border: none;
+  }
+
+  button{
+    span{
+      text-transform: capitalize;
+      font-family:'Proxima Nova';
+    }
   }
 }
