@@ -1,16 +1,46 @@
-.navbar{
-    background-color: white;
-    width: 100%;
-    #title{
-        font-size: 200%;
-        font-weight: normal;
-    }
-    a{
-        color: #449FD7;
-        font-weight: bold;
-    }
-    .container{
-        margin-left: 10%;
-        margin-right: 10%;
-    }
+.navbar {
+  button:focus {
+    outline: none;
+  }
+  background-color: white;
+  width: 100%;
+  #title {
+    font-size: 200%;
+    font-weight: normal;
+  }
+  a {
+    color: #449fd7;
+    font-weight: bold;
+  }
+
+  a:active {
+    color: black;
+  }
+
+  .tabsGroup {
+    border: 0.5px solid grey;
+    border-radius: 100px;
+    height: 40px;
+  }
+  .MuiTab-textColorInherit.Mui-selected {
+    transition: background-color 1s ease-in-out;
+    background-color: yellow;
+    border-radius: 100px;
+  }
+  .PrivateTabIndicator-root-1 {
+    display: none;
+  }
+  .MuiTabs-root {
+    justify-content: center;
+    align-items: center;
+    min-height: 40px;
+  }
+  .MuiTab-root {
+    min-width: 0px;
+    width: 100px;
+    font-weight: 800;
+  }
+  .Mui-selected {
+    border: none;
+  }
 }
