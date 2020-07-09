@@ -1,16 +1,96 @@
-.navbar{
-    background-color: white;
-    width: 100%;
-    #title{
-        font-size: 200%;
-        font-weight: normal;
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("../../styles/fonts/proximanova-bold-webfont.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Proxima Nova Regular";
+  src: url("../../styles/fonts/proximanova-regular-webfont.woff") format("woff");
+}
+
+.navbar {
+  background-color: white;
+  width: 100%;
+
+  button:focus {
+    outline: none;
+  }
+
+  #title {
+    font-size: 200%;
+    font-weight: normal;
+  }
+
+  .selected{
+    color: #449fd7;
+  }
+
+  a {
+    color: #9E9E9E;
+    font-weight: bold;
+    font-family:'Proxima Nova';
+    text-transform: uppercase;
+  }
+
+  a:active {
+    color: black;
+  }
+
+  #mode{
+    font-family:'Proxima Nova';
+    color: black;
+    margin-right: 10px;
+    font-weight: bold;
+  }
+
+  .items {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .itemRight {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+  }
+
+  .navcontainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .tabsGroup {
+    border: 0.5px solid grey;
+    border-radius: 100px;
+    height: 30px;
+  }
+  .MuiTab-textColorInherit.Mui-selected {
+    transition: background-color 1s ease-in-out;
+    background-color: #fee73f;
+    border-radius: 100px;
+  }
+  .PrivateTabIndicator-root-1 {
+    display: none;
+  }
+  .MuiTabs-root {
+    justify-content: center;
+    align-items: center;
+    min-height: 30px;
+  }
+  .MuiTab-root {
+    min-width: 0px;
+    width: 80px;
+    font-size: 10pt;
+  }
+  .Mui-selected {
+    border: none;
+  }
+
+  button{
+    span{
+      text-transform: capitalize;
+      font-family:'Proxima Nova';
     }
-    a{
-        color: #449FD7;
-        font-weight: bold;
-    }
-    .container{
-        margin-left: 10%;
-        margin-right: 10%;
-    }
+  }
 }
