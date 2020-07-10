@@ -15,7 +15,7 @@ export default() => {
                     data: [100, 95, 105, 123, 110, 96, 92, 88, 80, 99, 110, 136],
                     backgroundColor: 'white',
                     borderWidth: 1,
-                    borderColor: '#fff159',
+                    borderColor: '#EFD764',
 
                 },
                 {
@@ -23,7 +23,7 @@ export default() => {
                     data: [80, 87, 97, 101, 125, 97, 94, 100, 95, 113, 120, 100],
                     backgroundColor: 'white',
                     borderWidth: 1,
-                    borderColor: 'grey'
+                    borderColor: '#E4E4E4'
                 }
             ],
         })
