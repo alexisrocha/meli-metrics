@@ -21,7 +21,7 @@ import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import "./Metric.scss";
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: "24%",
+    maxWidth: "23%",
     marginBottom: 10,
   },
   media: {
