@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("../../styles/fonts/proximanova-bold-webfont.woff") format("woff");
+}
+
+.timeLapse {
+  margin-left: 5%;
+  font-size: 95%;
+  font-family: "Proxima Nova";
+}
+
+.contenedorInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  margin-left: 5%;
+}
+.value {
+  font-family: "Proxima Nova";
+  color: #f5cf3c;
+  width: 70%;
+}
+
+.porcentaje {
+  font-family: "Proxima Nova";
+  background-color: green;
+  text-align: center;
+  width: 30%;
+  color: white;
+  margin-right: 7px;
+  border-radius: 15px;
+}
