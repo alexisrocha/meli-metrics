@@ -10,7 +10,7 @@ export default function addmodal(props) {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton>
+        <Modal.Header id="headerModal" closeButton>
           <Modal.Title id="addtitle">Add a metric</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -23,7 +23,7 @@ export default function addmodal(props) {
           </Form.Group>
         </Form>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer id="footerModal">
           <span className="closeModal" onClick={props.onHide}>Cancelar</span>
           <span className="closeModal" onClick={props.onHide}>Listo</span>
         </Modal.Footer>
