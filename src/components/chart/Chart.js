@@ -11,14 +11,14 @@ export default () => {
         {
           label: "AY",
           data: [100, 95, 105, 123, 110, 96, 92, 88, 80, 99, 110, 136],
-          backgroundColor: "white",
+          backgroundColor: "transparent",
           borderWidth: 4,
           borderColor: "#f5cf3c",
         },
         {
           label: "AY",
           data: [80, 87, 97, 101, 125, 97, 94, 100, 95, 113, 120, 100],
-          backgroundColor: "white",
+          backgroundColor: "transparent",
           borderWidth: 4,
           borderColor: "#E4E4E4",
         },
