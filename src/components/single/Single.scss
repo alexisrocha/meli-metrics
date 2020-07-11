@@ -1,0 +1,51 @@
+@font-face {
+    font-family: "Proxima Nova";
+    src: url("../../styles/fonts/proximanova-bold-webfont.woff") format("woff");
+  }
+  
+  @font-face {
+    font-family: "Proxima Nova Regular";
+    src: url("../../styles/fonts/proximanova-regular-webfont.woff") format("woff");
+  }
+
+#add{
+    background-color: #449fd7;
+    color: white;
+    border-radius: 60px;
+    height: 60px;
+    width: 60px;
+    text-align: center;
+    padding-top: 10px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+#add:hover{
+    width: 70px;
+    height: 70px;
+    padding-top: 15px;
+    font-weight: bold;
+    background-color: #2893d6;
+}
+
+#addcard{
+    background-color: #cccccc;
+    width: 20%;
+    height: 225px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    span{
+        margin: 10px auto;
+        font-family:'Proxima Nova';
+        color: gray;
+        cursor: pointer;
+    }
+}
+
+.single{
+    background-color: #F1F1F1;
+    padding-top: 20px;
+    min-height: 500px;
+}
