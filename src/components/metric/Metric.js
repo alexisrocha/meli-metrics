@@ -12,12 +12,12 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import CloseIcon from "@material-ui/icons/Close";
 import Chart from "../chart/Chart";
 import MLA from "../../../public/flags/MLA.png";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
+
 import "./Metric.scss";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,7 +58,7 @@ export default function Metric() {
       <div className="contenedorInfo">
         <div className="value">
           <h3>
-            <strong>4.008.828</strong>
+            <strong>4.008.976</strong>
           </h3>
         </div>
 
@@ -67,7 +67,7 @@ export default function Metric() {
           20%
         </div>
       </div>
-      <p className="timeLapse">YOY:$188.834.485</p>
+      <p className="timeLapse">YOY $188.828.348</p>
       <CardMedia>
         <Chart />
       </CardMedia>

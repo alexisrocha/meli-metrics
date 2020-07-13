@@ -1,19 +1,19 @@
-import React from "react"
-import { Modal, Button, Form } from "react-bootstrap"
-import "./Addmodal.scss"
+import React from "react";
+import { Modal, Button, Form } from "react-bootstrap";
+import "./Addmodal.scss";
 
 export default function addmodal(props) {
-    return (
-      <Modal
-        id="modal"
-        {...props}
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header id="headerModal" closeButton>
-          <Modal.Title id="addtitle">Add a metric</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+  return (
+    <Modal
+      id="modal"
+      {...props}
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header id="headerModal" closeButton>
+        <Modal.Title id="addtitle">Add a metric</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         <Form>
           <Form.Group className="forminput">
             <Form.Control type="text" placeholder="Search metric" />
@@ -22,11 +22,15 @@ export default function addmodal(props) {
             <Form.Control type="text" placeholder="Nombre de la lista" />
           </Form.Group>
         </Form>
-        </Modal.Body>
-        <Modal.Footer id="footerModal">
-          <span className="closeModal" onClick={props.onHide}>Cancelar</span>
-          <span className="closeModal" onClick={props.onHide}>Listo</span>
-        </Modal.Footer>
-      </Modal>
-    );
-  }
+      </Modal.Body>
+      <Modal.Footer id="footerModal">
+        <span className="closeModal" onClick={props.onHide}>
+          Cancelar
+        </span>
+        <span className="closeModal" onClick={props.onHide}>
+          Listo
+        </span>
+      </Modal.Footer>
+    </Modal>
+  );
+}
