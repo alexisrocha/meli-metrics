@@ -28,6 +28,15 @@
 
 .forminput{
     margin-top: 25px;
+    display: flex;
+}
+.searchIcon{
+    justify-content: baseline;
+    margin-top: 7px;
+}
+
+#inputSearch{
+    margin-right: -30px;
 }
 
 #footerModal{
