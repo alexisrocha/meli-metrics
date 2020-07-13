@@ -1,7 +1,7 @@
 let getMetric = 
 {
-    name: 'nombre',
-    display_name: 'Buy Box',
+    name: 'Buy Box',
+    display_name: 'Buy Box - GMV',
     group: 'MARKETPLACE',
     description: 'Una descripcion de la metrica',
     format: 'INTEG',
@@ -32,7 +32,8 @@ let getMetric =
         }
     ]
 }
-//https://run.mocky.io/v3/194dc58a-cefd-4fae-9e71-c639a9161d4f
+//https://run.mocky.io/v3/4557431e-8bb8-4fe1-9439-306455af3ce7
+// erase https://designer.mocky.io/manage/delete/4557431e-8bb8-4fe1-9439-306455af3ce7/Y03fTFnE4hvREegNd2vFQYfTr5rLJe06YvFR
 
 let getMetricData = 
 {
@@ -54,7 +55,7 @@ let getMetricData =
 
 let getMetric2 = 
 {
-    name: 'nombre',
+    name: 'Devices Sold',
     display_name: 'Devices Sold',
     group: 'MERCADO PAGO',
     description: 'ejemplo de mercadopago',
@@ -86,8 +87,8 @@ let getMetric2 =
         }
     ]
 }
-// https://run.mocky.io/v3/2d1084a6-7943-42d2-ade0-8801ef3211fc
-
+// https://run.mocky.io/v3/274d970d-104d-4bdf-94b5-4f3aa526c99f
+// erase https://designer.mocky.io/manage/delete/274d970d-104d-4bdf-94b5-4f3aa526c99f/W8sWD3BjkgCXQL0usCnB087aAhYJfdBXxy3d
 let getMetricData2 = 
 {
     labels: ['2020-01-31', '2020-02-28', '2020-03-31', '2020-04-30', '2020-05-31', '2020-06-30', '2020-07-31', '2020-08-31', '2020-09-30', '2020-10-31', '2020-11-30', '2020-12-31'],
