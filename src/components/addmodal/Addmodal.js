@@ -1,10 +1,13 @@
 import React from "react"
 import { Modal, Button, Form } from "react-bootstrap"
+import { useSelector, useDispatch} from "react-redux"
 import SearchIcon from "@material-ui/icons/Search";
+import { fetchChart } from "../../redux/action-creator/Charts"
 import "./Addmodal.scss"
 
 
 export default function addmodal(props) {
+  const dispatch = useDispatch()
     return (
       <Modal
         id="modal"
@@ -28,7 +31,10 @@ export default function addmodal(props) {
         </Modal.Body>
         <Modal.Footer id="footerModal">
           <span className="closeModal" onClick={props.onHide}>Cancelar</span>
-          <span className="closeModal" onClick={props.onHide}>Listo</span>
+          <span className="closeModal" onClick={()=>{
+            dispatch(fetchChart())
+            props.onHide()
+          }}>Listo</span>
         </Modal.Footer>
       </Modal>
     );
