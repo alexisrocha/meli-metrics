@@ -97,8 +97,8 @@ export default function Metric() {
         avatar={<Avatar className={classes.small} src={MLA}></Avatar>}
         title={<Typography className={classes.title}>Buy Box - GMV</Typography>}
         action={
-          <IconButton aria-label="settings">
-            <CloseIcon onClick={deleteCard} />
+          <IconButton aria-label="settings" onClick={deleteCard}>
+            <CloseIcon/>
           </IconButton>
         }
       />
@@ -117,26 +117,26 @@ export default function Metric() {
       <p className="timeLapse">YOY:$188.834.485</p>
       <CardMedia>
         <Chart />
+        <div className="buttonContainer">
+          <div className="button" onClick={handleClickOpenInfo}>
+            <div className="buttonItem">
+              <InfoIcon className={classes.item} />
+            </div>
+          </div>
+
+          <div className="button" onClick={handleClickOpenSettings}>
+            <div className="buttonItem">
+              <SettingsIcon className={classes.item} />
+            </div>
+          </div>
+
+          <div className="button">
+            <div className="buttonItem">
+              <GetAppIcon className={classes.item} />
+            </div>
+          </div>
+        </div>
       </CardMedia>
-      <div className="buttonContainer">
-        <div className="button" onClick={handleClickOpenInfo}>
-          <div className="buttonItem">
-            <InfoIcon className={classes.item} />
-          </div>
-        </div>
-
-        <div className="button" onClick={handleClickOpenSettings}>
-          <div className="buttonItem">
-            <SettingsIcon className={classes.item} />
-          </div>
-        </div>
-
-        <div className="button">
-          <div className="buttonItem">
-            <GetAppIcon className={classes.item} />
-          </div>
-        </div>
-      </div>
 
       {/*Dialog for DeleteCard*/}
       <Dialog
