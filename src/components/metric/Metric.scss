@@ -30,3 +30,48 @@
   margin-right: 7px;
   border-radius: 15px;
 }
+
+.cardMain {
+  max-width: 23%;
+  margin-bottom: 50px;
+}
+
+.cardMain:hover {
+  margin-bottom: 0px;
+}
+
+.cardMain:hover {
+  -webkit-box-shadow: inset 0px -87px 68px -40px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: inset 0px -87px 68px -40px rgba(0, 0, 0, 0.75);
+  box-shadow: inset 0px -87px 68px -40px rgba(0, 0, 0, 0.75);
+}
+
+.cardMain:hover .button {
+  display: inline;
+}
+
+.button {
+  display: none;
+  width: 15%;
+  height: 30px;
+  background-color: whitesmoke;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  margin: 5px;
+}
+
+.buttonItem {
+  display: flex;
+  justify-content: center;
+  margin-top: 15%;
+}
+
+.button:hover {
+  cursor: pointer;
+}
