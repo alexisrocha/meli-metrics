@@ -34,6 +34,8 @@
 .cardMain {
   max-width: 23%;
   margin-bottom: 50px;
+  margin-left: 1%;
+  margin-right: 1%;
 }
 
 .cardMain:hover {
@@ -60,10 +62,15 @@
 }
 
 .buttonContainer {
+  height: 40px;
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: flex-end;
   margin: 5px;
+}
+
+.chartContainer {
+  border-bottom: 1px solid grey;
 }
 
 .buttonItem {
