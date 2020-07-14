@@ -1,5 +1,6 @@
 import React from "react";
 import { Modal, Button, Form } from "react-bootstrap";
+import SearchIcon from "@material-ui/icons/Search";
 import "./Addmodal.scss";
 
 export default function addmodal(props) {
@@ -16,7 +17,12 @@ export default function addmodal(props) {
       <Modal.Body>
         <Form>
           <Form.Group className="forminput">
-            <Form.Control type="text" placeholder="Search metric" />
+            <Form.Control
+              type="text"
+              placeholder="Search metric"
+              id="inputSearch"
+            />
+            <SearchIcon className="searchIcon" />
           </Form.Group>
           <Form.Group className="forminput">
             <Form.Control type="text" placeholder="Nombre de la lista" />

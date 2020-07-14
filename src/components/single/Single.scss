@@ -36,6 +36,7 @@
   justify-content: center;
   align-content: center;
   flex-direction: column;
+
   span {
     margin: 10px auto;
     font-family: "Proxima Nova";
@@ -56,4 +57,9 @@
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
+}
+
+.addMetrics {
+  display: flex;
+  width: 60%
 }

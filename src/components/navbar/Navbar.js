@@ -3,6 +3,7 @@ import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+
 import "./Navbar.scss";
 
 export default function navbar() {
@@ -24,9 +25,7 @@ export default function navbar() {
             <Nav.Link>Mis alarmas</Nav.Link>
           </div>
           <div className="itemRight">
-            <Nav.Item id="mode">
-              Visualización
-            </Nav.Item>
+            <Nav.Item id="mode">Visualización</Nav.Item>
             <Tabs
               className="tabsGroup"
               value={value}
