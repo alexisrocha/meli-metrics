@@ -10,16 +10,23 @@ export default function single() {
     <div className="single">
       <Addmodal show={modalShow} onHide={() => setModalShow(false)} />
       <div className="container">
-         <div id="addcard">
+        <div id="addcard">
           <h2 onClick={() => setModalShow(true)} id="add">
             +
           </h2>
           <span onClick={() => setModalShow(true)}>Add a metric</span>
         </div>
 
-        {/* <div className="containerMetric">
+        <div className="containerMetric">
           <Metric />
-        </div> */}
+          <Metric />
+          <Metric />
+          <Metric />
+          <Metric />
+          <Metric />
+          <Metric />
+          <Metric />
+        </div>
       </div>
     </div>
   );
