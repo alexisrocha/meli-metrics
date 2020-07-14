@@ -97,8 +97,8 @@ export default function Metric() {
         avatar={<Avatar className={classes.small} src={MLA}></Avatar>}
         title={<Typography className={classes.title}>Buy Box - GMV</Typography>}
         action={
-          <IconButton aria-label="settings">
-            <CloseIcon onClick={deleteCard} />
+          <IconButton aria-label="settings" onClick={deleteCard}>
+            <CloseIcon/>
           </IconButton>
         }
       />
