@@ -26,6 +26,7 @@ export default () => {
     });
   };
   useEffect(() => {
+    console.log("Entro al useEffect");
     chart();
   }, []);
   return (
