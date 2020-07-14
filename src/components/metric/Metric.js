@@ -98,7 +98,7 @@ export default function Metric() {
         title={<Typography className={classes.title}>Buy Box - GMV</Typography>}
         action={
           <IconButton aria-label="settings" onClick={deleteCard}>
-            <CloseIcon />
+            <CloseIcon/>
           </IconButton>
         }
       />
