@@ -30,6 +30,8 @@ import Slide from "@material-ui/core/Slide";
 import Button from "@material-ui/core/Button";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { deleteCharts } from "../../redux/action-creator/Charts";
+import { useDispatch } from "react-redux";
 import "./Metric.scss";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -61,12 +63,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //Aca abajo deberia recibir por props un array de metricas.
-export default function Metric() {
+export default function Metric({ idMetrica }) {
   const classes = useStyles();
   const [openInfo, setOpenInfo] = React.useState(false);
   const [openCard, setOpenCard] = React.useState(false);
   const [openSetting, setOpenSetting] = React.useState(false);
-
+  const dispatch = useDispatch();
   const deleteCard = () => {
     setOpenCard(true);
   };
@@ -98,7 +100,7 @@ export default function Metric() {
         title={<Typography className={classes.title}>Buy Box - GMV</Typography>}
         action={
           <IconButton aria-label="settings" onClick={deleteCard}>
-            <CloseIcon/>
+            <CloseIcon />
           </IconButton>
         }
       />
@@ -156,7 +158,13 @@ export default function Metric() {
           <Button onClick={handleCloseCard} color="primary">
             No
           </Button>
-          <Button onClick={handleCloseCard} color="primary">
+          <Button
+            onClick={() => {
+              dispatch(deleteCharts(idMetrica));
+              handleCloseCard();
+            }}
+            color="primary"
+          >
             Yes
           </Button>
         </DialogActions>
