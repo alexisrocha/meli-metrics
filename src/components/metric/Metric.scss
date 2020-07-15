@@ -23,7 +23,7 @@
 
 .porcentaje {
   font-family: "Proxima Nova";
-  background-color: green;
+  background-color: #2E8A44;
   text-align: center;
   width: 27%;
   color: white;
@@ -34,13 +34,14 @@
 
 .cardMain {
   max-width: 23%;
+  min-width: 23%;
   margin-bottom: 50px;
   margin-right: 1%;
   margin-left: 1%;
 }
 
 .cardMain:hover {
-  margin-bottom: 0px;
+  margin-bottom: 50px;
 }
 
 .cardMain:hover {

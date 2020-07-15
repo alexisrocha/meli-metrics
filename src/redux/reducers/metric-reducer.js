@@ -1,4 +1,4 @@
-import { GET_METRICS, GET_METRIC_DATA } from "../constants"
+import { GET_METRICS } from "../constants"
 
 const initialState = {
     metric: {}
