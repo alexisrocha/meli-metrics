@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import SearchIcon from "@material-ui/icons/Search";
@@ -6,6 +6,7 @@ import { fetchChart } from "../../redux/action-creator/Charts";
 import "./Addmodal.scss";
 
 export default function addmodal(props) {
+  const [value, setValue] = useState("");
   const dispatch = useDispatch();
   return (
     <Modal
@@ -21,6 +22,8 @@ export default function addmodal(props) {
         <Form>
           <Form.Group className="forminput">
             <Form.Control
+              onChange={(e) => setValue(e.target.value)}
+              value={value}
               type="text"
               placeholder="Search metric"
               id="inputSearch"
@@ -39,7 +42,7 @@ export default function addmodal(props) {
         <span
           className="closeModal"
           onClick={() => {
-            dispatch(fetchChart());
+            if (value) dispatch(fetchChart(value));
             props.onHide();
           }}
         >

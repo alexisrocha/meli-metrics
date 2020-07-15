@@ -1,41 +1,45 @@
-import { GET_CHART } from "../constants"
-import axios from "axios"
+import { GET_CHART, DELETE_CHART, SELECTED_CHART } from "../constants";
+import axios from "axios";
+
+let host = "https://run.mocky.io/v3/";
+
+let url = {
+  1: `61fbd212-8159-47f7-9083-7167d289a444`,
+  2: `8ed189c0-7f9f-4a1d-8fa2-b78bcb83da72`,
+};
 
 const getChart = (charts) => ({
-    type: GET_CHART,
-    charts
-})
+  type: GET_CHART,
+  charts,
+});
 
-let obj = {
-    title: 'lorem',
-    desc: 'lorem ipsum',
-    config: 
-    [
-        {
-            metric_id: 1,
-            time_frame: '60days',
-            dimension: {
-                site: 'MLA',
-                subgroup: 'All site'
-            },
-            comparation: [ 'YOY' ]
-        },
-        {
-            metric_id: 2,
-            time_frame: '12months',
-            dimension: {
-                site: 'MLB',
-                subgroup: 'All site'
-            },
-            comparation: [ 'YOY' ]
-        }
-    ]
-}
+const selectChart = (selectedChart) => ({
+  type: SELECTED_CHART,
+  selectedChart,
+});
 
-export const fetchChart = id =>{
-    return dispatch => (
-        axios.get(`https://run.mocky.io/v3/2d11beed-0fbe-492a-aa9a-468917b51a13`)
-        .then(res => obj)
-        .then(charts => dispatch(getChart(charts)))
-    )
-}
+const deleteChart = (id) => ({
+  type: DELETE_CHART,
+  id,
+});
+
+export const fetchChart = (id) => {
+  return (dispatch) =>
+    axios
+      .get(host + url[id])
+      .then((res) => res.data)
+      .then((charts) => dispatch(getChart(charts)));
+};
+
+export const chartSelect = (chart) => {
+  return (dispatch) => {
+    dispatch(selectChart(chart));
+  };
+};
+
+export const deleteCharts = (id) => {
+  console.log("Paso por deleteCHarts");
+  return (dispatch) => {
+    dispatch(deleteChart(id));
+  };
+};
