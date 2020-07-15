@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontFamily: "Proxima Nova",
-    fontSize: "120%",
+    fontSize: "100%",
   },
   item: {
     fontSize: "1.2em",
@@ -97,7 +97,11 @@ export default function Metric({ idMetrica }) {
     <Card className="cardMain">
       <CardHeader
         avatar={<Avatar className={classes.small} src={MLA}></Avatar>}
-        title={<Typography className={classes.title}>Buy Box - GMV</Typography>}
+        title={
+          <Typography className={classes.title}>
+            <b>Buy Box - GMV</b>
+          </Typography>
+        }
         action={
           <IconButton aria-label="settings" onClick={deleteCard}>
             <CloseIcon />
