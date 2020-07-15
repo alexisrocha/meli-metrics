@@ -114,6 +114,10 @@ export default function Metric({ idMetrica, chart }) {
     return sumArr(arr) - sumArr(arr2);
   };
 
+  const numberWithThousands = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
+
   const percentage = (arr, arr2) => {
     return ((sumArr(arr) / sumArr(arr2) - 1) * 100).toFixed(2);
   };
@@ -147,7 +151,9 @@ export default function Metric({ idMetrica, chart }) {
           <h3>
             <strong>
               {metricData
-                ? metricData.data[0].data[metricData.data[0].data.length - 1]
+                ? numberWithThousands(
+                    metricData.data[0].data[metricData.data[0].data.length - 1]
+                  )
                 : 0}
             </strong>
           </h3>
