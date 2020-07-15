@@ -13,7 +13,7 @@ let getMetricData2 = {"labels":["2020-01-31","2020-02-28","2020-03-31","2020-04-
 
 
 let getChart2 = {"title":"lorem","desc":"lorem ipsum","config":[{"metric_id":1,"time_frame":"60days","dimension":{"site":"MLA","subgroup":"All site"},"comparation":["YOY"]},{"metric_id":2,"time_frame":"12months","dimension":{"site":"MLB","subgroup":"All site"},"comparation":["YOY"]}]}
-// https://run.mocky.io/v3/beddddd4-e47c-43c2-8510-fe0fd7986c0a
+// https://run.mocky.io/v3/8ed189c0-7f9f-4a1d-8fa2-b78bcb83da72
 
 let getChart1 = {"title":"lorem","desc":"lorem ipsum","config":[{"metric_id":1,"time_frame":"60days","dimension":{"site":"MLA","subgroup":"All site"},"comparation":["YOY"]}]};
 // https://run.mocky.io/v3/61fbd212-8159-47f7-9083-7167d289a444
