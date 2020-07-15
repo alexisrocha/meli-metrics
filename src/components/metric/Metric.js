@@ -120,10 +120,7 @@ export default function Metric({ idMetrica, chart }) {
       dispatch(fetchMetricData(idMetrica))
 
   }, [idMetrica])
-  if(metricData) {
-    console.log("suma---->", sumArr(metricData.data[0].data));
-    console.log("suma2---->", sumArr(metricData.data[1].data));
-  }
+
   return (
     <Card className="cardMain">
       <CardHeader
@@ -151,7 +148,7 @@ export default function Metric({ idMetrica, chart }) {
         </div>
       </div>
 
-      <p className="timeLapse">YOY:${ metricData ? dif(metricData.data[0].data, metricData.data[1].data) : 0 }</p>
+      <p className="timeLapse">YOY:${ metricData ? numberWithThousands ( dif(metricData.data[0].data, metricData.data[1].data) ) : 0 }</p>
       <CardMedia>
         {metricData ? <Chart metricData={metricData} /> : null}
         <div className="buttonContainer">
