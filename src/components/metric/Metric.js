@@ -30,8 +30,9 @@ import Button from "@material-ui/core/Button";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { deleteCharts } from "../../redux/action-creator/Charts";
-import { useDispatch } from "react-redux";
-import { fetchMetric } from "../../redux/action-creator/Metrics"; 
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMetric } from "../../redux/action-creator/Metrics";
+import { fetchMetricData } from "../../redux/action-creator/MetricData";
 import "./Metric.scss";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -69,6 +70,10 @@ export default function Metric({ idMetrica, chart }) {
   const [openInfo, setOpenInfo] = React.useState(false);
   const [openCard, setOpenCard] = React.useState(false);
   const [openSetting, setOpenSetting] = React.useState(false);
+  const metric = useSelector((store) => store.metric.metric[idMetrica]);
+  const metricData = useSelector(
+    (store) => store.metricData.metricData[idMetrica]
+  );
   const dispatch = useDispatch();
   const deleteCard = () => {
     setOpenCard(true);
@@ -94,20 +99,35 @@ export default function Metric({ idMetrica, chart }) {
     setOpenCard(false);
   };
 
+  const sumArr = (arr) => {
+    return arr.reduce(
+      (accumulator, currentValue) => accumulator + currentValue
+    );
+  };
+
+  const dif = (arr, arr2) => {
+    return sumArr(arr) - sumArr(arr2);
+  };
+
+  const percentage = (arr, arr2) => {
+    return ((sumArr(arr) / sumArr(arr2) - 1) * 100).toFixed(2);
+  };
+
   useEffect(() => {
-
-      dispatch(fetchMetric(idMetrica))
-      //console.log('ACAAAA ',chart.metric_id)
-
-  })
-
+    dispatch(fetchMetric(idMetrica));
+    dispatch(fetchMetricData(idMetrica));
+  }, [idMetrica]);
+  if (metricData) {
+    console.log("suma---->", sumArr(metricData.data[0].data));
+    console.log("suma2---->", sumArr(metricData.data[1].data));
+  }
   return (
     <Card className="cardMain">
       <CardHeader
         avatar={<Avatar className={classes.small} src={MLA}></Avatar>}
         title={
           <Typography className={classes.title}>
-            <b>Buy Box - GMV</b>
+            <b>{metric ? metric.display_name : ""}</b>
           </Typography>
         }
         action={
@@ -119,18 +139,27 @@ export default function Metric({ idMetrica, chart }) {
       <div className="contenedorInfo">
         <div className="value">
           <h3>
-            <strong>4.008.976</strong>
+            <strong>
+              {metricData
+                ? metricData.data[0].data[metricData.data[0].data.length - 1]
+                : 0}
+            </strong>
           </h3>
         </div>
-
         <div className="porcentaje">
           <ArrowDropUpIcon />
-          20%
+          {metricData
+            ? percentage(metricData.data[0].data, metricData.data[1].data) + "%"
+            : 0}
         </div>
       </div>
-      <p className="timeLapse">YOY $188.828.348</p>
+
+      <p className="timeLapse">
+        YOY:$
+        {metricData ? dif(metricData.data[0].data, metricData.data[1].data) : 0}
+      </p>
       <CardMedia>
-        <Chart />
+        {metricData ? <Chart metricData={metricData} /> : null}
         <div className="buttonContainer">
           <div className="button" onClick={handleClickOpenInfo}>
             <div className="buttonItem">
