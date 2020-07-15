@@ -37,6 +37,8 @@
   align-content: center;
   flex-direction: column;
 
+
+
   span {
     margin: 10px auto;
     font-family: "Proxima Nova";
@@ -46,8 +48,7 @@
 }
 
 .single {
-  background-color: #f1f1f1;
-  padding-top: 20px;
+  background-color: #d4d3d3;
   min-height: 500px;
 }
 
@@ -61,5 +62,31 @@
 
 .addMetrics {
   display: flex;
-  width: 60%
+  width: 60%;
+  display: flex;
+  align-items: baseline;
+  margin-left: 115px;
+}
+
+.forminput {
+  margin-top: 25px;
+  display: flex;
+}
+
+.searchIcon {
+  justify-content: baseline;
+  margin-top: 7px;
+}
+
+#inputSearch {
+  display: flex;
+  justify-content: baseline;
+  margin-right: -30px;
+  padding-bottom: 100;
+}
+
+.form {
+  display: flex;
+  align-items: baseline;
+  margin-left: 10px;
 }

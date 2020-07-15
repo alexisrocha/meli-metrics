@@ -20,8 +20,10 @@ export default function single() {
         </div> */}
 
       <div className="addMetrics">
-        <span>Add metrics</span>
-        <Form>
+        <span>
+          <b> Add metrics </b>
+        </span>
+        <Form className="form">
           <Form.Group className="forminput">
             <Form.Control
               type="text"
@@ -42,9 +44,8 @@ export default function single() {
         <Metric />
         <Metric />
         <Metric />
-        <div className="containerMetric">
-          <Metric />
-        </div>
+
+        <div className="containerMetric"></div>
       </div>
     </div>
   );
