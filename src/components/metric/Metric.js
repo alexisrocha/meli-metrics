@@ -106,6 +106,10 @@ export default function Metric({ idMetrica, chart }) {
     return sumArr(arr) - sumArr(arr2)
   }
 
+  const numberWithThousands = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+
   const percentage = (arr, arr2) => {
     return (( sumArr(arr)/sumArr(arr2) - 1 ) * 100).toFixed(2)
   }
@@ -138,7 +142,7 @@ export default function Metric({ idMetrica, chart }) {
       <div className="contenedorInfo">
         <div className="value">
           <h3>
-            <strong>{ metricData ? metricData.data[0].data[ metricData.data[0].data.length - 1 ] : 0 }</strong>
+            <strong>{ metricData ? numberWithThousands( metricData.data[0].data[ metricData.data[0].data.length - 1 ] ) : 0 }</strong>
           </h3>
         </div>
         <div className="porcentaje">
