@@ -12,7 +12,7 @@
 .contenedorInfo {
   display: flex;
   flex-direction: row;
-  align-items: end;
+  align-items: baseline;
   margin-left: 5%;
 }
 .value {
@@ -25,10 +25,11 @@
   font-family: "Proxima Nova";
   background-color: green;
   text-align: center;
-  width: 30%;
+  width: 27%;
   color: white;
   margin-right: 7px;
-  border-radius: 15px;
+  border-radius: 5px;
+  height: 20px;
 }
 
 .cardMain {
@@ -43,9 +44,9 @@
 }
 
 .cardMain:hover {
-  -webkit-box-shadow: inset 0px -87px 68px -40px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: inset 0px -87px 68px -40px rgba(0, 0, 0, 0.75);
-  box-shadow: inset 0px -87px 68px -40px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: inset 0px -63px 79px -2px rgba(133, 128, 133, 0.8);
+  -moz-box-shadow: inset 0px -63px 79px -2px rgba(133, 128, 133, 0.8);
+  box-shadow: inset 0px -63px 79px -2px rgba(133, 128, 133, 0.8);
 }
 
 .cardMain:hover .button {
@@ -58,7 +59,7 @@
   height: 30px;
   background-color: whitesmoke;
   margin: 5px;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .buttonContainer {
