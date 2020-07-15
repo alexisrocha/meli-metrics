@@ -12,7 +12,7 @@
 .contenedorInfo {
   display: flex;
   flex-direction: row;
-  align-items: baseline;
+  align-items: center;
   margin-left: 5%;
 }
 .value {
@@ -23,13 +23,24 @@
 
 .porcentaje {
   font-family: "Proxima Nova";
-  background-color: #2E8A44;
   text-align: center;
-  width: 27%;
+  width: 40%;
   color: white;
   margin-right: 7px;
   border-radius: 5px;
   height: 20px;
+}
+
+.positive {
+  background-color: #2e8a44;
+  font-size: 80%;
+  border-radius: 5px;
+}
+
+.negative {
+  border-radius: 5px;
+  background-color: #f83b49;
+  font-size: 80%;
 }
 
 .cardMain {
