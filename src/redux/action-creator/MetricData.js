@@ -5,8 +5,8 @@ import axios from "axios";
 let host = "https://run.mocky.io/v3/";
 
 let url = {
-    1: `0ca2c344-a2f8-432a-9b62-da3cd924c7d5`,
-    2: `dab0f092-acde-4fc9-933e-0c7344cba6cb`,
+    1: `decf5f46-2492-47aa-8304-c8cace4037bf`,
+    2: `c3fd409a-a428-4e86-accb-1ad29687cb76`,
   };
 
 const  getMetricData = (id, metricData) => ({
