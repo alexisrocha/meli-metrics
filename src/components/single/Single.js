@@ -5,6 +5,7 @@ import Addmodal from "../addmodal/Addmodal";
 import Metric from "../metric/Metric";
 import { useSelector, useDispatch } from "react-redux";
 import { chartSelect } from "../../redux/action-creator/Charts";
+import Search from "../search/Search";
 import "./Single.scss";
 
 export default function single() {
@@ -21,15 +22,27 @@ export default function single() {
       <Addmodal show={modalShow} onHide={() => setModalShow(false)} />
       <div className="container">
         {charts.length > 0 ? (
-          <div className="containerMetric">
-            {selectedChart &&
-              selectedChart.map((chart) => {
-                console.log("La key en Single es:", chart.metric_id);
-                return (
-                  <Metric key={chart.metric_id} idMetrica={chart.metric_id} />
-                );
-              })}
-          </div>
+          <>
+            {selectedChart.length ? (
+              <Search />
+            ) : (
+              <div id="addcard">
+                <h2 onClick={() => setModalShow(true)} id="add">
+                  +
+                </h2>
+                <span onClick={() => setModalShow(true)}>Add a metric</span>
+              </div>
+            )}
+            <div className="containerMetric">
+              {selectedChart &&
+                selectedChart.map((chart) => {
+                  console.log("La key en Single es:", chart.metric_id);
+                  return (
+                    <Metric key={chart.metric_id} idMetrica={chart.metric_id} />
+                  );
+                })}
+            </div>
+          </>
         ) : (
           <div id="addcard">
             <h2 onClick={() => setModalShow(true)} id="add">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
@@ -31,6 +31,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { deleteCharts } from "../../redux/action-creator/Charts";
 import { useDispatch } from "react-redux";
+import { fetchMetric } from "../../redux/action-creator/Metrics"; 
 import "./Metric.scss";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -50,10 +51,11 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontFamily: "Proxima Nova",
-    fontSize: "120%",
+    fontSize: "100%",
   },
   item: {
     fontSize: "1.2em",
+    color: "gray",
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
@@ -62,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //Aca abajo deberia recibir por props un array de metricas.
-export default function Metric({ idMetrica }) {
+export default function Metric({ idMetrica, chart }) {
   const classes = useStyles();
   const [openInfo, setOpenInfo] = React.useState(false);
   const [openCard, setOpenCard] = React.useState(false);
@@ -92,11 +94,22 @@ export default function Metric({ idMetrica }) {
     setOpenCard(false);
   };
 
+  useEffect(() => {
+
+      dispatch(fetchMetric(idMetrica))
+      //console.log('ACAAAA ',chart.metric_id)
+
+  })
+
   return (
     <Card className="cardMain">
       <CardHeader
         avatar={<Avatar className={classes.small} src={MLA}></Avatar>}
-        title={<Typography className={classes.title}>Buy Box - GMV</Typography>}
+        title={
+          <Typography className={classes.title}>
+            <b>Buy Box - GMV</b>
+          </Typography>
+        }
         action={
           <IconButton aria-label="settings" onClick={deleteCard}>
             <CloseIcon />
