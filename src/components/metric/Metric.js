@@ -31,8 +31,9 @@ import Button from "@material-ui/core/Button";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { deleteCharts } from "../../redux/action-creator/Charts";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchMetric } from "../../redux/action-creator/Metrics"; 
+import { fetchMetricData } from "../../redux/action-creator/MetricData";
 import "./Metric.scss";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -70,6 +71,8 @@ export default function Metric({ idMetrica, chart }) {
   const [openInfo, setOpenInfo] = React.useState(false);
   const [openCard, setOpenCard] = React.useState(false);
   const [openSetting, setOpenSetting] = React.useState(false);
+  const metric = useSelector((store) => store.metric.metric[idMetrica]);
+  const metricData = useSelector( (store) => store.metricData.metricData[idMetrica] );
   const dispatch = useDispatch();
   const deleteCard = () => {
     setOpenCard(true);
@@ -98,17 +101,17 @@ export default function Metric({ idMetrica, chart }) {
   useEffect(() => {
 
       dispatch(fetchMetric(idMetrica))
-      //console.log('ACAAAA ',chart.metric_id)
+      dispatch(fetchMetricData(idMetrica))
 
-  })
-
+  }, [idMetrica])
+  console.log("MetricData------->", metricData);
   return (
     <Card className="cardMain">
       <CardHeader
         avatar={<Avatar className={classes.small} src={MLA}></Avatar>}
         title={
           <Typography className={classes.title}>
-            <b>Buy Box - GMV</b>
+            <b>{metric ? metric.display_name : ""}</b>
           </Typography>
         }
         action={
@@ -131,7 +134,7 @@ export default function Metric({ idMetrica, chart }) {
       </div>
       <p className="timeLapse">YOY:$188.834.485</p>
       <CardMedia>
-        <Chart />
+        {metricData ? <Chart metricData={metricData} /> : null}
         <div className="buttonContainer">
           <div className="button" onClick={handleClickOpenInfo}>
             <div className="buttonItem">

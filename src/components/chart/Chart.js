@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import "./Chart.scss";
-export default () => {
+export default ({ metricData }) => {
   const [chartData, setChartData] = useState({});
 
   const chart = () => {
     setChartData({
-      labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+      labels: metricData.labels,
       datasets: [
         {
-          label: "AY",
-          data: [100, 95, 105, 123, 110, 96, 92, 88, 80, 99, 110, 136],
+          label: metricData.data[0].name,
+          data: metricData.data[0].data,
           backgroundColor: "transparent",
-          borderWidth: 4,
+          borderWidth: 1.5,
           borderColor: "#f5cf3c",
         },
         {
-          label: "AY2",
-          data: [80, 87, 97, 101, 125, 97, 94, 100, 95, 113, 120, 100],
+          label: metricData.data[1].name,
+          data: metricData.data[1].data,
           backgroundColor: "transparent",
-          borderWidth: 4,
+          borderWidth: 1.5,
           borderColor: "#E4E4E4",
         },
       ],
