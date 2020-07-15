@@ -1,6 +1,8 @@
- import { combineReducers } from "redux"
- import chartReducer from "./chart-reducer"
+ import { combineReducers } from "redux";
+ import chartReducer from "./chart-reducer";
+ import metricReducer from "./metric-reducer";
 
  export default combineReducers({
-     chart: chartReducer
+     chart: chartReducer,
+     metric: metricReducer
  })
