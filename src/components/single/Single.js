@@ -11,18 +11,9 @@ export default function single() {
   const charts = useSelector((store) => store.chart.charts);
   const selectedChart = useSelector((store) => store.chart.selectedChart);
   const dispatch = useDispatch();
-  function usePrevious(value) {
-    const ref = useRef();
-    useEffect(() => {
-      ref.current = value;
-    });
-    return ref.current;
-  }
   useEffect(() => {
-    console.log(charts);
-    console.log("Esto es selectedChart en UseEffect:", selectedChart);
-    if (selectedChart && charts.length) dispatch(chartSelect(charts[0].config));
-  });
+    if (charts.length) dispatch(chartSelect(charts[0].config));
+  }, [charts.length]);
 
   return (
     <div className="single">
