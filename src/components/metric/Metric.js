@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
   item: {
     fontSize: "1.2em",
+    color: "gray",
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,

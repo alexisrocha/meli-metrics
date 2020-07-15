@@ -16,7 +16,7 @@ export default () => {
           borderColor: "#f5cf3c",
         },
         {
-          label: "AY",
+          label: "AY2",
           data: [80, 87, 97, 101, 125, 97, 94, 100, 95, 113, 120, 100],
           backgroundColor: "transparent",
           borderWidth: 4,
@@ -27,8 +27,9 @@ export default () => {
   };
   useEffect(() => {
     console.log("Entro al useEffect");
+    console.log("La data es:", chartData);
     chart();
-  }, []);
+  }, [chartData.length]);
   return (
     <div className="chart">
       <Line
