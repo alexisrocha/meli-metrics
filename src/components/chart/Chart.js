@@ -20,7 +20,7 @@ export default () => {
           data: [80, 87, 97, 101, 125, 97, 94, 100, 95, 113, 120, 100],
           backgroundColor: "transparent",
           borderWidth: 4,
-          borderColor: "green",
+          borderColor: "#E4E4E4",
         },
       ],
     });
