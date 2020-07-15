@@ -98,13 +98,28 @@ export default function Metric({ idMetrica, chart }) {
     setOpenCard(false);
   };
 
+  const sumArr = (arr) => {
+    return arr.reduce((accumulator, currentValue) => accumulator + currentValue)
+  }
+
+  const dif = (arr, arr2) => {
+    return sumArr(arr) - sumArr(arr2)
+  }
+
+  const percentage = (arr, arr2) => {
+    return (( sumArr(arr)/sumArr(arr2) - 1 ) * 100).toFixed(2)
+  }
+
   useEffect(() => {
 
       dispatch(fetchMetric(idMetrica))
       dispatch(fetchMetricData(idMetrica))
 
   }, [idMetrica])
-  console.log("MetricData------->", metricData);
+  if(metricData) {
+    console.log("suma---->", sumArr(metricData.data[0].data));
+    console.log("suma2---->", sumArr(metricData.data[1].data));
+  }
   return (
     <Card className="cardMain">
       <CardHeader
@@ -123,16 +138,16 @@ export default function Metric({ idMetrica, chart }) {
       <div className="contenedorInfo">
         <div className="value">
           <h3>
-            <strong>4.008.828</strong>
+            <strong>{ metricData ? metricData.data[0].data[ metricData.data[0].data.length - 1 ] : 0 }</strong>
           </h3>
         </div>
-
         <div className="porcentaje">
           <ArrowDropUpIcon />
-          20%
+          { metricData ? percentage(metricData.data[0].data, metricData.data[1].data) + "%" : 0 } 
         </div>
       </div>
-      <p className="timeLapse">YOY:$188.834.485</p>
+
+      <p className="timeLapse">YOY:${ metricData ? dif(metricData.data[0].data, metricData.data[1].data) : 0 }</p>
       <CardMedia>
         {metricData ? <Chart metricData={metricData} /> : null}
         <div className="buttonContainer">
