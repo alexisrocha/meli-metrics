@@ -29,6 +29,7 @@ import Slide from "@material-ui/core/Slide";
 import Button from "@material-ui/core/Button";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import { deleteCharts } from "../../redux/action-creator/Charts";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMetric } from "../../redux/action-creator/Metrics";
@@ -61,6 +62,9 @@ const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
     color: "#fff",
+  },
+  header: {
+    padding: "16px 16px 0px 16px",
   },
 }));
 
@@ -121,13 +125,10 @@ export default function Metric({ idMetrica, chart }) {
     dispatch(fetchMetric(idMetrica));
     dispatch(fetchMetricData(idMetrica));
   }, [idMetrica]);
-  if (metricData) {
-    console.log("suma---->", sumArr(metricData.data[0].data));
-    console.log("suma2---->", sumArr(metricData.data[1].data));
-  }
   return (
     <Card className="cardMain">
       <CardHeader
+        className={classes.header}
         avatar={<Avatar className={classes.small} src={MLA}></Avatar>}
         title={
           <Typography className={classes.title}>
@@ -141,7 +142,7 @@ export default function Metric({ idMetrica, chart }) {
         }
       />
       <div className="contenedorInfo">
-        <div className="value">
+        <div className="value" style={{ marginTop: "10px" }}>
           <h3>
             <strong>
               {metricData
@@ -152,17 +153,44 @@ export default function Metric({ idMetrica, chart }) {
             </strong>
           </h3>
         </div>
-        <div className="porcentaje">
-          <ArrowDropUpIcon />
-          {metricData
-            ? percentage(metricData.data[0].data, metricData.data[1].data) + "%"
-            : 0}
-        </div>
+
+        {metricData ? (
+          <>
+            {percentage(metricData.data[0].data, metricData.data[1].data) >
+            0 ? (
+              <div className="positive porcentaje">
+                <ArrowDropUpIcon />
+                {metricData
+                  ? percentage(
+                      metricData.data[0].data,
+                      metricData.data[1].data
+                    ) + "%"
+                  : 0}
+              </div>
+            ) : (
+              <div className="negative porcentaje">
+                <ArrowDropDownIcon />
+                {metricData
+                  ? percentage(
+                      metricData.data[0].data,
+                      metricData.data[1].data
+                    ) + "%"
+                  : 0}
+              </div>
+            )}
+          </>
+        ) : (
+          0
+        )}
       </div>
 
       <p className="timeLapse">
         YOY:$
-        {metricData ? dif(metricData.data[0].data, metricData.data[1].data) : 0}
+        {metricData
+          ? numberWithThousands(
+              dif(metricData.data[0].data, metricData.data[1].data)
+            )
+          : 0}
       </p>
       <CardMedia>
         {metricData ? <Chart metricData={metricData} /> : null}
