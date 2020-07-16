@@ -33,6 +33,8 @@ let getMetric3 = {
   ],
 };
 
+// https://run.mocky.io/v3/65b7aa8e-9f35-4b24-82f5-334957cde795
+
 let getMetric4 = {
   name: "Avg Shipping",
   display_name: "Avg Shipping Time",
@@ -49,6 +51,8 @@ let getMetric4 = {
     { code: "MOM", desc: "Last Month" },
   ],
 };
+
+// https://run.mocky.io/v3/551c0751-e44b-4551-8ad7-4b489d545802
 
 let getMetric5 = {
   name: "New Buyers",
@@ -67,6 +71,8 @@ let getMetric5 = {
   ],
 };
 
+// https://run.mocky.io/v3/70e3f815-5cc9-4691-8fd9-4be83fcd0416
+
 let getMetric6 = {
   name: "ASP p Shippment",
   display_name: "ASP per Shippment",
@@ -83,6 +89,8 @@ let getMetric6 = {
     { code: "MOM", desc: "Last Month" },
   ],
 };
+
+//https://run.mocky.io/v3/565a1c9d-5ca7-43d9-a604-9d57258dbd21
 
 let getMetric7 = {
   name: "Unique Receivers",
@@ -101,6 +109,8 @@ let getMetric7 = {
   ],
 };
 
+// https://run.mocky.io/v3/8a0f81b7-4ad5-4f0d-989b-180f7ecb8e17
+
 let getMetric8 = {
   name: "Share GMV Buy Box",
   display_name: "Share GMV Buy Box",
@@ -117,6 +127,8 @@ let getMetric8 = {
     { code: "MOM", desc: "Last Month" },
   ],
 };
+
+// https://run.mocky.io/v3/c91e84d2-f505-403a-bde0-094a6c1d9059
 
 let getMetric2 = {
   name: "Devices Sold",
@@ -287,7 +299,7 @@ let getChart7 = {
   desc: "lorem ipsum",
   config: [
     {
-      metric_id: 6,
+      metric_id: 7,
       time_frame: "60days",
       dimension: { site: "MLA", subgroup: "All site" },
       comparation: ["YOY"],
@@ -295,14 +307,14 @@ let getChart7 = {
   ],
 };
 
-// https://run.mocky.io/v3/15c6f0b8-d6e3-4c6c-ba26-00a27533b299
+// https://run.mocky.io/v3/2891d615-9637-4f48-b44f-dd473248a70c
 
 let getChart8 = {
   title: "arg3",
   desc: "lorem ipsum",
   config: [
     {
-      metric_id: 6,
+      metric_id: 8,
       time_frame: "60days",
       dimension: { site: "MLA", subgroup: "All site" },
       comparation: ["YOY"],
@@ -310,7 +322,7 @@ let getChart8 = {
   ],
 };
 
-// https://run.mocky.io/v3/a2a5228c-c917-47c9-af08-0aa7acc90ad9
+// https://run.mocky.io/v3/a911c61a-e19f-4011-bc76-3762f0f9cced
 
 
 
