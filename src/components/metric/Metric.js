@@ -66,6 +66,12 @@ const useStyles = makeStyles((theme) => ({
   header: {
     padding: "16px 16px 0px 16px",
   },
+  circular: {
+    display: "flex",
+    "& > * + *": {
+      marginLeft: theme.spacing(2),
+    },
+  },
 }));
 
 //Aca abajo deberia recibir por props un array de metricas.
@@ -126,172 +132,187 @@ export default function Metric({ idMetrica, chart }) {
     dispatch(fetchMetricData(idMetrica));
   }, [idMetrica]);
   return (
-    <Card className="cardMain">
-      <CardHeader
-        className={classes.header}
-        avatar={<Avatar className={classes.small} src={MLA}></Avatar>}
-        title={
-          <Typography className={classes.title}>
-            <b>{metric ? metric.display_name : ""}</b>
-          </Typography>
-        }
-        action={
-          <IconButton aria-label="settings" onClick={deleteCard}>
-            <CloseIcon />
-          </IconButton>
-        }
-      />
-      <div className="contenedorInfo">
-        <div className="value" style={{ marginTop: "10px" }}>
-          <h3>
-            <strong>
-              {metricData
-                ? numberWithThousands(
-                    metricData.data[0].data[metricData.data[0].data.length - 1]
-                  )
-                : 0}
-            </strong>
-          </h3>
-        </div>
+    <>
+      {metricData ? (
+        //Este codigo falta pulir, hay que sacar todos los ternarios
+        <Card className="cardMain" style={{ height: "290px" }}>
+          <CardHeader
+            className={classes.header}
+            avatar={<Avatar className={classes.small} src={MLA}></Avatar>}
+            title={
+              <Typography className={classes.title}>
+                <b>{metric ? metric.display_name : ""}</b>
+              </Typography>
+            }
+            action={
+              <IconButton aria-label="settings" onClick={deleteCard}>
+                <CloseIcon />
+              </IconButton>
+            }
+          />
+          <div className="contenedorInfo">
+            <div className="value" style={{ marginTop: "10px" }}>
+              <h3>
+                <strong>
+                  {metricData
+                    ? numberWithThousands(
+                        metricData.data[0].data[
+                          metricData.data[0].data.length - 1
+                        ]
+                      )
+                    : 0}
+                </strong>
+              </h3>
+            </div>
 
-        {metricData ? (
-          <>
-            {percentage(metricData.data[0].data, metricData.data[1].data) >
-            0 ? (
-              <div className="positive porcentaje">
-                <ArrowDropUpIcon />
-                {metricData
-                  ? percentage(
-                      metricData.data[0].data,
-                      metricData.data[1].data
-                    ) + "%"
-                  : 0}
-              </div>
+            {metricData ? (
+              <>
+                {percentage(metricData.data[0].data, metricData.data[1].data) >
+                0 ? (
+                  <div className="positive porcentaje">
+                    <ArrowDropUpIcon />
+                    {metricData
+                      ? percentage(
+                          metricData.data[0].data,
+                          metricData.data[1].data
+                        ) + "%"
+                      : 0}
+                  </div>
+                ) : (
+                  <div className="negative porcentaje">
+                    <ArrowDropDownIcon />
+                    {metricData
+                      ? percentage(
+                          metricData.data[0].data,
+                          metricData.data[1].data
+                        ) + "%"
+                      : 0}
+                  </div>
+                )}
+              </>
             ) : (
-              <div className="negative porcentaje">
-                <ArrowDropDownIcon />
-                {metricData
-                  ? percentage(
-                      metricData.data[0].data,
-                      metricData.data[1].data
-                    ) + "%"
-                  : 0}
-              </div>
+              0
             )}
-          </>
-        ) : (
-          0
-        )}
-      </div>
-
-      <p className="timeLapse">
-        YOY:$
-        {metricData
-          ? numberWithThousands(
-              dif(metricData.data[0].data, metricData.data[1].data)
-            )
-          : 0}
-      </p>
-      <CardMedia>
-        {metricData ? <Chart metricData={metricData} /> : null}
-        <div className="buttonContainer">
-          <div className="button" onClick={handleClickOpenInfo}>
-            <div className="buttonItem">
-              <InfoIcon className={classes.item} />
-            </div>
           </div>
 
-          <div className="button" onClick={handleClickOpenSettings}>
-            <div className="buttonItem">
-              <SettingsIcon className={classes.item} />
-            </div>
-          </div>
+          <p className="timeLapse">
+            YOY:$
+            {metricData
+              ? numberWithThousands(
+                  dif(metricData.data[0].data, metricData.data[1].data)
+                )
+              : 0}
+          </p>
+          <CardMedia>
+            {metricData ? <Chart metricData={metricData} /> : null}
+            <div className="buttonContainer">
+              <div className="button" onClick={handleClickOpenInfo}>
+                <div className="buttonItem">
+                  <InfoIcon className={classes.item} />
+                </div>
+              </div>
 
-          <div className="button">
-            <div className="buttonItem">
-              <GetAppIcon className={classes.item} />
-            </div>
-          </div>
-        </div>
-      </CardMedia>
+              <div className="button" onClick={handleClickOpenSettings}>
+                <div className="buttonItem">
+                  <SettingsIcon className={classes.item} />
+                </div>
+              </div>
 
-      {/*Dialog for DeleteCard*/}
-      <Dialog
-        open={openCard}
-        TransitionComponent={Transition}
-        onClose={handleCloseCard}
-        aria-labelledby="alert-dialog-slide-title"
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle id="alert-dialog-slide-title">Delete Card</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            Estas seguro que deseas eliminar esta tarjeta?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseCard} color="primary">
-            No
-          </Button>
-          <Button
-            onClick={() => {
-              dispatch(deleteCharts(idMetrica));
-              handleCloseCard();
-            }}
-            color="primary"
+              <div className="button">
+                <div className="buttonItem">
+                  <GetAppIcon className={classes.item} />
+                </div>
+              </div>
+            </div>
+          </CardMedia>
+
+          {/*Dialog for DeleteCard*/}
+          <Dialog
+            open={openCard}
+            TransitionComponent={Transition}
+            onClose={handleCloseCard}
+            aria-labelledby="alert-dialog-slide-title"
+            aria-describedby="alert-dialog-slide-description"
           >
-            Yes
-          </Button>
-        </DialogActions>
-      </Dialog>
+            <DialogTitle id="alert-dialog-slide-title">Delete Card</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-slide-description">
+                Estas seguro que deseas eliminar esta tarjeta?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseCard} color="primary">
+                No
+              </Button>
+              <Button
+                onClick={() => {
+                  dispatch(deleteCharts(idMetrica));
+                  handleCloseCard();
+                }}
+                color="primary"
+              >
+                Yes
+              </Button>
+            </DialogActions>
+          </Dialog>
 
-      {/*Dialog for InfoIcon*/}
-      <Dialog
-        open={openInfo}
-        TransitionComponent={Transition}
-        onClose={handleCloseInfo}
-        aria-labelledby="alert-dialog-slide-title"
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle id="alert-dialog-slide-title">{"Info"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            This is for Info
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseInfo} color="primary">
-            Disagree
-          </Button>
-          <Button onClick={handleCloseInfo} color="primary">
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
+          {/*Dialog for InfoIcon*/}
+          <Dialog
+            open={openInfo}
+            TransitionComponent={Transition}
+            onClose={handleCloseInfo}
+            aria-labelledby="alert-dialog-slide-title"
+            aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle id="alert-dialog-slide-title">{"Info"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-slide-description">
+                This is for Info
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseInfo} color="primary">
+                Disagree
+              </Button>
+              <Button onClick={handleCloseInfo} color="primary">
+                Agree
+              </Button>
+            </DialogActions>
+          </Dialog>
 
-      {/*Dialog for SettingsIcon*/}
-      <Dialog
-        open={openSetting}
-        TransitionComponent={Transition}
-        onClose={handleCloseSettings}
-        aria-labelledby="alert-dialog-slide-title"
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle id="alert-dialog-slide-title">Settings</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            Info for settings
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseSettings} color="primary">
-            No
-          </Button>
-          <Button onClick={handleCloseSettings} color="primary">
-            Yes
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </Card>
+          {/*Dialog for SettingsIcon*/}
+          <Dialog
+            open={openSetting}
+            TransitionComponent={Transition}
+            onClose={handleCloseSettings}
+            aria-labelledby="alert-dialog-slide-title"
+            aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle id="alert-dialog-slide-title">Settings</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-slide-description">
+                Info for settings
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseSettings} color="primary">
+                No
+              </Button>
+              <Button onClick={handleCloseSettings} color="primary">
+                Yes
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </Card>
+      ) : (
+        <Card className="cardMain" style={{ height: "290px" }}>
+          <div className="circularProgress">
+            <div className={classes.circular}>
+              <CircularProgress />
+            </div>
+          </div>
+        </Card>
+      )}
+    </>
   );
 }
