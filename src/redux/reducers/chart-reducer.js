@@ -1,8 +1,14 @@
-import { GET_CHART, DELETE_CHART, SELECTED_CHART } from "../constants";
+import {
+  GET_CHART,
+  DELETE_CHART,
+  SELECTED_CHART,
+  SET_TITLE,
+} from "../constants";
 
 const initialState = {
   charts: [],
   selectedChart: [],
+  title: "",
 };
 
 export default (state = initialState, action) => {
@@ -18,6 +24,8 @@ export default (state = initialState, action) => {
           (x) => x.metric_id != action.id
         ),
       };
+    case SET_TITLE:
+      return { ...state, title: action.title };
     default:
       return state;
   }

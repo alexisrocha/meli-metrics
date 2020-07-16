@@ -65,24 +65,29 @@
     border-radius: 100px;
     height: 30px;
   }
+
   .MuiTab-textColorInherit.Mui-selected {
     transition: background-color 1s ease-in-out;
     background-color: #fee73f;
     border-radius: 100px;
   }
+
   .PrivateTabIndicator-root-1 {
     display: none;
   }
+
   .MuiTabs-root {
     justify-content: center;
     align-items: center;
     min-height: 30px;
   }
+
   .MuiTab-root {
     min-width: 0px;
     width: 80px;
     font-size: 10pt;
   }
+
   .Mui-selected {
     border: none;
   }
@@ -93,4 +98,5 @@
       font-family: "Proxima Nova";
     }
   }
+
 }
