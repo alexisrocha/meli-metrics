@@ -117,7 +117,7 @@ export default function Metric({ idMetrica, chart }) {
   };
 
   const dif = (arr, arr2) => {
-    return sumArr(arr) - sumArr(arr2);
+    return arr.pop() - arr2.pop();
   };
 
   const numberWithThousands = (x) => {
@@ -125,19 +125,19 @@ export default function Metric({ idMetrica, chart }) {
   };
 
   const percentage = (arr, arr2) => {
-    return ((sumArr(arr) / sumArr(arr2) - 1) * 100).toFixed(2);
+    return ((arr.pop() / arr2.pop() - 1) * 100).toFixed(2);
   };
 
   const colors = {
-    "MARKETPLACE": "#f5cf3c",
+    MARKETPLACE: "#f5cf3c",
     "MERCADO PAGO": "#2aa7d9",
-    "MERCADO ENVIOS": "#a8c622"
-  }
+    "MERCADO ENVIOS": "#a8c622",
+  };
 
   const flags = {
-    "MLA": MLA,
-    "MLB": MLB
-  }
+    MLA: MLA,
+    MLB: MLB,
+  };
 
   useEffect(() => {
     dispatch(fetchMetric(idMetrica));
@@ -150,7 +150,12 @@ export default function Metric({ idMetrica, chart }) {
         <Card className="cardMain" style={{ height: "290px" }}>
           <CardHeader
             className={classes.header}
-            avatar={<Avatar className={classes.small} src={flags[chart.dimension.site]}></Avatar>}
+            avatar={
+              <Avatar
+                className={classes.small}
+                src={flags[chart.dimension.site]}
+              ></Avatar>
+            }
             title={
               <Typography className={classes.title}>
                 <b>{metric ? metric.display_name : ""}</b>
@@ -165,15 +170,17 @@ export default function Metric({ idMetrica, chart }) {
           <div className="contenedorInfo">
             <div className="value" style={{ marginTop: "10px" }}>
               <h3>
-                {metric ? (<strong style={{color: colors[metric.group]}}>
-                  {metricData
-                    ? numberWithThousands(
-                        metricData.data[0].data[
-                          metricData.data[0].data.length - 1
-                        ]
-                      )
-                    : 0}
-                </strong>):(null)}
+                {metric ? (
+                  <strong style={{ color: colors[metric.group] }}>
+                    {metricData
+                      ? numberWithThousands(
+                          metricData.data[0].data[
+                            metricData.data[0].data.length - 1
+                          ]
+                        )
+                      : 0}
+                  </strong>
+                ) : null}
               </h3>
             </div>
 
@@ -216,7 +223,9 @@ export default function Metric({ idMetrica, chart }) {
               : 0}
           </p>
           <CardMedia>
-            {metricData && metric ? <Chart metricData={metricData} color={ colors[metric.group]}/> : null}
+            {metricData && metric ? (
+              <Chart metricData={metricData} color={colors[metric.group]} />
+            ) : null}
             <div className="buttonContainer">
               <div className="button" onClick={handleClickOpenInfo}>
                 <div className="buttonItem">
