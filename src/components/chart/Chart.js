@@ -31,7 +31,7 @@ export default ({ metricData }) => {
     chart();
   }, [chartData.length]);
   return (
-    <div className="chart">
+    <div className="chart" style={{ height: "100px" }}>
       <Line
         data={chartData}
         options={{
@@ -65,6 +65,7 @@ export default ({ metricData }) => {
           legend: {
             display: false,
           },
+          maintainAspectRatio: false,
         }}
       />
     </div>
