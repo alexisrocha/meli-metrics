@@ -10,7 +10,8 @@ let host = "https://run.mocky.io/v3/";
 
 let url = {
   "Buy Box": `61fbd212-8159-47f7-9083-7167d289a444`,
-  2: `8ed189c0-7f9f-4a1d-8fa2-b78bcb83da72`,
+  "Devices Sold": `5c6d43d3-89b4-47b8-b5b2-152152e3f391`,
+  "Share GMV Buy Box": "a911c61a-e19f-4011-bc76-3762f0f9cced"
 };
 
 const getChart = (charts) => ({
