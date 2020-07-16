@@ -117,7 +117,7 @@ export default function Metric({ idMetrica, chart }) {
   };
 
   const dif = (arr, arr2) => {
-    return arr.pop() - arr2.pop();
+    return arr[arr.length - 1] - arr2[arr.length - 1];
   };
 
   const numberWithThousands = (x) => {
@@ -125,7 +125,7 @@ export default function Metric({ idMetrica, chart }) {
   };
 
   const percentage = (arr, arr2) => {
-    return ((arr.pop() / arr2.pop() - 1) * 100).toFixed(2);
+    return ((arr[arr.length - 1] / arr2[arr2.length - 1] - 1) * 100).toFixed(2);
   };
 
   const colors = {
