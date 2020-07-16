@@ -1,48 +1,51 @@
 @font-face {
-    font-family: "Proxima Nova";
-    src: url("../../styles/fonts/proximanova-bold-webfont.woff") format("woff");
-  }
-  
+  font-family: "Proxima Nova";
+  src: url("../../styles/fonts/proximanova-bold-webfont.woff") format("woff");
+}
+
 @font-face {
-    font-family: "Proxima Nova Regular";
-    src: url("../../styles/fonts/proximanova-regular-webfont.woff") format("woff");
-  }
-
-#addtitle{
-    font-family: "Proxima Nova";
-    margin-left: 40%;
-    font-size: 95%;
+  font-family: "Proxima Nova Regular";
+  src: url("../../styles/fonts/proximanova-regular-webfont.woff") format("woff");
 }
 
-.modal-content{
-    border-radius: 15px !important;
+#addtitle {
+  font-family: "Proxima Nova";
+  margin-left: 40%;
+  font-size: 95%;
 }
 
-.closeModal{
-    font-family: "Proxima Nova";
-    color: #449fd7;
-    margin-left: 15px !important;
-    margin-right: 15px !important;
-    cursor: pointer;
+.modal-content {
+  border-radius: 15px !important;
 }
 
-.forminput{
-    margin-top: 25px;
-    display: flex;
-}
-.searchIcon{
-    justify-content: baseline;
-    margin-top: 7px;
-}
-
-#inputSearch{
-    margin-right: -30px;
+.closeModal {
+  font-family: "Proxima Nova";
+  color: #449fd7;
+  margin-left: 15px !important;
+  margin-right: 15px !important;
+  cursor: pointer;
 }
 
-#footerModal{
-    border: none;
+.forminput {
+  margin-top: 25px;
+  display: flex;
+}
+.searchIcon {
+  justify-content: baseline;
+  margin-top: 7px;
 }
 
-#headerModal{
-    border:none;
+#inputSearch {
+  margin-right: -30px;
+}
+
+#footerModal {
+  border: none;
+}
+
+#headerModal {
+  border: none;
+}
+input::-webkit-calendar-picker-indicator {
+  display: none;
 }
