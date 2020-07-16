@@ -1,4 +1,9 @@
-import { GET_CHART, DELETE_CHART, SELECTED_CHART } from "../constants";
+import {
+  GET_CHART,
+  DELETE_CHART,
+  SELECTED_CHART,
+  SET_TITLE,
+} from "../constants";
 import axios from "axios";
 
 let host = "https://run.mocky.io/v3/";
@@ -23,6 +28,11 @@ const deleteChart = (id) => ({
   id,
 });
 
+const setTitle = (title) => ({
+  type: SET_TITLE,
+  title,
+});
+
 export const fetchChart = (id) => {
   return (dispatch) =>
     axios
@@ -38,8 +48,13 @@ export const chartSelect = (chart) => {
 };
 
 export const deleteCharts = (id) => {
-  console.log("Paso por deleteCHarts");
   return (dispatch) => {
     dispatch(deleteChart(id));
+  };
+};
+
+export const changeChart = (title) => {
+  return (dispatch) => {
+    dispatch(setTitle(title));
   };
 };

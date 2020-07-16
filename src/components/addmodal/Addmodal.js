@@ -2,12 +2,39 @@ import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import SearchIcon from "@material-ui/icons/Search";
-import { fetchChart } from "../../redux/action-creator/Charts";
+import { fetchChart, changeChart } from "../../redux/action-creator/Charts";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+
 import "./Addmodal.scss";
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 export default function addmodal(props) {
   const [value, setValue] = useState("");
+  const [valueTitle, setValueTitle] = useState("");
   const dispatch = useDispatch();
+  const checkValue = () => {
+    if (value !== "" && valueTitle !== "") {
+      dispatch(fetchChart(value));
+      dispatch(changeChart(valueTitle));
+      props.onHide();
+    } else {
+      handleClick();
+    }
+  };
+  const [open, setOpen] = React.useState(false);
+  const handleClick = () => {
+    setOpen(true);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
   return (
     <Modal
       id="modal"
@@ -31,7 +58,12 @@ export default function addmodal(props) {
             <SearchIcon className="searchIcon" />
           </Form.Group>
           <Form.Group className="forminput">
-            <Form.Control type="text" placeholder="Nombre de la lista" />
+            <Form.Control
+              onChange={(e) => setValueTitle(e.target.value)}
+              value={valueTitle}
+              type="text"
+              placeholder="Nombre de la lista"
+            />
           </Form.Group>
         </Form>
       </Modal.Body>
@@ -42,13 +74,18 @@ export default function addmodal(props) {
         <span
           className="closeModal"
           onClick={() => {
-            if (value) dispatch(fetchChart(value));
-            props.onHide();
+            checkValue();
           }}
         >
           Listo
         </span>
       </Modal.Footer>
+
+      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+        <Alert severity="error" onClose={handleClose}>
+          ¡Todos los campos deben estar completos!
+        </Alert>
+      </Snackbar>
     </Modal>
   );
 }
