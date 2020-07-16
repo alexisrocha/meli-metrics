@@ -17,6 +17,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import CloseIcon from "@material-ui/icons/Close";
 import Chart from "../chart/Chart";
 import MLA from "../../../public/flags/MLA.png";
+import MLB from "../../../public/flags/MLB.png";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import SettingsIcon from "@material-ui/icons/Settings";
 import GetAppIcon from "@material-ui/icons/GetApp";
@@ -128,6 +129,17 @@ export default function Metric({ idMetrica, chart }) {
     return ((sumArr(arr) / sumArr(arr2) - 1) * 100).toFixed(2);
   };
 
+  const colors = {
+    "MARKETPLACE": "#f5cf3c",
+    "MERCADO PAGO": "#2aa7d9",
+    "MERCADO ENVIOS": "#a8c622"
+  }
+
+  const flags = {
+    "MLA": MLA,
+    "MLB": MLB
+  }
+
   useEffect(() => {
     dispatch(fetchMetric(idMetrica));
     dispatch(fetchMetricData(idMetrica));
@@ -139,7 +151,7 @@ export default function Metric({ idMetrica, chart }) {
         <Card className="cardMain" style={{ height: "290px" }}>
           <CardHeader
             className={classes.header}
-            avatar={<Avatar className={classes.small} src={MLA}></Avatar>}
+            avatar={<Avatar className={classes.small} src={flags[chart.dimension.site]}></Avatar>}
             title={
               <Typography className={classes.title}>
                 <b>{metric ? metric.display_name : ""}</b>
@@ -154,7 +166,7 @@ export default function Metric({ idMetrica, chart }) {
           <div className="contenedorInfo">
             <div className="value" style={{ marginTop: "10px" }}>
               <h3>
-                <strong>
+                {metric ? (<strong style={{color: colors[metric.group]}}>
                   {metricData
                     ? numberWithThousands(
                         metricData.data[0].data[
@@ -162,7 +174,7 @@ export default function Metric({ idMetrica, chart }) {
                         ]
                       )
                     : 0}
-                </strong>
+                </strong>):(null)}
               </h3>
             </div>
 
@@ -205,7 +217,7 @@ export default function Metric({ idMetrica, chart }) {
               : 0}
           </p>
           <CardMedia>
-            {metricData ? <Chart metricData={metricData} /> : null}
+            {metricData && metric ? <Chart metricData={metricData} color={ colors[metric.group]}/> : null}
             <div className="buttonContainer">
               <div className="button" onClick={handleClickOpenInfo}>
                 <div className="buttonItem">
