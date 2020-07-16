@@ -3,6 +3,7 @@ import {
   DELETE_CHART,
   SELECTED_CHART,
   SET_TITLE,
+  ADD_METRIC,
 } from "../constants";
 
 const initialState = {
@@ -26,6 +27,8 @@ export default (state = initialState, action) => {
       };
     case SET_TITLE:
       return { ...state, title: action.title };
+    case ADD_METRIC:
+      return {...state, selectedChart: [...state.selectedChart, action.metric]}
     default:
       return state;
   }
