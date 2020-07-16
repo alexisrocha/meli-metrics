@@ -324,7 +324,77 @@ let getChart8 = {
 
 // https://run.mocky.io/v3/a911c61a-e19f-4011-bc76-3762f0f9cced
 
+let chartObj1 = {
+  metric_id: 1,
+  time_frame: '60days',
+  dimension: {
+      site: 'MLA',
+      subgroup: 'All site'
+  },
+  comparation: [ 'YOY' ]
+};
 
+// https://run.mocky.io/v3/930ee191-8d1e-43b8-b7a7-0213a31eadb9
+
+let chartObj2 = {
+  metric_id: 2,
+  time_frame: "12months",
+  dimension: { site: "MLB", subgroup: "All site" },
+  comparation: ["YOY"],
+};
+
+// https://run.mocky.io/v3/f0c1db20-2b03-4f07-80f8-d4b22e5e0257
+
+let chartObj3 = {
+  metric_id: 3,
+  time_frame: "60days",
+  dimension: { site: "MLC", subgroup: "All site" },
+  comparation: ["YOY"],
+};
+
+// https://run.mocky.io/v3/d720e0d3-f70e-41e9-9abe-58285e395fed
+
+let chartObj4 = {
+  metric_id: 4,
+  time_frame: "60days",
+  dimension: { site: "MLM", subgroup: "All site" },
+  comparation: ["YOY"],
+}
+
+// https://run.mocky.io/v3/ce8ec606-5383-4169-a423-a2e5620c63c7
+
+let chartObj5 = {
+  metric_id: 5,
+  time_frame: "60days",
+  dimension: { site: "MLU", subgroup: "All site" },
+  comparation: ["YOY"],
+}
+
+// https://run.mocky.io/v3/60b3c552-d717-4330-a3be-dab187eb6f51
+
+let chartObj6 = {
+      metric_id: 6,
+      time_frame: "60days",
+      dimension: { site: "MGU", subgroup: "All site" },
+      comparation: ["YOY"],
+}
+// https://run.mocky.io/v3/32cc928e-156c-4401-9463-355833f7a4af
+
+let chartOvj7 = {
+  metric_id: 7,
+  time_frame: "60days",
+  dimension: { site: "MLA", subgroup: "All site" },
+  comparation: ["YOY"],
+}
+// https://run.mocky.io/v3/a697f11b-4019-4cc9-a4ee-40966f35cc64
+
+let chartObj8 = {
+  metric_id: 8,
+  time_frame: "60days",
+  dimension: { site: "MLA", subgroup: "All site" },
+  comparation: ["YOY"],
+}
+//https://run.mocky.io/v3/373bf76d-4695-403a-9671-a519b3151923
 
 /* let getChart = {
     title: 'lorem',
