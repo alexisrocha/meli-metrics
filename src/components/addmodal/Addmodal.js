@@ -76,7 +76,7 @@ export default function addmodal(props) {
         <Modal.Title id="addtitle">Add a metric</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form autocomplete="off">
+        <Form autoComplete="off">
           <Form.Group className="forminput">
             <Form.Control
               onChange={(e) => setValue(e.target.value)}
@@ -89,8 +89,12 @@ export default function addmodal(props) {
             <datalist id="inputSearchlist">
               <option>Buy Box</option>
               <option>Devices Sold</option>
+              <option>CBT - ASP(e) Billable</option>
+              <option>Avg Shipping Time</option>
+              <option>New Buyers</option>
+              <option>ASP per Shippment</option>
+              <option>Unique Receivers</option>
               <option>Share GMV Buy Box</option>
-              <option>Green</option>
             </datalist>
             <SearchIcon className="searchIcon" />
           </Form.Group>

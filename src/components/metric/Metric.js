@@ -17,6 +17,12 @@ import CloseIcon from "@material-ui/icons/Close";
 import Chart from "../chart/Chart";
 import MLA from "../../../public/flags/MLA.png";
 import MLB from "../../../public/flags/MLB.png";
+import MLC from "../../../public/flags/MLC.png";
+import MLM from "../../../public/flags/MLM.png";
+import MLU from "../../../public/flags/MLU.png";
+import MCO from "../../../public/flags/MCO.png";
+import MGT from "../../../public/flags/MGT.png";
+import MBO from "../../../public/flags/MBO.png";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import SettingsIcon from "@material-ui/icons/Settings";
 import GetAppIcon from "@material-ui/icons/GetApp";
@@ -135,9 +141,15 @@ export default function Metric({ idMetrica, chart }) {
   };
 
   const flags = {
-    MLA: MLA,
-    MLB: MLB,
-  };
+    "MLA": MLA,
+    "MLB": MLB,
+    "MLC": MLC,
+    "MLM": MLM,
+    "MLU": MLU,
+    "MBO": MBO,
+    "MCO": MCO,
+    "MGU": MGT,
+  }
 
   useEffect(() => {
     dispatch(fetchMetric(idMetrica));
