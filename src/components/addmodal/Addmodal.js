@@ -14,6 +14,8 @@ function Alert(props) {
 export default function addmodal(props) {
   const [value, setValue] = useState("");
   const [valueTitle, setValueTitle] = useState("");
+  const [open, setOpen] = React.useState(false);
+  const [openMaxLength, setOpenMaxLength] = React.useState(false);
   const dispatch = useDispatch();
   const checkValue = () => {
     if (value !== "" && valueTitle !== "") {
@@ -24,15 +26,37 @@ export default function addmodal(props) {
       handleClick();
     }
   };
-  const [open, setOpen] = React.useState(false);
+
   const handleClick = () => {
     setOpen(true);
+  };
+  const handleClickMaxLength = () => {
+    setOpenMaxLength(true);
   };
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
     setOpen(false);
+  };
+
+  const handleCloseMaxLength = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenMaxLength(false);
+  };
+
+  const checkMaxLength = (e) => {
+    var texto = e;
+    console.log("El texto es:", e);
+    if (texto.length > 30) {
+      console.log("Entro al if");
+      handleClickMaxLength();
+    } else {
+      console.log("Entro al else");
+      setValueTitle(texto);
+    }
   };
 
   return (
@@ -55,17 +79,17 @@ export default function addmodal(props) {
               id="inputSearch"
               list="inputSearchlist"
             />
-            <datalist id="inputSearchlist"> 
-            <option>Buy Box</option> 
-            <option>Devices Sold</option> 
-            <option>Share GMV Buy Box</option> 
-            <option>Green</option> 
+            <datalist id="inputSearchlist">
+              <option>Buy Box</option>
+              <option>Devices Sold</option>
+              <option>Share GMV Buy Box</option>
+              <option>Green</option>
             </datalist>
             <SearchIcon className="searchIcon" />
           </Form.Group>
           <Form.Group className="forminput">
             <Form.Control
-              onChange={(e) => setValueTitle(e.target.value)}
+              onChange={(e) => checkMaxLength(e.target.value)}
               value={valueTitle}
               type="text"
               placeholder="Nombre de la lista"
@@ -90,6 +114,16 @@ export default function addmodal(props) {
       <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
         <Alert severity="error" onClose={handleClose}>
           ¡Todos los campos deben estar completos!
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={openMaxLength}
+        autoHideDuration={2000}
+        onClose={handleCloseMaxLength}
+      >
+        <Alert severity="warning" onClose={handleCloseMaxLength}>
+          La longitud maxima es de 30 caracteres!
         </Alert>
       </Snackbar>
     </Modal>
