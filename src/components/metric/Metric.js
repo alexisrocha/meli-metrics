@@ -123,13 +123,11 @@ export default function Metric({ idMetrica, chart }) {
   };
 
   useEffect(() => {
-
-      dispatch(fetchMetric(idMetrica))
-      dispatch(fetchMetricData(idMetrica))
-
-  }, [idMetrica])
+    dispatch(fetchMetric(idMetrica));
+    dispatch(fetchMetricData(idMetrica));
+  }, [idMetrica]);
   return (
-    <Card className="cardMain">
+    <Card className="cardMain" style={{ height: "290px" }}>
       <CardHeader
         className={classes.header}
         avatar={<Avatar className={classes.small} src={MLA}></Avatar>}
@@ -187,7 +185,14 @@ export default function Metric({ idMetrica, chart }) {
         )}
       </div>
 
-      <p className="timeLapse">YOY:${ metricData ? numberWithThousands ( dif(metricData.data[0].data, metricData.data[1].data) ) : 0 }</p>
+      <p className="timeLapse">
+        YOY:$
+        {metricData
+          ? numberWithThousands(
+              dif(metricData.data[0].data, metricData.data[1].data)
+            )
+          : 0}
+      </p>
       <CardMedia>
         {metricData ? <Chart metricData={metricData} /> : null}
         <div className="buttonContainer">
