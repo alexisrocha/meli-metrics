@@ -37,7 +37,7 @@ export default function single() {
                 selectedChart.map((chart) => {
                   console.log("La key en Single es:", chart.metric_id);
                   return (
-                    <Metric key={chart.metric_id} idMetrica={chart.metric_id} />
+                    <Metric key={chart.metric_id} idMetrica={chart.metric_id} chart={chart}/>
                   );
                 })}
             </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import "./Chart.scss";
-export default ({ metricData }) => {
+export default ({ metricData, color }) => {
   const [chartData, setChartData] = useState({});
 
   const chart = () => {
@@ -13,7 +13,7 @@ export default ({ metricData }) => {
           data: metricData.data[0].data,
           backgroundColor: "transparent",
           borderWidth: 1.5,
-          borderColor: "#f5cf3c",
+          borderColor: color,
         },
         {
           label: metricData.data[1].name,
