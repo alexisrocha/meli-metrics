@@ -135,7 +135,7 @@ export default function Metric({ idMetrica, chart }) {
   };
 
   const colors = {
-    MARKETPLACE: "#f5cf3c",
+    "MARKETPLACE": "#f5cf3c",
     "MERCADO PAGO": "#2aa7d9",
     "MERCADO ENVIOS": "#a8c622",
   };

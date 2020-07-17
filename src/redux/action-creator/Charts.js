@@ -16,7 +16,7 @@ let url = {
   "Avg Shipping Time": "50cdf8d6-2419-4bd9-8d1d-84463bcf0607",
   "New Buyers": "4c242570-12ec-44a5-ae5f-62ddee3b76ee", 
   "ASP per Shippment": "a0d606f3-e11b-4743-aeb6-b4761beadb84",
-  "Unique Receivers": "32cc928e-156c-4401-9463-355833f7a4af",
+  "Unique Receivers": "2891d615-9637-4f48-b44f-dd473248a70c",
   "Share GMV Buy Box": "a911c61a-e19f-4011-bc76-3762f0f9cced"
 };
 
