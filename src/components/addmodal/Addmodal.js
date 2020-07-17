@@ -59,6 +59,12 @@ export default function addmodal(props) {
     }
   };
 
+  const keyPress = (e) => {
+    if (e.keyCode == 13) {
+      checkValue();
+    }
+  };
+
   return (
     <Modal
       id="modal"
@@ -78,6 +84,7 @@ export default function addmodal(props) {
               placeholder="Search metric"
               id="inputSearch"
               list="inputSearchlist"
+              onKeyDown={keyPress}
             />
             <datalist id="inputSearchlist">
               <option>Buy Box</option>
@@ -97,6 +104,7 @@ export default function addmodal(props) {
               value={valueTitle}
               type="text"
               placeholder="Nombre de la lista"
+              onKeyDown={keyPress}
             />
           </Form.Group>
         </Form>
