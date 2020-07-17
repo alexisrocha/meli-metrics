@@ -135,21 +135,21 @@ export default function Metric({ idMetrica, chart }) {
   };
 
   const colors = {
-    "MARKETPLACE": "#f5cf3c",
+    MARKETPLACE: "#f5cf3c",
     "MERCADO PAGO": "#2aa7d9",
     "MERCADO ENVIOS": "#a8c622",
   };
 
   const flags = {
-    "MLA": MLA,
-    "MLB": MLB,
-    "MLC": MLC,
-    "MLM": MLM,
-    "MLU": MLU,
-    "MBO": MBO,
-    "MCO": MCO,
-    "MGU": MGT,
-  }
+    MLA: MLA,
+    MLB: MLB,
+    MLC: MLC,
+    MLM: MLM,
+    MLU: MLU,
+    MBO: MBO,
+    MCO: MCO,
+    MGU: MGT,
+  };
 
   useEffect(() => {
     dispatch(fetchMetric(idMetrica));
@@ -159,7 +159,7 @@ export default function Metric({ idMetrica, chart }) {
     <>
       {metricData ? (
         //Este codigo falta pulir, hay que sacar todos los ternarios
-        <Card className="cardMain" style={{ height: "290px" }}>
+        <Card className="cardMain" style={{ height: "270px" }}>
           <CardHeader
             className={classes.header}
             avatar={
@@ -338,7 +338,7 @@ export default function Metric({ idMetrica, chart }) {
           </Dialog>
         </Card>
       ) : (
-        <Card className="cardMain" style={{ height: "290px" }}>
+        <Card className="cardMain" style={{ height: "270px" }}>
           <div className="circularProgress">
             <div className={classes.circular}>
               <CircularProgress />
