@@ -32,6 +32,7 @@
   margin-right: 7px;
   border-radius: 5px;
   height: 20px;
+  margin-top: -2px;
 }
 
 .positive {
@@ -46,19 +47,7 @@
   font-size: 80%;
 }
 
-.cardMain {
-  max-width: 23%;
-  min-width: 23%;
-  margin-bottom: 20px;
-  margin-right: 1%;
-  margin-left: 1%;
-}
-
-.cardMain:hover {
-  margin-bottom: 20px;
-}
-
-.cardMain:hover .button {
+.buttonContainer:hover .button {
   display: inline;
 }
 
