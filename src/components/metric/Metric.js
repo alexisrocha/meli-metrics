@@ -37,6 +37,8 @@ import Button from "@material-ui/core/Button";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import { deleteCharts } from "../../redux/action-creator/Charts";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMetric } from "../../redux/action-creator/Metrics";
@@ -87,6 +89,8 @@ export default function Metric({ idMetrica, chart }) {
   const [openInfo, setOpenInfo] = React.useState(false);
   const [openCard, setOpenCard] = React.useState(false);
   const [openSetting, setOpenSetting] = React.useState(false);
+  const [openDownload, setOpenDownload] = React.useState(false);
+  const [shadow, setShadow] = React.useState(false);
   const metric = useSelector((store) => store.metric.metric[idMetrica]);
   const metricData = useSelector(
     (store) => store.metricData.metricData[idMetrica]
@@ -96,6 +100,9 @@ export default function Metric({ idMetrica, chart }) {
     setOpenCard(true);
   };
 
+  const handleClickOpenDownload = () => {
+    setOpenDownload(true);
+  };
   const handleClickOpenSettings = () => {
     setOpenSetting(true);
   };
@@ -106,6 +113,10 @@ export default function Metric({ idMetrica, chart }) {
 
   const handleCloseInfo = () => {
     setOpenInfo(false);
+  };
+
+  const handleCloseDownload = () => {
+    setOpenDownload(false);
   };
 
   const handleCloseSettings = () => {
@@ -131,7 +142,17 @@ export default function Metric({ idMetrica, chart }) {
   };
 
   const percentage = (arr, arr2) => {
-    return ((arr[arr.length - 1] / arr2[arr2.length - 1] - 1) * 100).toFixed(2);
+    return ((arr[arr.length - 1] / arr2[arr2.length - 1] - 1) * 100).toFixed(0);
+  };
+
+  const changeCSS = () => {
+    setShadow(true);
+    console.log("Estoy sobre el grafico");
+  };
+
+  const changeCSSOut = () => {
+    setShadow(false);
+    console.log("Estoy fuera del grafico");
   };
 
   const colors = {
@@ -151,6 +172,9 @@ export default function Metric({ idMetrica, chart }) {
     MGU: MGT,
   };
 
+  var shadowCssOn = "inset 0px -20px 43px -10px rgba(82, 72, 82, 1)";
+
+  var shadowCssOff = "inset 0px 0px 0px 0px rgba(0,0,0,0.75)";
   useEffect(() => {
     dispatch(fetchMetric(idMetrica));
     dispatch(fetchMetricData(idMetrica));
@@ -159,7 +183,13 @@ export default function Metric({ idMetrica, chart }) {
     <>
       {metricData ? (
         //Este codigo falta pulir, hay que sacar todos los ternarios
-        <Card className="cardMain" style={{ height: "270px" }}>
+        <Card
+          className="cardMain"
+          style={{
+            height: "270px",
+            boxShadow: shadow ? shadowCssOn : shadowCssOff,
+          }}
+        >
           <CardHeader
             className={classes.header}
             avatar={
@@ -175,7 +205,7 @@ export default function Metric({ idMetrica, chart }) {
             }
             action={
               <IconButton aria-label="settings" onClick={deleteCard}>
-                <CloseIcon />
+                <DeleteOutlineIcon />
               </IconButton>
             }
           />
@@ -202,22 +232,26 @@ export default function Metric({ idMetrica, chart }) {
                 0 ? (
                   <div className="positive porcentaje">
                     <ArrowDropUpIcon />
-                    {metricData
-                      ? percentage(
-                          metricData.data[0].data,
-                          metricData.data[1].data
-                        ) + "%"
-                      : 0}
+                    <div>
+                      {metricData
+                        ? percentage(
+                            metricData.data[0].data,
+                            metricData.data[1].data
+                          ) + "%"
+                        : 0}
+                    </div>
                   </div>
                 ) : (
                   <div className="negative porcentaje">
                     <ArrowDropDownIcon />
-                    {metricData
-                      ? percentage(
-                          metricData.data[0].data,
-                          metricData.data[1].data
-                        ) + "%"
-                      : 0}
+                    <div style={{ marginRight: "5px" }}>
+                      {metricData
+                        ? percentage(
+                            metricData.data[0].data,
+                            metricData.data[1].data
+                          ) + "%"
+                        : 0}
+                    </div>
                   </div>
                 )}
               </>
@@ -235,10 +269,21 @@ export default function Metric({ idMetrica, chart }) {
               : 0}
           </p>
           <CardMedia>
-            {metricData && metric ? (
-              <Chart metricData={metricData} color={colors[metric.group]} />
-            ) : null}
-            <div className="buttonContainer">
+            <div>
+              {metricData && metric ? (
+                <Chart
+                  metricData={metricData}
+                  color={colors[metric.group]}
+                  className="chart"
+                />
+              ) : null}
+            </div>
+
+            <div
+              className="buttonContainer"
+              onMouseOver={changeCSS}
+              onMouseLeave={changeCSSOut}
+            >
               <div className="button" onClick={handleClickOpenInfo}>
                 <div className="buttonItem">
                   <InfoIcon className={classes.item} />
@@ -251,7 +296,7 @@ export default function Metric({ idMetrica, chart }) {
                 </div>
               </div>
 
-              <div className="button">
+              <div className="button" onClick={handleClickOpenDownload}>
                 <div className="buttonItem">
                   <GetAppIcon className={classes.item} />
                 </div>
@@ -332,6 +377,30 @@ export default function Metric({ idMetrica, chart }) {
                 No
               </Button>
               <Button onClick={handleCloseSettings} color="primary">
+                Yes
+              </Button>
+            </DialogActions>
+          </Dialog>
+
+          {/*Dialog for DownloadIcon*/}
+          <Dialog
+            open={openDownload}
+            TransitionComponent={Transition}
+            onClose={handleCloseDownload}
+            aria-labelledby="alert-dialog-slide-title"
+            aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle id="alert-dialog-slide-title">Download</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-slide-description">
+                Are you sure you want to download data in a csv format?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseDownload} color="primary">
+                No
+              </Button>
+              <Button onClick={handleCloseDownload} color="primary">
                 Yes
               </Button>
             </DialogActions>
