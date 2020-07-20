@@ -172,7 +172,7 @@ export default function Metric({ idMetrica, chart }) {
     MGU: MGT,
   };
 
-  var shadowCssOn = "inset 0px -20px 43px -10px rgba(82, 72, 82, 1)";
+  var shadowCssOn = " inset 0px -55px 62px -15px rgba(0,0,0,0.75)";
 
   var shadowCssOff = "inset 0px 0px 0px 0px rgba(0,0,0,0.75)";
   useEffect(() => {
