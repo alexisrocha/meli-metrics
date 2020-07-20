@@ -17,7 +17,7 @@ export default function navbar() {
     <div className="navbar">
       <Navbar variant="light">
         <div className="container navcontainer">
-          <div>
+          <div className="divMeliMetrics">
             <Navbar.Brand id="title">MeliMetrics</Navbar.Brand>
           </div>
           <div className="items">
@@ -29,7 +29,7 @@ export default function navbar() {
             <Nav.Link>Mi lista de kpis</Nav.Link>
             <Nav.Link>Mis alarmas</Nav.Link>
           </div>
-          <div className="itemRight">
+          {/*  <div className="itemRight">
             <Nav.Item id="mode">Visualización</Nav.Item>
             <Tabs
               className="tabsGroup"
@@ -40,6 +40,17 @@ export default function navbar() {
               <Tab label="Single" aria-selected="false" />
               <Tab label="Versus" aria-selected="false" />
             </Tabs>
+          </div> */}
+          <div className="divVisualizacion">
+            <Nav.Item id="mode">Visualización</Nav.Item>
+          </div>
+          <div class="divMain">
+            <div class="leftButton">
+              <div> Simple</div>
+            </div>
+            <div class="rightButton">
+              <div> Versus</div>
+            </div>
           </div>
         </div>
       </Navbar>
