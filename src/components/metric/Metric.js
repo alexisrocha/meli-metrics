@@ -1,19 +1,12 @@
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import CloseIcon from "@material-ui/icons/Close";
 import Chart from "../chart/Chart";
 import MLA from "../../../public/flags/MLA.png";
 import MLB from "../../../public/flags/MLB.png";
@@ -34,10 +27,8 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import Button from "@material-ui/core/Button";
-import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import { deleteCharts } from "../../redux/action-creator/Charts";
 import { useDispatch, useSelector } from "react-redux";
@@ -73,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
   },
   header: {
-    padding: "16px 16px 0px 16px",
+    padding: "16px 16px 10px 16px",
   },
   circular: {
     display: "flex",
@@ -186,7 +177,7 @@ export default function Metric({ idMetrica, chart }) {
         <Card
           className="cardMain"
           style={{
-            height: "270px",
+            height: "280px",
             boxShadow: shadow ? shadowCssOn : shadowCssOff,
           }}
         >
@@ -215,7 +206,8 @@ export default function Metric({ idMetrica, chart }) {
                 {metric ? (
                   <strong style={{ color: colors[metric.group] }}>
                     {metricData
-                      ? numberWithThousands(
+                      ? "$" +
+                        numberWithThousands(
                           metricData.data[0].data[
                             metricData.data[0].data.length - 1
                           ]
@@ -264,7 +256,7 @@ export default function Metric({ idMetrica, chart }) {
             YOY:$
             {metricData
               ? numberWithThousands(
-                  dif(metricData.data[0].data, metricData.data[1].data)
+                  metricData.data[1].data[metricData.data[1].data.length - 1]
                 )
               : 0}
           </p>
