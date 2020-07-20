@@ -106,4 +106,58 @@
       font-family: "Proxima Nova";
     }
   }
+
+  .divVisualizacion {
+    margin-right: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .divMain {
+    .tabsGroup {
+      border: 0.5px solid grey;
+      border-radius: 100px;
+      height: 30px;
+    }
+
+    font-family: "Proxima Nova";
+    height: 23px;
+    width: 150px;
+    border: 1px solid grey;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+  }
+
+  .activeCSS {
+    background-color: yellow;
+    color: black;
+    height: 18px;
+    width: 68px;
+    border: 1px solid yellow;
+    border-radius: 50px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 11px;
+    transition: width 1s;
+  }
+  .desactivated {
+    color: black;
+    height: 10px;
+    width: 75px;
+    text-align: center;
+    /* border: 3px solid blue;
+    border-radius: 100px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 11px;
+  }
 }
