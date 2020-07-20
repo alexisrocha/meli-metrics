@@ -15,6 +15,14 @@
   button:focus {
     outline: none;
   }
+  .titleFirst {
+    margin-left: 7.5%;
+  }
+  .itemsFirst {
+    display: flex;
+    flex-direction: row;
+    margin-left: 12.5%;
+  }
 
   #title {
     font-size: 200%;
@@ -98,5 +106,4 @@
       font-family: "Proxima Nova";
     }
   }
-
 }
