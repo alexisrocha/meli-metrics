@@ -58,12 +58,6 @@
   margin-bottom: 20px;
 }
 
-.buttonContainer:hover {
-  -webkit-box-shadow: inset 0px -20px 43px -10px rgba(82, 72, 82, 1);
-  -moz-box-shadow: inset 0px -20px 43px -10px rgba(82, 72, 82, 1);
-  box-shadow: inset 0px -20px 43px -10px rgba(82, 72, 82, 1);
-}
-
 .cardMain:hover .button {
   display: inline;
 }

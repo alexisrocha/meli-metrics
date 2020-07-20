@@ -90,6 +90,7 @@ export default function Metric({ idMetrica, chart }) {
   const [openCard, setOpenCard] = React.useState(false);
   const [openSetting, setOpenSetting] = React.useState(false);
   const [openDownload, setOpenDownload] = React.useState(false);
+  const [shadow, setShadow] = React.useState(false);
   const metric = useSelector((store) => store.metric.metric[idMetrica]);
   const metricData = useSelector(
     (store) => store.metricData.metricData[idMetrica]
@@ -144,6 +145,16 @@ export default function Metric({ idMetrica, chart }) {
     return ((arr[arr.length - 1] / arr2[arr2.length - 1] - 1) * 100).toFixed(0);
   };
 
+  const changeCSS = () => {
+    setShadow(true);
+    console.log("Estoy sobre el grafico");
+  };
+
+  const changeCSSOut = () => {
+    setShadow(false);
+    console.log("Estoy fuera del grafico");
+  };
+
   const colors = {
     MARKETPLACE: "#f5cf3c",
     "MERCADO PAGO": "#2aa7d9",
@@ -161,6 +172,9 @@ export default function Metric({ idMetrica, chart }) {
     MGU: MGT,
   };
 
+  var shadowCssOn = "inset 0px -20px 43px -10px rgba(82, 72, 82, 1)";
+
+  var shadowCssOff = "inset 0px 0px 0px 0px rgba(0,0,0,0.75)";
   useEffect(() => {
     dispatch(fetchMetric(idMetrica));
     dispatch(fetchMetricData(idMetrica));
@@ -169,7 +183,13 @@ export default function Metric({ idMetrica, chart }) {
     <>
       {metricData ? (
         //Este codigo falta pulir, hay que sacar todos los ternarios
-        <Card className="cardMain" style={{ height: "270px" }}>
+        <Card
+          className="cardMain"
+          style={{
+            height: "270px",
+            boxShadow: shadow ? shadowCssOn : shadowCssOff,
+          }}
+        >
           <CardHeader
             className={classes.header}
             avatar={
@@ -249,14 +269,21 @@ export default function Metric({ idMetrica, chart }) {
               : 0}
           </p>
           <CardMedia>
-            {metricData && metric ? (
-              <Chart
-                metricData={metricData}
-                color={colors[metric.group]}
-                className="chart"
-              />
-            ) : null}
-            <div className="buttonContainer">
+            <div>
+              {metricData && metric ? (
+                <Chart
+                  metricData={metricData}
+                  color={colors[metric.group]}
+                  className="chart"
+                />
+              ) : null}
+            </div>
+
+            <div
+              className="buttonContainer"
+              onMouseOver={changeCSS}
+              onMouseLeave={changeCSSOut}
+            >
               <div className="button" onClick={handleClickOpenInfo}>
                 <div className="buttonItem">
                   <InfoIcon className={classes.item} />
