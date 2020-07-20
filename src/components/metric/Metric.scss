@@ -22,9 +22,12 @@
 }
 
 .porcentaje {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: "Proxima Nova";
   text-align: center;
-  width: 35%;
+  width: 25%;
   color: white;
   margin-right: 7px;
   border-radius: 5px;
@@ -34,11 +37,11 @@
 .positive {
   background-color: #2e8a44;
   font-size: 80%;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .negative {
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #f83b49;
   font-size: 80%;
 }
@@ -53,12 +56,6 @@
 
 .cardMain:hover {
   margin-bottom: 20px;
-}
-
-.cardMain:hover {
-  -webkit-box-shadow: inset 0px -63px 79px -2px rgba(133, 128, 133, 0.8);
-  -moz-box-shadow: inset 0px -63px 79px -2px rgba(133, 128, 133, 0.8);
-  box-shadow: inset 0px -63px 79px -2px rgba(133, 128, 133, 0.8);
 }
 
 .cardMain:hover .button {
