@@ -118,18 +118,17 @@ export default function Metric({ idMetrica, chart }) {
     setOpenCard(false);
   };
 
-  const sumArr = (arr) => {
-    return arr.reduce(
-      (accumulator, currentValue) => accumulator + currentValue
-    );
-  };
-
   const dif = (arr, arr2) => {
     return arr[arr.length - 1] - arr2[arr.length - 1];
   };
 
-  const numberWithThousands = (x) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  const reduceNumber = (number) => {
+    if (number > 1000000) {
+      return (number / 1000000).toFixed(2) + "M";
+    }
+    if (number < 1000000) {
+      return (number / 1000).toFixed(2) + "k";
+    }
   };
 
   const percentage = (arr, arr2) => {
@@ -207,7 +206,7 @@ export default function Metric({ idMetrica, chart }) {
                   <strong style={{ color: colors[metric.group] }}>
                     {metricData
                       ? "$" +
-                        numberWithThousands(
+                        reduceNumber(
                           metricData.data[0].data[
                             metricData.data[0].data.length - 1
                           ]
@@ -255,7 +254,7 @@ export default function Metric({ idMetrica, chart }) {
           <p className="timeLapse">
             YOY:$
             {metricData
-              ? numberWithThousands(
+              ? reduceNumber(
                   metricData.data[1].data[metricData.data[1].data.length - 1]
                 )
               : 0}
