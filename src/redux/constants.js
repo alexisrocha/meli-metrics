@@ -5,3 +5,4 @@ export const DELETE_CHART = "DELETE_CHART";
 export const SELECTED_CHART = "SELECTED_CHART";
 export const SET_TITLE = "SET_TITLE";
 export const ADD_METRIC = "ADD_METRIC";
+export const SET_LOCATION = "SET_LOCATION";
