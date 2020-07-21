@@ -30,6 +30,7 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import CloseIcon from "@material-ui/icons/Close";
 import { deleteCharts } from "../../redux/action-creator/Charts";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMetric } from "../../redux/action-creator/Metrics";
@@ -145,6 +146,51 @@ export default function Metric({ idMetrica, chart }) {
     console.log("Estoy fuera del grafico");
   };
 
+  const generateDate = () => {
+    var fecha = new Date().toString().slice(4, 15).split(" ");
+    var mes = fecha[0];
+    var newMonth;
+    switch (mes) {
+      case "Jan":
+        newMonth = 1;
+        break;
+      case "Feb":
+        newMonth = 2;
+        break;
+      case "Mar":
+        newMonth = 3;
+        break;
+      case "Apr":
+        newMonth = 4;
+        break;
+      case "May":
+        newMonth = 5;
+        break;
+      case "Jun":
+        newMonth = 6;
+        break;
+      case "Jul":
+        newMonth = 7;
+        break;
+      case "Ago":
+        newMonth = 8;
+        break;
+      case "Sep":
+        newMonth = 9;
+        break;
+      case "Oct":
+        newMonth = 10;
+        break;
+      case "Nov":
+        newMonth = 11;
+        break;
+      case "Dic":
+        newMonth = 12;
+        break;
+    }
+
+    return newMonth + "/" + fecha[1] + "/" + fecha[2];
+  };
   const colors = {
     MARKETPLACE: "#f5cf3c",
     "MERCADO PAGO": "#2aa7d9",
@@ -195,7 +241,7 @@ export default function Metric({ idMetrica, chart }) {
             }
             action={
               <IconButton aria-label="settings" onClick={deleteCard}>
-                <DeleteOutlineIcon />
+                <CloseIcon />
               </IconButton>
             }
           />
@@ -275,6 +321,12 @@ export default function Metric({ idMetrica, chart }) {
               onMouseOver={changeCSS}
               onMouseLeave={changeCSSOut}
             >
+              <div className="date">
+                {"Actualizacion:"}
+                <br />
+                {generateDate()}
+              </div>
+
               <div className="button" onClick={handleClickOpenInfo}>
                 <div className="buttonItem">
                   <InfoIcon className={classes.item} />
@@ -302,24 +354,28 @@ export default function Metric({ idMetrica, chart }) {
             onClose={handleCloseCard}
             aria-labelledby="alert-dialog-slide-title"
             aria-describedby="alert-dialog-slide-description"
+            id="quitmodal"
           >
             <DialogTitle id="alert-dialog-slide-title">Delete Card</DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-slide-description">
-                Estas seguro que deseas eliminar esta tarjeta?
+                Are you sure to remove this card?
               </DialogContentText>
             </DialogContent>
-            <DialogActions>
+            <DialogActions id="deleteOptions">
               <Button onClick={handleCloseCard} color="primary">
+                <CloseIcon />
                 No
               </Button>
               <Button
+                id="yesButton"
                 onClick={() => {
                   dispatch(deleteCharts(idMetrica));
                   handleCloseCard();
                 }}
                 color="primary"
               >
+                <DeleteOutlineIcon />
                 Yes
               </Button>
             </DialogActions>

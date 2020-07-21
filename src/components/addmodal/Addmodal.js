@@ -103,7 +103,7 @@ export default function addmodal(props) {
               onChange={(e) => checkMaxLength(e.target.value)}
               value={valueTitle}
               type="text"
-              placeholder="Nombre de la lista"
+              placeholder="List name"
               onKeyDown={keyPress}
             />
           </Form.Group>
@@ -111,7 +111,7 @@ export default function addmodal(props) {
       </Modal.Body>
       <Modal.Footer id="footerModal">
         <span className="closeModal" onClick={props.onHide}>
-          Cancelar
+          Cancel
         </span>
         <span
           className="closeModal"
@@ -119,7 +119,7 @@ export default function addmodal(props) {
             checkValue();
           }}
         >
-          Listo
+          Done
         </span>
       </Modal.Footer>
 
