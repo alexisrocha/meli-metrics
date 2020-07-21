@@ -23,7 +23,7 @@ export default function single() {
   const dispatch = useDispatch();
   const classes = useStyles();
   useEffect(() => {
-    if (charts.length) dispatch(chartSelect(charts[0].config));
+    if (charts.length) dispatch(chartSelect(charts[selectedChart].config));
   }, [charts.length]);
 
   return (
@@ -32,7 +32,7 @@ export default function single() {
       <div className="container">
         {charts.length > 0 ? (
           <>
-            {selectedChart.length ? (
+            {charts[selectedChart].config.length ? (
               <Grid
                 className={classes.root}
                 container
@@ -60,8 +60,8 @@ export default function single() {
               spacing={3}
               alignItems="flex-start"
             >
-              {selectedChart &&
-                selectedChart.map((chart) => {
+              {charts[selectedChart].config.length &&
+                charts[selectedChart].config.map((chart) => {
                   return (
                     <Grid key={chart.metric_id} item xs={3}>
                       <Metric

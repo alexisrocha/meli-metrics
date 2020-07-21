@@ -2,7 +2,7 @@ import {
   GET_CHART,
   DELETE_CHART,
   SELECTED_CHART,
-  SET_TITLE,
+  SET_SELECTEDCHART,
   ADD_METRIC,
 } from "../constants";
 import axios from "axios";
@@ -46,9 +46,9 @@ const deleteChart = (id) => ({
   id,
 });
 
-const setTitle = (title) => ({
-  type: SET_TITLE,
-  title,
+const setSelectedChart = (selectedChart) => ({
+  type: SET_SELECTEDCHART,
+  selectedChart,
 });
 
 const addMetric = (metric) => ({
@@ -56,11 +56,15 @@ const addMetric = (metric) => ({
   metric,
 });
 
-export const fetchChart = (id) => {
+export const fetchChart = (id , title) => {
   return (dispatch) =>
     axios
       .get(host + url[id])
       .then((res) => res.data)
+      .then((chart)=> {
+        chart.title = title
+        return chart
+      })
       .then((charts) => dispatch(getChart(charts)));
 };
 
@@ -76,9 +80,9 @@ export const deleteCharts = (id) => {
   };
 };
 
-export const changeChart = (title) => {
+export const changeChart = (selectChart) => {
   return (dispatch) => {
-    dispatch(setTitle(title));
+    dispatch(setSelectedChart(selectChart));
   };
 };
 

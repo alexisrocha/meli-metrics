@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Tabs from "@material-ui/core/Tabs";
@@ -11,7 +11,8 @@ export default function navbar() {
   const [value, setValue] = React.useState(0);
   const [activeClassLeft, setActiveClassLeft] = React.useState(true);
   const [activeClassRight, setActiveClassRight] = React.useState(false);
-  const title = useSelector((store) => store.chart.title);
+  const charts = useSelector((store) => store.chart.charts);
+  const selectedChart = useSelector((store) => store.chart.selectedChart);
   const metric = useSelector((store) => store.metric);
   const changeCSS = (position) => {
     if (position == "left") {
@@ -26,6 +27,10 @@ export default function navbar() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  useEffect(() => {
+    console.log("entre al useeffect de navbar" , selectedChart)
+    if(charts.length) console.log(charts[selectedChart].title)
+  }, [selectedChart]);
   return (
     <div>
       <div className="navbar">
@@ -36,10 +41,10 @@ export default function navbar() {
             </div>
 
             <div className="items">
-              {title == "" ? (
+              {!selectedChart && !charts.length  ? (
                 <Nav.Link className="selected">Main View</Nav.Link>
               ) : (
-                <Nav.Link className="selected">{title}</Nav.Link>
+                <Nav.Link className="selected">{charts[selectedChart].title}</Nav.Link>
               )}
               <Nav.Link>My KPIs</Nav.Link>
               <Nav.Link>My alarms</Nav.Link>
