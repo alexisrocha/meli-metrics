@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { chartSelect } from "../../redux/action-creator/Charts";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import { setLocation } from "../../redux/action-creator/Location";
 import Search from "../search/Search";
 import "./Single.scss";
 
@@ -19,12 +20,14 @@ const useStyles = makeStyles((theme) => ({
 export default function single() {
   const [modalShow, setModalShow] = useState(false);
   const charts = useSelector((store) => store.chart.charts);
+  const location = useSelector((store) => store.location);
   const selectedChart = useSelector((store) => store.chart.selectedChart);
   const dispatch = useDispatch();
   const classes = useStyles();
   useEffect(() => {
-    if (charts.length) dispatch(chartSelect(charts[0].config));
-  }, [charts.length]);
+    dispatch(setLocation("main"));
+    if (charts.length) dispatch(chartSelect(charts[selectedChart].config));
+  }, [charts.length, location.location]);
 
   return (
     <div className="single">
@@ -32,7 +35,7 @@ export default function single() {
       <div className="container">
         {charts.length > 0 ? (
           <>
-            {selectedChart.length ? (
+            {charts[selectedChart].config.length ? (
               <Grid
                 className={classes.root}
                 container
@@ -60,8 +63,8 @@ export default function single() {
               spacing={3}
               alignItems="flex-start"
             >
-              {selectedChart &&
-                selectedChart.map((chart) => {
+              {charts[selectedChart].config.length &&
+                charts[selectedChart].config.map((chart) => {
                   return (
                     <Grid key={chart.metric_id} item xs={3}>
                       <Metric

@@ -16,11 +16,13 @@ export default function addmodal(props) {
   const [valueTitle, setValueTitle] = useState("");
   const [open, setOpen] = React.useState(false);
   const [openMaxLength, setOpenMaxLength] = React.useState(false);
+  const charts = useSelector((store) => store.chart.charts);
   const dispatch = useDispatch();
   const checkValue = () => {
     if (value !== "" && valueTitle !== "") {
-      dispatch(fetchChart(value));
-      dispatch(changeChart(valueTitle));
+      dispatch(fetchChart(value, valueTitle));
+      if(!charts) dispatch(changeChart(0));
+      else if(charts) dispatch(changeChart(charts.length))
       props.onHide();
     } else {
       handleClick();
