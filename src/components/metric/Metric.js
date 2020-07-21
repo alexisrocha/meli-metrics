@@ -312,6 +312,7 @@ export default function Metric({ idMetrica, chart }) {
             </DialogContent>
             <DialogActions>
               <Button onClick={handleCloseCard} color="primary">
+                <CloseIcon />
                 No
               </Button>
               <Button
