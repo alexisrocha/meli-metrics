@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLocation } from "../../redux/action-creator/Location";
 export default function List() {
   const location = useSelector((store) => store.location.location);
+  const listsCharts = useSelector((store) => store.chart.charts);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setLocation("list"));
@@ -11,7 +12,7 @@ export default function List() {
   return (
     <div>
       {/* <CrearLista /> */}
-      <Listar />
+      <Listar listsCharts={listsCharts} />
     </div>
   );
 }

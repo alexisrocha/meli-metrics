@@ -13,6 +13,7 @@ export default function navbar() {
   const [activeClassRight, setActiveClassRight] = React.useState(false);
   const title = useSelector((store) => store.chart.title);
   const metric = useSelector((store) => store.metric);
+  const location = useSelector((store) => store.location);
   const changeCSS = (position) => {
     if (position == "left") {
       setActiveClassLeft(true);
@@ -51,7 +52,8 @@ export default function navbar() {
               <Nav.Link>My alarms</Nav.Link>
             </div>
 
-            {Object.keys(metric.metric).length == 0 ? (
+            {Object.keys(metric.metric).length == 0 ||
+            location.location == "list" ? (
               <div style={{ width: 260 }}></div>
             ) : (
               <div className="divVisualizacion">
