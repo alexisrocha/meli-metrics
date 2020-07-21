@@ -108,7 +108,9 @@
   }
 
   .divVisualizacion {
-    margin-left: 150px;
+    margin-right: 15px;
+    display: flex;
+    flex-direction: row;
     align-items: center;
   }
 
@@ -128,10 +130,9 @@
     align-items: center;
     justify-content: center;
     border-radius: 100px;
-
   }
 
-  .leftButton {
+  .activeCSS {
     background-color: yellow;
     color: black;
     height: 18px;
@@ -144,9 +145,10 @@
     justify-content: center;
     align-items: center;
     font-size: 11px;
+    transition: width 1s;
   }
 
-  .rightButton {
+  .desactivated {
     color: black;
     height: 10px;
     width: 75px;
@@ -158,6 +160,5 @@
     justify-content: center;
     align-items: center;
     font-size: 11px;
-
   }
 }

@@ -9,51 +9,85 @@ import "./Navbar.scss";
 
 export default function navbar() {
   const [value, setValue] = React.useState(0);
+  const [activeClassLeft, setActiveClassLeft] = React.useState(true);
+  const [activeClassRight, setActiveClassRight] = React.useState(false);
   const title = useSelector((store) => store.chart.title);
+  const metric = useSelector((store) => store.metric);
+  const changeCSS = (position) => {
+    if (position == "left") {
+      setActiveClassLeft(true);
+      setActiveClassRight(false);
+    } else {
+      setActiveClassLeft(false);
+      setActiveClassRight(true);
+    }
+  };
+  console.log("La metric es:", metric);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   return (
-    <div className="navbar">
-      <Navbar variant="light">
-        <div className="container navcontainer">
-          <div className="divMeliMetrics">
-            <Navbar.Brand id="title">MeliMetrics</Navbar.Brand>
-          </div>
-          <div className="items">
-            {title == "" ? (
-              <Nav.Link className="selected">Vista principal</Nav.Link>
-            ) : (
-              <Nav.Link className="selected">{title}</Nav.Link>
-            )}
-            <Nav.Link>Mi lista de kpis</Nav.Link>
-            <Nav.Link>Mis alarmas</Nav.Link>
-          </div>
-          {/*  <div className="itemRight">
-            <Nav.Item id="mode">Visualización</Nav.Item>
-            <Tabs
-              className="tabsGroup"
-              value={value}
-              onChange={handleChange}
-              aria-label="simple tabs example"
-            >
-              <Tab label="Single" aria-selected="false" />
-              <Tab label="Versus" aria-selected="false" />
-            </Tabs>
-          </div> */}
-          <div className="divVisualizacion">
-            <Nav.Item id="mode">Visualización</Nav.Item>
-          </div>
-          <div class="divMain">
-            <div class="leftButton">
-              <div> Simple</div>
+    <div>
+      {Object.keys(metric.metric).length == 0 ? (
+        <div>
+          <Navbar variant="light">
+            <div className="titleFirst">
+              <Navbar.Brand id="title">MeliMetrics</Navbar.Brand>
             </div>
-            <div class="rightButton">
-              <div> Versus</div>
+            <div className="itemsFirst">
+              {title == "" ? (
+                <Nav.Link className="selected">Vista principal</Nav.Link>
+              ) : (
+                <Nav.Link className="selected">{title}</Nav.Link>
+              )}
+              <Nav.Link>Mi lista de kpis</Nav.Link>
+              <Nav.Link>Mis alarmas</Nav.Link>
             </div>
-          </div>
+          </Navbar>
         </div>
-      </Navbar>
+      ) : (
+        <div className="navbar">
+          <Navbar variant="light">
+            <div className="container navcontainer">
+              <div style={{ marginLeft: "15px" }}>
+                <Navbar.Brand id="title">MeliMetrics</Navbar.Brand>
+              </div>
+              <div className="items">
+                {title == "" ? (
+                  <Nav.Link className="selected">Vista principal</Nav.Link>
+                ) : (
+                  <Nav.Link className="selected">{title}</Nav.Link>
+                )}
+                <Nav.Link>Mi lista de kpis</Nav.Link>
+                <Nav.Link>Mis alarmas</Nav.Link>
+              </div>
+              <div className="divVisualizacion">
+                <div>
+                  <Nav.Item id="mode">Visualización</Nav.Item>
+                </div>
+                <div class="divMain">
+                  <div
+                    className={activeClassLeft ? "activeCSS" : "desactivated"}
+                    onClick={() => {
+                      changeCSS("left");
+                    }}
+                  >
+                    <div> Simple</div>
+                  </div>
+                  <div
+                    className={activeClassRight ? "activeCSS" : "desactivated"}
+                    onClick={() => {
+                      changeCSS("right");
+                    }}
+                  >
+                    <div> Versus</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Navbar>
+        </div>
+      )}
     </div>
   );
 }
