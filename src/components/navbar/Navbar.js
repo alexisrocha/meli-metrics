@@ -37,12 +37,12 @@ export default function navbar() {
 
             <div className="items">
               {title == "" ? (
-                <Nav.Link className="selected">Vista principal</Nav.Link>
+                <Nav.Link className="selected">Main View</Nav.Link>
               ) : (
                 <Nav.Link className="selected">{title}</Nav.Link>
               )}
-              <Nav.Link>Mi lista de kpis</Nav.Link>
-              <Nav.Link>Mis alarmas</Nav.Link>
+              <Nav.Link>My KPIs</Nav.Link>
+              <Nav.Link>My alarms</Nav.Link>
             </div>
 
             {Object.keys(metric.metric).length == 0 ? (
@@ -50,7 +50,7 @@ export default function navbar() {
             ) : (
               <div className="divVisualizacion">
                 <div>
-                  <Nav.Item id="mode">Visualización</Nav.Item>
+                  <Nav.Item id="mode">Visualization</Nav.Item>
                 </div>
                 <div class="divMain">
                   <div
