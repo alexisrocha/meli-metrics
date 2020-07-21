@@ -28,13 +28,14 @@ export default function navbar() {
   };
   return (
     <div>
-      {Object.keys(metric.metric).length == 0 ? (
-        <div>
-          <Navbar variant="light">
-            <div className="titleFirst">
+      <div className="navbar">
+        <Navbar variant="light">
+          <div className="container navcontainer">
+            <div style={{ marginLeft: "15px" }}>
               <Navbar.Brand id="title">MeliMetrics</Navbar.Brand>
             </div>
-            <div className="itemsFirst">
+
+            <div className="items">
               {title == "" ? (
                 <Nav.Link className="selected">Vista principal</Nav.Link>
               ) : (
@@ -43,24 +44,10 @@ export default function navbar() {
               <Nav.Link>Mi lista de kpis</Nav.Link>
               <Nav.Link>Mis alarmas</Nav.Link>
             </div>
-          </Navbar>
-        </div>
-      ) : (
-        <div className="navbar">
-          <Navbar variant="light">
-            <div className="container navcontainer">
-              <div style={{ marginLeft: "15px" }}>
-                <Navbar.Brand id="title">MeliMetrics</Navbar.Brand>
-              </div>
-              <div className="items">
-                {title == "" ? (
-                  <Nav.Link className="selected">Vista principal</Nav.Link>
-                ) : (
-                  <Nav.Link className="selected">{title}</Nav.Link>
-                )}
-                <Nav.Link>Mi lista de kpis</Nav.Link>
-                <Nav.Link>Mis alarmas</Nav.Link>
-              </div>
+
+            {Object.keys(metric.metric).length == 0 ? (
+              <div style={{ width: 260 }}></div>
+            ) : (
               <div className="divVisualizacion">
                 <div>
                   <Nav.Item id="mode">Visualización</Nav.Item>
@@ -84,10 +71,10 @@ export default function navbar() {
                   </div>
                 </div>
               </div>
-            </div>
-          </Navbar>
-        </div>
-      )}
+            )}
+          </div>
+        </Navbar>
+      </div>
     </div>
   );
 }

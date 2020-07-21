@@ -30,6 +30,7 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import CloseIcon from "@material-ui/icons/Close";
 import { deleteCharts } from "../../redux/action-creator/Charts";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMetric } from "../../redux/action-creator/Metrics";
@@ -195,7 +196,7 @@ export default function Metric({ idMetrica, chart }) {
             }
             action={
               <IconButton aria-label="settings" onClick={deleteCard}>
-                <DeleteOutlineIcon />
+                <CloseIcon />
               </IconButton>
             }
           />
@@ -320,6 +321,7 @@ export default function Metric({ idMetrica, chart }) {
                 }}
                 color="primary"
               >
+                <DeleteOutlineIcon />
                 Yes
               </Button>
             </DialogActions>
