@@ -103,7 +103,7 @@ export default function addmodal(props) {
               onChange={(e) => checkMaxLength(e.target.value)}
               value={valueTitle}
               type="text"
-              placeholder="Nombre de la lista"
+              placeholder="List name"
               onKeyDown={keyPress}
             />
           </Form.Group>
