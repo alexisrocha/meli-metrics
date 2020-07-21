@@ -111,7 +111,7 @@ export default function addmodal(props) {
       </Modal.Body>
       <Modal.Footer id="footerModal">
         <span className="closeModal" onClick={props.onHide}>
-          Cancelar
+          Cancel
         </span>
         <span
           className="closeModal"
@@ -119,7 +119,7 @@ export default function addmodal(props) {
             checkValue();
           }}
         >
-          Listo
+          Done
         </span>
       </Modal.Footer>
 
