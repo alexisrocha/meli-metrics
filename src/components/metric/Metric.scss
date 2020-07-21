@@ -51,6 +51,17 @@
   display: inline;
 }
 
+.buttonContainer:hover .date {
+  display: inline;
+}
+
+.date {
+  color: white;
+  font-size: 80%;
+  margin-right: 23px;
+  display: none;
+}
+
 .button {
   display: none;
   width: 15%;
