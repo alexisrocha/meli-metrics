@@ -12,6 +12,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
+import Iconos from "../iconos/Iconos";
 import "./Listar.scss";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -84,7 +85,7 @@ export default function Listar({ listsCharts }) {
                   justifyContent: "space-between",
                 }}
               >
-                <div>Iconos</div>
+                <Iconos listaMetricas={item.config} />
                 <div>
                   <EditIcon className="button" />
                   <DeleteIcon
