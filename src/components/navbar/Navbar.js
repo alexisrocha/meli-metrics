@@ -14,6 +14,7 @@ export default function navbar() {
   const charts = useSelector((store) => store.chart.charts);
   const selectedChart = useSelector((store) => store.chart.selectedChart);
   const metric = useSelector((store) => store.metric);
+  const location = useSelector((store) => store.location);
   const changeCSS = (position) => {
     if (position == "left") {
       setActiveClassLeft(true);
@@ -42,15 +43,22 @@ export default function navbar() {
 
             <div className="items">
               {!selectedChart && !charts.length  ? (
-                <Nav.Link className="selected">Main View</Nav.Link>
+                <Nav.Link className="selected">
+                  <Link to="/">Main View</Link>
+                </Nav.Link>
               ) : (
-                <Nav.Link className="selected">{charts[selectedChart].title}</Nav.Link>
+                <Nav.Link className="selected">
+                  <Link to="/"> {charts[selectedChart].title}</Link>
+                </Nav.Link>
               )}
-              <Nav.Link>My KPIs</Nav.Link>
+              <Nav.Link>
+                <Link to="/list">My KPIs</Link>
+              </Nav.Link>
               <Nav.Link>My alarms</Nav.Link>
             </div>
 
-            {Object.keys(metric.metric).length == 0 ? (
+            {Object.keys(metric.metric).length == 0 ||
+            location.location == "list" ? (
               <div style={{ width: 260 }}></div>
             ) : (
               <div className="divVisualizacion">

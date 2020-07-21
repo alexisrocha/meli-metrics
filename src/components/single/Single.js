@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { chartSelect } from "../../redux/action-creator/Charts";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import { setLocation } from "../../redux/action-creator/Location";
 import Search from "../search/Search";
 import "./Single.scss";
 
@@ -19,12 +20,14 @@ const useStyles = makeStyles((theme) => ({
 export default function single() {
   const [modalShow, setModalShow] = useState(false);
   const charts = useSelector((store) => store.chart.charts);
+  const location = useSelector((store) => store.location);
   const selectedChart = useSelector((store) => store.chart.selectedChart);
   const dispatch = useDispatch();
   const classes = useStyles();
   useEffect(() => {
+    dispatch(setLocation("main"));
     if (charts.length) dispatch(chartSelect(charts[selectedChart].config));
-  }, [charts.length]);
+  }, [charts.length, location.location]);
 
   return (
     <div className="single">
