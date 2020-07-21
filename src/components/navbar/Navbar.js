@@ -37,11 +37,17 @@ export default function navbar() {
 
             <div className="items">
               {title == "" ? (
-                <Nav.Link className="selected">Main View</Nav.Link>
+                <Nav.Link className="selected">
+                  <Link to="/">Main View</Link>
+                </Nav.Link>
               ) : (
-                <Nav.Link className="selected">{title}</Nav.Link>
+                <Nav.Link className="selected">
+                  <Link to="/"> {title}</Link>
+                </Nav.Link>
               )}
-              <Nav.Link>My KPIs</Nav.Link>
+              <Nav.Link>
+                <Link to="/list">My KPIs</Link>
+              </Nav.Link>
               <Nav.Link>My alarms</Nav.Link>
             </div>
 
