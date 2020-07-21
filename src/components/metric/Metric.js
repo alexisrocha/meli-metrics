@@ -354,19 +354,21 @@ export default function Metric({ idMetrica, chart }) {
             onClose={handleCloseCard}
             aria-labelledby="alert-dialog-slide-title"
             aria-describedby="alert-dialog-slide-description"
+            id="quitmodal"
           >
             <DialogTitle id="alert-dialog-slide-title">Delete Card</DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-slide-description">
-                Estas seguro que deseas eliminar esta tarjeta?
+                Are you sure to remove this card?
               </DialogContentText>
             </DialogContent>
-            <DialogActions>
+            <DialogActions id="deleteOptions">
               <Button onClick={handleCloseCard} color="primary">
                 <CloseIcon />
                 No
               </Button>
               <Button
+                id="yesButton"
                 onClick={() => {
                   dispatch(deleteCharts(idMetrica));
                   handleCloseCard();
