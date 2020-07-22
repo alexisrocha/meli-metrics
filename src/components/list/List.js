@@ -14,7 +14,7 @@ export default function List() {
     dispatch(setLocation("list"));
   }, [location]);
   return (
-    <div>
+    <div className="container">
       <div className="crearLista">
         <span>
           <div className="crearListaContainer">
@@ -24,7 +24,6 @@ export default function List() {
       </div>
 
       <Addmodal show={modalShow} onHide={() => setModalShow(false)} />
-      {/* <CrearLista /> */}
       <Listar listsCharts={listsCharts} />
     </div>
   );
