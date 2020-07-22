@@ -32,7 +32,12 @@ export default function Iconos({ listaMetricas }) {
       {listaIDS.map((elem) => {
         return (
           <div className="elemento">
-            <Badge variant="secondary">{elem}</Badge>
+            <Badge
+              variant="secondary"
+              style={{ backgroundColor: "#f2f2f2", color: "#7E7775" }}
+            >
+              {elem}
+            </Badge>
           </div>
         );
       })}
