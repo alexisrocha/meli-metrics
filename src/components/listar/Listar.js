@@ -15,6 +15,7 @@ import Slide from "@material-ui/core/Slide";
 import Iconos from "../iconos/Iconos";
 import { deleteCharts } from "../../redux/action-creator/Charts"; 
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import "./Listar.scss";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -108,7 +109,9 @@ export default function Listar({ listsCharts }) {
               >
                 <Iconos listaMetricas={item.config} />
                 <div>
-                  <EditIcon className="button" />
+                  <Link to="/">
+                    <EditIcon className="button" />
+                  </Link>
                   <DeleteIcon
                     onClick={() => {
                       deleteList();
@@ -145,7 +148,6 @@ export default function Listar({ listsCharts }) {
           </Button>
           <Button onClick={ ()=> {
             handleCloseCard()
-            //console.log('numbertoDElete=-->', numberToDelete);
             dispatch(deleteCharts(numberToDelete))
            } } color="primary">
             <DeleteOutlineIcon />
