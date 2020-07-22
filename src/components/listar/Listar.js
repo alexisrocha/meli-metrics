@@ -56,7 +56,8 @@ export default function Listar({ listsCharts }) {
           KPIs
         </Grid>
 
-        {listsCharts.map((item) => {
+        {listsCharts.map((item, index) => {
+          console.log("El index es:", index);
           console.log("El item es:", item);
           return (
             <>

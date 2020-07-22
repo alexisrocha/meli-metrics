@@ -18,7 +18,6 @@ export default function addmodal(props) {
   const [valueTitle, setValueTitle] = useState("");
   const [open, setOpen] = React.useState(false);
   const [openMaxLength, setOpenMaxLength] = React.useState(false);
-  const [redirect, setRedirect] = React.useState(null);
   const charts = useSelector((store) => store.chart.charts);
   const dispatch = useDispatch();
   const checkValue = () => {
@@ -26,7 +25,6 @@ export default function addmodal(props) {
       dispatch(fetchChart(value, valueTitle));
       if (!charts) dispatch(changeChart(0));
       else if (charts) dispatch(changeChart(charts.length));
-      setRedirect(true);
       props.onHide();
     } else {
       handleClick();
@@ -68,12 +66,10 @@ export default function addmodal(props) {
   const keyPress = (e) => {
     if (e.keyCode == 13) {
       checkValue();
+      document.getElementById("botonRedireccionamiento").click();
     }
   };
 
-  if (redirect) {
-    return <Redirect push to="/" />;
-  }
   return (
     <Modal
       id="modal"
@@ -124,14 +120,16 @@ export default function addmodal(props) {
         </span>
 
         {value && valueTitle ? (
-          <span
-            className="closeModal"
-            onClick={() => {
-              checkValue();
-            }}
-          >
-            Done
-          </span>
+          <Link to="/" id="botonRedireccionamiento">
+            <span
+              className="closeModal"
+              onClick={() => {
+                checkValue();
+              }}
+            >
+              Done
+            </span>
+          </Link>
         ) : (
           <span
             className="closeModal"
