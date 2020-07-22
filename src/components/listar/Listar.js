@@ -16,8 +16,9 @@ import Iconos from "../iconos/Iconos";
 import { deleteCharts, changeChart } from "../../redux/action-creator/Charts"; 
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import "./Listar.scss";
-
+import { changeChart } from "../../redux/action-creator/Charts";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -34,12 +35,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function Listar({ listsCharts }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [openDelete, setOpenDelete] = React.useState(false);
   const [numberToDelete, setNumberToDelete] = React.useState(null)
   const dispatch = useDispatch();
 
   const deleteList = () => {
     setOpenDelete(true);
+  };
+
+  const changeSelected = (index) => {
+    dispatch(changeChart(index));
   };
 
   const handleCloseCard = () => {
@@ -109,9 +115,16 @@ export default function Listar({ listsCharts }) {
               >
                 <Iconos listaMetricas={item.config} />
                 <div>
-                  <Link to="/">
+                  <Link
+                    to="/"
+                    onClick={() => {
+                      console.log("El index es:", index);
+                      changeSelected(index);
+                    }}
+                  >
                     <EditIcon className="button" />
                   </Link>
+
                   <DeleteIcon
                     onClick={() => {
                       deleteList();
