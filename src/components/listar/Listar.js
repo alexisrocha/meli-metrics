@@ -13,10 +13,10 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import Iconos from "../iconos/Iconos";
+import { deleteCharts, changeChart } from "../../redux/action-creator/Charts"; 
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import "./Listar.scss";
-import { changeChart } from "../../redux/action-creator/Charts";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -35,6 +35,7 @@ export default function Listar({ listsCharts }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [openDelete, setOpenDelete] = React.useState(false);
+  const [numberToDelete, setNumberToDelete] = React.useState(null);
 
   const deleteList = () => {
     setOpenDelete(true);
@@ -124,11 +125,13 @@ export default function Listar({ listsCharts }) {
                   <DeleteIcon
                     onClick={() => {
                       deleteList();
+                      setNumberToDelete(index)
                     }}
                     className="button"
                   />
                 </div>
               </Grid>
+              
             </>
           );
         })}
@@ -153,7 +156,11 @@ export default function Listar({ listsCharts }) {
             <CloseIcon />
             No
           </Button>
-          <Button onClick={handleCloseCard} color="primary">
+          <Button onClick={ ()=> {
+            handleCloseCard()
+            dispatch(deleteCharts(numberToDelete))
+            dispatch(changeChart(0))
+           } } color="primary">
             <DeleteOutlineIcon />
             Yes
           </Button>

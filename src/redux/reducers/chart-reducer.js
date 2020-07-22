@@ -16,11 +16,11 @@ export default (state = initialState, action) => {
     case GET_CHART:
       return { ...state, charts: [...state.charts, action.charts] };
     case DELETE_CHART:
+      let newChart = state.charts
+      newChart.splice(action.id, 1)
       return {
         ...state,
-        selectedChart: state.selectedChart.filter(
-          (x) => x.metric_id != action.id
-        ),
+        charts: newChart,
       };
     case SET_SELECTEDCHART:
       return { ...state, selectedChart: action.selectedChart };
