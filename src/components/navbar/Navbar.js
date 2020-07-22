@@ -11,10 +11,16 @@ export default function navbar() {
   const [value, setValue] = React.useState(0);
   const [activeClassLeft, setActiveClassLeft] = React.useState(true);
   const [activeClassRight, setActiveClassRight] = React.useState(false);
+  const [selectedClass, setSelectedClass] = React.useState(null);
   const charts = useSelector((store) => store.chart.charts);
   const selectedChart = useSelector((store) => store.chart.selectedChart);
   const metric = useSelector((store) => store.metric);
   const location = useSelector((store) => store.location);
+
+  const setColor = (title) => {
+    setSelectedClass(title);
+  };
+
   const changeCSS = (position) => {
     if (position == "left") {
       setActiveClassLeft(true);
@@ -41,20 +47,59 @@ export default function navbar() {
             </div>
             <div className="items">
               {!selectedChart && !charts.length ? (
-                <Nav.Link className="selected">
-                  <Link to="/">Main View</Link>
+                <Nav.Link>
+                  <Link
+                    to="/"
+                    style={{
+                      color: selectedClass == "title" ? "#449fd7" : "#9e9e9e",
+                    }}
+                    onClick={() => {
+                      setColor("title");
+                    }}
+                  >
+                    Main View
+                  </Link>
                 </Nav.Link>
               ) : (
-                <Nav.Link className="selected">
+                <Nav.Link>
                   {charts[selectedChart] && (
-                    <Link to="/"> {charts[selectedChart].title} </Link>
+                    <Link
+                      to="/"
+                      style={{
+                        color: selectedClass == "title" ? "#449fd7" : "#9e9e9e",
+                      }}
+                      onClick={() => {
+                        setColor("title");
+                      }}
+                    >
+                      {charts[selectedChart].title}
+                    </Link>
                   )}
                 </Nav.Link>
               )}
               <Nav.Link>
-                <Link to="/list">My KPIs</Link>
+                <Link
+                  to="/list"
+                  style={{
+                    color: selectedClass == "kpis" ? "#449fd7" : "#9e9e9e",
+                  }}
+                  onClick={() => {
+                    setColor("kpis");
+                  }}
+                >
+                  My KPIs
+                </Link>
               </Nav.Link>
-              <Nav.Link>My alarms</Nav.Link>
+              <Nav.Link
+                style={{
+                  color: selectedClass == "alarms" ? "#449fd7" : "#9e9e9e",
+                }}
+                onClick={() => {
+                  setColor("alarms");
+                }}
+              >
+                My alarms
+              </Nav.Link>
             </div>
 
             {Object.keys(metric.metric).length == 0 ||
