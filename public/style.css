@@ -3,3 +3,7 @@ body {
   margin: 0;
   height: 100%;
 }
+
+a:hover {
+  text-decoration: none !important;
+}
