@@ -115,9 +115,11 @@ export default function addmodal(props) {
         </Form>
       </Modal.Body>
       <Modal.Footer id="footerModal">
-        <span className="closeModal" onClick={props.onHide}>
-          Cancel
-        </span>
+        <Link>
+          <span className="closeModal" onClick={props.onHide}>
+            Cancel
+          </span>
+        </Link>
 
         {value && valueTitle ? (
           <Link to="/" id="botonRedireccionamiento">
@@ -131,14 +133,16 @@ export default function addmodal(props) {
             </span>
           </Link>
         ) : (
-          <span
-            className="closeModal"
-            onClick={() => {
-              checkValue();
-            }}
-          >
-            Done
-          </span>
+          <Link>
+            <span
+              className="closeModal"
+              onClick={() => {
+                checkValue();
+              }}
+            >
+              Done
+            </span>
+          </Link>
         )}
       </Modal.Footer>
 

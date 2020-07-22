@@ -53,10 +53,22 @@ export default function Listar({ listsCharts }) {
         alignItems="center"
         style={{ maxWidth: "71%", margin: "0 auto" }}
       >
-        <Grid item xs={5} style={{ paddingLeft: "10px", color: "#9e9e9e" }}>
-          Nombre lista:
+        <Grid
+          item
+          xs={5}
+          style={{
+            paddingLeft: "10px",
+            color: "#9e9e9e",
+            fontFamily: "Proxima Nova",
+          }}
+        >
+          Nombre lista
         </Grid>
-        <Grid item xs={7} style={{ color: "#9e9e9e" }}>
+        <Grid
+          item
+          xs={7}
+          style={{ color: "#9e9e9e", fontFamily: "Proxima Nova" }}
+        >
           KPIs
         </Grid>
 
@@ -76,7 +88,9 @@ export default function Listar({ listsCharts }) {
                   alignItems: "center",
                 }}
               >
-                <div style={{ paddingLeft: "10px" }}>
+                <div
+                  style={{ paddingLeft: "10px", fontFamily: "Proxima Nova" }}
+                >
                   <strong>{item.title}</strong>
                 </div>
               </Grid>
