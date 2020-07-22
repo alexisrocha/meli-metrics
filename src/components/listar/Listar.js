@@ -13,6 +13,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import Iconos from "../iconos/Iconos";
+import { Link } from "react-router-dom";
 import "./Listar.scss";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -104,7 +105,9 @@ export default function Listar({ listsCharts }) {
               >
                 <Iconos listaMetricas={item.config} />
                 <div>
-                  <EditIcon className="button" />
+                  <Link to="/">
+                    <EditIcon className="button" />
+                  </Link>
                   <DeleteIcon
                     onClick={() => {
                       deleteList();
