@@ -1,0 +1,51 @@
+@font-face {
+    font-family: "Proxima Nova Regular";
+    src: url("../../styles/fonts/proximanova-regular-webfont.woff") format("woff");
+}
+
+
+.crearLista {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 150px;
+    font-family: "Proxima Nova";
+    font-size: 13px;
+    color: white;
+    padding-top: 20px;
+
+}
+
+.crearListaContainer {
+    display: flex;
+    border-radius: 10px;
+    width: 90px;
+    height: 30px;
+    background-color: #449fd7;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#newList {
+    font-family: "Proxima Nova";
+    margin-left: 40%;
+    font-size: 95%;
+}
+
+.forminput {
+    margin-top: 25px;
+    display: flex;
+}
+
+.closeModal {
+    font-family: "Proxima Nova";
+    color: #449fd7;
+    margin-left: 15px !important;
+    margin-right: 15px !important;
+    cursor: pointer;
+}
+
+.AddCircleOutlineIcon {
+    justify-content: baseline;
+    margin-top: 7px;
+}
