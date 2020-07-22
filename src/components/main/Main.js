@@ -5,11 +5,15 @@ import Single from "../single/Single";
 import List from "../list/List";
 import Metric from "../metric/Metric";
 
-export default () => (
+export default (props) => (
   <div id="main">
     <Navbar />
     <Switch>
-      <Route exact path="/" component={Single} />
+      <Route
+        exact
+        path="/"
+        render={(props) => <Single history={props.history} />}
+      />
       <Route path="/list" component={List} />
     </Switch>
   </div>

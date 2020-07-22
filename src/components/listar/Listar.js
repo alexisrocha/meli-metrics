@@ -12,6 +12,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
+import Iconos from "../iconos/Iconos";
 import "./Listar.scss";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -48,14 +49,15 @@ export default function Listar({ listsCharts }) {
         alignItems="center"
         style={{ maxWidth: "71%", margin: "0 auto" }}
       >
-        <Grid item xs={5}>
+        <Grid item xs={5} style={{ paddingLeft: "10px", color: "#9e9e9e" }}>
           Nombre lista:
         </Grid>
-        <Grid item xs={7}>
+        <Grid item xs={7} style={{ color: "#9e9e9e" }}>
           KPIs
         </Grid>
 
-        {listsCharts.map((item) => {
+        {listsCharts.map((item, index) => {
+          console.log("El index es:", index);
           console.log("El item es:", item);
           return (
             <>
@@ -70,7 +72,9 @@ export default function Listar({ listsCharts }) {
                   alignItems: "center",
                 }}
               >
-                <div>{item.title}</div>
+                <div style={{ paddingLeft: "10px" }}>
+                  <strong>{item.title}</strong>
+                </div>
               </Grid>
               <Grid
                 item
@@ -84,7 +88,7 @@ export default function Listar({ listsCharts }) {
                   justifyContent: "space-between",
                 }}
               >
-                <div>Iconos</div>
+                <Iconos listaMetricas={item.config} />
                 <div>
                   <EditIcon className="button" />
                   <DeleteIcon
