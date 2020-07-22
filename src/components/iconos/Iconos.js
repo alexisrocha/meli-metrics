@@ -1,10 +1,20 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMetric } from "../../redux/action-creator/Metrics";
 import Badge from "react-bootstrap/Badge";
 import "./iconos.scss";
 export default function Iconos({ listaMetricas }) {
   const listaNombres = useSelector((store) => store.metric.metric);
   const [listaIDS, setListaIDS] = React.useState([]);
+  const dispatch = useDispatch();
+  var arrayMetricas = [];
+
+  function cargarMetricas() {
+    for (var i = 0; i < listaMetricas.length; i++) {
+      console.log("Lista ids:", listaMetricas[i].metric_id);
+      arrayMetricas.push(dispatch(fetchMetric(listaMetricas[i].metric_id)));
+    }
+  }
 
   function buscarTitulos(listaMetricas) {
     var listaIds = [];
@@ -12,24 +22,29 @@ export default function Iconos({ listaMetricas }) {
       listaIds.push(listaMetricas[i].metric_id);
     }
     console.log("Lista IDS:", listaIds);
+    console.log("Lista nombres: ", listaNombres);
     var listaTitulos = [];
-    for (var j = 0; j < Math.min(Object.keys(listaNombres).length, 4); j++) {
+    console.log("Antes del for");
+    for (var j = 0; j < Math.min(listaIds.length, 4); j++) {
       listaTitulos.push(listaNombres[listaIds[j]].name.slice(0, 3));
-      console.log("Vuelta numero:", j);
     }
-    console.log("LIsta titulos:", listaTitulos);
+    console.log("Lista titulos:", listaTitulos);
     return listaTitulos;
   }
 
-  var resp = buscarTitulos(listaMetricas);
-
   useEffect(() => {
-    setListaIDS(resp);
-  }, [resp.length]);
+    new Promise(function (resolv, reject) {
+      resolv(cargarMetricas());
+    }).then(() => {
+      var resp = buscarTitulos(listaMetricas);
+      setListaIDS(resp);
+    });
+  }, [listaIDS.length]);
 
   return (
     <div className="containerIconos">
       {listaIDS.map((elem) => {
+        console.log("Lista IDS En return:", listaIDS);
         return (
           <div className="elemento">
             <Badge

@@ -5,6 +5,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import { fetchChart, changeChart } from "../../redux/action-creator/Charts";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import { Link } from "react-router-dom";
+import { Redirect } from "react-router";
 
 import "./Addmodal.scss";
 function Alert(props) {
@@ -21,8 +23,8 @@ export default function addmodal(props) {
   const checkValue = () => {
     if (value !== "" && valueTitle !== "") {
       dispatch(fetchChart(value, valueTitle));
-      if(!charts) dispatch(changeChart(0));
-      else if(charts) dispatch(changeChart(charts.length))
+      if (!charts) dispatch(changeChart(0));
+      else if (charts) dispatch(changeChart(charts.length));
       props.onHide();
     } else {
       handleClick();
@@ -64,6 +66,7 @@ export default function addmodal(props) {
   const keyPress = (e) => {
     if (e.keyCode == 13) {
       checkValue();
+      document.getElementById("botonRedireccionamiento").click();
     }
   };
 
@@ -115,14 +118,28 @@ export default function addmodal(props) {
         <span className="closeModal" onClick={props.onHide}>
           Cancel
         </span>
-        <span
-          className="closeModal"
-          onClick={() => {
-            checkValue();
-          }}
-        >
-          Done
-        </span>
+
+        {value && valueTitle ? (
+          <Link to="/" id="botonRedireccionamiento">
+            <span
+              className="closeModal"
+              onClick={() => {
+                checkValue();
+              }}
+            >
+              Done
+            </span>
+          </Link>
+        ) : (
+          <span
+            className="closeModal"
+            onClick={() => {
+              checkValue();
+            }}
+          >
+            Done
+          </span>
+        )}
       </Modal.Footer>
 
       <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
