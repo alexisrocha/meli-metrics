@@ -13,7 +13,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import Iconos from "../iconos/Iconos";
-import { deleteCharts } from "../../redux/action-creator/Charts"; 
+import { deleteCharts, changeChart } from "../../redux/action-creator/Charts"; 
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Listar.scss";
@@ -149,6 +149,7 @@ export default function Listar({ listsCharts }) {
           <Button onClick={ ()=> {
             handleCloseCard()
             dispatch(deleteCharts(numberToDelete))
+            dispatch(changeChart(0))
            } } color="primary">
             <DeleteOutlineIcon />
             Yes
