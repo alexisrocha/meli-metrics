@@ -35,6 +35,11 @@ export default ({ metricData, color }) => {
       <Line
         data={chartData}
         options={{
+          /* tooltips: {
+            callbacks: {
+              label: gg
+            }
+          }, */
           scales: {
             yAxes: [
               {
