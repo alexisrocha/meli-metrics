@@ -49,7 +49,11 @@ export default function Iconos({ listaMetricas }) {
           <div className="elemento">
             <Badge
               variant="secondary"
-              style={{ backgroundColor: "#f2f2f2", color: "#7E7775" }}
+              style={{
+                backgroundColor: "#f2f2f2",
+                color: "#7E7775",
+                fontFamily: "Proxima Nova",
+              }}
             >
               {elem}
             </Badge>
