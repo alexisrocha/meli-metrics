@@ -29,9 +29,8 @@ export default function navbar() {
     setValue(newValue);
   };
   useEffect(() => {
-    console.log("entre al useeffect de navbar" , selectedChart)
-    if(charts.length) console.log(charts[selectedChart].title)
-  }, [selectedChart]);
+    console.log("entre al useeffect de navbar", selectedChart, charts);
+  }, [selectedChart, charts.length]);
   return (
     <div>
       <div className="navbar">
@@ -40,15 +39,16 @@ export default function navbar() {
             <div style={{ marginLeft: "15px" }}>
               <Navbar.Brand id="title">MeliMetrics</Navbar.Brand>
             </div>
-
             <div className="items">
-              {!selectedChart && !charts.length  ? (
+              {!selectedChart && !charts.length ? (
                 <Nav.Link className="selected">
                   <Link to="/">Main View</Link>
                 </Nav.Link>
               ) : (
                 <Nav.Link className="selected">
-                  <Link to="/"> {charts[selectedChart].title}</Link>
+                  {charts[selectedChart] && (
+                    <Link to="/"> {charts[selectedChart].title} </Link>
+                  )}
                 </Nav.Link>
               )}
               <Nav.Link>
