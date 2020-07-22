@@ -16,9 +16,7 @@ import Iconos from "../iconos/Iconos";
 import { deleteCharts, changeChart } from "../../redux/action-creator/Charts"; 
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import "./Listar.scss";
-import { changeChart } from "../../redux/action-creator/Charts";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -37,8 +35,7 @@ export default function Listar({ listsCharts }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [openDelete, setOpenDelete] = React.useState(false);
-  const [numberToDelete, setNumberToDelete] = React.useState(null)
-  const dispatch = useDispatch();
+  const [numberToDelete, setNumberToDelete] = React.useState(null);
 
   const deleteList = () => {
     setOpenDelete(true);
