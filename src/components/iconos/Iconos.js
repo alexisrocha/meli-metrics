@@ -14,8 +14,6 @@ export default function Iconos({ listaMetricas }) {
       console.log("Lista ids:", listaMetricas[i].metric_id);
       arrayMetricas.push(dispatch(fetchMetric(listaMetricas[i].metric_id)));
     }
-
-    Promise.all(arrayMetricas);
   }
 
   function buscarTitulos(listaMetricas) {
@@ -26,19 +24,21 @@ export default function Iconos({ listaMetricas }) {
     console.log("Lista IDS:", listaIds);
     console.log("Lista nombres: ", listaNombres);
     var listaTitulos = [];
-
-    for (var j = 0; j < Object.keys(listaNombres).length; j++) {
-      console.log("X", listaNombres[listaIds[j]].name.slice(0, 3));
+    console.log("Antes del for");
+    for (var j = 0; j < Math.min(listaIds.length, 4); j++) {
       listaTitulos.push(listaNombres[listaIds[j]].name.slice(0, 3));
-      console.log("Vuelta numero:", j);
     }
     console.log("Lista titulos:", listaTitulos);
     return listaTitulos;
   }
 
   useEffect(() => {
-    cargarMetricas();
-    setListaIDS(buscarTitulos(listaMetricas));
+    new Promise(function (resolv, reject) {
+      resolv(cargarMetricas());
+    }).then(() => {
+      var resp = buscarTitulos(listaMetricas);
+      setListaIDS(resp);
+    });
   }, [listaIDS.length]);
 
   return (

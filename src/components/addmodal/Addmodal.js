@@ -5,6 +5,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import { fetchChart, changeChart } from "../../redux/action-creator/Charts";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import { Link } from "react-router-dom";
+import { Redirect } from "react-router";
 
 import "./Addmodal.scss";
 function Alert(props) {
@@ -16,13 +18,15 @@ export default function addmodal(props) {
   const [valueTitle, setValueTitle] = useState("");
   const [open, setOpen] = React.useState(false);
   const [openMaxLength, setOpenMaxLength] = React.useState(false);
+  const [redirect, setRedirect] = React.useState(null);
   const charts = useSelector((store) => store.chart.charts);
   const dispatch = useDispatch();
   const checkValue = () => {
     if (value !== "" && valueTitle !== "") {
       dispatch(fetchChart(value, valueTitle));
-      if(!charts) dispatch(changeChart(0));
-      else if(charts) dispatch(changeChart(charts.length))
+      if (!charts) dispatch(changeChart(0));
+      else if (charts) dispatch(changeChart(charts.length));
+      setRedirect(true);
       props.onHide();
     } else {
       handleClick();
@@ -67,6 +71,9 @@ export default function addmodal(props) {
     }
   };
 
+  if (redirect) {
+    return <Redirect push to="/" />;
+  }
   return (
     <Modal
       id="modal"
@@ -115,14 +122,26 @@ export default function addmodal(props) {
         <span className="closeModal" onClick={props.onHide}>
           Cancel
         </span>
-        <span
-          className="closeModal"
-          onClick={() => {
-            checkValue();
-          }}
-        >
-          Done
-        </span>
+
+        {value && valueTitle ? (
+          <span
+            className="closeModal"
+            onClick={() => {
+              checkValue();
+            }}
+          >
+            Done
+          </span>
+        ) : (
+          <span
+            className="closeModal"
+            onClick={() => {
+              checkValue();
+            }}
+          >
+            Done
+          </span>
+        )}
       </Modal.Footer>
 
       <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>

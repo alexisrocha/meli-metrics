@@ -50,7 +50,7 @@ export default function Listar({ listsCharts }) {
         style={{ maxWidth: "71%", margin: "0 auto" }}
       >
         <Grid item xs={5} style={{ paddingLeft: "10px", color: "#9e9e9e" }}>
-          Nombre lista
+          Nombre lista:
         </Grid>
         <Grid item xs={7} style={{ color: "#9e9e9e" }}>
           KPIs

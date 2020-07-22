@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function single() {
+export default function single({ history }) {
   const [modalShow, setModalShow] = useState(false);
   const charts = useSelector((store) => store.chart.charts);
   const location = useSelector((store) => store.location);
@@ -26,16 +26,21 @@ export default function single() {
   const classes = useStyles();
   useEffect(() => {
     dispatch(setLocation("main"));
-    if (charts.length) dispatch(chartSelect(charts[selectedChart].config));
+    if (charts[selectedChart])
+      dispatch(chartSelect(charts[selectedChart].config));
   }, [charts.length, location.location]);
 
   return (
     <div className="single">
-      <Addmodal show={modalShow} onHide={() => setModalShow(false)} />
+      <Addmodal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        history={history}
+      />
       <div className="container">
         {charts.length > 0 ? (
           <>
-            {charts[selectedChart].config.length ? (
+            {charts[selectedChart] && charts[selectedChart].config.length ? (
               <Grid
                 className={classes.root}
                 container
@@ -63,7 +68,7 @@ export default function single() {
               spacing={3}
               alignItems="flex-start"
             >
-              {charts[selectedChart].config.length &&
+              {charts[selectedChart] &&
                 charts[selectedChart].config.map((chart) => {
                   return (
                     <Grid key={chart.metric_id} item xs={3}>
