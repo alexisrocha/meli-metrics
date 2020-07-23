@@ -3,7 +3,7 @@ let getMetric1 = {
   display_name: "Buy Box - GMV",
   group: "MARKETPLACE",
   description: "Una descripcion de la metrica",
-  format: "INTEG",
+  format: "CUR_2",
   dimensions: {
     site: ["MLA", "MLB", "MLC", "MCO", "MLM", "MLU", "MGT", "MBO"],
     subgroup: ["All site", "entretainment", "vehicles"],
@@ -13,8 +13,9 @@ let getMetric1 = {
     { code: "YOY", desc: "Last year" },
     { code: "MOM", desc: "Last Month" },
   ],
+  last_updated: '2020-06-30T16:09:01.728'
 };
-// https://run.mocky.io/v3/beddddd4-e47c-43c2-8510-fe0fd7986c0a
+// https://run.mocky.io/v3/4af8049f-3477-4337-9853-bfe616f0d049
 
 let getChart1 = {
   title: "lorem",
@@ -89,7 +90,7 @@ let getMetric3 = {
   display_name: "CBT - ASP(e) Billable",
   group: "MARKETPLACE",
   description: "Una descripcion de la metrica",
-  format: "INTEG",
+  format: "CUR_2",
   dimensions: {
     site: ["MLA", "MLB", "MLC", "MCO", "MLM", "MLU", "MGT", "MBO"],
     subgroup: ["All site", "entretainment", "vehicles"],
@@ -99,8 +100,10 @@ let getMetric3 = {
     { code: "YOY", desc: "Last year" },
     { code: "MOM", desc: "Last Month" },
   ],
+  last_updated: '2020-06-30T16:09:01.728'
 };
-// https://run.mocky.io/v3/65b7aa8e-9f35-4b24-82f5-334957cde795
+// old https://run.mocky.io/v3/65b7aa8e-9f35-4b24-82f5-334957cde795
+// new https://run.mocky.io/v3/0d901dc2-6024-48d9-97f3-5145408329b1
 
 let getChart3 = {
   title: "tercero",
@@ -131,7 +134,7 @@ let getMetric4 = {
   display_name: "Avg Shipping Time",
   group: "MERCADO ENVIOS",
   description: "Una descripcion de la metrica",
-  format: "INTEG",
+  format: "DEC_2",
   dimensions: {
     site: ["MLA", "MLB", "MLC", "MCO", "MLM", "MLU", "MGT", "MBO"],
     subgroup: ["All site", "entretainment", "vehicles"],
@@ -141,8 +144,10 @@ let getMetric4 = {
     { code: "YOY", desc: "Last year" },
     { code: "MOM", desc: "Last Month" },
   ],
+  last_updated: '2020-06-30T16:09:01.728'
 };
-// https://run.mocky.io/v3/551c0751-e44b-4551-8ad7-4b489d545802
+// old https://run.mocky.io/v3/551c0751-e44b-4551-8ad7-4b489d545802
+// new https://run.mocky.io/v3/ff5a47cc-9dc9-4617-958c-c57c1ed66491
 
 let getChart4 = {
   title: "mexican",
@@ -215,7 +220,7 @@ let getMetric6 = {
   display_name: "ASP per Shippment",
   group: "MERCADO ENVIOS",
   description: "Una descripcion de la metrica",
-  format: "INTEG",
+  format: "CUR_2",
   dimensions: {
     site: ["MLA", "MLB", "MLC", "MCO", "MLM", "MLU", "MGT", "MBO"],
     subgroup: ["All site", "entretainment", "vehicles"],
@@ -225,8 +230,10 @@ let getMetric6 = {
     { code: "YOY", desc: "Last year" },
     { code: "MOM", desc: "Last Month" },
   ],
+  last_updated: '2020-06-30T16:09:01.728'
 };
-//https://run.mocky.io/v3/565a1c9d-5ca7-43d9-a604-9d57258dbd21
+// old https://run.mocky.io/v3/565a1c9d-5ca7-43d9-a604-9d57258dbd21
+// new https://run.mocky.io/v3/cd10c0cc-4c88-4693-8025-8ee062a409f8
 
 let getChart6 = {
   title: "Guatemala",
@@ -299,7 +306,7 @@ let getMetric8 = {
   display_name: "Share GMV Buy Box",
   group: "MARKETPLACE",
   description: "Una descripcion de la metrica",
-  format: "INTEG",
+  format: "PERC_2",
   dimensions: {
     site: ["MLA", "MLB", "MLC", "MCO", "MLM", "MLU", "MGT", "MBO"],
     subgroup: ["All site", "entretainment", "vehicles"],
@@ -309,8 +316,10 @@ let getMetric8 = {
     { code: "YOY", desc: "Last year" },
     { code: "MOM", desc: "Last Month" },
   ],
+  last_updated: '2020-06-30T16:09:01.728'
 };
-// https://run.mocky.io/v3/c91e84d2-f505-403a-bde0-094a6c1d9059
+// old https://run.mocky.io/v3/c91e84d2-f505-403a-bde0-094a6c1d9059
+// new https://run.mocky.io/v3/2037837b-2caa-4a29-8ac2-48fef5e6ff5d
 
 let getChart8 = {
   title: "arg3",
