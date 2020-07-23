@@ -35,7 +35,8 @@ export default (state = initialState, action) => {
       }
       return {...state, charts: newCharts};
     case DELETE_METRIC:
-      let chart2 = state.charts[state.selectedChart].config.filter(metric => metric.metric_id != action.id)
+      let chart2 = state.charts[state.selectedChart].config
+      chart2.splice(action.id, 1)
       let newCharts2 = []
       for(let i = 0; i < state.charts.length; i++){
         if(i == state.selectedChart) newCharts2[i] = {...state.charts[i], config: chart2}

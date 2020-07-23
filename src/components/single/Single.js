@@ -28,7 +28,6 @@ export default function single({ history }) {
     dispatch(setLocation("main"));
     if (charts[selectedChart])
       dispatch(chartSelect(charts[selectedChart].config));
-    console.log("Selectedchart es:", selectedChart);
   }, [charts.length, location.location, selectedChart]);
 
   return (
@@ -70,12 +69,12 @@ export default function single({ history }) {
               alignItems="flex-start"
             >
               {charts[selectedChart] &&
-                charts[selectedChart].config.map((chart) => {
+                charts[selectedChart].config.map((chart, index) => {
                   return (
-                    <Grid key={chart.metric_id} item xs={3}>
+                    <Grid key={index} item xs={3}>
                       <Metric
-                        key={chart.metric_id}
                         idMetrica={chart.metric_id}
+                        deleteId={index}
                         chart={chart}
                       />
                     </Grid>
