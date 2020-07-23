@@ -103,7 +103,7 @@ export default function navbar() {
             </div>
 
             {!charts.length > 0 || location == "list" ? (
-              <div style={{ width: 260 }}></div>
+              <div style={{ width: 253, marginRight: "15px" }}></div>
             ) : (
               <div className="divVisualizacion">
                 <div>
