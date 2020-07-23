@@ -382,7 +382,6 @@ export default function Metric({ idMetrica, chart, deleteId }) {
                 No
               </Button>
               <Button
-                id="yesButton"
                 onClick={() => {
                   dispatch(removeMetric(deleteId, selectedChart));
                   handleCloseCard();

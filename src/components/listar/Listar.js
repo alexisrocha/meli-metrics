@@ -212,6 +212,7 @@ export default function Listar() {
         onClose={handleCloseCard}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
+        id="quitmodal"
       >
         <DialogTitle id="alert-dialog-slide-title">Delete List</DialogTitle>
         <DialogContent>
@@ -219,7 +220,7 @@ export default function Listar() {
             Are you sure you want to delete this list?
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
+        <DialogActions id="deleteOptions">
           <Button onClick={handleCloseCard} color="primary">
             <CloseIcon />
             No
