@@ -195,9 +195,9 @@ export default function Metric({ idMetrica, chart, deleteId }) {
     return newMonth + "/" + fecha[1] + "/" + fecha[2] + " " + horaminutos;
   };
   const colors = {
-    MARKETPLACE: "#f5cf3c",
-    "MERCADO PAGO": "#2aa7d9",
-    "MERCADO ENVIOS": "#a8c622",
+    MARKETPLACE: "#ffd100",
+    "MERCADO PAGO": "#00a6dc",
+    "MERCADO ENVIOS": "#a9c534",
   };
 
   let formatos = {

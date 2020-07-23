@@ -20,7 +20,7 @@ export default ({ metricData, color }) => {
           data: metricData.data[1].data,
           backgroundColor: "transparent",
           borderWidth: 1.5,
-          borderColor: "#E4E4E4",
+          borderColor: "#e6e6e6",
         },
       ],
     });
