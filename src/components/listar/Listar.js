@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import EditIcon from "@material-ui/icons/Edit";
@@ -39,7 +39,9 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
 }));
-export default function Listar({ listsCharts }) {
+
+export default function Listar() {
+  const listsCharts = useSelector((store) => store.chart.charts);
   const classes = useStyles();
   const dispatch = useDispatch();
   const [openDelete, setOpenDelete] = React.useState(false);
@@ -87,7 +89,7 @@ export default function Listar({ listsCharts }) {
   const handleCloseCard = () => {
     setOpenDelete(false);
   };
-  let diccionario = new Object();
+
   return (
     <div className="container">
       <Grid
@@ -117,12 +119,7 @@ export default function Listar({ listsCharts }) {
         </Grid>
 
         {listsCharts.map((item, index) => {
-          {
-            !diccionario[item.name]
-              ? (diccionario[item.name] = 1)
-              : (diccionario[item.name] += 1);
-          }
-
+          console.log("El item en el map es:", item);
           return (
             <>
               <Grid
@@ -142,19 +139,12 @@ export default function Listar({ listsCharts }) {
                   <div
                     style={{ paddingLeft: "10px", fontFamily: "Proxima Nova" }}
                   >
-                    {diccionario[item.name] != 1 ? (
-                      <strong>
-                        {item.title + " (" + (diccionario[item.name] - 1) + ")"}
-                      </strong>
-                    ) : (
-                      <strong>{item.title}</strong>
-                    )}
+                    <strong>{item.title}</strong>
                   </div>
                   <div style={{ marginRight: "20px" }}>
                     <Link
                       to="/"
                       onClick={() => {
-                        console.log("El index es:", index);
                         changeSelected(index);
                       }}
                       style={{
@@ -204,8 +194,8 @@ export default function Listar({ listsCharts }) {
 
                   <DeleteIcon
                     onClick={() => {
-                      deleteList();
                       setNumberToDelete(index);
+                      deleteList();
                     }}
                     className="button"
                   />
@@ -239,7 +229,6 @@ export default function Listar({ listsCharts }) {
             onClick={() => {
               handleCloseCard();
               dispatch(deleteCharts(numberToDelete));
-              dispatch(changeChart(0));
             }}
             color="primary"
           >

@@ -5,7 +5,7 @@ import {
   SET_SELECTEDCHART,
   ADD_METRIC,
   DELETE_METRIC,
-  COPY_CHART
+  COPY_CHART,
 } from "../constants";
 import axios from "axios";
 
@@ -87,6 +87,7 @@ export const chartSelect = (chart) => {
 };
 
 export const deleteCharts = (id) => {
+  console.log("ESTOOOOOOY POOOOOOR ELIMINAAAAAAAAAAAAR:", id);
   return (dispatch) => {
     dispatch(deleteChart(id));
   };
