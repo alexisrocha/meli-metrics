@@ -87,7 +87,7 @@ export default function navbar() {
                     setColor("kpis");
                   }}
                 >
-                  My KPIs
+                  My Charts
                 </Link>
               </Nav.Link>
               <Nav.Link
@@ -102,8 +102,7 @@ export default function navbar() {
               </Nav.Link>
             </div>
 
-            {Object.keys(metric.metric).length == 0 ||
-            location.location == "list" ? (
+            {!charts.length > 0 || location.location == "list" ? (
               <div style={{ width: 260 }}></div>
             ) : (
               <div className="divVisualizacion">
