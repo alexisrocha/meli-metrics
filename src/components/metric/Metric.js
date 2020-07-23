@@ -34,6 +34,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMetric } from "../../redux/action-creator/Metrics";
 import { fetchMetricData } from "../../redux/action-creator/MetricData";
+import { removeMetric } from "../../redux/action-creator/Charts";
 import "./Metric.scss";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -370,6 +371,7 @@ export default function Metric({ idMetrica, chart }) {
                 id="yesButton"
                 onClick={() => {
                   handleCloseCard();
+                  dispatch(removeMetric(idMetrica))
                 }}
                 color="primary"
               >
