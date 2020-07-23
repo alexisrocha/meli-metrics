@@ -34,6 +34,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMetric } from "../../redux/action-creator/Metrics";
 import { fetchMetricData } from "../../redux/action-creator/MetricData";
+import { removeMetric } from "../../redux/action-creator/Charts";
 import "./Metric.scss";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -144,8 +145,11 @@ export default function Metric({ idMetrica, chart }) {
   };
 
   const generateDate = () => {
-    var fecha = new Date().toString().slice(4, 15).split(" ");
+    var data = new Date();
+    var fecha = data.toString().slice(4, 25).split(" ");
+    console.log("Fecha");
     var mes = fecha[0];
+    var horaminutos = data.toString().slice(16, 21);
     var newMonth;
     switch (mes) {
       case "Jan":
@@ -186,7 +190,7 @@ export default function Metric({ idMetrica, chart }) {
         break;
     }
 
-    return newMonth + "/" + fecha[1] + "/" + fecha[2];
+    return newMonth + "/" + fecha[1] + "/" + fecha[2] + " " + horaminutos;
   };
   const colors = {
     MARKETPLACE: "#f5cf3c",
@@ -319,9 +323,9 @@ export default function Metric({ idMetrica, chart }) {
               onMouseLeave={changeCSSOut}
             >
               <div className="date">
-                {"Actualizacion:"}
+                {"Last update"}
                 <br />
-                {generateDate()}
+                <span style={{ fontSize: "90%" }}>{generateDate()}</span>
               </div>
 
               <div className="button" onClick={handleClickOpenInfo}>
@@ -368,6 +372,7 @@ export default function Metric({ idMetrica, chart }) {
                 id="yesButton"
                 onClick={() => {
                   handleCloseCard();
+                  dispatch(removeMetric(idMetrica));
                 }}
                 color="primary"
               >

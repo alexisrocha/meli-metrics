@@ -50,7 +50,7 @@ export default function Iconos({ listaMetricas }) {
                 fontFamily: "Proxima Nova",
               }}
             >
-              {elem}
+              {elem.toUpperCase()}
             </Badge>
           </div>
         );
