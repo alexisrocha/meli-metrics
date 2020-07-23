@@ -4,6 +4,8 @@ import {
   SELECTED_CHART,
   SET_SELECTEDCHART,
   ADD_METRIC,
+  DELETE_METRIC,
+  COPY_CHART
 } from "../constants";
 import axios from "axios";
 
@@ -46,6 +48,16 @@ const deleteChart = (id) => ({
   id,
 });
 
+const deleteMetric = (id) => ({
+  type: DELETE_METRIC,
+  id,
+});
+
+const copyChart = (id) => ({
+  type: COPY_CHART,
+  id,
+});
+
 const setSelectedChart = (selectedChart) => ({
   type: SET_SELECTEDCHART,
   selectedChart,
@@ -83,6 +95,18 @@ export const deleteCharts = (id) => {
 export const changeChart = (selectChart) => {
   return (dispatch) => {
     dispatch(setSelectedChart(selectChart));
+  };
+};
+
+export const removeMetric = (id) => {
+  return (dispatch) => {
+    dispatch(deleteMetric(id));
+  };
+};
+
+export const copyList = (id) => {
+  return (dispatch) => {
+    dispatch(copyChart(id));
   };
 };
 

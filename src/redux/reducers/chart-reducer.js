@@ -4,6 +4,8 @@ import {
   SELECTED_CHART,
   SET_SELECTEDCHART,
   ADD_METRIC,
+  DELETE_METRIC,
+  COPY_CHART
 } from "../constants";
 
 const initialState = {
@@ -31,7 +33,17 @@ export default (state = initialState, action) => {
         if(i == state.selectedChart) newCharts[i] = {...state.charts[i], config: chart}
         else newCharts[i] = state.charts[i]
       }
-      return {...state, charts: newCharts}
+      return {...state, charts: newCharts};
+    case DELETE_METRIC:
+      let chart2 = state.charts[state.selectedChart].config.filter(metric => metric.metric_id != action.id)
+      let newCharts2 = []
+      for(let i = 0; i < state.charts.length; i++){
+        if(i == state.selectedChart) newCharts2[i] = {...state.charts[i], config: chart2}
+        else newCharts2[i] = state.charts[i]
+      }
+      return {...state, charts: newCharts2};
+    case COPY_CHART:
+      return {...state, charts: [...state.charts, state.charts[action.id]]}
     default:
       return state;
   }
