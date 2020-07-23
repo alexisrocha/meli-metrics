@@ -37,12 +37,14 @@ export default (state = initialState, action) => {
       }
       return { ...state, charts: newCharts };
     case DELETE_METRIC:
-      let chart2 = state.charts[state.selectedChart].config
-      chart2.splice(action.id, 1)
-      let newCharts2 = []
-      for(let i = 0; i < state.charts.length; i++){
-        if(i == state.selectedChart) newCharts2[i] = {...state.charts[i], config: chart2}
-        else newCharts2[i] = state.charts[i]
+      let chart2 = state.charts[state.selectedChart].config.filter(
+        (x, index) => index != action.id
+      );
+      let newCharts2 = [];
+      for (let i = 0; i < state.charts.length; i++) {
+        if (i == state.selectedChart)
+          newCharts2[i] = { ...state.charts[i], config: chart2 };
+        else newCharts2[i] = state.charts[i];
       }
       return { ...state, charts: newCharts2 };
     case COPY_CHART:
