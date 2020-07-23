@@ -119,7 +119,6 @@ export default function Listar() {
         </Grid>
 
         {listsCharts.map((item, index) => {
-          console.log("El item en el map es:", item);
           return (
             <>
               <Grid

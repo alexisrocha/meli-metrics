@@ -210,14 +210,18 @@ export default function Metric({ idMetrica, chart, deleteId }) {
     MCO: MCO,
     MGU: MGT,
   };
-
+  var info = [];
   var shadowCssOn = " inset 0px -55px 62px -15px rgba(0,0,0,0.75)";
-
   var shadowCssOff = "inset 0px 0px 0px 0px rgba(0,0,0,0.75)";
   useEffect(() => {
     dispatch(fetchMetric(idMetrica));
     dispatch(fetchMetricData(idMetrica));
-  }, [idMetrica, charts[selectedChart].length]);
+  }, [idMetrica, charts[selectedChart].length, info.length]);
+
+  if (charts[selectedChart]) {
+    info = charts[selectedChart].config;
+  }
+
   return (
     <>
       {metricData ? (
@@ -372,9 +376,9 @@ export default function Metric({ idMetrica, chart, deleteId }) {
               </Button>
               <Button
                 id="yesButton"
-                onClick={async () => {
-                  await dispatch(removeMetric(deleteId))
-                  handleCloseCard()
+                onClick={() => {
+                  dispatch(removeMetric(deleteId, selectedChart));
+                  handleCloseCard();
                 }}
                 color="primary"
               >
