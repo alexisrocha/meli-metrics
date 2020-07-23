@@ -17,7 +17,11 @@ import FileCopyIcon from "@material-ui/icons/FileCopy";
 import Overlay from "react-bootstrap/Overlay";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { deleteCharts, changeChart } from "../../redux/action-creator/Charts";
+import {
+  deleteCharts,
+  changeChart,
+  copyList,
+} from "../../redux/action-creator/Charts";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Listar.scss";
@@ -76,11 +80,14 @@ export default function Listar({ listsCharts }) {
     );
   }
 
-  const setCopyRedux = (index) => {};
+  const setCopyRedux = (index) => {
+    dispatch(copyList(index));
+  };
 
   const handleCloseCard = () => {
     setOpenDelete(false);
   };
+  let diccionario = new Object();
   return (
     <div className="container">
       <Grid
@@ -112,6 +119,13 @@ export default function Listar({ listsCharts }) {
         {listsCharts.map((item, index) => {
           console.log("El index es:", index);
           console.log("El item es:", item);
+
+          {
+            !diccionario[item.name]
+              ? (diccionario[item.name] = 1)
+              : (diccionario[item.name] += 1);
+          }
+
           return (
             <>
               <Grid
@@ -131,7 +145,13 @@ export default function Listar({ listsCharts }) {
                   <div
                     style={{ paddingLeft: "10px", fontFamily: "Proxima Nova" }}
                   >
-                    <strong>{item.title}</strong>
+                    {diccionario[item.name] != 1 ? (
+                      <strong>
+                        {item.title + " (" + (diccionario[item.name] - 1) + ")"}
+                      </strong>
+                    ) : (
+                      <strong>{item.title}</strong>
+                    )}
                   </div>
                   <div style={{ marginRight: "20px" }}>
                     <Link
