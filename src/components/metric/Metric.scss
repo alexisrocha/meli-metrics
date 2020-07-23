@@ -56,8 +56,9 @@
 }
 
 .date {
+  margin-left: 5px;
   color: white;
-  font-size: 80%;
+  font-size: 75%;
   margin-right: 23px;
   display: none;
 }
@@ -103,23 +104,23 @@
   padding: 0px !important;
 }
 
-#alert-dialog-slide-description{
+#alert-dialog-slide-description {
   font-family: "Proxima Nova";
 }
 
-#alert-dialog-slide-title h2{
+#alert-dialog-slide-title h2 {
   font-family: "Proxima Nova" !important;
 }
 
-#deleteOptions button{
+#deleteOptions button {
   color: #00a6dc;
   font-family: "Proxima Nova" !important;
 }
 
-#deleteOptions #yesButton{
+#deleteOptions #yesButton {
   color: #e14d54;
 }
 
-#quitmodal div div{
+#quitmodal div div {
   border-radius: 10px !important;
 }
