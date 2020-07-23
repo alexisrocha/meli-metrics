@@ -26,8 +26,6 @@ export default ({ metricData, color }) => {
     });
   };
   useEffect(() => {
-    console.log("Entro al useEffect");
-    console.log("La data es:", chartData);
     chart();
   }, [chartData.length]);
   return (

@@ -34,6 +34,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMetric } from "../../redux/action-creator/Metrics";
 import { fetchMetricData } from "../../redux/action-creator/MetricData";
+import { removeMetric } from "../../redux/action-creator/Charts";
 import "./Metric.scss";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -75,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //Aca abajo deberia recibir por props un array de metricas.
-export default function Metric({ idMetrica, chart }) {
+export default function Metric({ idMetrica, chart, deleteId }) {
   const classes = useStyles();
   const [openInfo, setOpenInfo] = React.useState(false);
   const [openCard, setOpenCard] = React.useState(false);
@@ -83,6 +84,8 @@ export default function Metric({ idMetrica, chart }) {
   const [openDownload, setOpenDownload] = React.useState(false);
   const [shadow, setShadow] = React.useState(false);
   const metric = useSelector((store) => store.metric.metric[idMetrica]);
+  const charts = useSelector((store) => store.chart.charts);
+  const selectedChart = useSelector((store) => store.chart.selectedChart);
   const metricData = useSelector(
     (store) => store.metricData.metricData[idMetrica]
   );
@@ -137,17 +140,18 @@ export default function Metric({ idMetrica, chart }) {
 
   const changeCSS = () => {
     setShadow(true);
-    console.log("Estoy sobre el grafico");
   };
 
   const changeCSSOut = () => {
     setShadow(false);
-    console.log("Estoy fuera del grafico");
   };
 
   const generateDate = () => {
-    var fecha = new Date().toString().slice(4, 15).split(" ");
+    var data = new Date();
+    var fecha = data.toString().slice(4, 25).split(" ");
+    console.log("Fecha");
     var mes = fecha[0];
+    var horaminutos = data.toString().slice(16, 21);
     var newMonth;
     switch (mes) {
       case "Jan":
@@ -188,7 +192,7 @@ export default function Metric({ idMetrica, chart }) {
         break;
     }
 
-    return newMonth + "/" + fecha[1] + "/" + fecha[2];
+    return newMonth + "/" + fecha[1] + "/" + fecha[2] + " " + horaminutos;
   };
   const colors = {
     MARKETPLACE: "#f5cf3c",
@@ -220,7 +224,7 @@ export default function Metric({ idMetrica, chart }) {
   useEffect(() => {
     dispatch(fetchMetric(idMetrica));
     dispatch(fetchMetricData(idMetrica));
-  }, [idMetrica]);
+  }, [idMetrica, charts[selectedChart].length]);
   return (
     <>
       {metricData ? (
@@ -328,9 +332,9 @@ export default function Metric({ idMetrica, chart }) {
               onMouseLeave={changeCSSOut}
             >
               <div className="date">
-                {"Actualizacion:"}
+                {"Last update"}
                 <br />
-                {generateDate()}
+                <span style={{ fontSize: "90%" }}>{generateDate()}</span>
               </div>
 
               <div className="button" onClick={handleClickOpenInfo}>
@@ -375,8 +379,9 @@ export default function Metric({ idMetrica, chart }) {
               </Button>
               <Button
                 id="yesButton"
-                onClick={() => {
-                  handleCloseCard();
+                onClick={async () => {
+                  await dispatch(removeMetric(deleteId))
+                  handleCloseCard()
                 }}
                 color="primary"
               >

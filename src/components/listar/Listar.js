@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import EditIcon from "@material-ui/icons/Edit";
@@ -13,7 +13,15 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import Iconos from "../iconos/Iconos";
-import { deleteCharts, changeChart } from "../../redux/action-creator/Charts"; 
+import FileCopyIcon from "@material-ui/icons/FileCopy";
+import Overlay from "react-bootstrap/Overlay";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import {
+  deleteCharts,
+  changeChart,
+  copyList,
+} from "../../redux/action-creator/Charts";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Listar.scss";
@@ -31,12 +39,16 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
 }));
-export default function Listar({ listsCharts }) {
+
+export default function Listar() {
+  const listsCharts = useSelector((store) => store.chart.charts);
   const classes = useStyles();
   const dispatch = useDispatch();
   const [openDelete, setOpenDelete] = React.useState(false);
   const [numberToDelete, setNumberToDelete] = React.useState(null);
-
+  const [copy, setCopy] = React.useState(false);
+  const [tooltip, setTooltip] = React.useState(false);
+  const [indexChart, setIndex] = React.useState(null);
   const deleteList = () => {
     setOpenDelete(true);
   };
@@ -45,9 +57,39 @@ export default function Listar({ listsCharts }) {
     dispatch(changeChart(index));
   };
 
+  const setOver = (flag, index) => {
+    if (flag == "in") {
+      setCopy(true);
+      setIndex(index);
+    } else {
+      setCopy(false);
+      setIndex(index);
+    }
+  };
+
+  const setearTool = (flag) => {
+    if (flag == "in") {
+      setTooltip(true);
+    } else {
+      setTooltip(false);
+    }
+  };
+  function renderTooltip(props) {
+    return (
+      <Tooltip id="button-tooltip" {...props}>
+        Copy
+      </Tooltip>
+    );
+  }
+
+  const setCopyRedux = (index) => {
+    dispatch(copyList(index));
+  };
+
   const handleCloseCard = () => {
     setOpenDelete(false);
   };
+
   return (
     <div className="container">
       <Grid
@@ -59,45 +101,27 @@ export default function Listar({ listsCharts }) {
       >
         <Grid
           item
-          xs={5}
+          xs={7}
           style={{
             paddingLeft: "10px",
             color: "#9e9e9e",
             fontFamily: "Proxima Nova",
           }}
         >
-          Nombre lista
+          List name
         </Grid>
         <Grid
           item
-          xs={7}
+          xs={5}
           style={{ color: "#9e9e9e", fontFamily: "Proxima Nova" }}
         >
           KPIs
         </Grid>
 
         {listsCharts.map((item, index) => {
-          console.log("El index es:", index);
-          console.log("El item es:", item);
+          console.log("El item en el map es:", item);
           return (
             <>
-              <Grid
-                item
-                xs={5}
-                style={{
-                  backgroundColor: "white",
-                  height: "40px",
-                  marginBottom: "10px",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <div
-                  style={{ paddingLeft: "10px", fontFamily: "Proxima Nova" }}
-                >
-                  <strong>{item.title}</strong>
-                </div>
-              </Grid>
               <Grid
                 item
                 xs={7}
@@ -107,31 +131,76 @@ export default function Listar({ listsCharts }) {
                   marginBottom: "10px",
                   display: "flex",
                   alignItems: "center",
+                }}
+                onMouseOver={() => setOver("in", index)}
+                onMouseLeave={() => setOver("out", index)}
+              >
+                <div className="containerFirstList">
+                  <div
+                    style={{ paddingLeft: "10px", fontFamily: "Proxima Nova" }}
+                  >
+                    <strong>{item.title}</strong>
+                  </div>
+                  <div style={{ marginRight: "20px" }}>
+                    <Link
+                      to="/"
+                      onClick={() => {
+                        changeSelected(index);
+                      }}
+                      style={{
+                        display:
+                          copy && index == indexChart ? "inline" : "none",
+                        transition: "all 2s ease-in;",
+                      }}
+                    >
+                      <EditIcon className="button" />
+                    </Link>
+                  </div>
+                </div>
+              </Grid>
+              <Grid
+                item
+                xs={5}
+                style={{
+                  backgroundColor: "white",
+                  height: "40px",
+                  marginBottom: "10px",
+                  display: "flex",
+                  alignItems: "center",
                   justifyContent: "space-between",
                 }}
+                onMouseOver={() => setOver("in", index)}
+                onMouseLeave={() => setOver("out", index)}
               >
                 <Iconos listaMetricas={item.config} />
                 <div>
-                  <Link
-                    to="/"
-                    onClick={() => {
-                      console.log("El index es:", index);
-                      changeSelected(index);
-                    }}
+                  <OverlayTrigger
+                    placement="left"
+                    delay={{ show: 200, hide: 0 }}
+                    overlay={renderTooltip}
                   >
-                    <EditIcon className="button" />
-                  </Link>
+                    <FileCopyIcon
+                      className="button"
+                      style={{
+                        display:
+                          copy && index == indexChart ? "inline" : "none",
+                        transition: "all 2s ease-in;",
+                      }}
+                      onClick={() => {
+                        setCopyRedux(index);
+                      }}
+                    />
+                  </OverlayTrigger>
 
                   <DeleteIcon
                     onClick={() => {
+                      setNumberToDelete(index);
                       deleteList();
-                      setNumberToDelete(index)
                     }}
                     className="button"
                   />
                 </div>
               </Grid>
-              
             </>
           );
         })}
@@ -156,11 +225,13 @@ export default function Listar({ listsCharts }) {
             <CloseIcon />
             No
           </Button>
-          <Button onClick={ ()=> {
-            handleCloseCard()
-            dispatch(deleteCharts(numberToDelete))
-            dispatch(changeChart(0))
-           } } color="primary">
+          <Button
+            onClick={() => {
+              handleCloseCard();
+              dispatch(deleteCharts(numberToDelete));
+            }}
+            color="primary"
+          >
             <DeleteOutlineIcon />
             Yes
           </Button>
