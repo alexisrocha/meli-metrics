@@ -42,6 +42,7 @@ export default function Listar({ listsCharts }) {
   const [numberToDelete, setNumberToDelete] = React.useState(null);
   const [copy, setCopy] = React.useState(false);
   const [tooltip, setTooltip] = React.useState(false);
+  const [indexChart, setIndex] = React.useState(null);
   const deleteList = () => {
     setOpenDelete(true);
   };
@@ -50,11 +51,13 @@ export default function Listar({ listsCharts }) {
     dispatch(changeChart(index));
   };
 
-  const setOver = (flag) => {
+  const setOver = (flag, index) => {
     if (flag == "in") {
       setCopy(true);
+      setIndex(index);
     } else {
       setCopy(false);
+      setIndex(index);
     }
   };
 
@@ -73,9 +76,7 @@ export default function Listar({ listsCharts }) {
     );
   }
 
-  const setCopyRedux = (index) => {
-    //Hacer algo con el reducer enviandoles el index
-  };
+  const setCopyRedux = (index) => {};
 
   const handleCloseCard = () => {
     setOpenDelete(false);
@@ -91,7 +92,7 @@ export default function Listar({ listsCharts }) {
       >
         <Grid
           item
-          xs={5}
+          xs={7}
           style={{
             paddingLeft: "10px",
             color: "#9e9e9e",
@@ -102,7 +103,7 @@ export default function Listar({ listsCharts }) {
         </Grid>
         <Grid
           item
-          xs={7}
+          xs={5}
           style={{ color: "#9e9e9e", fontFamily: "Proxima Nova" }}
         >
           KPIs
@@ -115,7 +116,7 @@ export default function Listar({ listsCharts }) {
             <>
               <Grid
                 item
-                xs={5}
+                xs={7}
                 style={{
                   backgroundColor: "white",
                   height: "40px",
@@ -123,16 +124,36 @@ export default function Listar({ listsCharts }) {
                   display: "flex",
                   alignItems: "center",
                 }}
+                onMouseOver={() => setOver("in", index)}
+                onMouseLeave={() => setOver("out", index)}
               >
-                <div
-                  style={{ paddingLeft: "10px", fontFamily: "Proxima Nova" }}
-                >
-                  <strong>{item.title}</strong>
+                <div className="containerFirstList">
+                  <div
+                    style={{ paddingLeft: "10px", fontFamily: "Proxima Nova" }}
+                  >
+                    <strong>{item.title}</strong>
+                  </div>
+                  <div style={{ marginRight: "20px" }}>
+                    <Link
+                      to="/"
+                      onClick={() => {
+                        console.log("El index es:", index);
+                        changeSelected(index);
+                      }}
+                      style={{
+                        display:
+                          copy && index == indexChart ? "inline" : "none",
+                        transition: "all 2s ease-in;",
+                      }}
+                    >
+                      <EditIcon className="button" />
+                    </Link>
+                  </div>
                 </div>
               </Grid>
               <Grid
                 item
-                xs={7}
+                xs={5}
                 style={{
                   backgroundColor: "white",
                   height: "40px",
@@ -141,8 +162,8 @@ export default function Listar({ listsCharts }) {
                   alignItems: "center",
                   justifyContent: "space-between",
                 }}
-                onMouseOver={() => setOver("in")}
-                onMouseLeave={() => setOver("out")}
+                onMouseOver={() => setOver("in", index)}
+                onMouseLeave={() => setOver("out", index)}
               >
                 <Iconos listaMetricas={item.config} />
                 <div>
@@ -154,7 +175,8 @@ export default function Listar({ listsCharts }) {
                     <FileCopyIcon
                       className="button"
                       style={{
-                        display: copy ? "inline" : "none",
+                        display:
+                          copy && index == indexChart ? "inline" : "none",
                         transition: "all 2s ease-in;",
                       }}
                       onClick={() => {
@@ -162,16 +184,6 @@ export default function Listar({ listsCharts }) {
                       }}
                     />
                   </OverlayTrigger>
-
-                  <Link
-                    to="/"
-                    onClick={() => {
-                      console.log("El index es:", index);
-                      changeSelected(index);
-                    }}
-                  >
-                    <EditIcon className="button" />
-                  </Link>
 
                   <DeleteIcon
                     onClick={() => {
