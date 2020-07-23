@@ -140,12 +140,10 @@ export default function Metric({ idMetrica, chart, deleteId }) {
 
   const changeCSS = () => {
     setShadow(true);
-    console.log("Estoy sobre el grafico");
   };
 
   const changeCSSOut = () => {
     setShadow(false);
-    console.log("Estoy fuera del grafico");
   };
 
   const generateDate = () => {
@@ -303,7 +301,7 @@ export default function Metric({ idMetrica, chart, deleteId }) {
           </div>
 
           <p className="timeLapse">
-            YOY:$
+            YOY $
             {metricData
               ? reduceNumber(
                   metricData.data[1].data[metricData.data[1].data.length - 1]
