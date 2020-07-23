@@ -40,12 +40,11 @@ export default function Search() {
             id="inputSearch"
             list="inputSearchlist"
             onChange={(e) => {
-              console.log(e.target.value);
               setValueInput(e.target.value);
             }}
           />
           <datalist id="inputSearchlist">
-            <option>Buy Box</option>
+            <option>Buy Box - GMV</option>
             <option>Devices Sold</option>
             <option>CBT - ASP(e) Billable</option>
             <option>Avg Shipping Time</option>

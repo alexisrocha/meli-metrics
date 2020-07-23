@@ -4,6 +4,7 @@ import { fetchMetric } from "../../redux/action-creator/Metrics";
 import Badge from "react-bootstrap/Badge";
 import "./iconos.scss";
 export default function Iconos({ listaMetricas }) {
+  console.log("Lista metricas:", listaMetricas);
   const listaNombres = useSelector((store) => store.metric.metric);
   const [listaIDS, setListaIDS] = React.useState([]);
   const dispatch = useDispatch();
@@ -11,7 +12,6 @@ export default function Iconos({ listaMetricas }) {
 
   function cargarMetricas() {
     for (var i = 0; i < listaMetricas.length; i++) {
-      console.log("Lista metricas:", listaMetricas);
       arrayMetricas.push(dispatch(fetchMetric(listaMetricas[i].metric_id)));
     }
   }
@@ -40,15 +40,13 @@ export default function Iconos({ listaMetricas }) {
       resp = buscarTitulos(listaMetricas);
       setListaIDS(resp);
     });
-  }, [resp.length, listaIDS.length]);
+  }, [resp.length, listaIDS.length, listaMetricas]);
 
   return (
     <div className="containerIconos">
-      {listaIDS.map((elem) => {
-        console.log("La lista de IDS es:", listaIDS);
-        console.log("Elemento es:", elem);
+      {listaIDS.map((elem, index) => {
         return (
-          <div className="elemento">
+          <div className="elemento" key={index}>
             <Badge
               variant="secondary"
               style={{

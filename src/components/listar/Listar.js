@@ -40,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Listar({ listsCharts }) {
+export default function Listar() {
+  const listsCharts = useSelector((store) => store.chart.charts);
   const classes = useStyles();
   const dispatch = useDispatch();
   const [openDelete, setOpenDelete] = React.useState(false);
@@ -89,20 +90,6 @@ export default function Listar({ listsCharts }) {
     setOpenDelete(false);
   };
 
-  function buscarElementos(listsCharts) {
-    var ids = [];
-    for (var i = 0; i < listsCharts.length; i++) {
-      ids.push(listsCharts[i].config.length);
-    }
-    let total = ids.reduce((a, b) => a + b, 0);
-    return total;
-  }
-  var longitud = 0;
-  useEffect(() => {
-    longitud = buscarElementos(listsCharts);
-    console.log("La lista de charts es:", listsCharts);
-  }, [listsCharts.length, longitud]);
-
   return (
     <div className="container">
       <Grid
@@ -121,7 +108,7 @@ export default function Listar({ listsCharts }) {
             fontFamily: "Proxima Nova",
           }}
         >
-          Nombre lista
+          List name
         </Grid>
         <Grid
           item
@@ -132,6 +119,7 @@ export default function Listar({ listsCharts }) {
         </Grid>
 
         {listsCharts.map((item, index) => {
+          console.log("El item en el map es:", item);
           return (
             <>
               <Grid
@@ -241,7 +229,6 @@ export default function Listar({ listsCharts }) {
             onClick={() => {
               handleCloseCard();
               dispatch(deleteCharts(numberToDelete));
-              dispatch(changeChart(0));
             }}
             color="primary"
           >

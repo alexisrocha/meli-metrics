@@ -8,7 +8,6 @@ import "./List.scss";
 export default function List() {
   const [modalShow, setModalShow] = useState(false);
   const location = useSelector((store) => store.location.location);
-  const listsCharts = useSelector((store) => store.chart.charts);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,7 +24,7 @@ export default function List() {
       </div>
 
       <Addmodal show={modalShow} onHide={() => setModalShow(false)} />
-      <Listar listsCharts={listsCharts} />
+      <Listar />
     </div>
   );
 }
