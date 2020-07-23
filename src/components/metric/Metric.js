@@ -196,6 +196,13 @@ export default function Metric({ idMetrica, chart }) {
     "MERCADO ENVIOS": "#a8c622",
   };
 
+  let formatos = {
+    INTEG: 'integ',
+    CUR_2: 'cur2',
+    PERC_2: 'perc2',
+    DEC_2: 'dec2'
+  };
+  console.log('metric --------------------->', metric)
   const flags = {
     MLA: MLA,
     MLB: MLB,
@@ -297,7 +304,7 @@ export default function Metric({ idMetrica, chart }) {
           </div>
 
           <p className="timeLapse">
-            YOY:$
+            YOY $
             {metricData
               ? reduceNumber(
                   metricData.data[1].data[metricData.data[1].data.length - 1]
