@@ -5,7 +5,7 @@ import {
   SET_SELECTEDCHART,
   ADD_METRIC,
   DELETE_METRIC,
-  COPY_CHART
+  COPY_CHART,
 } from "../constants";
 import axios from "axios";
 
@@ -68,14 +68,14 @@ const addMetric = (metric) => ({
   metric,
 });
 
-export const fetchChart = (id , title) => {
+export const fetchChart = (id, title) => {
   return (dispatch) =>
     axios
       .get(host + url[id])
       .then((res) => res.data)
-      .then((chart)=> {
-        chart.title = title
-        return chart
+      .then((chart) => {
+        chart.title = title;
+        return chart;
       })
       .then((charts) => dispatch(getChart(charts)));
 };
@@ -87,6 +87,7 @@ export const chartSelect = (chart) => {
 };
 
 export const deleteCharts = (id) => {
+  console.log("ESTOOOOOOY POOOOOOR ELIMINAAAAAAAAAAAAR:", id);
   return (dispatch) => {
     dispatch(deleteChart(id));
   };
@@ -111,7 +112,6 @@ export const copyList = (id) => {
 };
 
 export const addMetricToChart = (id) => {
-  console.log("ACA ESTA EL ADDMETRIC", id, host + metricUrl[id]);
   return (dispatch) =>
     axios
       .get(host + metricUrl[id])

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import EditIcon from "@material-ui/icons/Edit";
@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
 }));
+
 export default function Listar({ listsCharts }) {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -87,7 +88,21 @@ export default function Listar({ listsCharts }) {
   const handleCloseCard = () => {
     setOpenDelete(false);
   };
-  let diccionario = new Object();
+
+  function buscarElementos(listsCharts) {
+    var ids = [];
+    for (var i = 0; i < listsCharts.length; i++) {
+      ids.push(listsCharts[i].config.length);
+    }
+    let total = ids.reduce((a, b) => a + b, 0);
+    return total;
+  }
+  var longitud = 0;
+  useEffect(() => {
+    longitud = buscarElementos(listsCharts);
+    console.log("La lista de charts es:", listsCharts);
+  }, [listsCharts.length, longitud]);
+
   return (
     <div className="container">
       <Grid
@@ -117,15 +132,6 @@ export default function Listar({ listsCharts }) {
         </Grid>
 
         {listsCharts.map((item, index) => {
-          console.log("El index es:", index);
-          console.log("El item es:", item);
-
-          {
-            !diccionario[item.name]
-              ? (diccionario[item.name] = 1)
-              : (diccionario[item.name] += 1);
-          }
-
           return (
             <>
               <Grid
@@ -145,19 +151,12 @@ export default function Listar({ listsCharts }) {
                   <div
                     style={{ paddingLeft: "10px", fontFamily: "Proxima Nova" }}
                   >
-                    {diccionario[item.name] != 1 ? (
-                      <strong>
-                        {item.title + " (" + (diccionario[item.name] - 1) + ")"}
-                      </strong>
-                    ) : (
-                      <strong>{item.title}</strong>
-                    )}
+                    <strong>{item.title}</strong>
                   </div>
                   <div style={{ marginRight: "20px" }}>
                     <Link
                       to="/"
                       onClick={() => {
-                        console.log("El index es:", index);
                         changeSelected(index);
                       }}
                       style={{
@@ -207,8 +206,8 @@ export default function Listar({ listsCharts }) {
 
                   <DeleteIcon
                     onClick={() => {
-                      deleteList();
                       setNumberToDelete(index);
+                      deleteList();
                     }}
                     className="button"
                   />

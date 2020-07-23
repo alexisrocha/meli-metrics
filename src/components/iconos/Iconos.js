@@ -11,7 +11,7 @@ export default function Iconos({ listaMetricas }) {
 
   function cargarMetricas() {
     for (var i = 0; i < listaMetricas.length; i++) {
-      console.log("Lista ids:", listaMetricas[i].metric_id);
+      console.log("Lista metricas:", listaMetricas);
       arrayMetricas.push(dispatch(fetchMetric(listaMetricas[i].metric_id)));
     }
   }
@@ -21,30 +21,32 @@ export default function Iconos({ listaMetricas }) {
     for (var i = 0; i < listaMetricas.length; i++) {
       listaIds.push(listaMetricas[i].metric_id);
     }
-    console.log("Lista IDS:", listaIds);
-    console.log("Lista nombres: ", listaNombres);
+
     var listaTitulos = [];
-    console.log("Antes del for");
+
     for (var j = 0; j < Math.min(listaIds.length, 4); j++) {
       listaTitulos.push(listaNombres[listaIds[j]].name.slice(0, 3));
     }
-    console.log("Lista titulos:", listaTitulos);
+
     return listaTitulos;
   }
+
+  var resp = [];
 
   useEffect(() => {
     new Promise(function (resolv, reject) {
       resolv(cargarMetricas());
     }).then(() => {
-      var resp = buscarTitulos(listaMetricas);
+      resp = buscarTitulos(listaMetricas);
       setListaIDS(resp);
     });
-  }, [listaIDS.length]);
+  }, [resp.length, listaIDS.length]);
 
   return (
     <div className="containerIconos">
       {listaIDS.map((elem) => {
-        console.log("Lista IDS En return:", listaIDS);
+        console.log("La lista de IDS es:", listaIDS);
+        console.log("Elemento es:", elem);
         return (
           <div className="elemento">
             <Badge
