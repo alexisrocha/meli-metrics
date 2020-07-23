@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import "./Chart.scss";
 export default ({ metricData, color }) => {
-  const [chartData, setChartData] = useState({});
+  const [chartData, setChartData] = useState([]);
 
   const chart = () => {
     setChartData({
@@ -27,7 +27,7 @@ export default ({ metricData, color }) => {
   };
   useEffect(() => {
     chart();
-  }, [chartData.length]);
+  }, [chartData.length, metricData.labels]);
   return (
     <div className="chart" style={{ height: "100px" }}>
       <Line

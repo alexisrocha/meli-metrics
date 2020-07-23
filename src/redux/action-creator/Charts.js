@@ -99,10 +99,17 @@ export const changeChart = (selectChart) => {
   };
 };
 
-export const removeMetric = (id) => {
-  return (dispatch) => {
-    dispatch(deleteMetric(id));
-  };
+export const removeMetric = (id, selectedChart) => {
+  if (id == 0) {
+    return (dispatch) => {
+      dispatch(deleteCharts(selectedChart));
+      dispatch(changeChart(0));
+    };
+  } else {
+    return (dispatch) => {
+      dispatch(deleteMetric(id));
+    };
+  }
 };
 
 export const copyList = (id) => {
