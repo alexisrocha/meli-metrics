@@ -13,7 +13,11 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import Iconos from "../iconos/Iconos";
-import { deleteCharts, changeChart } from "../../redux/action-creator/Charts"; 
+import FileCopyIcon from "@material-ui/icons/FileCopy";
+import Overlay from "react-bootstrap/Overlay";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import { deleteCharts, changeChart } from "../../redux/action-creator/Charts";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Listar.scss";
@@ -36,13 +40,41 @@ export default function Listar({ listsCharts }) {
   const dispatch = useDispatch();
   const [openDelete, setOpenDelete] = React.useState(false);
   const [numberToDelete, setNumberToDelete] = React.useState(null);
-
+  const [copy, setCopy] = React.useState(false);
+  const [tooltip, setTooltip] = React.useState(false);
   const deleteList = () => {
     setOpenDelete(true);
   };
 
   const changeSelected = (index) => {
     dispatch(changeChart(index));
+  };
+
+  const setOver = (flag) => {
+    if (flag == "in") {
+      setCopy(true);
+    } else {
+      setCopy(false);
+    }
+  };
+
+  const setearTool = (flag) => {
+    if (flag == "in") {
+      setTooltip(true);
+    } else {
+      setTooltip(false);
+    }
+  };
+  function renderTooltip(props) {
+    return (
+      <Tooltip id="button-tooltip" {...props}>
+        Copy
+      </Tooltip>
+    );
+  }
+
+  const setCopyRedux = (index) => {
+    //Hacer algo con el reducer enviandoles el index
   };
 
   const handleCloseCard = () => {
@@ -109,9 +141,28 @@ export default function Listar({ listsCharts }) {
                   alignItems: "center",
                   justifyContent: "space-between",
                 }}
+                onMouseOver={() => setOver("in")}
+                onMouseLeave={() => setOver("out")}
               >
                 <Iconos listaMetricas={item.config} />
                 <div>
+                  <OverlayTrigger
+                    placement="left"
+                    delay={{ show: 200, hide: 0 }}
+                    overlay={renderTooltip}
+                  >
+                    <FileCopyIcon
+                      className="button"
+                      style={{
+                        display: copy ? "inline" : "none",
+                        transition: "all 2s ease-in;",
+                      }}
+                      onClick={() => {
+                        setCopyRedux(index);
+                      }}
+                    />
+                  </OverlayTrigger>
+
                   <Link
                     to="/"
                     onClick={() => {
@@ -125,13 +176,12 @@ export default function Listar({ listsCharts }) {
                   <DeleteIcon
                     onClick={() => {
                       deleteList();
-                      setNumberToDelete(index)
+                      setNumberToDelete(index);
                     }}
                     className="button"
                   />
                 </div>
               </Grid>
-              
             </>
           );
         })}
@@ -156,11 +206,14 @@ export default function Listar({ listsCharts }) {
             <CloseIcon />
             No
           </Button>
-          <Button onClick={ ()=> {
-            handleCloseCard()
-            dispatch(deleteCharts(numberToDelete))
-            dispatch(changeChart(0))
-           } } color="primary">
+          <Button
+            onClick={() => {
+              handleCloseCard();
+              dispatch(deleteCharts(numberToDelete));
+              dispatch(changeChart(0));
+            }}
+            color="primary"
+          >
             <DeleteOutlineIcon />
             Yes
           </Button>
