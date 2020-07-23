@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //Aca abajo deberia recibir por props un array de metricas.
-export default function Metric({ idMetrica, chart }) {
+export default function Metric({ idMetrica, chart, deleteId }) {
   const classes = useStyles();
   const [openInfo, setOpenInfo] = React.useState(false);
   const [openCard, setOpenCard] = React.useState(false);
@@ -84,6 +84,8 @@ export default function Metric({ idMetrica, chart }) {
   const [openDownload, setOpenDownload] = React.useState(false);
   const [shadow, setShadow] = React.useState(false);
   const metric = useSelector((store) => store.metric.metric[idMetrica]);
+  const charts = useSelector((store) => store.chart.charts);
+  const selectedChart = useSelector((store) => store.chart.selectedChart);
   const metricData = useSelector(
     (store) => store.metricData.metricData[idMetrica]
   );
@@ -215,7 +217,7 @@ export default function Metric({ idMetrica, chart }) {
   useEffect(() => {
     dispatch(fetchMetric(idMetrica));
     dispatch(fetchMetricData(idMetrica));
-  }, [idMetrica]);
+  }, [idMetrica, charts[selectedChart].length]);
   return (
     <>
       {metricData ? (
@@ -370,9 +372,9 @@ export default function Metric({ idMetrica, chart }) {
               </Button>
               <Button
                 id="yesButton"
-                onClick={() => {
-                  handleCloseCard();
-                  dispatch(removeMetric(idMetrica));
+                onClick={async () => {
+                  await dispatch(removeMetric(deleteId))
+                  handleCloseCard()
                 }}
                 color="primary"
               >
