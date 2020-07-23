@@ -53,12 +53,9 @@ export default function addmodal(props) {
 
   const checkMaxLength = (e) => {
     var texto = e;
-    console.log("El texto es:", e);
     if (texto.length > 30) {
-      console.log("Entro al if");
       handleClickMaxLength();
     } else {
-      console.log("Entro al else");
       setValueTitle(texto);
     }
   };
@@ -92,14 +89,14 @@ export default function addmodal(props) {
               onKeyDown={keyPress}
             />
             <datalist id="inputSearchlist">
-              <option>Buy Box</option>
-              <option>Devices Sold</option>
+              <option>Buy Box - GMV</option>
               <option>CBT - ASP(e) Billable</option>
               <option>Avg Shipping Time</option>
+              <option>Devices Sold</option>
               <option>New Buyers</option>
               <option>ASP per Shippment</option>
               <option>Unique Receivers</option>
-              <option>Share GMV Buy Box</option>
+              <option>Share GMV BuyBox</option>
             </datalist>
             <SearchIcon className="searchIcon" />
           </Form.Group>

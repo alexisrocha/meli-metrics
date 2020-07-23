@@ -106,7 +106,7 @@ export default function Listar({ listsCharts }) {
             fontFamily: "Proxima Nova",
           }}
         >
-          Nombre lista
+          List name
         </Grid>
         <Grid
           item
@@ -117,9 +117,6 @@ export default function Listar({ listsCharts }) {
         </Grid>
 
         {listsCharts.map((item, index) => {
-          console.log("El index es:", index);
-          console.log("El item es:", item);
-
           {
             !diccionario[item.name]
               ? (diccionario[item.name] = 1)
