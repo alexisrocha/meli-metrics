@@ -66,7 +66,7 @@ export default function Listar({ listsCharts }) {
             fontFamily: "Proxima Nova",
           }}
         >
-          Nombre lista
+          List name
         </Grid>
         <Grid
           item

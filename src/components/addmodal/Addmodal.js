@@ -89,7 +89,7 @@ export default function addmodal(props) {
               onKeyDown={keyPress}
             />
             <datalist id="inputSearchlist">
-              <option>Buy Box </option>
+              <option>Buy Box - GMV</option>
               <option>CBT - ASP(e) Billable</option>
               <option>Avg Shipping Time</option>
               <option>Devices Sold</option>

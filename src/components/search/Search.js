@@ -44,7 +44,7 @@ export default function Search() {
             }}
           />
           <datalist id="inputSearchlist">
-            <option>Buy Box</option>
+            <option>Buy Box - GMV</option>
             <option>Devices Sold</option>
             <option>CBT - ASP(e) Billable</option>
             <option>Avg Shipping Time</option>
