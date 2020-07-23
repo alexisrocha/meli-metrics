@@ -11,7 +11,6 @@ export default function Iconos({ listaMetricas }) {
 
   function cargarMetricas() {
     for (var i = 0; i < listaMetricas.length; i++) {
-      console.log("Lista ids:", listaMetricas[i].metric_id);
       arrayMetricas.push(dispatch(fetchMetric(listaMetricas[i].metric_id)));
     }
   }
@@ -21,14 +20,11 @@ export default function Iconos({ listaMetricas }) {
     for (var i = 0; i < listaMetricas.length; i++) {
       listaIds.push(listaMetricas[i].metric_id);
     }
-    console.log("Lista IDS:", listaIds);
-    console.log("Lista nombres: ", listaNombres);
+
     var listaTitulos = [];
-    console.log("Antes del for");
     for (var j = 0; j < Math.min(listaIds.length, 4); j++) {
       listaTitulos.push(listaNombres[listaIds[j]].name.slice(0, 3));
     }
-    console.log("Lista titulos:", listaTitulos);
     return listaTitulos;
   }
 
@@ -44,7 +40,6 @@ export default function Iconos({ listaMetricas }) {
   return (
     <div className="containerIconos">
       {listaIDS.map((elem) => {
-        console.log("Lista IDS En return:", listaIDS);
         return (
           <div className="elemento">
             <Badge

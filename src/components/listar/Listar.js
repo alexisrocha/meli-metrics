@@ -13,7 +13,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import Iconos from "../iconos/Iconos";
-import { deleteCharts, changeChart } from "../../redux/action-creator/Charts"; 
+import { deleteCharts, changeChart } from "../../redux/action-creator/Charts";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Listar.scss";
@@ -77,8 +77,6 @@ export default function Listar({ listsCharts }) {
         </Grid>
 
         {listsCharts.map((item, index) => {
-          console.log("El index es:", index);
-          console.log("El item es:", item);
           return (
             <>
               <Grid
@@ -115,7 +113,7 @@ export default function Listar({ listsCharts }) {
                   <Link
                     to="/"
                     onClick={() => {
-                      console.log("El index es:", index);
+                      "El index es:", index;
                       changeSelected(index);
                     }}
                   >
@@ -125,13 +123,12 @@ export default function Listar({ listsCharts }) {
                   <DeleteIcon
                     onClick={() => {
                       deleteList();
-                      setNumberToDelete(index)
+                      setNumberToDelete(index);
                     }}
                     className="button"
                   />
                 </div>
               </Grid>
-              
             </>
           );
         })}
@@ -156,11 +153,14 @@ export default function Listar({ listsCharts }) {
             <CloseIcon />
             No
           </Button>
-          <Button onClick={ ()=> {
-            handleCloseCard()
-            dispatch(deleteCharts(numberToDelete))
-            dispatch(changeChart(0))
-           } } color="primary">
+          <Button
+            onClick={() => {
+              handleCloseCard();
+              dispatch(deleteCharts(numberToDelete));
+              dispatch(changeChart(0));
+            }}
+            color="primary"
+          >
             <DeleteOutlineIcon />
             Yes
           </Button>

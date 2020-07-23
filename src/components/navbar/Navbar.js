@@ -30,13 +30,10 @@ export default function navbar() {
       setActiveClassRight(true);
     }
   };
-  console.log("La metric es:", metric);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  useEffect(() => {
-    console.log("entre al useeffect de navbar", selectedChart, charts);
-  }, [selectedChart, charts.length]);
+  useEffect(() => {}, [selectedChart, charts.length]);
   return (
     <div>
       <div className="navbar">

@@ -28,7 +28,6 @@ export default function single({ history }) {
     dispatch(setLocation("main"));
     if (charts[selectedChart])
       dispatch(chartSelect(charts[selectedChart].config));
-    console.log("Selectedchart es:", selectedChart);
   }, [charts.length, location.location, selectedChart]);
 
   return (

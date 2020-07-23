@@ -40,7 +40,6 @@ export default function Search() {
             id="inputSearch"
             list="inputSearchlist"
             onChange={(e) => {
-              console.log(e.target.value);
               setValueInput(e.target.value);
             }}
           />
