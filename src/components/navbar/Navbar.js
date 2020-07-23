@@ -15,7 +15,7 @@ export default function navbar() {
   const charts = useSelector((store) => store.chart.charts);
   const selectedChart = useSelector((store) => store.chart.selectedChart);
   const metric = useSelector((store) => store.metric);
-  const location = useSelector((store) => store.location);
+  const location = useSelector((store) => store.location.location);
 
   const setColor = (title) => {
     setSelectedClass(title);
@@ -51,7 +51,7 @@ export default function navbar() {
                   <Link
                     to="/"
                     style={{
-                      color: selectedClass == "title" ? "#449fd7" : "#9e9e9e",
+                      color: location == "main" ? "#449fd7" : "#9e9e9e",
                     }}
                     onClick={() => {
                       setColor("title");
@@ -66,7 +66,7 @@ export default function navbar() {
                     <Link
                       to="/"
                       style={{
-                        color: selectedClass == "title" ? "#449fd7" : "#9e9e9e",
+                        color: location == "main" ? "#449fd7" : "#9e9e9e",
                       }}
                       onClick={() => {
                         setColor("title");
@@ -81,7 +81,7 @@ export default function navbar() {
                 <Link
                   to="/list"
                   style={{
-                    color: selectedClass == "kpis" ? "#449fd7" : "#9e9e9e",
+                    color: location == "list" ? "#449fd7" : "#9e9e9e",
                   }}
                   onClick={() => {
                     setColor("kpis");
@@ -92,7 +92,7 @@ export default function navbar() {
               </Nav.Link>
               <Nav.Link
                 style={{
-                  color: selectedClass == "alarms" ? "#449fd7" : "#9e9e9e",
+                  color: location == "alarms" ? "#449fd7" : "#9e9e9e",
                 }}
                 onClick={() => {
                   setColor("alarms");
@@ -102,7 +102,7 @@ export default function navbar() {
               </Nav.Link>
             </div>
 
-            {!charts.length > 0 || location.location == "list" ? (
+            {!charts.length > 0 || location == "list" ? (
               <div style={{ width: 260 }}></div>
             ) : (
               <div className="divVisualizacion">
