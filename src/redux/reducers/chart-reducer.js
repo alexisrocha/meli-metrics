@@ -2,33 +2,53 @@ import {
   GET_CHART,
   DELETE_CHART,
   SELECTED_CHART,
-  SET_TITLE,
+  SET_SELECTEDCHART,
   ADD_METRIC,
+  DELETE_METRIC,
+  COPY_CHART,
 } from "../constants";
 
 const initialState = {
   charts: [],
-  selectedChart: [],
-  title: "",
+  selectedChart: null,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_CHART:
       return { ...state, charts: [...state.charts, action.charts] };
-    case SELECTED_CHART:
-      return { ...state, selectedChart: action.selectedChart };
     case DELETE_CHART:
+      let newChartstoDelete = state.charts.filter(
+        (x, index) => index != action.id
+      );
       return {
         ...state,
-        selectedChart: state.selectedChart.filter(
-          (x) => x.metric_id != action.id
-        ),
+        charts: newChartstoDelete,
       };
-    case SET_TITLE:
-      return { ...state, title: action.title };
+    case SET_SELECTEDCHART:
+      return { ...state, selectedChart: action.selectedChart };
     case ADD_METRIC:
-      return {...state, selectedChart: [...state.selectedChart, action.metric]}
+      let chart = [...state.charts[state.selectedChart].config, action.metric];
+      let newCharts = [];
+      for (let i = 0; i < state.charts.length; i++) {
+        if (i == state.selectedChart)
+          newCharts[i] = { ...state.charts[i], config: chart };
+        else newCharts[i] = state.charts[i];
+      }
+      return { ...state, charts: newCharts };
+    case DELETE_METRIC:
+      let chart2 = state.charts[state.selectedChart].config.filter(
+        (x, index) => index != action.id
+      );
+      let newCharts2 = [];
+      for (let i = 0; i < state.charts.length; i++) {
+        if (i == state.selectedChart)
+          newCharts2[i] = { ...state.charts[i], config: chart2 };
+        else newCharts2[i] = state.charts[i];
+      }
+      return { ...state, charts: newCharts2 };
+    case COPY_CHART:
+      return { ...state, charts: [...state.charts, state.charts[action.id]] };
     default:
       return state;
   }

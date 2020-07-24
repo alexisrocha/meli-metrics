@@ -5,26 +5,53 @@ import Addmodal from "../addmodal/Addmodal";
 import Metric from "../metric/Metric";
 import { useSelector, useDispatch } from "react-redux";
 import { chartSelect } from "../../redux/action-creator/Charts";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import { setLocation } from "../../redux/action-creator/Location";
 import Search from "../search/Search";
 import "./Single.scss";
 
-export default function single() {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+}));
+
+export default function single({ history }) {
   const [modalShow, setModalShow] = useState(false);
   const charts = useSelector((store) => store.chart.charts);
+  const location = useSelector((store) => store.location);
   const selectedChart = useSelector((store) => store.chart.selectedChart);
   const dispatch = useDispatch();
+  const classes = useStyles();
   useEffect(() => {
-    if (charts.length) dispatch(chartSelect(charts[0].config));
-  }, [charts.length]);
+    dispatch(setLocation("main"));
+    if (charts[selectedChart])
+      dispatch(chartSelect(charts[selectedChart].config));
+  }, [charts.length, location.location, selectedChart]);
 
   return (
     <div className="single">
-      <Addmodal show={modalShow} onHide={() => setModalShow(false)} />
+      <Addmodal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        history={history}
+      />
       <div className="container">
         {charts.length > 0 ? (
           <>
-            {selectedChart.length ? (
-              <Search />
+            {charts[selectedChart] && charts[selectedChart].config.length ? (
+              <Grid
+                className={classes.root}
+                container
+                justify="flex-start"
+                spacing={3}
+                alignItems="flex-start"
+              >
+                <Grid key={1} item xs={12}>
+                  <Search />
+                </Grid>
+              </Grid>
             ) : (
               <div id="addcard">
                 <h2 onClick={() => setModalShow(true)} id="add">
@@ -33,15 +60,27 @@ export default function single() {
                 <span onClick={() => setModalShow(true)}>Add a metric</span>
               </div>
             )}
-            <div className="containerMetric">
-              {selectedChart &&
-                selectedChart.map((chart) => {
-                  console.log("La key en Single es:", chart.metric_id);
+
+            <Grid
+              className={classes.root}
+              container
+              justify="flex-start"
+              spacing={3}
+              alignItems="flex-start"
+            >
+              {charts[selectedChart] &&
+                charts[selectedChart].config.map((chart, index) => {
                   return (
-                    <Metric key={chart.metric_id} idMetrica={chart.metric_id} chart={chart}/>
+                    <Grid key={index} item xs={3}>
+                      <Metric
+                        idMetrica={chart.metric_id}
+                        deleteId={index}
+                        chart={chart}
+                      />
+                    </Grid>
                   );
                 })}
-            </div>
+            </Grid>
           </>
         ) : (
           <div id="addcard">

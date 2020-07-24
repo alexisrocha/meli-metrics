@@ -30,14 +30,12 @@
 
 #addcard {
   background-color: #cccccc;
-  width: 24%;
-  height: 225px;
+  width: 23%;
+  height: 270px;
   display: flex;
   justify-content: center;
   align-content: center;
   flex-direction: column;
-
-
 
   span {
     margin: 10px auto;
@@ -49,7 +47,7 @@
 
 .single {
   background-color: #f1f1f1;
-  min-height: 500px;
+  height: 100%;
   padding-top: 20px;
 }
 

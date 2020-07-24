@@ -5,7 +5,7 @@
 
 .timeLapse {
   margin-left: 5%;
-  font-size: 95%;
+  font-size: 105%;
   font-family: "Proxima Nova";
 }
 
@@ -15,6 +15,7 @@
   align-items: center;
   margin-left: 5%;
 }
+
 .value {
   font-family: "Proxima Nova";
   color: #f5cf3c;
@@ -22,47 +23,45 @@
 }
 
 .porcentaje {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: "Proxima Nova";
   text-align: center;
-  width: 35%;
+  width: 25%;
   color: white;
   margin-right: 7px;
   border-radius: 5px;
   height: 20px;
+  margin-top: -2px;
 }
 
 .positive {
-  background-color: #2e8a44;
+  background-color: #3a844b;
   font-size: 80%;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .negative {
-  border-radius: 5px;
-  background-color: #f83b49;
+  border-radius: 10px;
+  background-color: #e14d54;
   font-size: 80%;
 }
 
-.cardMain {
-  max-width: 23%;
-  min-width: 23%;
-  margin-bottom: 20px;
-  margin-right: 1%;
-  margin-left: 1%;
-}
-
-.cardMain:hover {
-  margin-bottom: 20px;
-}
-
-.cardMain:hover {
-  -webkit-box-shadow: inset 0px -63px 79px -2px rgba(133, 128, 133, 0.8);
-  -moz-box-shadow: inset 0px -63px 79px -2px rgba(133, 128, 133, 0.8);
-  box-shadow: inset 0px -63px 79px -2px rgba(133, 128, 133, 0.8);
-}
-
-.cardMain:hover .button {
+.buttonContainer:hover .button {
   display: inline;
+}
+
+.buttonContainer:hover .date {
+  display: inline;
+}
+
+.date {
+  margin-left: 5px;
+  color: white;
+  font-size: 75%;
+  margin-right: 23px;
+  display: none;
 }
 
 .button {
@@ -100,4 +99,26 @@
   justify-content: center;
   align-items: center;
   margin-top: 130px;
+}
+
+.MuiIconButton-root {
+  padding: 0px !important;
+}
+
+#alert-dialog-slide-description {
+  font-family: "Proxima Nova";
+}
+
+#alert-dialog-slide-title h2 {
+  font-family: "Proxima Nova" !important;
+  text-align: center !important;
+}
+
+#deleteOptions button {
+  color: #449fd7;
+  font-family: "Proxima Nova" !important;
+}
+
+#quitmodal div div {
+  border-radius: 10px !important;
 }

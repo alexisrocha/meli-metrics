@@ -1,8 +1,53 @@
-let getMetric = {
+let getMetric1 = {
   name: "Buy Box",
   display_name: "Buy Box - GMV",
   group: "MARKETPLACE",
   description: "Una descripcion de la metrica",
+  format: "CUR_2",
+  dimensions: {
+    site: ["MLA", "MLB", "MLC", "MCO", "MLM", "MLU", "MGT", "MBO"],
+    subgroup: ["All site", "entretainment", "vehicles"],
+  },
+  time_frames: [{ desc: "60days" }, { desc: "12months" }, { desc: "4weeks" }],
+  date_comp: [
+    { code: "YOY", desc: "Last year" },
+    { code: "MOM", desc: "Last Month" },
+  ],
+  last_updated: '2020-06-30T16:09:01.728'
+};
+// https://run.mocky.io/v3/4af8049f-3477-4337-9853-bfe616f0d049
+
+let getChart1 = {
+  title: "lorem",
+  desc: "lorem ipsum",
+  config: [
+    {
+      metric_id: 1,
+      time_frame: "60days",
+      dimension: { site: "MLA", subgroup: "All site" },
+      comparation: ["YOY"],
+    },
+  ],
+};
+// https://run.mocky.io/v3/61fbd212-8159-47f7-9083-7167d289a444
+
+let chartObj1 = {
+  metric_id: 1,
+  time_frame: '60days',
+  dimension: {
+      site: 'MLA',
+      subgroup: 'All site'
+  },
+  comparation: [ 'YOY' ]
+};
+// https://run.mocky.io/v3/930ee191-8d1e-43b8-b7a7-0213a31eadb9
+
+// -------------------------------------------------------------------------------------//
+let getMetric2 = {
+  name: "Devices Sold",
+  display_name: "Devices Sold",
+  group: "MERCADO PAGO",
+  description: "ejemplo de mercadopago",
   format: "INTEG",
   dimensions: {
     site: ["MLA", "MLB", "MLC", "MCO", "MLM", "MLU", "MGT", "MBO"],
@@ -14,14 +59,38 @@ let getMetric = {
     { code: "MOM", desc: "Last Month" },
   ],
 };
-// https://run.mocky.io/v3/beddddd4-e47c-43c2-8510-fe0fd7986c0a
+// https://run.mocky.io/v3/d2ecd0d4-0234-45fb-a140-6f1d0f63d9b5
+
+let getChart2 = {
+  title: "segundo chart",
+  desc: "lorem ipsum",
+  config: [
+    {
+      metric_id: 2,
+      time_frame: "12months",
+      dimension: { site: "MLB", subgroup: "All site" },
+      comparation: ["YOY"],
+    }
+  ],
+};
+// https://run.mocky.io/v3/5c6d43d3-89b4-47b8-b5b2-152152e3f391
+
+let chartObj2 = {
+  metric_id: 2,
+  time_frame: "12months",
+  dimension: { site: "MLB", subgroup: "All site" },
+  comparation: ["YOY"],
+};
+// https://run.mocky.io/v3/f0c1db20-2b03-4f07-80f8-d4b22e5e0257
+
+// -------------------------------------------------------------------------------------//
 
 let getMetric3 = {
   name: "CBT - ASP",
   display_name: "CBT - ASP(e) Billable",
   group: "MARKETPLACE",
   description: "Una descripcion de la metrica",
-  format: "INTEG",
+  format: "CUR_2",
   dimensions: {
     site: ["MLA", "MLB", "MLC", "MCO", "MLM", "MLU", "MGT", "MBO"],
     subgroup: ["All site", "entretainment", "vehicles"],
@@ -31,16 +100,41 @@ let getMetric3 = {
     { code: "YOY", desc: "Last year" },
     { code: "MOM", desc: "Last Month" },
   ],
+  last_updated: '2020-06-30T16:09:01.728'
 };
+// old https://run.mocky.io/v3/65b7aa8e-9f35-4b24-82f5-334957cde795
+// new https://run.mocky.io/v3/0d901dc2-6024-48d9-97f3-5145408329b1
 
-// https://run.mocky.io/v3/65b7aa8e-9f35-4b24-82f5-334957cde795
+let getChart3 = {
+  title: "tercero",
+  desc: "lorem ipsum",
+  config: [
+    {
+      metric_id: 3,
+      time_frame: "60days",
+      dimension: { site: "MLC", subgroup: "All site" },
+      comparation: ["YOY"],
+    }
+  ],
+};
+// https://run.mocky.io/v3/bbac3e4d-6e02-474e-aef0-82a049ea8dd7
+
+let chartObj3 = {
+  metric_id: 3,
+  time_frame: "60days",
+  dimension: { site: "MLC", subgroup: "All site" },
+  comparation: ["YOY"],
+};
+// https://run.mocky.io/v3/d720e0d3-f70e-41e9-9abe-58285e395fed
+
+// -------------------------------------------------------------------------------------//
 
 let getMetric4 = {
   name: "Avg Shipping",
   display_name: "Avg Shipping Time",
   group: "MERCADO ENVIOS",
   description: "Una descripcion de la metrica",
-  format: "INTEG",
+  format: "DEC_2",
   dimensions: {
     site: ["MLA", "MLB", "MLC", "MCO", "MLM", "MLU", "MGT", "MBO"],
     subgroup: ["All site", "entretainment", "vehicles"],
@@ -50,9 +144,34 @@ let getMetric4 = {
     { code: "YOY", desc: "Last year" },
     { code: "MOM", desc: "Last Month" },
   ],
+  last_updated: '2020-06-30T16:09:01.728'
 };
+// old https://run.mocky.io/v3/551c0751-e44b-4551-8ad7-4b489d545802
+// new https://run.mocky.io/v3/ff5a47cc-9dc9-4617-958c-c57c1ed66491
 
-// https://run.mocky.io/v3/551c0751-e44b-4551-8ad7-4b489d545802
+let getChart4 = {
+  title: "mexican",
+  desc: "lorem ipsum",
+  config: [
+    {
+      metric_id: 4,
+      time_frame: "60days",
+      dimension: { site: "MLM", subgroup: "All site" },
+      comparation: ["YOY"],
+    }
+  ],
+};
+// https://run.mocky.io/v3/50cdf8d6-2419-4bd9-8d1d-84463bcf0607
+
+let chartObj4 = {
+  metric_id: 4,
+  time_frame: "60days",
+  dimension: { site: "MLM", subgroup: "All site" },
+  comparation: ["YOY"],
+}
+// https://run.mocky.io/v3/ce8ec606-5383-4169-a423-a2e5620c63c7
+
+// -------------------------------------------------------------------------------------//
 
 let getMetric5 = {
   name: "New Buyers",
@@ -70,15 +189,38 @@ let getMetric5 = {
     { code: "MOM", desc: "Last Month" },
   ],
 };
-
 // https://run.mocky.io/v3/70e3f815-5cc9-4691-8fd9-4be83fcd0416
+
+let getChart5 = {
+  title: "uruguay",
+  desc: "lorem ipsum",
+  config: [
+    {
+      metric_id: 5,
+      time_frame: "60days",
+      dimension: { site: "MLU", subgroup: "All site" },
+      comparation: ["YOY"],
+    }
+  ],
+};
+// https://run.mocky.io/v3/4c242570-12ec-44a5-ae5f-62ddee3b76ee
+
+let chartObj5 = {
+  metric_id: 5,
+  time_frame: "60days",
+  dimension: { site: "MLU", subgroup: "All site" },
+  comparation: ["YOY"],
+}
+// https://run.mocky.io/v3/60b3c552-d717-4330-a3be-dab187eb6f51
+
+// -------------------------------------------------------------------------------------//
 
 let getMetric6 = {
   name: "ASP p Shippment",
   display_name: "ASP per Shippment",
   group: "MERCADO ENVIOS",
   description: "Una descripcion de la metrica",
-  format: "INTEG",
+  format: "CUR_2",
   dimensions: {
     site: ["MLA", "MLB", "MLC", "MCO", "MLM", "MLU", "MGT", "MBO"],
     subgroup: ["All site", "entretainment", "vehicles"],
@@ -88,9 +230,34 @@ let getMetric6 = {
     { code: "YOY", desc: "Last year" },
     { code: "MOM", desc: "Last Month" },
   ],
+  last_updated: '2020-06-30T16:09:01.728'
 };
+// old https://run.mocky.io/v3/565a1c9d-5ca7-43d9-a604-9d57258dbd21
+// new https://run.mocky.io/v3/cd10c0cc-4c88-4693-8025-8ee062a409f8
 
-//https://run.mocky.io/v3/565a1c9d-5ca7-43d9-a604-9d57258dbd21
+let getChart6 = {
+  title: "Guatemala",
+  desc: "lorem ipsum",
+  config: [
+    {
+      metric_id: 6,
+      time_frame: "60days",
+      dimension: { site: "MGU", subgroup: "All site" },
+      comparation: ["YOY"],
+    }
+  ],
+};
+// https://run.mocky.io/v3/a0d606f3-e11b-4743-aeb6-b4761beadb84
+
+let chartObj6 = {
+  metric_id: 6,
+  time_frame: "60days",
+  dimension: { site: "MGU", subgroup: "All site" },
+  comparation: ["YOY"],
+}
+// https://run.mocky.io/v3/32cc928e-156c-4401-9463-355833f7a4af
+
+// -------------------------------------------------------------------------------------//
 
 let getMetric7 = {
   name: "Unique Receivers",
@@ -108,191 +275,7 @@ let getMetric7 = {
     { code: "MOM", desc: "Last Month" },
   ],
 };
-
 // https://run.mocky.io/v3/8a0f81b7-4ad5-4f0d-989b-180f7ecb8e17
-
-let getMetric8 = {
-  name: "Share GMV Buy Box",
-  display_name: "Share GMV Buy Box",
-  group: "MARKETPLACE",
-  description: "Una descripcion de la metrica",
-  format: "INTEG",
-  dimensions: {
-    site: ["MLA", "MLB", "MLC", "MCO", "MLM", "MLU", "MGT", "MBO"],
-    subgroup: ["All site", "entretainment", "vehicles"],
-  },
-  time_frames: [{ desc: "60days" }, { desc: "12months" }, { desc: "4weeks" }],
-  date_comp: [
-    { code: "YOY", desc: "Last year" },
-    { code: "MOM", desc: "Last Month" },
-  ],
-};
-
-// https://run.mocky.io/v3/c91e84d2-f505-403a-bde0-094a6c1d9059
-
-let getMetric2 = {
-  name: "Devices Sold",
-  display_name: "Devices Sold",
-  group: "MERCADO PAGO",
-  description: "ejemplo de mercadopago",
-  format: "INTEG",
-  dimensions: {
-    site: ["MLA", "MLB", "MLC", "MCO", "MLM", "MLU", "MGT", "MBO"],
-    subgroup: ["All site", "entretainment", "vehicles"],
-  },
-  time_frames: [{ desc: "60days" }, { desc: "12months" }, { desc: "4weeks" }],
-  date_comp: [
-    { code: "YOY", desc: "Last year" },
-    { code: "MOM", desc: "Last Month" },
-  ],
-};
-
-// https://run.mocky.io/v3/d2ecd0d4-0234-45fb-a140-6f1d0f63d9b5
-
-let getMetricData = {
-  labels: [
-    "2020-01-31",
-    "2020-02-28",
-    "2020-03-31",
-    "2020-04-30",
-    "2020-05-31",
-    "2020-06-30",
-    "2020-07-31",
-    "2020-08-31",
-    "2020-09-30",
-    "2020-10-31",
-    "2020-11-30",
-    "2020-12-31",
-  ],
-  data: [
-    {
-      name: "Actual",
-      data: [100, 95, 105, 123, 110, 96, 92, 88, 80, 99, 110, 136],
-    },
-    {
-      name: "Last Year",
-      data: [80, 87, 97, 101, 125, 97, 94, 100, 95, 113, 120, 100],
-    },
-  ],
-};
-// https://run.mocky.io/v3/19f3e90f-4e4c-4e96-998a-abc0d2eb64e0
-
-let getMetricData2 = {
-  labels: [
-    "2020-01-31",
-    "2020-02-28",
-    "2020-03-31",
-    "2020-04-30",
-    "2020-05-31",
-    "2020-06-30",
-    "2020-07-31",
-    "2020-08-31",
-    "2020-09-30",
-    "2020-10-31",
-    "2020-11-30",
-    "2020-12-31",
-  ],
-  data: [
-    {
-      name: "Actual",
-      data: [123, 110, 96, 92, 88, 80, 99, 110, 136, 100, 95, 105],
-    },
-    {
-      name: "Last Year",
-      data: [80, 87, 105, 101, 125, 120, 100, 97, 94, 100, 95, 113],
-    },
-  ],
-};
-// https://run.mocky.io/v3/dab0f092-acde-4fc9-933e-0c7344cba6cb
-
-let getChart1 = {
-  title: "lorem",
-  desc: "lorem ipsum",
-  config: [
-    {
-      metric_id: 1,
-      time_frame: "60days",
-      dimension: { site: "MLA", subgroup: "All site" },
-      comparation: ["YOY"],
-    },
-  ],
-};
-// https://run.mocky.io/v3/61fbd212-8159-47f7-9083-7167d289a444
-
-let getChart2 = {
-  title: "segundo chart",
-  desc: "lorem ipsum",
-  config: [
-    {
-      metric_id: 2,
-      time_frame: "12months",
-      dimension: { site: "MLB", subgroup: "All site" },
-      comparation: ["YOY"],
-    }
-  ],
-};
-
-// https://run.mocky.io/v3/5c6d43d3-89b4-47b8-b5b2-152152e3f391
-
-let getChart3 = {
-  title: "tercero",
-  desc: "lorem ipsum",
-  config: [
-    {
-      metric_id: 3,
-      time_frame: "60days",
-      dimension: { site: "MLC", subgroup: "All site" },
-      comparation: ["YOY"],
-    }
-  ],
-};
-
-// https://run.mocky.io/v3/bbac3e4d-6e02-474e-aef0-82a049ea8dd7
-
-let getChart4 = {
-  title: "mexican",
-  desc: "lorem ipsum",
-  config: [
-    {
-      metric_id: 4,
-      time_frame: "60days",
-      dimension: { site: "MLM", subgroup: "All site" },
-      comparation: ["YOY"],
-    }
-  ],
-};
-
-// https://run.mocky.io/v3/50cdf8d6-2419-4bd9-8d1d-84463bcf0607
-
-let getChart5 = {
-  title: "uruguay",
-  desc: "lorem ipsum",
-  config: [
-    {
-      metric_id: 5,
-      time_frame: "60days",
-      dimension: { site: "MLU", subgroup: "All site" },
-      comparation: ["YOY"],
-    }
-  ],
-};
-
-// https://run.mocky.io/v3/4c242570-12ec-44a5-ae5f-62ddee3b76ee
-
-let getChart6 = {
-  title: "Guatemala",
-  desc: "lorem ipsum",
-  config: [
-    {
-      metric_id: 6,
-      time_frame: "60days",
-      dimension: { site: "MGU", subgroup: "All site" },
-      comparation: ["YOY"],
-    }
-  ],
-};
-
-// https://run.mocky.io/v3/a0d606f3-e11b-4743-aeb6-b4761beadb84
 
 let getChart7 = {
   title: "arg2",
@@ -306,8 +289,37 @@ let getChart7 = {
     }
   ],
 };
-
 // https://run.mocky.io/v3/2891d615-9637-4f48-b44f-dd473248a70c
+
+let chartObj7 = {
+  metric_id: 7,
+  time_frame: "60days",
+  dimension: { site: "MLA", subgroup: "All site" },
+  comparation: ["YOY"],
+}
+// https://run.mocky.io/v3/a697f11b-4019-4cc9-a4ee-40966f35cc64
+
+// -------------------------------------------------------------------------------------//
+
+let getMetric8 = {
+  name: "Share GMV Buy Box",
+  display_name: "Share GMV Buy Box",
+  group: "MARKETPLACE",
+  description: "Una descripcion de la metrica",
+  format: "PERC_2",
+  dimensions: {
+    site: ["MLA", "MLB", "MLC", "MCO", "MLM", "MLU", "MGT", "MBO"],
+    subgroup: ["All site", "entretainment", "vehicles"],
+  },
+  time_frames: [{ desc: "60days" }, { desc: "12months" }, { desc: "4weeks" }],
+  date_comp: [
+    { code: "YOY", desc: "Last year" },
+    { code: "MOM", desc: "Last Month" },
+  ],
+  last_updated: '2020-06-30T16:09:01.728'
+};
+// old https://run.mocky.io/v3/c91e84d2-f505-403a-bde0-094a6c1d9059
+// new https://run.mocky.io/v3/2037837b-2caa-4a29-8ac2-48fef5e6ff5d
 
 let getChart8 = {
   title: "arg3",
@@ -321,72 +333,7 @@ let getChart8 = {
     }
   ],
 };
-
 // https://run.mocky.io/v3/a911c61a-e19f-4011-bc76-3762f0f9cced
-
-let chartObj1 = {
-  metric_id: 1,
-  time_frame: '60days',
-  dimension: {
-      site: 'MLA',
-      subgroup: 'All site'
-  },
-  comparation: [ 'YOY' ]
-};
-
-// https://run.mocky.io/v3/930ee191-8d1e-43b8-b7a7-0213a31eadb9
-
-let chartObj2 = {
-  metric_id: 2,
-  time_frame: "12months",
-  dimension: { site: "MLB", subgroup: "All site" },
-  comparation: ["YOY"],
-};
-
-// https://run.mocky.io/v3/f0c1db20-2b03-4f07-80f8-d4b22e5e0257
-
-let chartObj3 = {
-  metric_id: 3,
-  time_frame: "60days",
-  dimension: { site: "MLC", subgroup: "All site" },
-  comparation: ["YOY"],
-};
-
-// https://run.mocky.io/v3/d720e0d3-f70e-41e9-9abe-58285e395fed
-
-let chartObj4 = {
-  metric_id: 4,
-  time_frame: "60days",
-  dimension: { site: "MLM", subgroup: "All site" },
-  comparation: ["YOY"],
-}
-
-// https://run.mocky.io/v3/ce8ec606-5383-4169-a423-a2e5620c63c7
-
-let chartObj5 = {
-  metric_id: 5,
-  time_frame: "60days",
-  dimension: { site: "MLU", subgroup: "All site" },
-  comparation: ["YOY"],
-}
-
-// https://run.mocky.io/v3/60b3c552-d717-4330-a3be-dab187eb6f51
-
-let chartObj6 = {
-      metric_id: 6,
-      time_frame: "60days",
-      dimension: { site: "MGU", subgroup: "All site" },
-      comparation: ["YOY"],
-}
-// https://run.mocky.io/v3/32cc928e-156c-4401-9463-355833f7a4af
-
-let chartOvj7 = {
-  metric_id: 7,
-  time_frame: "60days",
-  dimension: { site: "MLA", subgroup: "All site" },
-  comparation: ["YOY"],
-}
-// https://run.mocky.io/v3/a697f11b-4019-4cc9-a4ee-40966f35cc64
 
 let chartObj8 = {
   metric_id: 8,
@@ -396,122 +343,8 @@ let chartObj8 = {
 }
 //https://run.mocky.io/v3/373bf76d-4695-403a-9671-a519b3151923
 
-/* let getChart = {
-    title: 'lorem',
-    desc: 'lorem ipsum',
-    config: 
-    [
-        {
-            metric_id: 1,
-            time_frame: '60days',
-            dimension: {
-                site: 'MLA',
-                subgroup: 'All site'
-            },
-            comparation: [ 'YOY' ]
-        }
-    ]
-} */
-
-/* let getMetric = {
-    name: 'Buy Box',
-    display_name: 'Buy Box - GMV',
-    group: 'MARKETPLACE',
-    description: 'Una descripcion de la metrica',
-    format: 'INTEG',
-    dimensions: {
-        site: ['MLA', 'MLB', 'MLC', 'MCO', 'MLM', 'MLU', 'MGT', 'MBO'],
-        subgroup: ['All site', 'entretainment', 'vehicles']
-    },
-    time_frames: [
-        {
-            desc: '60days' 
-        },
-        {
-            desc:'12months'
-        },
-        {
-            desc: '4weeks'
-        }
-    ],
-    date_comp:
-    [
-        {
-            code: 'YOY',
-            desc: 'Last year'
-        },
-        {
-            code: 'MOM',
-            desc: 'Last Month'
-        }
-    ]
-} */
-
-/* let getMetricData = {
-    labels: ['2020-01-31', '2020-02-28', '2020-03-31', '2020-04-30', '2020-05-31', '2020-06-30', '2020-07-31', '2020-08-31', '2020-09-30', '2020-10-31', '2020-11-30', '2020-12-31'],
-    data: 
-    [
-        {
-            name: 'Actual',
-            data: [100, 95, 105, 123, 110, 96, 92, 88, 80, 99, 110, 136]
-        },
-        {
-            name: 'Last Year',
-            data: [80, 87, 97, 101, 125, 97, 94, 100, 95, 113, 120, 100]
-        }
-    ]
-} */
-
-/* let getMetric2 = 
-{
-    name: 'Devices Sold',
-    display_name: 'Devices Sold',
-    group: 'MERCADO PAGO',
-    description: 'ejemplo de mercadopago',
-    format: 'INTEG',
-    dimensions: {
-        site: ['MLA', 'MLB', 'MLC', 'MCO', 'MLM', 'MLU', 'MGT', 'MBO'],
-        subgroup: ['All site', 'entretainment', 'vehicles']
-    },
-    time_frames: [
-        {
-            desc: '60days' 
-        },
-        {
-            desc:'12months'
-        },
-        {
-            desc: '4weeks'
-        }
-    ],
-    date_comp:
-    [
-        {
-            code: 'YOY',
-            desc: 'Last year'
-        },
-        {
-            code: 'MOM',
-            desc: 'Last Month'
-        }
-    ]
-} */
-
-/* let getMetricData2 = 
-{
-    labels: ['2020-01-31', '2020-02-28', '2020-03-31', '2020-04-30', '2020-05-31', '2020-06-30', '2020-07-31', '2020-08-31', '2020-09-30', '2020-10-31', '2020-11-30', '2020-12-31'],
-    data: 
-    [
-        {
-            name: 'Actual',
-            data: [123, 110, 96, 92, 88, 80, 99, 110, 136, 100, 95, 105]
-        },
-        {
-            name: 'Last Year',
-            data: [80, 87, 105, 101, 125, 120, 100, 97, 94, 100, 95, 113]
-        }
-    ]
-} */
+// -------------------------------------------------------------------------------------//
+//getMetricData//
 
 function generarData() {
   var arrayData = [];

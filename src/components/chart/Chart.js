@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import "./Chart.scss";
 export default ({ metricData, color }) => {
-  const [chartData, setChartData] = useState({});
+  const [chartData, setChartData] = useState([]);
 
   const chart = () => {
     setChartData({
@@ -20,21 +20,24 @@ export default ({ metricData, color }) => {
           data: metricData.data[1].data,
           backgroundColor: "transparent",
           borderWidth: 1.5,
-          borderColor: "#E4E4E4",
+          borderColor: "#e6e6e6",
         },
       ],
     });
   };
   useEffect(() => {
-    console.log("Entro al useEffect");
-    console.log("La data es:", chartData);
     chart();
-  }, [chartData.length]);
+  }, [chartData.length, metricData.labels]);
   return (
     <div className="chart" style={{ height: "100px" }}>
       <Line
         data={chartData}
         options={{
+          /* tooltips: {
+            callbacks: {
+              label: gg
+            }
+          }, */
           scales: {
             yAxes: [
               {
