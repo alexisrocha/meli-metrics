@@ -99,8 +99,8 @@ export const changeChart = (selectChart) => {
   };
 };
 
-export const removeMetric = (id, selectedChart) => {
-  if (id == 0) {
+export const removeMetric = (id, selectedChart, chartLength) => {
+  if (id == 0 && chartLength == 1) {
     return (dispatch) => {
       dispatch(deleteCharts(selectedChart));
       dispatch(changeChart(0));

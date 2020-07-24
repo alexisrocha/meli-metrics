@@ -383,7 +383,7 @@ export default function Metric({ idMetrica, chart, deleteId }) {
               </Button>
               <Button
                 onClick={() => {
-                  dispatch(removeMetric(deleteId, selectedChart));
+                  dispatch(removeMetric(deleteId, selectedChart, charts[selectedChart].config.length));
                   handleCloseCard();
                 }}
                 color="primary"
