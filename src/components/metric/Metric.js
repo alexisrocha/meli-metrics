@@ -217,7 +217,7 @@ export default function Metric({ idMetrica, chart, deleteId }) {
     MLU: MLU,
     MBO: MBO,
     MCO: MCO,
-    MGU: MGT,
+    MGT: MGT,
   };
   var info = [];
   var shadowCssOn = " inset 0px -55px 62px -15px rgba(0,0,0,0.75)";
