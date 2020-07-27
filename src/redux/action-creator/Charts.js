@@ -6,6 +6,7 @@ import {
   ADD_METRIC,
   DELETE_METRIC,
   COPY_CHART,
+  CHANGE_NAME,
 } from "../constants";
 import axios from "axios";
 
@@ -68,6 +69,12 @@ const addMetric = (metric) => ({
   metric,
 });
 
+const changeName = (index, newName) => ({
+  type: CHANGE_NAME,
+  index,
+  newName,
+});
+
 export const fetchChart = (id, title) => {
   return (dispatch) =>
     axios
@@ -123,4 +130,10 @@ export const addMetricToChart = (id) => {
       .get(host + metricUrl[id])
       .then((res) => res.data)
       .then((metric) => dispatch(addMetric(metric)));
+};
+
+export const changeTitle = (index, newName) => {
+  return (dispatch) => {
+    dispatch(changeName(index, newName));
+  };
 };

@@ -17,11 +17,14 @@ import FileCopyIcon from "@material-ui/icons/FileCopy";
 import Overlay from "react-bootstrap/Overlay";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import TextField from "@material-ui/core/TextField";
 import {
   deleteCharts,
   changeChart,
   copyList,
+  changeTitle,
 } from "../../redux/action-creator/Charts";
+import { changeTitleNavbar } from "../../redux/action-creator/Location";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Listar.scss";
@@ -38,10 +41,18 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     color: theme.palette.text.secondary,
   },
+  input: {
+    "& > *": {
+      margin: theme.spacing(1),
+      width: "25ch",
+    },
+  },
 }));
 
 export default function Listar() {
   const listsCharts = useSelector((store) => store.chart.charts);
+  const selectedChart = useSelector((store) => store.chart.selectedChart);
+  const navbar = useSelector((store) => store.location.bool);
   const classes = useStyles();
   const dispatch = useDispatch();
   const [openDelete, setOpenDelete] = React.useState(false);
@@ -49,6 +60,7 @@ export default function Listar() {
   const [copy, setCopy] = React.useState(false);
   const [tooltip, setTooltip] = React.useState(false);
   const [indexChart, setIndex] = React.useState(null);
+  const [newName, setNewName] = React.useState(false);
   const deleteList = () => {
     setOpenDelete(true);
   };
@@ -90,6 +102,15 @@ export default function Listar() {
     setOpenDelete(false);
   };
 
+  const changeName = (e, index, name) => {
+    setIndex(index);
+    console.log("Index:", index);
+    console.log("Name:", name);
+    e.preventDefault();
+    dispatch(changeTitle(index, name));
+    dispatch(changeTitleNavbar(!navbar));
+    setNewName(false);
+  };
   return (
     <div className="container">
       <Grid
@@ -124,6 +145,9 @@ export default function Listar() {
               <Grid
                 item
                 xs={7}
+                onClick={() => {
+                  changeSelected(index);
+                }}
                 style={{
                   backgroundColor: "white",
                   height: "40px",
@@ -134,27 +158,71 @@ export default function Listar() {
                 onMouseOver={() => setOver("in", index)}
                 onMouseLeave={() => setOver("out", index)}
               >
-                <div className="containerFirstList">
-                  <div
-                    style={{ paddingLeft: "10px", fontFamily: "Proxima Nova" }}
-                  >
-                    <strong>{item.title}</strong>
-                  </div>
-                  <div style={{ marginRight: "20px" }}>
-                    <Link
-                      to="/"
-                      onClick={() => {
-                        changeSelected(index);
-                      }}
+                <Link
+                  id={`toMain${index}`}
+                  to="/"
+                  onClick={() => {
+                    changeSelected(index);
+                  }}
+                  style={{
+                    display:
+                      newName && index == selectedChart ? "none" : "inline",
+                    width: "80%",
+                  }}
+                >
+                  <div className="containerFirstList">
+                    <div
                       style={{
-                        display:
-                          copy && index == indexChart ? "inline" : "none",
-                        transition: "all 2s ease-in;",
+                        paddingLeft: "10px",
+                        fontFamily: "Proxima Nova",
                       }}
                     >
-                      <EditIcon className="button" />
-                    </Link>
+                      <strong>{item.title}</strong>
+                    </div>
                   </div>
+                </Link>
+
+                <div
+                  className="containerFirstList"
+                  style={{
+                    display:
+                      newName && index == selectedChart ? "inline" : "none",
+                    width: "80%",
+                  }}
+                >
+                  <div>
+                    <form
+                      className={classes.root}
+                      noValidate
+                      autoComplete="off"
+                      onSubmit={(e) => {
+                        changeName(
+                          e,
+                          index,
+                          document.getElementById(`input${index}`).value
+                        );
+                      }}
+                    >
+                      <TextField
+                        id={`input${index}`}
+                        label="Title"
+                        defaultValue={item.title}
+                      />
+                    </form>
+                  </div>
+                </div>
+
+                <div>
+                  <EditIcon
+                    className="button"
+                    style={{
+                      display: copy && index == indexChart ? "inline" : "none",
+                      transition: "all 2s ease-in",
+                    }}
+                    onClick={() => {
+                      setNewName(true);
+                    }}
+                  />
                 </div>
               </Grid>
               <Grid
