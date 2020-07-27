@@ -18,6 +18,8 @@ import Overlay from "react-bootstrap/Overlay";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import TextField from "@material-ui/core/TextField";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 import {
   deleteCharts,
   changeChart,
@@ -32,6 +34,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -53,6 +58,8 @@ export default function Listar() {
   const listsCharts = useSelector((store) => store.chart.charts);
   const selectedChart = useSelector((store) => store.chart.selectedChart);
   const navbar = useSelector((store) => store.location.bool);
+  const [open, setOpen] = React.useState(false);
+  const [openMaxLength, setOpenMaxLength] = React.useState(false);
   const classes = useStyles();
   const dispatch = useDispatch();
   const [openDelete, setOpenDelete] = React.useState(false);
@@ -63,6 +70,20 @@ export default function Listar() {
   const [newName, setNewName] = React.useState(false);
   const deleteList = () => {
     setOpenDelete(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const handleCloseMaxLength = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenMaxLength(false);
   };
 
   const changeSelected = (index) => {
@@ -94,6 +115,10 @@ export default function Listar() {
     );
   }
 
+  const handleClickMaxLength = () => {
+    setOpenMaxLength(true);
+  };
+
   const setCopyRedux = (index) => {
     dispatch(copyList(index));
   };
@@ -102,14 +127,28 @@ export default function Listar() {
     setOpenDelete(false);
   };
 
+  const checkMaxLength = (e, index) => {
+    var input = document.getElementById(`input${index}`);
+    var texto = e;
+    if (texto.length > 30) {
+      handleClickMaxLength();
+      input.value = input.value.slice(0, 30);
+    }
+  };
+
   const changeName = (e, index, name) => {
-    setIndex(index);
-    console.log("Index:", index);
-    console.log("Name:", name);
     e.preventDefault();
-    dispatch(changeTitle(index, name));
-    dispatch(changeTitleNavbar(!navbar));
-    setNewName(false);
+    console.log("El valor de name:", name);
+    if (name == "") {
+      setOpen(true);
+    } else {
+      setIndex(index);
+      console.log("Index:", index);
+      console.log("Name:", name);
+      dispatch(changeTitle(index, name));
+      dispatch(changeTitleNavbar(!navbar));
+      setNewName(false);
+    }
   };
   return (
     <div className="container">
@@ -207,6 +246,7 @@ export default function Listar() {
                         id={`input${index}`}
                         label="Title"
                         defaultValue={item.title}
+                        onChange={(e) => checkMaxLength(e.target.value, index)}
                       />
                     </form>
                   </div>
@@ -272,6 +312,22 @@ export default function Listar() {
           );
         })}
       </Grid>
+
+      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+        <Alert severity="error" onClose={handleClose}>
+          ¡Todos los campos deben estar completos!
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={openMaxLength}
+        autoHideDuration={2000}
+        onClose={handleCloseMaxLength}
+      >
+        <Alert severity="warning" onClose={handleCloseMaxLength}>
+          La longitud maxima es de 30 caracteres!
+        </Alert>
+      </Snackbar>
 
       {/*Dialog for DeleteList*/}
       <Dialog
