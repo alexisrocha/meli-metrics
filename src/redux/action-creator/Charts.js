@@ -87,7 +87,6 @@ export const chartSelect = (chart) => {
 };
 
 export const deleteCharts = (id) => {
-  console.log("ESTOOOOOOY POOOOOOR ELIMINAAAAAAAAAAAAR:", id);
   return (dispatch) => {
     dispatch(deleteChart(id));
   };
