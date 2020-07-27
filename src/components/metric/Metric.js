@@ -233,11 +233,11 @@ export default function Metric({ idMetrica, chart, deleteId }) {
 
   return (
     <>
-
       {metric && metricData && (
         <Editmodal
           idMetrica={idMetrica}
-          name={metric.display_name}
+          metric={metric}
+          chart={chart}
           show={modalShow}
           onHide={() => setModalShow(false)}
         />
