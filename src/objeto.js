@@ -20,6 +20,7 @@ let getMetric1 = {
 let getChart1 = {
   title: "lorem",
   desc: "lorem ipsum",
+  type: "simple",
   config: [
     {
       metric_id: 1,
@@ -29,6 +30,7 @@ let getChart1 = {
     },
   ],
 };
+// new https://run.mocky.io/v3/0bb9fde4-c5c2-4a40-9630-466fec01b377
 // https://run.mocky.io/v3/61fbd212-8159-47f7-9083-7167d289a444
 
 let chartObj1 = {
@@ -64,6 +66,7 @@ let getMetric2 = {
 let getChart2 = {
   title: "segundo chart",
   desc: "lorem ipsum",
+  type: "siple",
   config: [
     {
       metric_id: 2,
@@ -73,6 +76,7 @@ let getChart2 = {
     }
   ],
 };
+// new https://run.mocky.io/v3/dd639092-466b-4430-81c1-73fd9b5829c9
 // https://run.mocky.io/v3/5c6d43d3-89b4-47b8-b5b2-152152e3f391
 
 let chartObj2 = {
@@ -108,6 +112,7 @@ let getMetric3 = {
 let getChart3 = {
   title: "tercero",
   desc: "lorem ipsum",
+  type: "simple",
   config: [
     {
       metric_id: 3,
@@ -117,6 +122,7 @@ let getChart3 = {
     }
   ],
 };
+// new https://run.mocky.io/v3/6477bf45-b68e-45f3-83a5-1a798c517ac6
 // https://run.mocky.io/v3/bbac3e4d-6e02-474e-aef0-82a049ea8dd7
 
 let chartObj3 = {
@@ -152,6 +158,7 @@ let getMetric4 = {
 let getChart4 = {
   title: "mexican",
   desc: "lorem ipsum",
+  type: "simple",
   config: [
     {
       metric_id: 4,
@@ -161,6 +168,7 @@ let getChart4 = {
     }
   ],
 };
+//new https://run.mocky.io/v3/3af1379f-4676-4d4e-958f-d5fb9c379fd4
 // https://run.mocky.io/v3/50cdf8d6-2419-4bd9-8d1d-84463bcf0607
 
 let chartObj4 = {
@@ -194,6 +202,7 @@ let getMetric5 = {
 let getChart5 = {
   title: "uruguay",
   desc: "lorem ipsum",
+  type: "simple",
   config: [
     {
       metric_id: 5,
@@ -203,6 +212,7 @@ let getChart5 = {
     }
   ],
 };
+// new https://run.mocky.io/v3/25e5d4bf-fca9-4161-9175-72020548c29a
 // https://run.mocky.io/v3/4c242570-12ec-44a5-ae5f-62ddee3b76ee
 
 let chartObj5 = {
@@ -238,15 +248,17 @@ let getMetric6 = {
 let getChart6 = {
   title: "Guatemala",
   desc: "lorem ipsum",
+  type: "simple",
   config: [
     {
       metric_id: 6,
       time_frame: "60days",
-      dimension: { site: "MGU", subgroup: "All site" },
+      dimension: { site: "MGT", subgroup: "All site" },
       comparation: ["YOY"],
     }
   ],
 };
+// new https://run.mocky.io/v3/6c098f7d-aeb9-44e3-9dd3-40240b4c789b
 // https://run.mocky.io/v3/a0d606f3-e11b-4743-aeb6-b4761beadb84
 
 let chartObj6 = {
@@ -280,6 +292,7 @@ let getMetric7 = {
 let getChart7 = {
   title: "arg2",
   desc: "lorem ipsum",
+  type: "simple",
   config: [
     {
       metric_id: 7,
@@ -289,6 +302,7 @@ let getChart7 = {
     }
   ],
 };
+// new https://run.mocky.io/v3/226724ff-5b90-4b39-9d4c-8a32139d8ade
 // https://run.mocky.io/v3/2891d615-9637-4f48-b44f-dd473248a70c
 
 let chartObj7 = {
@@ -324,6 +338,7 @@ let getMetric8 = {
 let getChart8 = {
   title: "arg3",
   desc: "lorem ipsum",
+  type: "simple",
   config: [
     {
       metric_id: 8,
@@ -333,6 +348,7 @@ let getChart8 = {
     }
   ],
 };
+// new https://run.mocky.io/v3/0145f405-c88d-4aca-a056-12cc03e3c1a2
 // https://run.mocky.io/v3/a911c61a-e19f-4011-bc76-3762f0f9cced
 
 let chartObj8 = {
