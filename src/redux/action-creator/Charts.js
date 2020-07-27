@@ -13,14 +13,14 @@ import axios from "axios";
 let host = "https://run.mocky.io/v3/";
 
 let url = {
-  "Buy Box - GMV": `61fbd212-8159-47f7-9083-7167d289a444`,
-  "CBT - ASP(e) Billable": "bbac3e4d-6e02-474e-aef0-82a049ea8dd7",
-  "Avg Shipping Time": "50cdf8d6-2419-4bd9-8d1d-84463bcf0607",
-  "Devices Sold": `5c6d43d3-89b4-47b8-b5b2-152152e3f391`,
-  "New Buyers": "4c242570-12ec-44a5-ae5f-62ddee3b76ee",
-  "ASP per Shippment": "a0d606f3-e11b-4743-aeb6-b4761beadb84",
-  "Unique Receivers": "2891d615-9637-4f48-b44f-dd473248a70c",
-  "Share GMV Buy Box": "a911c61a-e19f-4011-bc76-3762f0f9cced",
+  "Buy Box - GMV": `0bb9fde4-c5c2-4a40-9630-466fec01b377`,
+  "CBT - ASP(e) Billable": "dd639092-466b-4430-81c1-73fd9b5829c9",
+  "Avg Shipping Time": "6477bf45-b68e-45f3-83a5-1a798c517ac6",
+  "Devices Sold": `3af1379f-4676-4d4e-958f-d5fb9c379fd4`,
+  "New Buyers": "25e5d4bf-fca9-4161-9175-72020548c29a",
+  "ASP per Shippment": "6c098f7d-aeb9-44e3-9dd3-40240b4c789b",
+  "Unique Receivers": "226724ff-5b90-4b39-9d4c-8a32139d8ade",
+  "Share GMV Buy Box": "0145f405-c88d-4aca-a056-12cc03e3c1a2",
 };
 
 let metricUrl = {

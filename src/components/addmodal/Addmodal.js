@@ -95,7 +95,7 @@ export default function addmodal(props) {
               <option>New Buyers</option>
               <option>ASP per Shippment</option>
               <option>Unique Receivers</option>
-              <option>Share GMV BuyBox</option>
+              <option>Share GMV Buy Box</option>
             </datalist>
             <SearchIcon className="searchIcon" />
           </Form.Group>
