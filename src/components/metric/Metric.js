@@ -201,12 +201,12 @@ export default function Metric({ idMetrica, chart, deleteId }) {
   };
 
   let formatos = {
-    INTEG: 'integ',
-    CUR_2: 'cur2',
-    PERC_2: 'perc2',
-    DEC_2: 'dec2'
+    INTEG: "integ",
+    CUR_2: "cur2",
+    PERC_2: "perc2",
+    DEC_2: "dec2",
   };
-  console.log('metric --------------------->', metric)
+  console.log("metric --------------------->", metric);
   const flags = {
     MLA: MLA,
     MLB: MLB,
@@ -383,7 +383,13 @@ export default function Metric({ idMetrica, chart, deleteId }) {
               </Button>
               <Button
                 onClick={() => {
-                  dispatch(removeMetric(deleteId, selectedChart, charts[selectedChart].config.length));
+                  dispatch(
+                    removeMetric(
+                      deleteId,
+                      selectedChart,
+                      charts[selectedChart].config.length
+                    )
+                  );
                   handleCloseCard();
                 }}
                 color="primary"
