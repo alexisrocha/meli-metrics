@@ -7,4 +7,6 @@ export const SET_SELECTEDCHART = "SET_SELECTEDCHART";
 export const ADD_METRIC = "ADD_METRIC";
 export const SET_LOCATION = "SET_LOCATION";
 export const DELETE_METRIC = "DELETE_METRIC";
-export const COPY_CHART = "COPY_CHART"
+export const COPY_CHART = "COPY_CHART";
+export const CHANGE_NAME = "CHANGE_NAME";
+export const CHANGE_TITLE_NAVBAR = "CHANGE_TITLE_NAVBAR";

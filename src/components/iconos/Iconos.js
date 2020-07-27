@@ -7,7 +7,6 @@ import Tooltip from "@material-ui/core/Tooltip";
 import "./iconos.scss";
 
 export default function Iconos({ listaMetricas }) {
-  console.log("Lista metricas:", listaMetricas);
   const listaNombres = useSelector((store) => store.metric.metric);
   const [listaIDS, setListaIDS] = React.useState([]);
   const [name, setName] = React.useState(null);
@@ -58,7 +57,6 @@ export default function Iconos({ listaMetricas }) {
   return (
     <div className="containerIconos">
       {listaIDS.map((elem, index) => {
-        console.log("Lista IDS:", listaIDS);
         if (!diccionario[elem] && index < 4) {
           diccionario[elem] = true;
           return (

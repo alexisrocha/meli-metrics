@@ -6,11 +6,13 @@ import {
   ADD_METRIC,
   DELETE_METRIC,
   COPY_CHART,
+  CHANGE_NAME,
 } from "../constants";
+import { changeChart } from "../action-creator/Charts";
 
 const initialState = {
   charts: [],
-  selectedChart: null,
+  selectedChart: -1,
 };
 
 export default (state = initialState, action) => {
@@ -49,6 +51,18 @@ export default (state = initialState, action) => {
       return { ...state, charts: newCharts2 };
     case COPY_CHART:
       return { ...state, charts: [...state.charts, state.charts[action.id]] };
+    case CHANGE_NAME:
+      let newItem = { ...state.charts[action.index], title: action.newName };
+      let changeCharts = state.charts;
+      for (let i = 0; i < changeCharts.length; i++) {
+        if (i == action.index) {
+          changeCharts[i] = newItem;
+        }
+      }
+      return {
+        ...state,
+        charts: changeCharts,
+      };
     default:
       return state;
   }
