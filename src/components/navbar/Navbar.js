@@ -45,7 +45,7 @@ export default function navbar() {
               <Navbar.Brand id="title">MeliMetrics</Navbar.Brand>
             </div>
             <div className="items">
-              {selectedChart == -1 && !charts.length ? (
+              {(selectedChart == -1 && !charts.length) || charts.length == 0 ? (
                 <Nav.Link>
                   <Link
                     className="linkNavbar"
