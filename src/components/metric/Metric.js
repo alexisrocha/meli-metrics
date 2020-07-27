@@ -35,6 +35,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMetric } from "../../redux/action-creator/Metrics";
 import { fetchMetricData } from "../../redux/action-creator/MetricData";
 import { removeMetric } from "../../redux/action-creator/Charts";
+import Editmodal from "../editmodal/Editmodal";
 import "./Metric.scss";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -78,6 +79,7 @@ const useStyles = makeStyles((theme) => ({
 //Aca abajo deberia recibir por props un array de metricas.
 export default function Metric({ idMetrica, chart, deleteId }) {
   const classes = useStyles();
+  const [modalShow, setModalShow] = React.useState(false);
   const [openInfo, setOpenInfo] = React.useState(false);
   const [openCard, setOpenCard] = React.useState(false);
   const [openSetting, setOpenSetting] = React.useState(false);
@@ -231,6 +233,15 @@ export default function Metric({ idMetrica, chart, deleteId }) {
 
   return (
     <>
+      {metric && metricData && (
+        <Editmodal
+          idMetrica={idMetrica}
+          name={metric.display_name}
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
+      )}
+
       {metricData ? (
         //Este codigo falta pulir, hay que sacar todos los ternarios
         <Card
@@ -347,7 +358,7 @@ export default function Metric({ idMetrica, chart, deleteId }) {
                 </div>
               </div>
 
-              <div className="button" onClick={handleClickOpenSettings}>
+              <div className="button" onClick={() => setModalShow(true)}>
                 <div className="buttonItem">
                   <SettingsIcon className={classes.item} />
                 </div>
@@ -420,30 +431,6 @@ export default function Metric({ idMetrica, chart, deleteId }) {
               </Button>
               <Button onClick={handleCloseInfo} color="primary">
                 Agree
-              </Button>
-            </DialogActions>
-          </Dialog>
-
-          {/*Dialog for SettingsIcon*/}
-          <Dialog
-            open={openSetting}
-            TransitionComponent={Transition}
-            onClose={handleCloseSettings}
-            aria-labelledby="alert-dialog-slide-title"
-            aria-describedby="alert-dialog-slide-description"
-          >
-            <DialogTitle id="alert-dialog-slide-title">Settings</DialogTitle>
-            <DialogContent>
-              <DialogContentText id="alert-dialog-slide-description">
-                Info for settings
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleCloseSettings} color="primary">
-                No
-              </Button>
-              <Button onClick={handleCloseSettings} color="primary">
-                Yes
               </Button>
             </DialogActions>
           </Dialog>
