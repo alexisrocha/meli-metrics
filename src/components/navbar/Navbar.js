@@ -46,6 +46,7 @@ export default function navbar() {
               {!selectedChart && !charts.length ? (
                 <Nav.Link>
                   <Link
+                    className="linkNavbar"
                     to="/"
                     style={{
                       color: location == "main" ? "#449fd7" : "#9e9e9e",
@@ -61,6 +62,7 @@ export default function navbar() {
                 <Nav.Link>
                   {charts[selectedChart] && (
                     <Link
+                      className="linkNavbar"
                       to="/"
                       style={{
                         color: location == "main" ? "#449fd7" : "#9e9e9e",
@@ -76,6 +78,7 @@ export default function navbar() {
               )}
               <Nav.Link>
                 <Link
+                  className="linkNavbar"
                   to="/list"
                   style={{
                     color: location == "list" ? "#449fd7" : "#9e9e9e",
@@ -88,6 +91,7 @@ export default function navbar() {
                 </Link>
               </Nav.Link>
               <Nav.Link
+                className="linkNavbar"
                 style={{
                   color: location == "alarms" ? "#449fd7" : "#9e9e9e",
                 }}
@@ -107,22 +111,26 @@ export default function navbar() {
                   <Nav.Item id="mode">Visualization</Nav.Item>
                 </div>
                 <div class="divMain">
+                <Link className="linkSwitch" to="/">
                   <div
                     className={activeClassLeft ? "activeCSS" : "desactivated"}
                     onClick={() => {
                       changeCSS("left");
                     }}
                   >
-                    <div> Simple</div>
+                    <div>Simple</div>
                   </div>
-                  <div
+                  </Link>
+                  <Link className="linkSwitch" to="/versus">
+                    <div
                     className={activeClassRight ? "activeCSS" : "desactivated"}
                     onClick={() => {
                       changeCSS("right");
                     }}
                   >
-                    <div> Versus</div>
+                    <div>Versus</div>
                   </div>
+                  </Link>
                 </div>
               </div>
             )}
