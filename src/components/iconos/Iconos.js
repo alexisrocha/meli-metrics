@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMetric } from "../../redux/action-creator/Metrics";
 import Badge from "react-bootstrap/Badge";
-
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 import "./iconos.scss";
 
@@ -28,7 +28,7 @@ export default function Iconos({ listaMetricas }) {
 
     var listaTitulos = [];
 
-    for (var j = 0; j < Math.min(listaIds.length, 4); j++) {
+    for (var j = 0; j < listaIds.length; j++) {
       listaTitulos.push(listaNombres[listaIds[j]].display_name);
     }
 
@@ -46,10 +46,20 @@ export default function Iconos({ listaMetricas }) {
     });
   }, [resp.length, listaIDS.length, listaMetricas]);
 
+  const HtmlTooltip = withStyles((theme) => ({
+    tooltip: {
+      backgroundColor: "#f5f5f9",
+      color: "rgba(0, 0, 0, 0.87)",
+      maxWidth: 220,
+      fontSize: theme.typography.pxToRem(12),
+      border: "1px solid #dadde9",
+    },
+  }))(Tooltip);
   return (
     <div className="containerIconos">
       {listaIDS.map((elem, index) => {
-        if (!diccionario[elem]) {
+        console.log("Lista IDS:", listaIDS);
+        if (!diccionario[elem] && index < 4) {
           diccionario[elem] = true;
           return (
             <div className="elemento" key={index}>
@@ -66,6 +76,34 @@ export default function Iconos({ listaMetricas }) {
                 </Badge>
               </Tooltip>
             </div>
+          );
+        } else if (index == 4) {
+          return (
+            <HtmlTooltip
+              title={
+                <React.Fragment>
+                  {listaIDS.map((elem, index) => {
+                    if (index >= 4 && !diccionario[elem]) {
+                      diccionario[elem] = true;
+                      return (
+                        <p style={{ fontFamily: "Proxima Nova" }}>{elem}</p>
+                      );
+                    }
+                  })}
+                </React.Fragment>
+              }
+            >
+              <Badge
+                variant="secondary"
+                style={{
+                  backgroundColor: "#f2f2f2",
+                  color: "#7E7775",
+                  fontFamily: "Proxima Nova",
+                }}
+              >
+                ...
+              </Badge>
+            </HtmlTooltip>
           );
         }
       })}
