@@ -233,6 +233,7 @@ export default function Metric({ idMetrica, chart, deleteId }) {
 
   return (
     <>
+
       {metric && metricData && (
         <Editmodal
           idMetrica={idMetrica}
