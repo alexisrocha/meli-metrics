@@ -16,6 +16,7 @@ export default function navbar() {
   const selectedChart = useSelector((store) => store.chart.selectedChart);
   const metric = useSelector((store) => store.metric);
   const location = useSelector((store) => store.location.location);
+  const titleChange = useSelector((store) => store.location.bool);
 
   const setColor = (title) => {
     setSelectedClass(title);
@@ -33,7 +34,8 @@ export default function navbar() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  useEffect(() => {}, [selectedChart, charts.length]);
+
+  useEffect(() => {}, [selectedChart, charts.length, titleChange]);
   return (
     <div>
       <div className="navbar">
@@ -43,9 +45,10 @@ export default function navbar() {
               <Navbar.Brand id="title">MeliMetrics</Navbar.Brand>
             </div>
             <div className="items">
-              {!selectedChart && !charts.length ? (
+              {selectedChart == -1 && !charts.length ? (
                 <Nav.Link>
                   <Link
+                    className="linkNavbar"
                     to="/"
                     style={{
                       color: location == "main" ? "#449fd7" : "#9e9e9e",
@@ -61,6 +64,7 @@ export default function navbar() {
                 <Nav.Link>
                   {charts[selectedChart] && (
                     <Link
+                      className="linkNavbar"
                       to="/"
                       style={{
                         color: location == "main" ? "#449fd7" : "#9e9e9e",
@@ -76,6 +80,7 @@ export default function navbar() {
               )}
               <Nav.Link>
                 <Link
+                  className="linkNavbar"
                   to="/list"
                   style={{
                     color: location == "list" ? "#449fd7" : "#9e9e9e",
@@ -88,6 +93,7 @@ export default function navbar() {
                 </Link>
               </Nav.Link>
               <Nav.Link
+                className="linkNavbar"
                 style={{
                   color: location == "alarms" ? "#449fd7" : "#9e9e9e",
                 }}
@@ -107,22 +113,26 @@ export default function navbar() {
                   <Nav.Item id="mode">Visualization</Nav.Item>
                 </div>
                 <div class="divMain">
+                <Link className="linkSwitch" to="/">
                   <div
                     className={activeClassLeft ? "activeCSS" : "desactivated"}
                     onClick={() => {
                       changeCSS("left");
                     }}
                   >
-                    <div> Simple</div>
+                    <div>Simple</div>
                   </div>
-                  <div
+                  </Link>
+                  <Link className="linkSwitch" to="/versus">
+                    <div
                     className={activeClassRight ? "activeCSS" : "desactivated"}
                     onClick={() => {
                       changeCSS("right");
                     }}
                   >
-                    <div> Versus</div>
+                    <div>Versus</div>
                   </div>
+                  </Link>
                 </div>
               </div>
             )}
