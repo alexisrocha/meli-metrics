@@ -83,9 +83,9 @@ export default function versus() {
               }
             })}
             <Nav.Link>
-              <div class="dropdown">
+              <div id="dropdownAgregar" class="dropdown">
                 <strong color="white">+</strong>
-                <div class="dropdown-content">
+                <div id="dropdownContentAgregar" class="dropdown-content">
                   {flagsArray.map((item, index) => {
                     if (
                       !selectedCountries.includes(item) &&
