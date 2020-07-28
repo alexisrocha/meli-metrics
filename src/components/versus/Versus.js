@@ -36,7 +36,7 @@ export default function versus() {
   };
 
   useEffect(() => {}, [selectedCountries.length]);
-
+  const [indexItem, setIndex] = React.useState(null);
   const [shadow, setShadow] = React.useState(false);
 
   const changeCSS = () => {
@@ -57,13 +57,19 @@ export default function versus() {
                   <Nav.Link
                     className="navbutton"
                     href="#home"
-                    onMouseOver={changeCSS}
+                    onMouseOver={() => {
+                      setIndex(index);
+                      changeCSS();
+                    }}
                     onMouseLeave={changeCSSOut}
                   >
                     <img src={flags[country]} className="flagsVersus" />
                     &nbsp;{country}
                     <DeleteIcon
-                      style={{ display: shadow ? "inline" : "none" }}
+                      style={{
+                        display:
+                          shadow && index == indexItem ? "inline" : "none",
+                      }}
                       className="buttonDeleteNavbar"
                     />
                   </Nav.Link>
@@ -75,7 +81,10 @@ export default function versus() {
                 <strong color="white">+</strong>
                 <div class="dropdown-content">
                   {flagsArray.map((item, index) => {
-                    if (!selectedCountries.includes(item)) {
+                    if (
+                      !selectedCountries.includes(item) &&
+                      selectedCountries.length < 4
+                    ) {
                       return (
                         <p
                           key={item + index}

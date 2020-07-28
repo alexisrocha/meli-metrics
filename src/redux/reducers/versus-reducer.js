@@ -1,7 +1,7 @@
 import { ADD_NAME } from "../constants";
 
 const initialState = {
-  selectedCountries: ["MLA", "MLB"],
+  selectedCountries: [],
 };
 
 export default (state = initialState, action) => {
