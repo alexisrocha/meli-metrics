@@ -1,5 +1,5 @@
-import React from "react";
-import { useDispatch, useSelector, useState } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Navbar, Nav } from "react-bootstrap";
 import MLA from "../../../public/flags/MLA.png";
 import MLB from "../../../public/flags/MLB.png";
@@ -10,9 +10,9 @@ import MCO from "../../../public/flags/MCO.png";
 import MGT from "../../../public/flags/MGT.png";
 import MBO from "../../../public/flags/MBO.png";
 import Avatar from "@material-ui/core/Avatar";
-import DeleteIcon from "@material-ui/icons/Delete";
-
 import { makeStyles } from "@material-ui/core/styles";
+import { addCountry } from "../../redux/action-creator/Versus";
+import DeleteIcon from "@material-ui/icons/Delete";
 import "./Versus.scss";
 
 export default function versus() {
@@ -29,6 +29,14 @@ export default function versus() {
     MCO: MCO,
     MGU: MGT,
   };
+  const flagsArray = ["MLA", "MLB", "MLC", "MLM", "MLU", "MBO", "MCO", "MGU"];
+  const dispatch = useDispatch();
+  const addToModal = (name) => {
+    dispatch(addCountry(name));
+  };
+
+  useEffect(() => {}, [selectedCountries.length]);
+  const [indexItem, setIndex] = React.useState(null);
   const [shadow, setShadow] = React.useState(false);
 
   const changeCSS = () => {
@@ -43,23 +51,55 @@ export default function versus() {
       <Navbar id="navbarVersus" variant="dark">
         <div className="container">
           <Nav id="navVersus" className="mr-auto">
-            {selectedCountries.map((country) => (
-              <Nav.Link
-                className="navbutton"
-                href="#home"
-                onMouseOver={changeCSS}
-                onMouseLeave={changeCSSOut}
-              >
-                <img src={flags[country]} className="flagsVersus" />
-                &nbsp;{country}
-                <DeleteIcon
-                  style={{ display: shadow ? "inline" : "none" }}
-                  className="buttonDeleteNavbar"
-                />
-              </Nav.Link>
-            ))}
-            <Nav.Link href="#home">
-              <strong>+</strong>
+            {selectedCountries.map((country, index) => {
+              if (index < 4) {
+                return (
+                  <Nav.Link
+                    className="navbutton"
+                    href="#home"
+                    onMouseOver={() => {
+                      setIndex(index);
+                      changeCSS();
+                    }}
+                    onMouseLeave={changeCSSOut}
+                  >
+                    <img src={flags[country]} className="flagsVersus" />
+                    &nbsp;{country}
+                    <DeleteIcon
+                      style={{
+                        display:
+                          shadow && index == indexItem ? "inline" : "none",
+                      }}
+                      className="buttonDeleteNavbar"
+                    />
+                  </Nav.Link>
+                );
+              }
+            })}
+            <Nav.Link>
+              <div class="dropdown">
+                <strong color="white">+</strong>
+                <div class="dropdown-content">
+                  {flagsArray.map((item, index) => {
+                    if (
+                      !selectedCountries.includes(item) &&
+                      selectedCountries.length < 4
+                    ) {
+                      return (
+                        <p
+                          key={item + index}
+                          style={{ color: "grey" }}
+                          onClick={() => {
+                            addToModal(item);
+                          }}
+                        >
+                          {item}
+                        </p>
+                      );
+                    }
+                  })}
+                </div>
+              </div>
             </Nav.Link>
           </Nav>
         </div>
