@@ -12,6 +12,7 @@ import MBO from "../../../public/flags/MBO.png";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/core/styles";
 import { addCountry, deleteCountry } from "../../redux/action-creator/Versus";
+import { setLocation } from "../../redux/action-creator/Location";
 import DeleteIcon from "@material-ui/icons/Delete";
 import "./Versus.scss";
 
@@ -35,7 +36,9 @@ export default function versus() {
     dispatch(addCountry(name));
   };
 
-  useEffect(() => {}, [selectedCountries.length]);
+  useEffect(() => {
+    dispatch(setLocation("main"));
+  }, [selectedCountries.length]);
   const [indexItem, setIndex] = React.useState(null);
   const [shadow, setShadow] = React.useState(false);
 
