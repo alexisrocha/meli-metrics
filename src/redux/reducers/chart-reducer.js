@@ -7,6 +7,7 @@ import {
   DELETE_METRIC,
   COPY_CHART,
   CHANGE_NAME,
+  CHANGE_METRIC_INFO,
 } from "../constants";
 import { changeChart } from "../action-creator/Charts";
 
@@ -50,7 +51,7 @@ export default (state = initialState, action) => {
       }
       return { ...state, charts: newCharts2 };
     case COPY_CHART:
-      return { ...state, charts: [...state.charts, state.charts[action.id]] };
+      return { ...state, charts: [...state.charts, {...state.charts[action.id]}] };
     case CHANGE_NAME:
       let newItem = { ...state.charts[action.index], title: action.newName };
       let changeCharts = state.charts;
@@ -63,6 +64,20 @@ export default (state = initialState, action) => {
         ...state,
         charts: changeCharts,
       };
+    case CHANGE_METRIC_INFO: 
+      let charts3 = [...state.charts[state.selectedChart].config]
+      let newCharts3 = []
+      charts3[action.index] = action.newChart
+      for(let i = 0; i < state.charts.length; i++){
+        if(i == state.selectedChart){
+          newCharts3 = [...newCharts3, state.charts[i]]
+          newCharts3[i].config = charts3
+        }
+        else if(i != state.selectedChart){ 
+          newCharts3 = [...newCharts3, state.charts[i]]
+        }
+      }
+      return {...state, charts: newCharts3}
     default:
       return state;
   }

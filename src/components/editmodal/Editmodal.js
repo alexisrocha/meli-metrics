@@ -10,10 +10,12 @@ import {
   DropdownButton,
   Dropdown,
 } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { changeMetricInfo } from "../../redux/action-creator/Charts"
 import "./Editmodal.scss";
 
 export default function editmodal(props) {
+  const dispatch = useDispatch();
   const metricOptions = useSelector(
     (store) => store.metric.metric[props.idMetrica]
   );
@@ -47,10 +49,8 @@ export default function editmodal(props) {
   };
 
   const sendData = () => {
-    console.log(props.index, site, subgroup, timeFrame, comparison);
-    /* dispatch(
-      changeMetricInfo(props.index, site, subgroup, timeFrame, comparison)
-    ); */
+    console.log(props.index, props.chart.metric_id, site, subgroup, timeFrame, comparison);
+    dispatch(changeMetricInfo(props.index, props.chart.metric_id, site, subgroup, timeFrame, comparison)); 
   };
 
   return (
