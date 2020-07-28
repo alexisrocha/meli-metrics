@@ -14,11 +14,16 @@ import { useSelector } from "react-redux";
 import "./Editmodal.scss";
 
 export default function editmodal(props) {
-  console.log("Las props son:", props);
   const metricOptions = useSelector(
     (store) => store.metric.metric[props.idMetrica]
   );
 
+  const [timeFrameButton, setTimeFrameButton] = React.useState(
+    props.chart.time_frame
+  );
+  const [comparationButton, setComparationButton] = React.useState(
+    props.chart.comparation[0]
+  );
   const [site, setSite] = React.useState(props.chart.dimension.site);
   const [subgroup, setSubgroup] = React.useState(
     props.chart.dimension.subgroup
@@ -27,6 +32,26 @@ export default function editmodal(props) {
   const [comparison, setComparison] = React.useState(
     props.chart.comparation[0]
   );
+
+  const unselected = {
+    fontSize: "90%",
+    marginRight: "10px",
+    color: "gray",
+    backgroundColor: "#f2f2f2",
+    border: "1px solid #e6e6e6",
+  };
+
+  const selected = {
+    fontSize: "90%",
+    marginRight: "10px",
+  };
+
+  const sendData = () => {
+    console.log(props.index, site, subgroup, timeFrame, comparison);
+    /* dispatch(
+      changeMetricInfo(props.index, site, subgroup, timeFrame, comparison)
+    ); */
+  };
 
   return (
     <Modal
@@ -107,16 +132,38 @@ export default function editmodal(props) {
               <div className="buttonModalComparacion">
                 {metricOptions &&
                   metricOptions.time_frames.map((elem) => {
-                    return (
-                      <Button
-                        style={{ fontSize: "90%", marginRight: "10px" }}
-                        onClick={() => {
-                          setTimeFrame(elem.desc);
-                        }}
-                      >
-                        {elem.desc}
-                      </Button>
-                    );
+                    if (elem.desc == props.chart.time_frame) {
+                      return (
+                        <Button
+                          style={
+                            timeFrameButton == elem.desc &&
+                            elem.desc == props.chart.time_frame
+                              ? selected
+                              : unselected
+                          }
+                          onClick={() => {
+                            setTimeFrame(elem.desc);
+                            setTimeFrameButton(elem.desc);
+                          }}
+                        >
+                          {elem.desc}
+                        </Button>
+                      );
+                    } else {
+                      return (
+                        <Button
+                          style={
+                            timeFrameButton == elem.desc ? selected : unselected
+                          }
+                          onClick={() => {
+                            setTimeFrame(elem.desc);
+                            setTimeFrameButton(elem.desc);
+                          }}
+                        >
+                          {elem.desc}
+                        </Button>
+                      );
+                    }
                   })}
               </div>
             </Col>
@@ -130,16 +177,40 @@ export default function editmodal(props) {
               <div className="buttonModalComparacion">
                 {metricOptions &&
                   metricOptions.date_comp.map((elem, index) => {
-                    return (
-                      <Button
-                        style={{ fontSize: "90%", marginRight: "10px" }}
-                        onClick={() => {
-                          setComparison(elem.code);
-                        }}
-                      >
-                        {elem.desc}
-                      </Button>
-                    );
+                    if (elem.code == props.chart.comparation[0]) {
+                      return (
+                        <Button
+                          style={
+                            comparationButton == elem.code &&
+                            elem.code == props.chart.comparation[0]
+                              ? selected
+                              : unselected
+                          }
+                          onClick={() => {
+                            setComparison(elem.code);
+                            setComparationButton(elem.code);
+                          }}
+                        >
+                          {elem.desc}
+                        </Button>
+                      );
+                    } else {
+                      return (
+                        <Button
+                          style={
+                            comparationButton == elem.code
+                              ? selected
+                              : unselected
+                          }
+                          onClick={() => {
+                            setComparison(elem.code);
+                            setComparationButton(elem.code);
+                          }}
+                        >
+                          {elem.desc}
+                        </Button>
+                      );
+                    }
                   })}
               </div>
             </Col>
@@ -150,7 +221,13 @@ export default function editmodal(props) {
         <span className="closeModal" onClick={props.onHide}>
           Cancel
         </span>
-        <span className="closeModal" onClick={props.onHide}>
+        <span
+          className="closeModal"
+          onClick={() => {
+            props.onHide();
+            sendData();
+          }}
+        >
           Done
         </span>
       </Modal.Footer>
