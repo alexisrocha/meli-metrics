@@ -222,8 +222,8 @@ export default function Metric({ idMetrica, chart, deleteId }) {
   var shadowCssOff = "inset 0px 0px 0px 0px rgba(0,0,0,0.75)";
   useEffect(() => {
     dispatch(fetchMetric(idMetrica));
-    dispatch(fetchMetricData(idMetrica));
-  }, [idMetrica, charts[selectedChart].length, info.length]);
+    dispatch(fetchMetricData(idMetrica, chart.time_frame));
+  }, [idMetrica, charts[selectedChart].length, info.length, chart.time_frame]);
 
   if (charts[selectedChart]) {
     info = charts[selectedChart].config;
