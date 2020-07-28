@@ -17,7 +17,7 @@ let url = {
   "Buy Box - GMV": `0bb9fde4-c5c2-4a40-9630-466fec01b377`,
   "CBT - ASP(e) Billable": "dd639092-466b-4430-81c1-73fd9b5829c9",
   "Avg Shipping Time": "6477bf45-b68e-45f3-83a5-1a798c517ac6",
-  "Devices Sold": `3af1379f-4676-4d4e-958f-d5fb9c379fd4`,
+  "Devices Sold": `5b620a5b-4941-4b65-acdb-02da3bebb863`,
   "New Buyers": "25e5d4bf-fca9-4161-9175-72020548c29a",
   "ASP per Shippment": "6c098f7d-aeb9-44e3-9dd3-40240b4c789b",
   "Unique Receivers": "226724ff-5b90-4b39-9d4c-8a32139d8ade",
