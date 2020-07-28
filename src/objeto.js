@@ -265,7 +265,7 @@ let getChart6 = {
 let chartObj6 = {
   metric_id: 6,
   time_frame: "60days",
-  dimension: { site: "MGU", subgroup: "All site" },
+  dimension: { site: "MGT", subgroup: "All site" },
   comparation: ["YOY"],
 }
 // https://run.mocky.io/v3/32cc928e-156c-4401-9463-355833f7a4af

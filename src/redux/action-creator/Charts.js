@@ -30,7 +30,7 @@ let metricUrl = {
   "Avg Shipping Time": "ce8ec606-5383-4169-a423-a2e5620c63c7",
   "Devices Sold": "f0c1db20-2b03-4f07-80f8-d4b22e5e0257",
   "New Buyers": "60b3c552-d717-4330-a3be-dab187eb6f51",
-  "ASP per Shippment": "32cc928e-156c-4401-9463-355833f7a4af",
+  "ASP per Shippment": "39a9cccd-2ff2-4738-adb5-cd0b3ec68356",
   "Unique Receivers": "a697f11b-4019-4cc9-a4ee-40966f35cc64",
   "Share GMV Buy Box": "373bf76d-4695-403a-9671-a519b3151923",
 };
