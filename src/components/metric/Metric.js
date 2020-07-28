@@ -151,7 +151,6 @@ export default function Metric({ idMetrica, chart, deleteId }) {
   const generateDate = () => {
     var data = new Date();
     var fecha = data.toString().slice(4, 25).split(" ");
-    console.log("Fecha");
     var mes = fecha[0];
     var horaminutos = data.toString().slice(16, 21);
     var newMonth;
@@ -208,7 +207,6 @@ export default function Metric({ idMetrica, chart, deleteId }) {
     PERC_2: "perc2",
     DEC_2: "dec2",
   };
-  console.log("metric --------------------->", metric);
   const flags = {
     MLA: MLA,
     MLB: MLB,
@@ -233,11 +231,12 @@ export default function Metric({ idMetrica, chart, deleteId }) {
 
   return (
     <>
-
       {metric && metricData && (
         <Editmodal
+          index={deleteId}
           idMetrica={idMetrica}
-          name={metric.display_name}
+          metric={metric}
+          chart={chart}
           show={modalShow}
           onHide={() => setModalShow(false)}
         />

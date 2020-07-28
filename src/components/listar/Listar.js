@@ -243,8 +243,8 @@ export default function Listar() {
                       }}
                     >
                       <TextField
+                        color="primary"
                         id={`input${index}`}
-                        label="Title"
                         defaultValue={item.title}
                         onChange={(e) => checkMaxLength(e.target.value, index)}
                       />

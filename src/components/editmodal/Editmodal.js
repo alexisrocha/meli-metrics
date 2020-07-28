@@ -10,10 +10,49 @@ import {
   DropdownButton,
   Dropdown,
 } from "react-bootstrap";
-
+import { useSelector, useDispatch } from "react-redux";
+import { changeMetricInfo } from "../../redux/action-creator/Charts"
 import "./Editmodal.scss";
 
 export default function editmodal(props) {
+  const dispatch = useDispatch();
+  const metricOptions = useSelector(
+    (store) => store.metric.metric[props.idMetrica]
+  );
+
+  const [timeFrameButton, setTimeFrameButton] = React.useState(
+    props.chart.time_frame
+  );
+  const [comparationButton, setComparationButton] = React.useState(
+    props.chart.comparation[0]
+  );
+  const [site, setSite] = React.useState(props.chart.dimension.site);
+  const [subgroup, setSubgroup] = React.useState(
+    props.chart.dimension.subgroup
+  );
+  const [timeFrame, setTimeFrame] = React.useState(props.chart.time_frame);
+  const [comparison, setComparison] = React.useState(
+    props.chart.comparation[0]
+  );
+
+  const unselected = {
+    fontSize: "90%",
+    marginRight: "10px",
+    color: "gray",
+    backgroundColor: "#f2f2f2",
+    border: "1px solid #e6e6e6",
+  };
+
+  const selected = {
+    fontSize: "90%",
+    marginRight: "10px",
+  };
+
+  const sendData = () => {
+    console.log(props.index, props.chart.metric_id, site, subgroup, timeFrame, comparison);
+    dispatch(changeMetricInfo(props.index, props.chart.metric_id, site, subgroup, timeFrame, comparison)); 
+  };
+
   return (
     <Modal
       {...props}
@@ -26,7 +65,7 @@ export default function editmodal(props) {
           id="contained-modal-title-vcenter"
           className="editModalTitle"
         >
-          {props.name}
+          {props.metric.display_name}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -46,32 +85,42 @@ export default function editmodal(props) {
           <Row>
             <Col md={3} lg={3} className="dropdownSite">
               <label style={{ color: "#cccccc" }}>Site</label>
-              <DropdownButton
-                size="sm"
-                title="MLA"
-                style={{
-                  backgroundColor: "white",
-                  color: "black",
-                  border: "0px solid white",
-                }}
-              >
-                <Dropdown.Item eventKey="1">Dropdown Site</Dropdown.Item>
-                <Dropdown.Item eventKey="2">Dropdown Site</Dropdown.Item>
+              <DropdownButton id="dropdownMenuButton" size="sm" title={site}>
+                {metricOptions &&
+                  metricOptions.dimensions.site.map((elem, index) => {
+                    return (
+                      <Dropdown.Item
+                        eventKey={index + 1}
+                        onClick={() => {
+                          setSite(elem);
+                        }}
+                      >
+                        {elem}
+                      </Dropdown.Item>
+                    );
+                  })}
               </DropdownButton>
             </Col>
             <Col md={3} lg={3} className="dropdownSubgroup">
               <label style={{ color: "#cccccc" }}>Subgroup</label>
               <DropdownButton
+                id="dropdownMenuButton2"
                 size="sm"
-                title="All sites"
-                style={{
-                  backgroundColor: "white",
-                  color: "black",
-                  border: "0px solid white",
-                }}
+                title={subgroup}
               >
-                <Dropdown.Item eventKey="1">Dropdown Subgroup</Dropdown.Item>
-                <Dropdown.Item eventKey="2">Dropdown Subgroups</Dropdown.Item>
+                {metricOptions &&
+                  metricOptions.dimensions.subgroup.map((elem, index) => {
+                    return (
+                      <Dropdown.Item
+                        eventKey={index + 1}
+                        onClick={() => {
+                          setSubgroup(elem);
+                        }}
+                      >
+                        {elem}
+                      </Dropdown.Item>
+                    );
+                  })}
               </DropdownButton>
             </Col>
             <Col md={6} lg={20}></Col>
@@ -81,15 +130,41 @@ export default function editmodal(props) {
             <Col xs={12} md={20} className="timeFrame">
               <label style={{ color: "#cccccc" }}>Time frame</label>
               <div className="buttonModalComparacion">
-                <Button style={{ fontSize: "90%", marginRight: "10px" }}>
-                  Ultimos 60 dias
-                </Button>
-                <Button style={{ fontSize: "90%", marginRight: "10px" }}>
-                  Ultimas 4 semanas
-                </Button>
-                <Button style={{ fontSize: "90%", marginRight: "10px" }}>
-                  Ultimos 12 meses
-                </Button>
+                {metricOptions &&
+                  metricOptions.time_frames.map((elem) => {
+                    if (elem.desc == props.chart.time_frame) {
+                      return (
+                        <Button
+                          style={
+                            timeFrameButton == elem.desc &&
+                            elem.desc == props.chart.time_frame
+                              ? selected
+                              : unselected
+                          }
+                          onClick={() => {
+                            setTimeFrame(elem.desc);
+                            setTimeFrameButton(elem.desc);
+                          }}
+                        >
+                          {elem.desc}
+                        </Button>
+                      );
+                    } else {
+                      return (
+                        <Button
+                          style={
+                            timeFrameButton == elem.desc ? selected : unselected
+                          }
+                          onClick={() => {
+                            setTimeFrame(elem.desc);
+                            setTimeFrameButton(elem.desc);
+                          }}
+                        >
+                          {elem.desc}
+                        </Button>
+                      );
+                    }
+                  })}
               </div>
             </Col>
           </Row>
@@ -100,15 +175,43 @@ export default function editmodal(props) {
                 Comparacion
               </label>
               <div className="buttonModalComparacion">
-                <Button style={{ fontSize: "90%", marginRight: "10px" }}>
-                  Last Year
-                </Button>
-                <Button style={{ fontSize: "90%", marginRight: "10px" }}>
-                  Last month
-                </Button>
-                <Button style={{ fontSize: "90%", marginRight: "10px" }}>
-                  Last Week
-                </Button>
+                {metricOptions &&
+                  metricOptions.date_comp.map((elem, index) => {
+                    if (elem.code == props.chart.comparation[0]) {
+                      return (
+                        <Button
+                          style={
+                            comparationButton == elem.code &&
+                            elem.code == props.chart.comparation[0]
+                              ? selected
+                              : unselected
+                          }
+                          onClick={() => {
+                            setComparison(elem.code);
+                            setComparationButton(elem.code);
+                          }}
+                        >
+                          {elem.desc}
+                        </Button>
+                      );
+                    } else {
+                      return (
+                        <Button
+                          style={
+                            comparationButton == elem.code
+                              ? selected
+                              : unselected
+                          }
+                          onClick={() => {
+                            setComparison(elem.code);
+                            setComparationButton(elem.code);
+                          }}
+                        >
+                          {elem.desc}
+                        </Button>
+                      );
+                    }
+                  })}
               </div>
             </Col>
           </Row>
@@ -118,7 +221,13 @@ export default function editmodal(props) {
         <span className="closeModal" onClick={props.onHide}>
           Cancel
         </span>
-        <span className="closeModal" onClick={props.onHide}>
+        <span
+          className="closeModal"
+          onClick={() => {
+            props.onHide();
+            sendData();
+          }}
+        >
           Done
         </span>
       </Modal.Footer>
