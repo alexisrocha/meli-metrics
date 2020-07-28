@@ -12,6 +12,7 @@ import MBO from "../../../public/flags/MBO.png";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/core/styles";
 import { addCountry } from "../../redux/action-creator/Versus";
+import DeleteIcon from "@material-ui/icons/Delete";
 import "./Versus.scss";
 
 export default function versus() {
@@ -36,6 +37,15 @@ export default function versus() {
 
   useEffect(() => {}, [selectedCountries.length]);
 
+  const [shadow, setShadow] = React.useState(false);
+
+  const changeCSS = () => {
+    setShadow(true);
+  };
+
+  const changeCSSOut = () => {
+    setShadow(false);
+  };
   return (
     <>
       <Navbar id="navbarVersus" variant="dark">
@@ -44,9 +54,18 @@ export default function versus() {
             {selectedCountries.map((country, index) => {
               if (index < 4) {
                 return (
-                  <Nav.Link className="navbutton" href="#home">
+                  <Nav.Link
+                    className="navbutton"
+                    href="#home"
+                    onMouseOver={changeCSS}
+                    onMouseLeave={changeCSSOut}
+                  >
                     <img src={flags[country]} className="flagsVersus" />
                     &nbsp;{country}
+                    <DeleteIcon
+                      style={{ display: shadow ? "inline" : "none" }}
+                      className="buttonDeleteNavbar"
+                    />
                   </Nav.Link>
                 );
               }
