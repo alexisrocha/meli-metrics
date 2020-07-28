@@ -8,6 +8,7 @@ import {
   COPY_CHART,
   CHANGE_NAME,
   CHANGE_METRIC_INFO,
+  CHANGE_VISUALIZATION,
 } from "../constants";
 import axios from "axios";
 
@@ -81,6 +82,18 @@ const changeInfo = (index, newChart) => ({
   index,
   newChart,
 });
+
+const changeVisualization = (index, data) => ({
+  type: CHANGE_VISUALIZATION,
+  index,
+  data,
+});
+
+export const changeView = (index, data) => {
+  return (dispatch) => {
+    dispatch(changeVisualization(index, data));
+  };
+};
 
 export const fetchChart = (id, title) => {
   return (dispatch) =>
