@@ -66,7 +66,7 @@ let getMetric2 = {
 let getChart2 = {
   title: "segundo chart",
   desc: "lorem ipsum",
-  type: "siple",
+  type: "simple",
   config: [
     {
       metric_id: 2,
@@ -76,6 +76,7 @@ let getChart2 = {
     }
   ],
 };
+// newnew https://run.mocky.io/v3/5b620a5b-4941-4b65-acdb-02da3bebb863
 // new https://run.mocky.io/v3/dd639092-466b-4430-81c1-73fd9b5829c9
 // https://run.mocky.io/v3/5c6d43d3-89b4-47b8-b5b2-152152e3f391
 
