@@ -66,7 +66,8 @@ export default function navbar() {
                 </Nav.Link>
               ) : (
                 <Nav.Link>
-                  {charts[selectedChart] && (
+                  {charts[selectedChart] &&
+                  charts[selectedChart].type == "simple" ? (
                     <Link
                       className="linkNavbar"
                       to="/"
@@ -79,7 +80,22 @@ export default function navbar() {
                     >
                       {charts[selectedChart].title}
                     </Link>
-                  )}
+                  ) : null}
+                  {charts[selectedChart] &&
+                  charts[selectedChart].type == "versus" ? (
+                    <Link
+                      className="linkNavbar"
+                      to="/versus"
+                      style={{
+                        color: location == "main" ? "#449fd7" : "#9e9e9e",
+                      }}
+                      onClick={() => {
+                        setColor("title");
+                      }}
+                    >
+                      {charts[selectedChart].title}
+                    </Link>
+                  ) : null}
                 </Nav.Link>
               )}
               <Nav.Link>
@@ -120,7 +136,6 @@ export default function navbar() {
                   <Link className="linkSwitch" to="/">
                     <div
                       className={
-                        activeClassLeft ||
                         charts[selectedChart].type == "simple"
                           ? "activeCSS"
                           : "desactivated"
@@ -136,7 +151,6 @@ export default function navbar() {
                   <Link className="linkSwitch" to="/versus">
                     <div
                       className={
-                        activeClassRight ||
                         charts[selectedChart].type == "versus"
                           ? "activeCSS"
                           : "desactivated"

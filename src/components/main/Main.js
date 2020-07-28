@@ -5,18 +5,17 @@ import Single from "../single/Single";
 import Versus from "../versus/Versus";
 import List from "../list/List";
 import Metric from "../metric/Metric";
-
-export default (props) => (
-  <div id="main">
-    <Navbar />
-    <Switch>
-      <Route
-        exact
-        path="/"
-        render={(props) => <Single history={props.history} />}
-      />
-      <Route exact path="/versus" component={Versus}/>
-      <Route path="/list" component={List} />
-    </Switch>
-  </div>
-);
+import { Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import Container from "../Container/Container";
+export default (props) => {
+  return (
+    <div id="main">
+      <Navbar />
+      <Switch>
+        <Route exact path="/list" component={List} />
+        <Route path="/" render={(props) => <Container />} />
+      </Switch>
+    </div>
+  );
+};

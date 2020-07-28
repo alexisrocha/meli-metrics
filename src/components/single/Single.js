@@ -32,6 +32,7 @@ export default function single({ history }) {
 
   return (
     <div className="single">
+      {console.log("Este es el selectedChart", selectedChart)}
       <Link id="gotoVersus" to={"/versus"}></Link>
       <Addmodal
         show={modalShow}

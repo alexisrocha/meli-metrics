@@ -1,7 +1,7 @@
 import { ADD_NAME, DELETE_NAME } from "../constants";
 
 const initialState = {
-  selectedCountries: [],
+  selectedCountries: ["MLB", "MLA", "MLM"],
 };
 
 export default (state = initialState, action) => {
