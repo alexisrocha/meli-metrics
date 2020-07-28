@@ -8,6 +8,7 @@ import {
   COPY_CHART,
   CHANGE_NAME,
   CHANGE_METRIC_INFO,
+  CHANGE_VISUALIZATION,
 } from "../constants";
 import { changeChart } from "../action-creator/Charts";
 
@@ -51,7 +52,10 @@ export default (state = initialState, action) => {
       }
       return { ...state, charts: newCharts2 };
     case COPY_CHART:
-      return { ...state, charts: [...state.charts, {...state.charts[action.id]}] };
+      return {
+        ...state,
+        charts: [...state.charts, { ...state.charts[action.id] }],
+      };
     case CHANGE_NAME:
       let newItem = { ...state.charts[action.index], title: action.newName };
       let changeCharts = state.charts;
@@ -64,20 +68,35 @@ export default (state = initialState, action) => {
         ...state,
         charts: changeCharts,
       };
-    case CHANGE_METRIC_INFO: 
-      let charts3 = [...state.charts[state.selectedChart].config]
-      let newCharts3 = []
-      charts3[action.index] = action.newChart
-      for(let i = 0; i < state.charts.length; i++){
-        if(i == state.selectedChart){
-          newCharts3 = [...newCharts3, state.charts[i]]
-          newCharts3[i].config = charts3
-        }
-        else if(i != state.selectedChart){ 
-          newCharts3 = [...newCharts3, state.charts[i]]
+
+    case CHANGE_VISUALIZATION:
+      let newItemVisualization = {
+        ...state.charts[action.index],
+        type: action.data,
+      };
+      let newChartsVisualization = state.charts;
+      for (let i = 0; i < newChartsVisualization.length; i++) {
+        if (i == action.index) {
+          newChartsVisualization[i] = newItemVisualization;
         }
       }
-      return {...state, charts: newCharts3}
+      return {
+        ...state,
+        charts: newChartsVisualization,
+      };
+    case CHANGE_METRIC_INFO:
+      let charts3 = [...state.charts[state.selectedChart].config];
+      let newCharts3 = [];
+      charts3[action.index] = action.newChart;
+      for (let i = 0; i < state.charts.length; i++) {
+        if (i == state.selectedChart) {
+          newCharts3 = [...newCharts3, state.charts[i]];
+          newCharts3[i].config = charts3;
+        } else if (i != state.selectedChart) {
+          newCharts3 = [...newCharts3, state.charts[i]];
+        }
+      }
+      return { ...state, charts: newCharts3 };
     default:
       return state;
   }

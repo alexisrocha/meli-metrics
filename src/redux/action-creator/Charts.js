@@ -8,6 +8,7 @@ import {
   COPY_CHART,
   CHANGE_NAME,
   CHANGE_METRIC_INFO,
+  CHANGE_VISUALIZATION,
 } from "../constants";
 import axios from "axios";
 
@@ -79,8 +80,20 @@ const changeName = (index, newName) => ({
 const changeInfo = (index, newChart) => ({
   type: CHANGE_METRIC_INFO,
   index,
-  newChart
-})
+  newChart,
+});
+
+const changeVisualization = (index, data) => ({
+  type: CHANGE_VISUALIZATION,
+  index,
+  data,
+});
+
+export const changeView = (index, data) => {
+  return (dispatch) => {
+    dispatch(changeVisualization(index, data));
+  };
+};
 
 export const fetchChart = (id, title) => {
   return (dispatch) =>
@@ -145,17 +158,24 @@ export const changeTitle = (index, newName) => {
   };
 };
 
-export const changeMetricInfo = (index, metric_id, site, subgroup, time_frame, comparison) =>{
+export const changeMetricInfo = (
+  index,
+  metric_id,
+  site,
+  subgroup,
+  time_frame,
+  comparison
+) => {
   return (dispatch) => {
     let newChart = {
       metric_id,
       time_frame,
       dimension: {
         site,
-        subgroup
+        subgroup,
       },
-      comparation: [comparison]
-    }
-    dispatch(changeInfo(index, newChart))
-  }
-}
+      comparation: [comparison],
+    };
+    dispatch(changeInfo(index, newChart));
+  };
+};

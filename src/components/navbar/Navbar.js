@@ -3,8 +3,8 @@ import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { changeView } from "../../redux/action-creator/Charts";
 import "./Navbar.scss";
 
 export default function navbar() {
@@ -17,7 +17,7 @@ export default function navbar() {
   const metric = useSelector((store) => store.metric);
   const location = useSelector((store) => store.location.location);
   const titleChange = useSelector((store) => store.location.bool);
-
+  const dispatch = useDispatch();
   const setColor = (title) => {
     setSelectedClass(title);
   };
@@ -33,6 +33,10 @@ export default function navbar() {
   };
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const changeData = (type) => {
+    dispatch(changeView(selectedChart, type));
   };
 
   useEffect(() => {}, [selectedChart, charts.length, titleChange]);
@@ -113,25 +117,37 @@ export default function navbar() {
                   <Nav.Item id="mode">Visualization</Nav.Item>
                 </div>
                 <div class="divMain">
-                <Link className="linkSwitch" to="/">
-                  <div
-                    className={activeClassLeft ? "activeCSS" : "desactivated"}
-                    onClick={() => {
-                      changeCSS("left");
-                    }}
-                  >
-                    <div>Simple</div>
-                  </div>
+                  <Link className="linkSwitch" to="/">
+                    <div
+                      className={
+                        activeClassLeft ||
+                        charts[selectedChart].type == "simple"
+                          ? "activeCSS"
+                          : "desactivated"
+                      }
+                      onClick={() => {
+                        changeData("simple");
+                        changeCSS("left");
+                      }}
+                    >
+                      <div>Simple</div>
+                    </div>
                   </Link>
                   <Link className="linkSwitch" to="/versus">
                     <div
-                    className={activeClassRight ? "activeCSS" : "desactivated"}
-                    onClick={() => {
-                      changeCSS("right");
-                    }}
-                  >
-                    <div>Versus</div>
-                  </div>
+                      className={
+                        activeClassRight ||
+                        charts[selectedChart].type == "versus"
+                          ? "activeCSS"
+                          : "desactivated"
+                      }
+                      onClick={() => {
+                        changeData("versus");
+                        changeCSS("right");
+                      }}
+                    >
+                      <div>Versus</div>
+                    </div>
                   </Link>
                 </div>
               </div>

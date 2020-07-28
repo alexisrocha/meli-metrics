@@ -32,6 +32,7 @@ export default function single({ history }) {
 
   return (
     <div className="single">
+      <Link id="gotoVersus" to={"/versus"}></Link>
       <Addmodal
         show={modalShow}
         onHide={() => setModalShow(false)}
