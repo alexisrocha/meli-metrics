@@ -11,3 +11,4 @@ export const COPY_CHART = "COPY_CHART";
 export const CHANGE_NAME = "CHANGE_NAME";
 export const CHANGE_TITLE_NAVBAR = "CHANGE_TITLE_NAVBAR";
 export const ADD_NAME = "ADD_NAME";
+export const DELETE_NAME = "DELETE_NAME";

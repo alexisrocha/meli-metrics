@@ -11,7 +11,7 @@ import MGT from "../../../public/flags/MGT.png";
 import MBO from "../../../public/flags/MBO.png";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/core/styles";
-import { addCountry } from "../../redux/action-creator/Versus";
+import { addCountry, deleteCountry } from "../../redux/action-creator/Versus";
 import DeleteIcon from "@material-ui/icons/Delete";
 import "./Versus.scss";
 
@@ -46,6 +46,9 @@ export default function versus() {
   const changeCSSOut = () => {
     setShadow(false);
   };
+  const deleteName = (name) => {
+    dispatch(deleteCountry(name));
+  };
   return (
     <>
       <Navbar id="navbarVersus" variant="dark">
@@ -71,6 +74,9 @@ export default function versus() {
                           shadow && index == indexItem ? "inline" : "none",
                       }}
                       className="buttonDeleteNavbar"
+                      onClick={() => {
+                        deleteName(country);
+                      }}
                     />
                   </Nav.Link>
                 );
