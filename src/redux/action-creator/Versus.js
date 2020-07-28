@@ -5,16 +5,16 @@ const addName = (name) => ({
   name,
 });
 
+const deleteName = (name) => ({
+  type: DELETE_NAME,
+  name,
+});
+
 export const addCountry = (name) => {
   return (dispatch) => {
     dispatch(addName(name));
   };
 };
-
-const deleteName = (name) => ({
-  type: DELETE_NAME,
-  name,
-});
 
 export const deleteCountry = (name) => {
   return (dispatch) => {

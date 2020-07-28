@@ -79,8 +79,8 @@ const changeName = (index, newName) => ({
 const changeInfo = (index, newChart) => ({
   type: CHANGE_METRIC_INFO,
   index,
-  newChart
-})
+  newChart,
+});
 
 export const fetchChart = (id, title) => {
   return (dispatch) =>
@@ -145,17 +145,24 @@ export const changeTitle = (index, newName) => {
   };
 };
 
-export const changeMetricInfo = (index, metric_id, site, subgroup, time_frame, comparison) =>{
+export const changeMetricInfo = (
+  index,
+  metric_id,
+  site,
+  subgroup,
+  time_frame,
+  comparison
+) => {
   return (dispatch) => {
     let newChart = {
       metric_id,
       time_frame,
       dimension: {
         site,
-        subgroup
+        subgroup,
       },
-      comparation: [comparison]
-    }
-    dispatch(changeInfo(index, newChart))
-  }
-}
+      comparation: [comparison],
+    };
+    dispatch(changeInfo(index, newChart));
+  };
+};

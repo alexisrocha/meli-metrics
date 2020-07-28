@@ -113,25 +113,27 @@ export default function navbar() {
                   <Nav.Item id="mode">Visualization</Nav.Item>
                 </div>
                 <div class="divMain">
-                <Link className="linkSwitch" to="/">
-                  <div
-                    className={activeClassLeft ? "activeCSS" : "desactivated"}
-                    onClick={() => {
-                      changeCSS("left");
-                    }}
-                  >
-                    <div>Simple</div>
-                  </div>
-                  </Link>
-                  <Link className="linkSwitch" to="/versus">
+                  <Link className="linkSwitch" to="/" onClick={}>
                     <div
-                    className={activeClassRight ? "activeCSS" : "desactivated"}
-                    onClick={() => {
-                      changeCSS("right");
-                    }}
-                  >
-                    <div>Versus</div>
-                  </div>
+                      className={activeClassLeft ? "activeCSS" : "desactivated"}
+                      onClick={() => {
+                        changeCSS("left");
+                      }}
+                    >
+                      <div>Simple</div>
+                    </div>
+                  </Link>
+                  <Link className="linkSwitch" to="/versus" onClick={}>
+                    <div
+                      className={
+                        activeClassRight ? "activeCSS" : "desactivated"
+                      }
+                      onClick={() => {
+                        changeCSS("right");
+                      }}
+                    >
+                      <div>Versus</div>
+                    </div>
                   </Link>
                 </div>
               </div>
