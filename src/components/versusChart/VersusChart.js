@@ -5,7 +5,6 @@ import Grid from "@material-ui/core/Grid";
 import VersusMetric from "../versusMetric/VersusMetric";
 import "./versusContainer.scss";
 export default function VersusChart({ array }) {
-  console.log("Array en versus chart:", array);
   return (
     <>
       <p>HOla</p>
