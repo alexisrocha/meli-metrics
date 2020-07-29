@@ -14,6 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { addCountry, deleteCountry } from "../../redux/action-creator/Versus";
 import { setLocation } from "../../redux/action-creator/Location";
 import DeleteIcon from "@material-ui/icons/Delete";
+import AddIcon from "@material-ui/icons/Add";
 import "./Versus.scss";
 
 export default function versus() {
@@ -73,6 +74,7 @@ export default function versus() {
                     &nbsp;{country}
                     <DeleteIcon
                       style={{
+                        color: "white",
                         display:
                           shadow && index == indexItem ? "inline" : "none",
                       }}
@@ -87,7 +89,14 @@ export default function versus() {
             })}
             <Nav.Link>
               <div id="dropdownAgregar" class="dropdown">
-                <strong color="white">+</strong>
+                <strong color="white">
+                  <AddIcon
+                    fontSize="small"
+                    style={{
+                      color: "white",
+                    }}
+                  />
+                </strong>
                 <div id="dropdownContentAgregar" class="dropdown-content">
                   {flagsArray.map((item, index) => {
                     if (
