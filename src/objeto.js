@@ -267,7 +267,8 @@ let chartObj6 = {
   time_frame: "60days",
   dimension: { site: "MGT", subgroup: "All site" },
   comparation: ["YOY"],
-}
+};
+// new https://run.mocky.io/v3/39a9cccd-2ff2-4738-adb5-cd0b3ec68356
 // https://run.mocky.io/v3/32cc928e-156c-4401-9463-355833f7a4af
 
 // -------------------------------------------------------------------------------------//
