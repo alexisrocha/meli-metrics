@@ -5,9 +5,15 @@ import Grid from "@material-ui/core/Grid";
 import VersusMetric from "../versusMetric/VersusMetric";
 import "./versusContainer.scss";
 export default function VersusChart({ array }) {
+  const metric = useSelector((store) => store.metric.metric[array[0].metric_id]);
+  console.log("Array en versus chart:", array);
   return (
     <>
-      <p>HOla</p>
+      <div>
+      <span>{metric && metric.group}</span>
+      <span>{metric && metric.display_name}</span>
+      <span>Last update:</span>
+      </div>
       <div className="versusContainer">
         {array &&
           array.map((elem, index) => {
