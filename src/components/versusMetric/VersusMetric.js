@@ -36,7 +36,7 @@ import { fetchMetric } from "../../redux/action-creator/Metrics";
 import { fetchMetricData } from "../../redux/action-creator/MetricData";
 import { removeMetric } from "../../redux/action-creator/Charts";
 import Editmodal from "../editmodal/Editmodal";
-import "./Metric.scss";
+import "../metric/Metric.scss";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -148,53 +148,6 @@ export default function Metric({ idMetrica, chart, deleteId }) {
     setShadow(false);
   };
 
-  const generateDate = () => {
-    var data = new Date();
-    var fecha = data.toString().slice(4, 25).split(" ");
-    var mes = fecha[0];
-    var horaminutos = data.toString().slice(16, 21);
-    var newMonth;
-    switch (mes) {
-      case "Jan":
-        newMonth = 1;
-        break;
-      case "Feb":
-        newMonth = 2;
-        break;
-      case "Mar":
-        newMonth = 3;
-        break;
-      case "Apr":
-        newMonth = 4;
-        break;
-      case "May":
-        newMonth = 5;
-        break;
-      case "Jun":
-        newMonth = 6;
-        break;
-      case "Jul":
-        newMonth = 7;
-        break;
-      case "Ago":
-        newMonth = 8;
-        break;
-      case "Sep":
-        newMonth = 9;
-        break;
-      case "Oct":
-        newMonth = 10;
-        break;
-      case "Nov":
-        newMonth = 11;
-        break;
-      case "Dic":
-        newMonth = 12;
-        break;
-    }
-
-    return newMonth + "/" + fecha[1] + "/" + fecha[2] + " " + horaminutos;
-  };
   const colors = {
     MARKETPLACE: "#ffd100",
     "MERCADO PAGO": "#00a6dc",
@@ -206,16 +159,6 @@ export default function Metric({ idMetrica, chart, deleteId }) {
     CUR_2: "cur2",
     PERC_2: "perc2",
     DEC_2: "dec2",
-  };
-  const flags = {
-    MLA: MLA,
-    MLB: MLB,
-    MLC: MLC,
-    MLM: MLM,
-    MLU: MLU,
-    MBO: MBO,
-    MCO: MCO,
-    MGT: MGT,
   };
   var info = [];
   var shadowCssOn = "inset 0px -55px 62px -15px rgba(0,0,0,0.75)";
@@ -247,29 +190,13 @@ export default function Metric({ idMetrica, chart, deleteId }) {
         <Card
           className="cardMain"
           style={{
-            height: "280px",
+            width: "23%",
+            marginRight: "10px",
+            marginLeft: "10px",
+            height: "240px",
             boxShadow: shadow ? shadowCssOn : shadowCssOff,
           }}
         >
-          <CardHeader
-            className={classes.header}
-            avatar={
-              <Avatar
-                className={classes.small}
-                src={flags[chart.dimension.site]}
-              ></Avatar>
-            }
-            title={
-              <Typography className={classes.title}>
-                <b>{metric ? metric.display_name : ""}</b>
-              </Typography>
-            }
-            action={
-              <IconButton aria-label="settings" onClick={deleteCard}>
-                <CloseIcon />
-              </IconButton>
-            }
-          />
           <div className="contenedorInfo">
             <div className="value" style={{ marginTop: "10px" }}>
               <h3>
@@ -346,12 +273,6 @@ export default function Metric({ idMetrica, chart, deleteId }) {
               onMouseOver={changeCSS}
               onMouseLeave={changeCSSOut}
             >
-              <div className="date">
-                {"Last update"}
-                <br />
-                <span style={{ fontSize: "90%" }}>{generateDate()}</span>
-              </div>
-
               <div className="button" onClick={handleClickOpenInfo}>
                 <div className="buttonItem">
                   <InfoIcon className={classes.item} />
