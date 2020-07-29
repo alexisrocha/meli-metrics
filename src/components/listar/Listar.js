@@ -197,62 +197,33 @@ export default function Listar() {
                 onMouseOver={() => setOver("in", index)}
                 onMouseLeave={() => setOver("out", index)}
               >
-                {listsCharts[selectedChart].type == "simple" ? (
-                  <Link
-                    id={`toMain${index}`}
-                    to="/"
-                    onClick={() => {
-                      changeSelected(index);
-                    }}
-                    style={{
-                      display:
-                        newName && index == selectedChart ? "none" : "inline",
-                      width: "80%",
-                    }}
-                  >
-                    <div className="containerFirstList">
-                      <div
-                        style={{
-                          paddingLeft: "10px",
-                          fontFamily: "Proxima Nova",
-                        }}
-                      >
-                        <strong>{item.title}</strong>
-                      </div>
+                <Link
+                  id={`toMain${index}`}
+                  to="/"
+                  onClick={() => {
+                    changeSelected(index);
+                  }}
+                  style={{
+                    display:
+                      newName && index == selectedChart ? "none" : "inline",
+                  }}
+                >
+                  <div className="containerFirstList">
+                    <div
+                      style={{
+                        paddingLeft: "10px",
+                        fontFamily: "Proxima Nova",
+                      }}
+                    >
+                      <strong>{item.title}</strong>
                     </div>
-                  </Link>
-                ) : (
-                  <Link
-                    id={`toMain${index}`}
-                    to="/versus"
-                    onClick={() => {
-                      changeSelected(index);
-                    }}
-                    style={{
-                      display:
-                        newName && index == selectedChart ? "none" : "inline",
-                      width: "80%",
-                    }}
-                  >
-                    <div className="containerFirstList">
-                      <div
-                        style={{
-                          paddingLeft: "10px",
-                          fontFamily: "Proxima Nova",
-                        }}
-                      >
-                        <strong>{item.title}</strong>
-                      </div>
-                    </div>
-                  </Link>
-                )}
-
+                  </div>
+                </Link>
                 <div
                   className="containerFirstList"
                   style={{
                     display:
                       newName && index == selectedChart ? "inline" : "none",
-                    width: "80%",
                   }}
                 >
                   <div>
@@ -273,6 +244,7 @@ export default function Listar() {
                         id={`input${index}`}
                         defaultValue={item.title}
                         onChange={(e) => checkMaxLength(e.target.value, index)}
+                        style={{ marginLeft: "10px", width: "80%" }}
                       />
                     </form>
                   </div>

@@ -134,34 +134,38 @@ export default function navbar() {
                 </div>
                 <div class="divMain">
                   <Link className="linkSwitch" to="/">
-                    <div
-                      className={
-                        charts[selectedChart].type == "simple"
-                          ? "activeCSS"
-                          : "desactivated"
-                      }
-                      onClick={() => {
-                        changeData("simple");
-                        changeCSS("left");
-                      }}
-                    >
-                      <div>Simple</div>
-                    </div>
+                    {charts[selectedChart] != null ? (
+                      <div
+                        className={
+                          charts[selectedChart].type == "simple"
+                            ? "activeCSS"
+                            : "desactivated"
+                        }
+                        onClick={() => {
+                          changeData("simple");
+                          changeCSS("left");
+                        }}
+                      >
+                        <div>Simple</div>
+                      </div>
+                    ) : null}
                   </Link>
                   <Link className="linkSwitch" to="/versus">
-                    <div
-                      className={
-                        charts[selectedChart].type == "versus"
-                          ? "activeCSS"
-                          : "desactivated"
-                      }
-                      onClick={() => {
-                        changeData("versus");
-                        changeCSS("right");
-                      }}
-                    >
-                      <div>Versus</div>
-                    </div>
+                    {charts[selectedChart] != null ? (
+                      <div
+                        className={
+                          charts[selectedChart].type == "versus"
+                            ? "activeCSS"
+                            : "desactivated"
+                        }
+                        onClick={() => {
+                          changeData("versus");
+                          changeCSS("right");
+                        }}
+                      >
+                        <div>Versus</div>
+                      </div>
+                    ) : null}
                   </Link>
                 </div>
               </div>
