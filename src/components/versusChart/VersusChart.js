@@ -8,7 +8,7 @@ export default function VersusChart({ array }) {
   console.log("Array en versus chart:", array);
   return (
     <>
-      <p>HOla</p>
+      <p>Hola</p>
       <div className="versusContainer">
         {array &&
           array.map((elem, index) => {
