@@ -15,6 +15,7 @@ import { addCountry, deleteCountry } from "../../redux/action-creator/Versus";
 import { setLocation } from "../../redux/action-creator/Location";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
+import Search from "../search/Search";
 import "./Versus.scss";
 
 export default function versus() {
@@ -122,6 +123,9 @@ export default function versus() {
           </Nav>
         </div>
       </Navbar>
+      <div style={{ paddingLeft: "125px" }}>
+        <Search />
+      </div>
     </>
   );
 }
