@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navbar, Nav } from "react-bootstrap";
 import MLA from "../../../public/flags/MLA.png";
@@ -11,13 +11,20 @@ import MGT from "../../../public/flags/MGT.png";
 import MBO from "../../../public/flags/MBO.png";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/core/styles";
-import { addCountry, deleteCountry } from "../../redux/action-creator/Versus";
+import { addCountry, deleteCountry, sendToVersus } from "../../redux/action-creator/Versus";
 import { setLocation } from "../../redux/action-creator/Location";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
+import Search from "../search/Search";
 import "./Versus.scss";
 
 export default function versus() {
+  const [chartsVersus, setChartsVersus] = useState([])
+  const [indexItem, setIndex] = useState(null);
+  const [shadow, setShadow] = useState(false);
+
+  const charts = useSelector((store)=>store.chart.charts)
+  const selectedChart = useSelector((store)=>store.chart.selectedChart)
   const selectedCountries = useSelector(
     (store) => store.versus.selectedCountries
   );
@@ -29,19 +36,22 @@ export default function versus() {
     MLU: MLU,
     MBO: MBO,
     MCO: MCO,
-    MGU: MGT,
+    MGT: MGT,
   };
-  const flagsArray = ["MLA", "MLB", "MLC", "MLM", "MLU", "MBO", "MCO", "MGU"];
+  const flagsArray = ["MLA", "MLB", "MLC", "MLM", "MLU", "MBO", "MCO", "MGT"];
   const dispatch = useDispatch();
   const addToModal = (name) => {
     dispatch(addCountry(name));
   };
+  let flagsSelected = []
 
   useEffect(() => {
     dispatch(setLocation("main"));
-  }, [selectedCountries.length]);
-  const [indexItem, setIndex] = React.useState(null);
-  const [shadow, setShadow] = React.useState(false);
+    for(let i = 0; i < charts[selectedChart].config.length; i++){
+      if(!flagsSelected.includes(charts[selectedChart].config[i].dimension.site)) flagsSelected = [...flagsSelected, charts[selectedChart].config[i].dimension.site]
+    }
+    dispatch(sendToVersus(charts[selectedChart].config, flagsSelected))
+  }, []);
 
   const changeCSS = () => {
     setShadow(true);
@@ -125,6 +135,9 @@ export default function versus() {
           </Nav>
         </div>
       </Navbar>
+      <div style={{ paddingLeft: "125px" }}>
+        <Search />
+      </div>
     </>
   );
 }
