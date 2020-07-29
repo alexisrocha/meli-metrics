@@ -89,14 +89,17 @@ export default function versus() {
             })}
             <Nav.Link>
               <div id="dropdownAgregar" class="dropdown">
-                <strong color="white">
-                  <AddIcon
-                    fontSize="small"
-                    style={{
-                      color: "white",
-                    }}
-                  />
-                </strong>
+                {selectedCountries.length < 4 ? (
+                  <strong color="white">
+                    <AddIcon
+                      fontSize="small"
+                      style={{
+                        color: "white",
+                      }}
+                    />
+                  </strong>
+                ) : null}
+
                 <div id="dropdownContentAgregar" class="dropdown-content">
                   {flagsArray.map((item, index) => {
                     if (

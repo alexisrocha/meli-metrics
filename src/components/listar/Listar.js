@@ -244,7 +244,7 @@ export default function Listar() {
                         id={`input${index}`}
                         defaultValue={item.title}
                         onChange={(e) => checkMaxLength(e.target.value, index)}
-                        style={{ marginLeft: "10px", width: "80%" }}
+                        style={{ marginLeft: "10px", width: "67%" }}
                       />
                     </form>
                   </div>
