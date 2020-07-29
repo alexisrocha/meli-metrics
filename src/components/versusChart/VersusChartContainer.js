@@ -31,15 +31,10 @@ export default function VersusChartContainer() {
     arrayDeCharts = separarArray(chartVersus, flags.length);
   }
 
-  useEffect(() => {
-    console.log("Array de charts:", arrayDeCharts);
-    console.log("Flags", flags);
-  }, [arrayDeCharts.length, flags.length]);
+  useEffect(() => {}, [arrayDeCharts.length, flags.length]);
 
-  console.log("Array de charts:", arrayDeCharts);
   return (
     <div>
-      {console.log("Antes del map:", arrayDeCharts)}
       {arrayDeCharts.length &&
         arrayDeCharts.map((chart, index) => <VersusChart array={chart} />)}
     </div>
