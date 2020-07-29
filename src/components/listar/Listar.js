@@ -138,13 +138,11 @@ export default function Listar() {
 
   const changeName = (e, index, name) => {
     e.preventDefault();
-    console.log("El valor de name:", name);
     if (name == "") {
       setOpen(true);
     } else {
       setIndex(index);
-      console.log("Index:", index);
-      console.log("Name:", name);
+
       dispatch(changeTitle(index, name));
       dispatch(changeTitleNavbar(!navbar));
       setNewName(false);
