@@ -33,11 +33,17 @@ export default ({ metricData, color }) => {
       <Line
         data={chartData}
         options={{
-          /* tooltips: {
+          tooltips: {
+            mode: 'x',
+            intersect: false,
             callbacks: {
-              label: gg
+              label:function(tooltipItem, data) {
+                return "$" + Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
+                    return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+                });
             }
-          }, */
+            }
+          }, 
           scales: {
             yAxes: [
               {
