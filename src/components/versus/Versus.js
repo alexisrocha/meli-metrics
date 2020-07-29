@@ -10,8 +10,13 @@ import MCO from "../../../public/flags/MCO.png";
 import MGT from "../../../public/flags/MGT.png";
 import MBO from "../../../public/flags/MBO.png";
 import Avatar from "@material-ui/core/Avatar";
+import VersusChartContainer from "../versusChart/VersusChartContainer";
 import { makeStyles } from "@material-ui/core/styles";
-import { addCountry, deleteCountry, sendToVersus } from "../../redux/action-creator/Versus";
+import {
+  addCountry,
+  deleteCountry,
+  sendToVersus,
+} from "../../redux/action-creator/Versus";
 import { setLocation } from "../../redux/action-creator/Location";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
@@ -19,12 +24,12 @@ import Search from "../search/Search";
 import "./Versus.scss";
 
 export default function versus() {
-  const [chartsVersus, setChartsVersus] = useState([])
+  const [chartsVersus, setChartsVersus] = useState([]);
   const [indexItem, setIndex] = useState(null);
   const [shadow, setShadow] = useState(false);
-
-  const charts = useSelector((store)=>store.chart.charts)
-  const selectedChart = useSelector((store)=>store.chart.selectedChart)
+  const chartVersus = useSelector((store) => store.versus.chartVersus);
+  const charts = useSelector((store) => store.chart.charts);
+  const selectedChart = useSelector((store) => store.chart.selectedChart);
   const selectedCountries = useSelector(
     (store) => store.versus.selectedCountries
   );
@@ -43,14 +48,20 @@ export default function versus() {
   const addToModal = (name) => {
     dispatch(addCountry(name));
   };
-  let flagsSelected = []
+  let flagsSelected = [];
 
   useEffect(() => {
     dispatch(setLocation("main"));
-    for(let i = 0; i < charts[selectedChart].config.length; i++){
-      if(!flagsSelected.includes(charts[selectedChart].config[i].dimension.site)) flagsSelected = [...flagsSelected, charts[selectedChart].config[i].dimension.site]
+    for (let i = 0; i < charts[selectedChart].config.length; i++) {
+      if (
+        !flagsSelected.includes(charts[selectedChart].config[i].dimension.site)
+      )
+        flagsSelected = [
+          ...flagsSelected,
+          charts[selectedChart].config[i].dimension.site,
+        ];
     }
-    dispatch(sendToVersus(charts[selectedChart].config, flagsSelected))
+    dispatch(sendToVersus(charts[selectedChart].config, flagsSelected));
   }, []);
 
   const changeCSS = () => {
@@ -99,14 +110,17 @@ export default function versus() {
             })}
             <Nav.Link>
               <div id="dropdownAgregar" class="dropdown">
-                <strong color="white">
-                  <AddIcon
-                    fontSize="small"
-                    style={{
-                      color: "white",
-                    }}
-                  />
-                </strong>
+                {selectedCountries.length < 4 ? (
+                  <strong color="white">
+                    <AddIcon
+                      fontSize="small"
+                      style={{
+                        color: "white",
+                      }}
+                    />
+                  </strong>
+                ) : null}
+
                 <div id="dropdownContentAgregar" class="dropdown-content">
                   {flagsArray.map((item, index) => {
                     if (
@@ -132,8 +146,9 @@ export default function versus() {
           </Nav>
         </div>
       </Navbar>
-      <div style={{ paddingLeft: "125px" }}>
+      <div className="container">
         <Search />
+        <VersusChartContainer />
       </div>
     </>
   );
