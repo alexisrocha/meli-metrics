@@ -1,7 +1,8 @@
-import { ADD_NAME, DELETE_NAME } from "../constants";
+import { ADD_NAME, DELETE_NAME, CHART_TO_VERSUS } from "../constants";
 
 const initialState = {
-  selectedCountries: ["MLB", "MLA", "MLM"],
+  selectedCountries: [],
+  chartVersus: []
 };
 
 export default (state = initialState, action) => {
@@ -19,7 +20,8 @@ export default (state = initialState, action) => {
         ...state,
         selectedCountries: selectedCountries2,
       };
-
+      case CHART_TO_VERSUS:
+        return {...state, selectedCountries: action.listFlag}
     default:
       return state;
   }
