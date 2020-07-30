@@ -40,8 +40,6 @@ export default ({ metricData, color }) => {
             displayColors: false,
             callbacks: {
               label:function(tooltipItem, data) {
-                console.log('tooltipItem------->', tooltipItem);
-                console.log('data=====>', data);
                 if(tooltipItem.datasetIndex == 0) {
                   return "$" + Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
                     return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
