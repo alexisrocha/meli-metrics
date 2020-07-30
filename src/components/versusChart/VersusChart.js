@@ -18,7 +18,7 @@ export default function VersusChart({ array }) {
 
   return (
     <>
-      <div>
+      <div className="containerTitle">
         <Badge style={{ backgroundColor: colors[metric.group] }}>
           <span className="spanVersusNameGroup">{metric && metric.group}</span>
         </Badge>

@@ -1,14 +1,16 @@
 import { ADD_NAME, DELETE_NAME, CHART_TO_VERSUS } from "../constants";
 import { ListItemText } from "@material-ui/core";
 
-const addName = (name) => ({
+const addName = (name, newList) => ({
   type: ADD_NAME,
   name,
+  newList,
 });
 
-const deleteName = (name) => ({
+const deleteName = (name, newList) => ({
   type: DELETE_NAME,
   name,
+  newList,
 });
 
 const chartToVersus = (list, listFlag) => ({
@@ -17,15 +19,29 @@ const chartToVersus = (list, listFlag) => ({
   listFlag,
 });
 
-export const addCountry = (name) => {
+export const addCountry = (name, list) => {
+  let newList = [];
+  for (let i = 0; i < list.length; i++) {
+    newList.push({ ...list[i] });
+    if (
+      (list[i + 1] && list[i + 1].metric_id != list[i].metric_id) ||
+      list[i + 1] == undefined
+    ) {
+      let copy = { ...list[i], site: name };
+      newList.push(copy);
+    }
+  }
+
   return (dispatch) => {
-    dispatch(addName(name));
+    dispatch(addName(name, newList));
   };
 };
 
-export const deleteCountry = (name) => {
+export const deleteCountry = (name, list) => {
+  let newList = [];
+  newList = list.filter((x) => x.site != name);
   return (dispatch) => {
-    dispatch(deleteName(name));
+    dispatch(deleteName(name, newList));
   };
 };
 

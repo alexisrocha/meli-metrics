@@ -20,7 +20,7 @@ export default function Search() {
   };
   const dispatch = useDispatch();
   return (
-    <div className="addMetrics">
+    <div className="addMetrics" style={{ marginBottom: "-15px" }}>
       <span>
         <b> Add metrics </b>
       </span>
