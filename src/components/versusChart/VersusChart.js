@@ -7,11 +7,15 @@ export default function VersusChart({ array }) {
   const metric = useSelector(
     (store) => store.metric.metric[array[0].metric_id]
   );
+
+  let date = new Date();
+
   const colors = {
     MARKETPLACE: "#ffd100",
     "MERCADO PAGO": "#00a6dc",
     "MERCADO ENVIOS": "#a9c534",
   };
+
   return (
     <>
       <div>
@@ -21,7 +25,15 @@ export default function VersusChart({ array }) {
         <span className="spanVersusNameCard">
           {metric && metric.display_name}
         </span>
-        <span className="spanVersusLastUpdate"> {""} Last update:</span>
+        <span className="spanVersusLastUpdate">
+          Last update:
+          {" " +
+            date.getMonth() +
+            "/" +
+            date.getDate() +
+            "/" +
+            date.getFullYear()}
+        </span>
       </div>
       <div className="versusContainer">
         {array &&
@@ -39,24 +51,3 @@ export default function VersusChart({ array }) {
     </>
   );
 }
-
-/* 
-{metric && metric.group == "MARKETPLACE" ? (
-  <Badge variant="warning">
-    <span
-      className="spanVersusNameGroup"
-      style={{ color: colors[MARKETPLACE] }}
-    >
-      {metric && metric.group}
-    </span>
-  </Badge>
-) : (
-  <Badge variant="warning">
-    <span
-      className="spanVersusNameGroup"
-      style={{ color: colors[MERCADOPAGO] }}
-    >
-      {metric && metric.group}
-    </span>
-  </Badge>
-)} */
