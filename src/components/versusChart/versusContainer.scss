@@ -13,6 +13,7 @@
 }
 
 .spanVersusNameGroup {
+  font-size: 130%;
   font-family: "Proxima Nova";
   color: white;
   border-radius: 10px;
@@ -30,6 +31,10 @@
 .spanVersusLastUpdate {
   font-family: "Proxima Nova Regular";
   color: grey;
+}
 
-
+.containerBadge {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
 }

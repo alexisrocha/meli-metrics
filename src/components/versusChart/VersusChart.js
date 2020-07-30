@@ -7,16 +7,25 @@ export default function VersusChart({ array }) {
   const metric = useSelector(
     (store) => store.metric.metric[array[0].metric_id]
   );
+  let date = new Date();
   return (
     <>
-      <div>
+      <div className="containerBadge">
         <Badge variant="warning">
           <span className="spanVersusNameGroup">{metric && metric.group}</span>
         </Badge>
         <span className="spanVersusNameCard">
           {metric && metric.display_name}
         </span>
-        <span className="spanVersusLastUpdate"> {""} Last update:</span>
+        <span className="spanVersusLastUpdate">
+          Last update:
+          {" " +
+            date.getMonth() +
+            "/" +
+            date.getDate() +
+            "/" +
+            date.getFullYear()}
+        </span>
       </div>
       <div className="versusContainer">
         {array &&
