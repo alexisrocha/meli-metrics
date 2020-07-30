@@ -7,7 +7,15 @@ export default function VersusChart({ array }) {
   const metric = useSelector(
     (store) => store.metric.metric[array[0].metric_id]
   );
+
   let date = new Date();
+
+  const colors = {
+    MARKETPLACE: "#ffd100",
+    MERCADOPAGO: "#00a6dc",
+    MERCADOENVIOS: "#a9c534",
+  };
+
   return (
     <>
       <div className="containerBadge">
