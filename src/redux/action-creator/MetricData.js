@@ -40,10 +40,11 @@ let url = {
   "4weeks": url4
 }
 
-const getMetricData = (id, metricData) => ({
+const getMetricData = (id, metricData, timeFrame) => ({
   type: GET_METRIC_DATA,
   id,
   metricData,
+  timeFrame
 });
 
 export const fetchMetricData = (id, timeFrame) => {
@@ -51,6 +52,6 @@ export const fetchMetricData = (id, timeFrame) => {
     axios
       .get(host + url[timeFrame][id])
       .then((res) => res.data)
-      .then((metricData) => dispatch(getMetricData(id, metricData)));
+      .then((metricData) => dispatch(getMetricData(id, metricData, timeFrame)));
   };
 };

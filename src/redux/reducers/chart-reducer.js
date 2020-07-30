@@ -20,7 +20,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_CHART:
-      return { ...state, charts: [...state.charts, action.charts] };
+      return { ...state, charts: [...state.charts, {...action.charts}] };
     case DELETE_CHART:
       let newChartstoDelete = state.charts.filter(
         (x, index) => index != action.id
@@ -36,7 +36,7 @@ export default (state = initialState, action) => {
       let newCharts = [];
       for (let i = 0; i < state.charts.length; i++) {
         if (i == state.selectedChart)
-          newCharts[i] = { ...state.charts[i], config: chart };
+          newCharts[i] = { ...state.charts[i], config: [...chart] };
         else newCharts[i] = state.charts[i];
       }
       return { ...state, charts: newCharts };
@@ -87,16 +87,16 @@ export default (state = initialState, action) => {
     case CHANGE_METRIC_INFO:
       let charts3 = [...state.charts[state.selectedChart].config];
       let newCharts3 = [];
-      charts3[action.index] = action.newChart;
+      charts3[action.index] = {...action.newChart};
       for (let i = 0; i < state.charts.length; i++) {
         if (i == state.selectedChart) {
-          newCharts3 = [...newCharts3, state.charts[i]];
-          newCharts3[i].config = charts3;
+          newCharts3 = [...newCharts3, {...state.charts[i]}];
+          newCharts3[i].config = [...charts3];
         } else if (i != state.selectedChart) {
-          newCharts3 = [...newCharts3, state.charts[i]];
+          newCharts3 = [...newCharts3, {...state.charts[i]}];
         }
       }
-      return { ...state, charts: newCharts3 };
+      return { ...state, charts: [...newCharts3] };
     default:
       return state;
   }
