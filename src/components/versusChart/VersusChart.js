@@ -1,18 +1,22 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Metric from "../metric/Metric";
-import Grid from "@material-ui/core/Grid";
+import React from "react";
+import { useSelector } from "react-redux";
+import Badge from "react-bootstrap/Badge";
 import VersusMetric from "../versusMetric/VersusMetric";
 import "./versusContainer.scss";
 export default function VersusChart({ array }) {
-  const metric = useSelector((store) => store.metric.metric[array[0].metric_id]);
-  console.log("Array en versus chart:", array);
+  const metric = useSelector(
+    (store) => store.metric.metric[array[0].metric_id]
+  );
   return (
     <>
       <div>
-      <span>{metric && metric.group}</span>
-      <span>{metric && metric.display_name}</span>
-      <span>Last update:</span>
+        <Badge variant="warning">
+          <span className="spanVersusNameGroup">{metric && metric.group}</span>
+        </Badge>
+        <span className="spanVersusNameCard">
+          {metric && metric.display_name}
+        </span>
+        <span className="spanVersusLastUpdate"> {""} Last update:</span>
       </div>
       <div className="versusContainer">
         {array &&
