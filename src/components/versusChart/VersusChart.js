@@ -9,6 +9,7 @@ export default function VersusChart({ array }) {
     (store) => store.metric.metric[array[0].metric_id]
   );
   console.log("Array en versus chart:", array);
+
   return (
     <>
       <div>

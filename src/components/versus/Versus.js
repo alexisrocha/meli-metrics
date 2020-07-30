@@ -84,7 +84,6 @@ export default function versus() {
                 return (
                   <Nav.Link
                     className="navbutton"
-                    href="#home"
                     onMouseOver={() => {
                       setIndex(index);
                       changeCSS();
