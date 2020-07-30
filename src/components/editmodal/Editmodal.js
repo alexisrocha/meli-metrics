@@ -2,16 +2,14 @@ import React from "react";
 import {
   Modal,
   Button,
-  Form,
   Container,
   Row,
   Col,
-  ButtonGroup,
   DropdownButton,
   Dropdown,
 } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { changeMetricInfo } from "../../redux/action-creator/Charts"
+import { changeMetricInfo } from "../../redux/action-creator/Charts";
 import "./Editmodal.scss";
 
 export default function editmodal(props) {
@@ -49,8 +47,16 @@ export default function editmodal(props) {
   };
 
   const sendData = () => {
-    console.log(props.index, props.chart.metric_id, site, subgroup, timeFrame, comparison);
-    dispatch(changeMetricInfo(props.index, props.chart.metric_id, site, subgroup, timeFrame, comparison)); 
+    dispatch(
+      changeMetricInfo(
+        props.index,
+        props.chart.metric_id,
+        site,
+        subgroup,
+        timeFrame,
+        comparison
+      )
+    );
   };
 
   return (
@@ -125,6 +131,7 @@ export default function editmodal(props) {
             </Col>
             <Col md={6} lg={20}></Col>
           </Row>
+
           {/* Columna para TIMEFRAME  */}
           <Row>
             <Col xs={12} md={20} className="timeFrame">

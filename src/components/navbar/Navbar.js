@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+import Badge from "react-bootstrap/Badge";
 import { useSelector, useDispatch } from "react-redux";
 import { changeView } from "../../redux/action-creator/Charts";
 import "./Navbar.scss";

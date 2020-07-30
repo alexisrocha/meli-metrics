@@ -10,12 +10,7 @@ export default (props) => {
   const charts = useSelector((store) => store.chart.charts);
   const selectedChart = useSelector((store) => store.chart.selectedChart);
 
-  useEffect(() => {
-    console.log(
-      "El selected chart en Container es:----------------->",
-      selectedChart
-    );
-  }, [selectedChart]);
+  useEffect(() => {}, [selectedChart]);
 
   return selectedChart == -1 ? (
     <div>
