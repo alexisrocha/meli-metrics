@@ -9,13 +9,13 @@ export default function VersusChart({ array }) {
   );
   const colors = {
     MARKETPLACE: "#ffd100",
-    MERCADOPAGO: "#00a6dc",
-    MERCADOENVIOS: "#a9c534",
+    "MERCADO PAGO": "#00a6dc",
+    "MERCADO ENVIOS": "#a9c534",
   };
   return (
     <>
       <div>
-        <Badge variant="warning">
+        <Badge style={{ backgroundColor: colors[metric.group] }}>
           <span className="spanVersusNameGroup">{metric && metric.group}</span>
         </Badge>
         <span className="spanVersusNameCard">
