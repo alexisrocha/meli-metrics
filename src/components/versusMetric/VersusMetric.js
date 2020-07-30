@@ -89,7 +89,7 @@ export default function Metric({ idMetrica, chart, deleteId }) {
   const charts = useSelector((store) => store.chart.charts);
   const selectedChart = useSelector((store) => store.chart.selectedChart);
   const metricData = useSelector(
-    (store) => store.metricData.metricData[idMetrica]
+    (store) => store.metricData.metricData[idMetrica] ? store.metricData.metricData[idMetrica][chart.time_frame] : store.metricData.metricData[idMetrica]
   );
   const dispatch = useDispatch();
   const deleteCard = () => {
