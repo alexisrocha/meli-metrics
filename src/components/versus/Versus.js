@@ -46,7 +46,7 @@ export default function versus() {
   const flagsArray = ["MLA", "MLB", "MLC", "MLM", "MLU", "MBO", "MCO", "MGT"];
   const dispatch = useDispatch();
   const addToModal = (name) => {
-    dispatch(addCountry(name));
+    dispatch(addCountry(name, chartVersus));
   };
   let flagsSelected = [];
 
@@ -72,7 +72,7 @@ export default function versus() {
     setShadow(false);
   };
   const deleteName = (name) => {
-    dispatch(deleteCountry(name));
+    dispatch(deleteCountry(name, chartVersus));
   };
   return (
     <>

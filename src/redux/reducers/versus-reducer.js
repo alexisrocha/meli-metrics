@@ -11,6 +11,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         selectedCountries: [...state.selectedCountries, action.name],
+        chartVersus: action.newList,
       };
     case DELETE_NAME:
       let selectedCountries2 = state.selectedCountries.filter(
@@ -19,6 +20,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         selectedCountries: selectedCountries2,
+        chartVersus: action.newList,
       };
     case CHART_TO_VERSUS:
       return {
