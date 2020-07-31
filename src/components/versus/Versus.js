@@ -76,15 +76,17 @@ export default function versus() {
   };
   return (
     <>
-
       <Navbar id="navbarVersus" variant="dark">
-
         <div className="container">
           <Nav id="navVersus" className="mr-auto">
             {selectedCountries.map((country, index) => {
               if (index < 4) {
                 return (
                   <Nav.Link
+                    style={{
+                      borderRight:
+                        index < 3 ? "2px solid gray" : "2px solid black",
+                    }}
                     className="navbutton"
                     onMouseOver={() => {
                       setIndex(index);

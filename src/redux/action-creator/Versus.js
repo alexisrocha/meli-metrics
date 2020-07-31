@@ -1,6 +1,12 @@
-import { ADD_NAME, DELETE_NAME, CHART_TO_VERSUS, ADD_CHART_TO_VERSUS } from "../constants";
+import {
+  ADD_NAME,
+  DELETE_NAME,
+  CHART_TO_VERSUS,
+  ADD_CHART_TO_VERSUS,
+  DELETE_ROW,
+} from "../constants";
 import { ListItemText } from "@material-ui/core";
-import axios from "axios"
+import axios from "axios";
 
 let host = "https://run.mocky.io/v3/";
 
@@ -14,6 +20,11 @@ let metricUrl = {
   "Unique Receivers": "a697f11b-4019-4cc9-a4ee-40966f35cc64",
   "Share GMV Buy Box": "373bf76d-4695-403a-9671-a519b3151923",
 };
+
+const deleteRow = (metricID) => ({
+  type: DELETE_ROW,
+  metricID,
+});
 
 const addName = (name, newList) => ({
   type: ADD_NAME,
@@ -33,10 +44,16 @@ const chartToVersus = (list, listFlag) => ({
   listFlag,
 });
 
-const addChartToVersus = (metric)=> ({
+const addChartToVersus = (metric) => ({
   type: ADD_CHART_TO_VERSUS,
-  metric
-})
+  metric,
+});
+
+export const deleteMetrics = (metricID) => {
+  return (dispatch) => {
+    dispatch(deleteRow(metricID));
+  };
+};
 
 export const addCountry = (name, list) => {
   let newList = [];
@@ -87,8 +104,8 @@ export const sendToVersus = (list, listFlag) => {
 
 export const addToVersus = (id) => {
   return (dispatch) =>
-  axios
-    .get(host + metricUrl[id])
-    .then((res) => res.data)
-    .then((metric) => dispatch(addChartToVersus(metric)));
-}
+    axios
+      .get(host + metricUrl[id])
+      .then((res) => res.data)
+      .then((metric) => dispatch(addChartToVersus(metric)));
+};
