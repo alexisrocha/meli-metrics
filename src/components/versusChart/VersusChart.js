@@ -19,11 +19,13 @@ export default function VersusChart({ array }) {
   return (
     <>
       <div className="containerTitle">
-        {metric && 
-        <Badge style={{ backgroundColor: colors[metric.group] }}>
-          <span className="spanVersusNameGroup">{metric && metric.group}</span>
-        </Badge>
-        }
+        {metric && (
+          <Badge style={{ backgroundColor: colors[metric.group] }}>
+            <span className="spanVersusNameGroup">
+              {metric && metric.group}
+            </span>
+          </Badge>
+        )}
         <span className="spanVersusNameCard">
           {metric && metric.display_name}
         </span>
