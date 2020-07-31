@@ -442,3 +442,9 @@ function generateObjects() {
 // obj 5: https://run.mocky.io/v3/ff7e2746-aa2c-42c6-9bc2-51dd4b23ca8f
 // obj 6: https://run.mocky.io/v3/6df298fc-633d-4159-bc6c-fd2c8cb5dab3
 // obj 7: https://run.mocky.io/v3/fb224c30-4882-45a0-b74c-01ba4e51dc66
+
+/* Formatos:
+INTEG: Número entero.
+CUR_2: Moneda.
+PERC_2: Porcentaje. (Acá tengan en cuenta que si están haciendo comparación de porcentajes, lo que tienen que mostrar en la comparación es la diferencia en puntos porcentuales “p.p” y no en %).
+DEC_2: Decimales. */

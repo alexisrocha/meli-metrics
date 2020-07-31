@@ -216,6 +216,12 @@ export default function Metric({ idMetrica, chart, deleteId }) {
     MCO: MCO,
     MGT: MGT,
   };
+/*   const format = {
+    INTEG: algo,
+    CUR_2: algo,
+    PERC_2: algo,
+    DEC_2: algo
+  } */
   var info = [];
   var shadowCssOn = "inset 0px -55px 62px -15px rgba(0,0,0,0.75)";
   var shadowCssOff = "inset 0px 0px 0px 0px rgba(0,0,0,0.75)";
@@ -227,7 +233,7 @@ export default function Metric({ idMetrica, chart, deleteId }) {
   if (charts[selectedChart]) {
     info = charts[selectedChart].config;
   }
-  console.log(chart, "<----------antes del return")
+
 
   return (
     <>
