@@ -1,4 +1,9 @@
-import { ADD_NAME, DELETE_NAME, CHART_TO_VERSUS, ADD_CHART_TO_VERSUS } from "../constants";
+import {
+  ADD_NAME,
+  DELETE_NAME,
+  CHART_TO_VERSUS,
+  ADD_CHART_TO_VERSUS,
+} from "../constants";
 
 const initialState = {
   selectedCountries: [],
@@ -29,13 +34,21 @@ export default (state = initialState, action) => {
         chartVersus: action.list,
       };
     case ADD_CHART_TO_VERSUS:
-      let newList = []
-      for(let i = 0; i < state.selectedCountries.length; i++){
-        let newMetric = {...action.metric, site: state.selectedCountries[i] }
-        newMetric.dimension.site = state.selectedCountries[i]
-        newList.push(newMetric)
+      let newList = [];
+      if (
+        state.chartVersus.filter((x) => x.metric_id == action.metric.metric_id)
+          .length == 0
+      ) {
+        for (let i = 0; i < state.selectedCountries.length; i++) {
+          let newMetric = {
+            ...action.metric,
+            site: state.selectedCountries[i],
+          };
+          newMetric.dimension.site = state.selectedCountries[i];
+          newList.push(newMetric);
+        }
       }
-      return {...state, chartVersus: [...state.chartVersus, ...newList]}
+      return { ...state, chartVersus: [...state.chartVersus, ...newList] };
     default:
       return state;
   }
