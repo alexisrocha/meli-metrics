@@ -204,6 +204,7 @@ export default function Listar() {
                   style={{
                     display:
                       newName && index == selectedChart ? "none" : "inline",
+                    color: "black",
                   }}
                 >
                   <div className="containerFirstList">

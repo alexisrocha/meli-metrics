@@ -90,7 +90,7 @@ export default function editmodal(props) {
           {/* Columna para SITE y SUBGROUP */}
           <Row>
             <Col md={3} lg={3} className="dropdownSite">
-              <label style={{ color: "#cccccc" }}>Site</label>
+              <label style={{ color: "gray" }}>Site</label>
               <DropdownButton id="dropdownMenuButton" size="sm" title={site}>
                 {metricOptions &&
                   metricOptions.dimensions.site.map((elem, index) => {
@@ -108,7 +108,7 @@ export default function editmodal(props) {
               </DropdownButton>
             </Col>
             <Col md={3} lg={3} className="dropdownSubgroup">
-              <label style={{ color: "#cccccc" }}>Subgroup</label>
+              <label style={{ color: "gray" }}>Subgroup</label>
               <DropdownButton
                 id="dropdownMenuButton2"
                 size="sm"
@@ -135,7 +135,7 @@ export default function editmodal(props) {
           {/* Columna para TIMEFRAME  */}
           <Row>
             <Col xs={12} md={20} className="timeFrame">
-              <label style={{ color: "#cccccc" }}>Time frame</label>
+              <label style={{ color: "gray" }}>Time frame</label>
               <div className="buttonModalComparacion">
                 {metricOptions &&
                   metricOptions.time_frames.map((elem) => {
@@ -178,7 +178,7 @@ export default function editmodal(props) {
           {/* Columna para COMPARACION  */}
           <Row>
             <Col xs={12} md={20} className="comparacion">
-              <label style={{ color: "#cccccc", display: "block" }}>
+              <label style={{ color: "gray", display: "block" }}>
                 Comparacion
               </label>
               <div className="buttonModalComparacion">
