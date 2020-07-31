@@ -3,6 +3,7 @@ import {
   DELETE_NAME,
   CHART_TO_VERSUS,
   ADD_CHART_TO_VERSUS,
+  DELETE_ROW,
 } from "../constants";
 
 const initialState = {
@@ -49,6 +50,11 @@ export default (state = initialState, action) => {
         }
       }
       return { ...state, chartVersus: [...state.chartVersus, ...newList] };
+    case DELETE_ROW:
+      let deleteRowList = state.chartVersus.filter(
+        (x) => x.metric_id != action.metricID
+      );
+      return { ...state, chartVersus: deleteRowList };
     default:
       return state;
   }
