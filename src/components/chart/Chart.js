@@ -30,7 +30,6 @@ export default ({ metricData, color }) => {
     chart();
   }, [chartData.length, metricData.labels]);
 
-  console.log(metricData, "<---------- metricdata antes del return")
   return (
     <div className="chart" style={{ height: "100px" }}>
       <Line
