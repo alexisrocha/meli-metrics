@@ -233,7 +233,7 @@ export default function Metric({ idMetrica, chart, deleteId }) {
   if (charts[selectedChart]) {
     info = charts[selectedChart].config;
   }
-  console.log(chart, "<----------antes del return")
+
 
   return (
     <>
