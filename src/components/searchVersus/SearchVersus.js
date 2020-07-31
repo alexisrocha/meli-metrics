@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Form } from "react-bootstrap";
 import SearchIcon from "@material-ui/icons/Search";
-import { addMetricToChart } from "../../redux/action-creator/Charts";
-import "./Search.scss";
+import { addToVersus } from "../../redux/action-creator/Versus";
+import "../search/Search.scss";
 
 export default function Search() {
   const [valueInput, setValueInput] = useState("");
-
   const dispatchInfo = () => {
-    dispatch(addMetricToChart(valueInput));
+    dispatch(addToVersus(valueInput));
     setValueInput("");
   };
 
@@ -19,6 +18,7 @@ export default function Search() {
     }
   };
   const dispatch = useDispatch();
+
   return (
     <div className="addMetrics" style={{ marginBottom: "-15px" }}>
       <span>

@@ -1,0 +1,52 @@
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("../../styles/fonts/proximanova-bold-webfont.woff") format("woff");
+}
+
+.editModalTitle {
+  font-family: "Proxima Nova";
+  font-size: 95% !important;
+}
+
+.editarSwitch {
+  font-family: "Proxima Nova";
+  text-align: center;
+}
+
+.buttonModalComparacion {
+  font-family: "Proxima Nova";
+  font-size: 90% !important;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 20px;
+}
+
+.dropdownSite {
+  padding-top: 30px;
+}
+
+.dropdownSubgroup {
+  padding-top: 30px;
+}
+
+.timeFrame {
+  padding-top: 30px;
+}
+
+.comparacion {
+  padding-top: 30px;
+  padding-bottom: 40px;
+}
+
+#dropdownMenuButton {
+  background-color: white !important;
+  color: black !important;
+  border: 0px solid white !important;
+}
+
+#dropdownMenuButton2 {
+  background-color: white !important;
+  color: black !important;
+  border: 0px solid white !important;
+}

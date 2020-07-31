@@ -6,8 +6,6 @@ import { fetchChart, changeChart } from "../../redux/action-creator/Charts";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { Link } from "react-router-dom";
-import { Redirect } from "react-router";
-
 import "./Addmodal.scss";
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -96,7 +94,7 @@ export default function addmodal(props) {
               <option>New Buyers</option>
               <option>ASP per Shippment</option>
               <option>Unique Receivers</option>
-              <option>Share GMV BuyBox</option>
+              <option>Share GMV Buy Box</option>
             </datalist>
             <SearchIcon className="searchIcon" />
           </Form.Group>

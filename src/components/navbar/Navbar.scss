@@ -36,14 +36,14 @@
     color: #449fd7;
   }
 
-  a {
+  .linkNavbar {
     color: #9e9e9e;
     font-weight: bold;
     font-family: "Proxima Nova";
     text-transform: uppercase;
   }
 
-  a:active {
+  .linkNavbar:active {
     color: black;
   }
 
@@ -75,7 +75,7 @@
 
   .MuiTab-textColorInherit.Mui-selected {
     transition: background-color 1s ease-in-out;
-    background-color: #fee73f;
+    background-color: #ffd100;
     border-radius: 100px;
 
   }
@@ -133,11 +133,11 @@
   }
 
   .activeCSS {
-    background-color: yellow;
+    background-color: #ffd100;
     color: black;
     height: 18px;
     width: 68px;
-    border: 1px solid yellow;
+    border: 1px solid #ffd100;
     border-radius: 50px;
     text-align: center;
     display: flex;
@@ -153,12 +153,15 @@
     height: 10px;
     width: 75px;
     text-align: center;
-    /* border: 3px solid blue;
-    border-radius: 100px; */
+
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     font-size: 11px;
+  }
+
+  .linkSwitch {
+    color: black;
   }
 }

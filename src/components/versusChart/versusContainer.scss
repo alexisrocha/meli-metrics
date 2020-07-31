@@ -1,0 +1,45 @@
+@font-face {
+  font-family: "Proxima Nova Regular";
+  src: url("../../styles/fonts/proximanova-regular-webfont.woff") format("woff");
+}
+
+.versusContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-left: -30px;
+}
+
+.spanVersusNameGroup {
+  font-size: 130%;
+  font-family: "Proxima Nova";
+  color: white;
+  border-radius: 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.spanVersusNameCard {
+  font-family: "Proxima Nova";
+  color: black;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.spanVersusLastUpdate {
+  font-family: "Proxima Nova Regular";
+  color: grey;
+}
+
+.containerBadge {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+}
+
+.containerTitle {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}

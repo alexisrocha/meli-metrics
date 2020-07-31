@@ -17,11 +17,16 @@ import FileCopyIcon from "@material-ui/icons/FileCopy";
 import Overlay from "react-bootstrap/Overlay";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import TextField from "@material-ui/core/TextField";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 import {
   deleteCharts,
   changeChart,
   copyList,
+  changeTitle,
 } from "../../redux/action-creator/Charts";
+import { changeTitleNavbar } from "../../redux/action-creator/Location";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Listar.scss";
@@ -29,6 +34,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -38,10 +46,20 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     color: theme.palette.text.secondary,
   },
+  input: {
+    "& > *": {
+      margin: theme.spacing(1),
+      width: "25ch",
+    },
+  },
 }));
 
 export default function Listar() {
   const listsCharts = useSelector((store) => store.chart.charts);
+  const selectedChart = useSelector((store) => store.chart.selectedChart);
+  const navbar = useSelector((store) => store.location.bool);
+  const [open, setOpen] = React.useState(false);
+  const [openMaxLength, setOpenMaxLength] = React.useState(false);
   const classes = useStyles();
   const dispatch = useDispatch();
   const [openDelete, setOpenDelete] = React.useState(false);
@@ -49,8 +67,23 @@ export default function Listar() {
   const [copy, setCopy] = React.useState(false);
   const [tooltip, setTooltip] = React.useState(false);
   const [indexChart, setIndex] = React.useState(null);
+  const [newName, setNewName] = React.useState(false);
   const deleteList = () => {
     setOpenDelete(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const handleCloseMaxLength = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenMaxLength(false);
   };
 
   const changeSelected = (index) => {
@@ -82,6 +115,10 @@ export default function Listar() {
     );
   }
 
+  const handleClickMaxLength = () => {
+    setOpenMaxLength(true);
+  };
+
   const setCopyRedux = (index) => {
     dispatch(copyList(index));
   };
@@ -90,6 +127,27 @@ export default function Listar() {
     setOpenDelete(false);
   };
 
+  const checkMaxLength = (e, index) => {
+    var input = document.getElementById(`input${index}`);
+    var texto = e;
+    if (texto.length > 30) {
+      handleClickMaxLength();
+      input.value = input.value.slice(0, 30);
+    }
+  };
+
+  const changeName = (e, index, name) => {
+    e.preventDefault();
+    if (name == "") {
+      setOpen(true);
+    } else {
+      setIndex(index);
+
+      dispatch(changeTitle(index, name));
+      dispatch(changeTitleNavbar(!navbar));
+      setNewName(false);
+    }
+  };
   return (
     <div className="container">
       <Grid
@@ -108,7 +166,7 @@ export default function Listar() {
             fontFamily: "Proxima Nova",
           }}
         >
-          List name
+          Chart name
         </Grid>
         <Grid
           item
@@ -124,6 +182,9 @@ export default function Listar() {
               <Grid
                 item
                 xs={7}
+                onClick={() => {
+                  changeSelected(index);
+                }}
                 style={{
                   backgroundColor: "white",
                   height: "40px",
@@ -134,27 +195,70 @@ export default function Listar() {
                 onMouseOver={() => setOver("in", index)}
                 onMouseLeave={() => setOver("out", index)}
               >
-                <div className="containerFirstList">
-                  <div
-                    style={{ paddingLeft: "10px", fontFamily: "Proxima Nova" }}
-                  >
-                    <strong>{item.title}</strong>
-                  </div>
-                  <div style={{ marginRight: "20px" }}>
-                    <Link
-                      to="/"
-                      onClick={() => {
-                        changeSelected(index);
-                      }}
+                <Link
+                  id={`toMain${index}`}
+                  to="/"
+                  onClick={() => {
+                    changeSelected(index);
+                  }}
+                  style={{
+                    display:
+                      newName && index == selectedChart ? "none" : "inline",
+                  }}
+                >
+                  <div className="containerFirstList">
+                    <div
                       style={{
-                        display:
-                          copy && index == indexChart ? "inline" : "none",
-                        transition: "all 2s ease-in;",
+                        paddingLeft: "10px",
+                        fontFamily: "Proxima Nova",
                       }}
                     >
-                      <EditIcon className="button" />
-                    </Link>
+                      <strong>{item.title}</strong>
+                    </div>
                   </div>
+                </Link>
+                <div
+                  className="containerFirstList"
+                  style={{
+                    display:
+                      newName && index == selectedChart ? "inline" : "none",
+                  }}
+                >
+                  <div>
+                    <form
+                      className={classes.root}
+                      noValidate
+                      autoComplete="off"
+                      onSubmit={(e) => {
+                        changeName(
+                          e,
+                          index,
+                          document.getElementById(`input${index}`).value
+                        );
+                      }}
+                    >
+                      <TextField
+                        color="primary"
+                        id={`input${index}`}
+                        defaultValue={item.title}
+                        onChange={(e) => checkMaxLength(e.target.value, index)}
+                        style={{ marginLeft: "10px", width: "67%" }}
+                      />
+                    </form>
+                  </div>
+                </div>
+
+                <div>
+                  <EditIcon
+                    className="button"
+                    style={{
+                      display: copy && index == indexChart ? "inline" : "none",
+                      transition: "all 2s ease-in",
+                    }}
+                    onClick={() => {
+                      setNewName(true);
+                    }}
+                  />
                 </div>
               </Grid>
               <Grid
@@ -204,6 +308,22 @@ export default function Listar() {
           );
         })}
       </Grid>
+
+      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+        <Alert severity="error" onClose={handleClose}>
+          ¡Todos los campos deben estar completos!
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={openMaxLength}
+        autoHideDuration={2000}
+        onClose={handleCloseMaxLength}
+      >
+        <Alert severity="warning" onClose={handleCloseMaxLength}>
+          La longitud maxima es de 30 caracteres!
+        </Alert>
+      </Snackbar>
 
       {/*Dialog for DeleteList*/}
       <Dialog

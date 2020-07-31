@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import "./Chart.scss";
+
 export default ({ metricData, color }) => {
   const [chartData, setChartData] = useState([]);
 
@@ -28,16 +29,45 @@ export default ({ metricData, color }) => {
   useEffect(() => {
     chart();
   }, [chartData.length, metricData.labels]);
+
   return (
     <div className="chart" style={{ height: "100px" }}>
       <Line
         data={chartData}
         options={{
-          /* tooltips: {
+          tooltips: {
+            mode: 'x',
+            intersect: false,
+            displayColors: false,
             callbacks: {
-              label: gg
+              label:function(tooltipItem, data) {
+                if(tooltipItem.datasetIndex == 0) {
+                  return "$" + Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
+                    return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+                  });
+                }else{
+                  let percentage = Math.trunc(((data.datasets[0].data[tooltipItem.index]-Number(tooltipItem.yLabel))/data.datasets[0].data[tooltipItem.index]) *100);
+                  if(percentage > 0)return "YOY " + '▲ ' + percentage + "%";
+                  return "YOY " + '▼ ' + percentage + "%";
+                }
+                
+              },
+              labelColor: function(tooltipItem, chart){
+                if (tooltipItem.datasetIndex == 0) {
+                  return {
+                    borderColor: color,
+                    backgroundColor: color
+                  }
+                }else {
+                  return {
+                    borderColor: '#e6e6e6',
+                    backgroundColor: '#e6e6e6'
+                  }
+                }
+                ;
+              }
             }
-          }, */
+          }, 
           scales: {
             yAxes: [
               {
