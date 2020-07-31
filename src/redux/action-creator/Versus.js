@@ -84,13 +84,30 @@ export const deleteCountry = (name, list) => {
 export const sendToVersus = (list, listFlag) => {
   let listVersus = [];
   let diccionario = new Object();
+  let newListFlags = [];
+  if (listFlag.includes("MLA")) {
+    newListFlags.push("MLA");
+  }
+  if (listFlag.includes("MLB")) {
+    newListFlags.push("MLB");
+  }
+  if (listFlag.includes("MLM")) {
+    newListFlags.push("MLM");
+  }
+  listFlag = listFlag.filter((x) => x != "MLA" && x != "MLB" && x != "MLM");
+  let test = [...newListFlags, ...listFlag].slice(
+    0,
+    Math.min(listFlag.length + newListFlags.length, 4)
+  );
+
+  console.log("Test: ", test);
   for (let i = 0; i < list.length; i++) {
     if (!diccionario[list[i].metric_id]) {
       diccionario[list[i].metric_id] = true;
       let copy = list[i];
       let dimensionCopy = list[i];
-      for (let j = 0; j < listFlag.length; j++) {
-        dimensionCopy.site = listFlag[j];
+      for (let j = 0; j < test.length; j++) {
+        dimensionCopy.site = test[j];
         copy = { ...list[i], dimension: dimensionCopy };
         listVersus.push(copy);
       }
@@ -98,7 +115,7 @@ export const sendToVersus = (list, listFlag) => {
   }
 
   return (dispatch) => {
-    dispatch(chartToVersus(listVersus, listFlag));
+    dispatch(chartToVersus(listVersus, test));
   };
 };
 
