@@ -1,6 +1,12 @@
-import { ADD_NAME, DELETE_NAME, CHART_TO_VERSUS, ADD_CHART_TO_VERSUS } from "../constants";
+import {
+  ADD_NAME,
+  DELETE_NAME,
+  CHART_TO_VERSUS,
+  ADD_CHART_TO_VERSUS,
+  DELETE_ROW,
+} from "../constants";
 import { ListItemText } from "@material-ui/core";
-import axios from "axios"
+import axios from "axios";
 
 let host = "https://run.mocky.io/v3/";
 
@@ -14,6 +20,11 @@ let metricUrl = {
   "Unique Receivers": "a697f11b-4019-4cc9-a4ee-40966f35cc64",
   "Share GMV Buy Box": "373bf76d-4695-403a-9671-a519b3151923",
 };
+
+const deleteRow = (metricID) => ({
+  type: DELETE_ROW,
+  metricID,
+});
 
 const addName = (name, newList) => ({
   type: ADD_NAME,
@@ -33,10 +44,16 @@ const chartToVersus = (list, listFlag) => ({
   listFlag,
 });
 
-const addChartToVersus = (metric)=> ({
+const addChartToVersus = (metric) => ({
   type: ADD_CHART_TO_VERSUS,
-  metric
-})
+  metric,
+});
+
+export const deleteMetrics = (metricID) => {
+  return (dispatch) => {
+    dispatch(deleteRow(metricID));
+  };
+};
 
 export const addCountry = (name, list) => {
   let newList = [];
@@ -67,13 +84,30 @@ export const deleteCountry = (name, list) => {
 export const sendToVersus = (list, listFlag) => {
   let listVersus = [];
   let diccionario = new Object();
+  let newListFlags = [];
+  if (listFlag.includes("MLA")) {
+    newListFlags.push("MLA");
+  }
+  if (listFlag.includes("MLB")) {
+    newListFlags.push("MLB");
+  }
+  if (listFlag.includes("MLM")) {
+    newListFlags.push("MLM");
+  }
+  listFlag = listFlag.filter((x) => x != "MLA" && x != "MLB" && x != "MLM");
+  let test = [...newListFlags, ...listFlag].slice(
+    0,
+    Math.min(listFlag.length + newListFlags.length, 4)
+  );
+
+  console.log("Test: ", test);
   for (let i = 0; i < list.length; i++) {
     if (!diccionario[list[i].metric_id]) {
       diccionario[list[i].metric_id] = true;
       let copy = list[i];
       let dimensionCopy = list[i];
-      for (let j = 0; j < listFlag.length; j++) {
-        dimensionCopy.site = listFlag[j];
+      for (let j = 0; j < test.length; j++) {
+        dimensionCopy.site = test[j];
         copy = { ...list[i], dimension: dimensionCopy };
         listVersus.push(copy);
       }
@@ -81,14 +115,14 @@ export const sendToVersus = (list, listFlag) => {
   }
 
   return (dispatch) => {
-    dispatch(chartToVersus(listVersus, listFlag));
+    dispatch(chartToVersus(listVersus, test));
   };
 };
 
 export const addToVersus = (id) => {
   return (dispatch) =>
-  axios
-    .get(host + metricUrl[id])
-    .then((res) => res.data)
-    .then((metric) => dispatch(addChartToVersus(metric)));
-}
+    axios
+      .get(host + metricUrl[id])
+      .then((res) => res.data)
+      .then((metric) => dispatch(addChartToVersus(metric)));
+};
