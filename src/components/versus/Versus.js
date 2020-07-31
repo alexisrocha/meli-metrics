@@ -20,7 +20,7 @@ import {
 import { setLocation } from "../../redux/action-creator/Location";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
-import Search from "../search/Search";
+import SearchVersus from "../searchVersus/SearchVersus";
 import "./Versus.scss";
 
 export default function versus() {
@@ -76,7 +76,9 @@ export default function versus() {
   };
   return (
     <>
+
       <Navbar id="navbarVersus" variant="dark">
+
         <div className="container">
           <Nav id="navVersus" className="mr-auto">
             {selectedCountries.map((country, index) => {
@@ -146,7 +148,7 @@ export default function versus() {
         </div>
       </Navbar>
       <div className="container">
-        <Search />
+        <SearchVersus />
         <VersusChartContainer />
       </div>
     </>
