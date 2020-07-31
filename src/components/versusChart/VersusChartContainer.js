@@ -32,11 +32,13 @@ export default function VersusChartContainer() {
   }
 
   useEffect(() => {}, [arrayDeCharts.length, flags.length]);
-
+  let diccionario = new Object();
   return (
     <div>
       {arrayDeCharts.length &&
-        arrayDeCharts.map((chart, index) => <VersusChart array={chart} />)}
+        arrayDeCharts.map((chart, index) => {
+          return <VersusChart array={chart} />;
+        })}
     </div>
   );
 }

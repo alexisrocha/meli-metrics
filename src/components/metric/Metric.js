@@ -89,8 +89,7 @@ export default function Metric({ idMetrica, chart, deleteId }) {
   const charts = useSelector((store) => store.chart.charts);
   const selectedChart = useSelector((store) => store.chart.selectedChart);
   const metricData = useSelector(
-    (store) => store.metricData.metricData[idMetrica]
-  );
+    (store) => store.metricData.metricData[idMetrica] ? store.metricData.metricData[idMetrica][chart.time_frame] : store.metricData.metricData[idMetrica])
   const dispatch = useDispatch();
   const deleteCard = () => {
     setOpenCard(true);
@@ -234,6 +233,7 @@ export default function Metric({ idMetrica, chart, deleteId }) {
   if (charts[selectedChart]) {
     info = charts[selectedChart].config;
   }
+  console.log(chart, "<----------antes del return")
 
   return (
     <>
@@ -340,6 +340,7 @@ export default function Metric({ idMetrica, chart, deleteId }) {
             <div>
               {metricData && metric ? (
                 <Chart
+                  key={deleteId}
                   metricData={metricData}
                   color={colors[metric.group]}
                   className="chart"

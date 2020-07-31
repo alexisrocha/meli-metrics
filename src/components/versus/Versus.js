@@ -20,7 +20,7 @@ import {
 import { setLocation } from "../../redux/action-creator/Location";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
-import Search from "../search/Search";
+import SearchVersus from "../searchVersus/SearchVersus";
 import "./Versus.scss";
 
 export default function versus() {
@@ -46,7 +46,7 @@ export default function versus() {
   const flagsArray = ["MLA", "MLB", "MLC", "MLM", "MLU", "MBO", "MCO", "MGT"];
   const dispatch = useDispatch();
   const addToModal = (name) => {
-    dispatch(addCountry(name));
+    dispatch(addCountry(name, chartVersus));
   };
   let flagsSelected = [];
 
@@ -72,11 +72,13 @@ export default function versus() {
     setShadow(false);
   };
   const deleteName = (name) => {
-    dispatch(deleteCountry(name));
+    dispatch(deleteCountry(name, chartVersus));
   };
   return (
     <>
+
       <Navbar id="navbarVersus" variant="dark">
+
         <div className="container">
           <Nav id="navVersus" className="mr-auto">
             {selectedCountries.map((country, index) => {
@@ -84,7 +86,6 @@ export default function versus() {
                 return (
                   <Nav.Link
                     className="navbutton"
-                    href="#home"
                     onMouseOver={() => {
                       setIndex(index);
                       changeCSS();
@@ -147,7 +148,7 @@ export default function versus() {
         </div>
       </Navbar>
       <div className="container">
-        <Search />
+        <SearchVersus />
         <VersusChartContainer />
       </div>
     </>
