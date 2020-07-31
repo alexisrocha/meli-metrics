@@ -56,7 +56,7 @@ export default function Iconos({ listaMetricas }) {
   }))(Tooltip);
   return (
     <div className="containerIconos">
-      {listaIDS.map((elem, index) => {
+      {Array.from(new Set(listaIDS)).map((elem, index) => {
         if (!diccionario[elem] && index < 4) {
           diccionario[elem] = true;
           return (
@@ -75,7 +75,7 @@ export default function Iconos({ listaMetricas }) {
               </Tooltip>
             </div>
           );
-        } else if (index == 4) {
+        } else if (index == 4 && Object.keys(diccionario).length >= 4) {
           return (
             <HtmlTooltip
               title={
