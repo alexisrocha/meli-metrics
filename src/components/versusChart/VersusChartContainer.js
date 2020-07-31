@@ -30,9 +30,7 @@ export default function VersusChartContainer() {
   if (flags.length > 0) {
     arrayDeCharts = separarArray(chartVersus, flags.length);
   }
-
   useEffect(() => {}, [arrayDeCharts.length, flags.length]);
-  let diccionario = new Object();
   return (
     <div>
       {arrayDeCharts.length &&
