@@ -76,7 +76,9 @@ export default function versus() {
   };
   return (
     <>
-      <Navbar id="navbarVersus" variant="dark" /*  fixed="top" */>
+
+      <Navbar id="navbarVersus" variant="dark">
+
         <div className="container">
           <Nav id="navVersus" className="mr-auto">
             {selectedCountries.map((country, index) => {
