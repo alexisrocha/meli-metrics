@@ -216,12 +216,14 @@ export default function Metric({ idMetrica, chart, deleteId }) {
     MCO: MCO,
     MGT: MGT,
   };
-/*   const format = {
-    INTEG: algo,
-    CUR_2: algo,
-    PERC_2: algo,
-    DEC_2: algo
+
+/*   const formatData = {
+    INTEG: 3algo,
+    CUR_2: 3algo,
+    PERC_2: 3algo,
+    DEC_2: 3algo
   } */
+
   var info = [];
   var shadowCssOn = "inset 0px -55px 62px -15px rgba(0,0,0,0.75)";
   var shadowCssOff = "inset 0px 0px 0px 0px rgba(0,0,0,0.75)";

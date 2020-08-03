@@ -23,15 +23,21 @@ let getChart1 = {
   type: "simple",
   config: [
     {
-      metric_id: 1,
-      time_frame: "60days",
-      dimension: { site: "MLA", subgroup: "All site" },
-      comparation: ["YOY"],
+      type: "simple",
+      config: [{
+        metric_id: 1,
+        time_frame: "60days",
+        dimension: { site: "MLA", subgroup: "All site" },
+        comparation: ["YOY"],
+      }],
     },
+    {
+      type: "versus",
+      config: []
+    }
   ],
 };
-// new https://run.mocky.io/v3/0bb9fde4-c5c2-4a40-9630-466fec01b377
-// https://run.mocky.io/v3/61fbd212-8159-47f7-9083-7167d289a444
+// link def https://run.mocky.io/v3/77fc33ee-62b0-49b8-a9da-4729b6e4ca5f
 
 let chartObj1 = {
   metric_id: 1,
@@ -64,21 +70,27 @@ let getMetric2 = {
 // https://run.mocky.io/v3/d2ecd0d4-0234-45fb-a140-6f1d0f63d9b5
 
 let getChart2 = {
-  title: "segundo chart",
-  desc: "lorem ipsum",
+  title: "segundo",
+  desc: "sgundo chart",
   type: "simple",
   config: [
     {
-      metric_id: 2,
-      time_frame: "12months",
-      dimension: { site: "MLB", subgroup: "All site" },
-      comparation: ["YOY"],
+      type: "simple",
+      config: [{
+        metric_id: 2,
+        time_frame: "60days",
+        dimension: { site: "MLB", subgroup: "All site" },
+        comparation: ["YOY"],
+      }],
+    },
+    {
+      type: "versus",
+      config: []
     }
   ],
 };
-// newnew https://run.mocky.io/v3/5b620a5b-4941-4b65-acdb-02da3bebb863
-// new https://run.mocky.io/v3/dd639092-466b-4430-81c1-73fd9b5829c9
-// https://run.mocky.io/v3/5c6d43d3-89b4-47b8-b5b2-152152e3f391
+// link https://run.mocky.io/v3/89641815-0b73-4d90-8f34-5b0987cac224
+
 
 let chartObj2 = {
   metric_id: 2,
@@ -112,19 +124,25 @@ let getMetric3 = {
 
 let getChart3 = {
   title: "tercero",
-  desc: "lorem ipsum",
+  desc: "tercer chart",
   type: "simple",
   config: [
     {
-      metric_id: 3,
-      time_frame: "60days",
-      dimension: { site: "MLC", subgroup: "All site" },
-      comparation: ["YOY"],
+      type: "simple",
+      config: [{
+        metric_id: 3,
+        time_frame: "60days",
+        dimension: { site: "MLC", subgroup: "All site" },
+        comparation: ["YOY"],
+      }],
+    },
+    {
+      type: "versus",
+      config: []
     }
   ],
 };
-// new https://run.mocky.io/v3/6477bf45-b68e-45f3-83a5-1a798c517ac6
-// https://run.mocky.io/v3/bbac3e4d-6e02-474e-aef0-82a049ea8dd7
+// new https://run.mocky.io/v3/2cbbb23d-12cd-400c-b685-98ad593a434c
 
 let chartObj3 = {
   metric_id: 3,
@@ -157,20 +175,26 @@ let getMetric4 = {
 // new https://run.mocky.io/v3/ff5a47cc-9dc9-4617-958c-c57c1ed66491
 
 let getChart4 = {
-  title: "mexican",
-  desc: "lorem ipsum",
+  title: "cuarto",
+  desc: "cuarto chart",
   type: "simple",
   config: [
     {
-      metric_id: 4,
-      time_frame: "60days",
-      dimension: { site: "MLM", subgroup: "All site" },
-      comparation: ["YOY"],
+      type: "simple",
+      config: [{
+        metric_id: 4,
+        time_frame: "60days",
+        dimension: { site: "MLM", subgroup: "All site" },
+        comparation: ["YOY"],
+      }],
+    },
+    {
+      type: "versus",
+      config: []
     }
   ],
 };
-//new https://run.mocky.io/v3/3af1379f-4676-4d4e-958f-d5fb9c379fd4
-// https://run.mocky.io/v3/50cdf8d6-2419-4bd9-8d1d-84463bcf0607
+//new https://run.mocky.io/v3/789d536d-f588-44ed-ac00-6f601b239aaa
 
 let chartObj4 = {
   metric_id: 4,
@@ -201,20 +225,26 @@ let getMetric5 = {
 // https://run.mocky.io/v3/70e3f815-5cc9-4691-8fd9-4be83fcd0416
 
 let getChart5 = {
-  title: "uruguay",
-  desc: "lorem ipsum",
+  title: "quinto",
+  desc: "quinto chart",
   type: "simple",
   config: [
     {
-      metric_id: 5,
-      time_frame: "60days",
-      dimension: { site: "MLU", subgroup: "All site" },
-      comparation: ["YOY"],
+      type: "simple",
+      config: [{
+        metric_id: 5,
+        time_frame: "60days",
+        dimension: { site: "MLU", subgroup: "All site" },
+        comparation: ["YOY"],
+      }],
+    },
+    {
+      type: "versus",
+      config: []
     }
   ],
 };
-// new https://run.mocky.io/v3/25e5d4bf-fca9-4161-9175-72020548c29a
-// https://run.mocky.io/v3/4c242570-12ec-44a5-ae5f-62ddee3b76ee
+// new https://run.mocky.io/v3/1fce3541-6d39-43aa-aa72-cef59b9326d1
 
 let chartObj5 = {
   metric_id: 5,
@@ -247,20 +277,26 @@ let getMetric6 = {
 // new https://run.mocky.io/v3/cd10c0cc-4c88-4693-8025-8ee062a409f8
 
 let getChart6 = {
-  title: "Guatemala",
-  desc: "lorem ipsum",
+  title: "sexto",
+  desc: "sexto chart",
   type: "simple",
   config: [
     {
-      metric_id: 6,
-      time_frame: "60days",
-      dimension: { site: "MGT", subgroup: "All site" },
-      comparation: ["YOY"],
+      type: "simple",
+      config: [{
+        metric_id: 6,
+        time_frame: "60days",
+        dimension: { site: "MGT", subgroup: "All site" },
+        comparation: ["YOY"],
+      }],
+    },
+    {
+      type: "versus",
+      config: []
     }
   ],
 };
-// new https://run.mocky.io/v3/6c098f7d-aeb9-44e3-9dd3-40240b4c789b
-// https://run.mocky.io/v3/a0d606f3-e11b-4743-aeb6-b4761beadb84
+// new https://run.mocky.io/v3/cddfea31-f2c0-4431-a85c-54a2e02c1ea3
 
 let chartObj6 = {
   metric_id: 6,
@@ -292,20 +328,26 @@ let getMetric7 = {
 // https://run.mocky.io/v3/8a0f81b7-4ad5-4f0d-989b-180f7ecb8e17
 
 let getChart7 = {
-  title: "arg2",
-  desc: "lorem ipsum",
+  title: "septimo",
+  desc: "septimo chart",
   type: "simple",
   config: [
     {
-      metric_id: 7,
-      time_frame: "60days",
-      dimension: { site: "MLA", subgroup: "All site" },
-      comparation: ["YOY"],
+      type: "simple",
+      config: [{
+        metric_id: 7,
+        time_frame: "60days",
+        dimension: { site: "MLA", subgroup: "All site" },
+        comparation: ["YOY"],
+      }],
+    },
+    {
+      type: "versus",
+      config: []
     }
   ],
 };
-// new https://run.mocky.io/v3/226724ff-5b90-4b39-9d4c-8a32139d8ade
-// https://run.mocky.io/v3/2891d615-9637-4f48-b44f-dd473248a70c
+// new https://run.mocky.io/v3/59efbe6a-193a-4dfd-b50f-e81a2d696bd8
 
 let chartObj7 = {
   metric_id: 7,
@@ -338,20 +380,26 @@ let getMetric8 = {
 // new https://run.mocky.io/v3/2037837b-2caa-4a29-8ac2-48fef5e6ff5d
 
 let getChart8 = {
-  title: "arg3",
-  desc: "lorem ipsum",
+  title: "occtavo",
+  desc: "octavo chart",
   type: "simple",
   config: [
     {
-      metric_id: 8,
-      time_frame: "60days",
-      dimension: { site: "MLA", subgroup: "All site" },
-      comparation: ["YOY"],
+      type: "simple",
+      config: [{
+        metric_id: 8,
+        time_frame: "60days",
+        dimension: { site: "MLA", subgroup: "All site" },
+        comparation: ["YOY"],
+      }],
+    },
+    {
+      type: "versus",
+      config: []
     }
   ],
 };
-// new https://run.mocky.io/v3/0145f405-c88d-4aca-a056-12cc03e3c1a2
-// https://run.mocky.io/v3/a911c61a-e19f-4011-bc76-3762f0f9cced
+// new https://run.mocky.io/v3/d8b5b02c-71f4-49c9-9073-bf306eb149b2
 
 let chartObj8 = {
   metric_id: 8,
