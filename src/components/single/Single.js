@@ -27,7 +27,7 @@ export default function single({ history }) {
   useEffect(() => {
     dispatch(setLocation("main"));
     if (charts[selectedChart])
-      dispatch(chartSelect(charts[selectedChart].config));
+      dispatch(chartSelect(charts[selectedChart].config.single));
   }, [charts.length, location.location, selectedChart]);
 
   return (
@@ -41,7 +41,8 @@ export default function single({ history }) {
       <div className="container">
         {charts.length > 0 ? (
           <>
-            {charts[selectedChart] && charts[selectedChart].config.length ? (
+            {charts[selectedChart] &&
+            charts[selectedChart].config.simple.length ? (
               <Grid
                 className={classes.root}
                 container
@@ -51,6 +52,7 @@ export default function single({ history }) {
               >
                 <Grid key={1} item xs={12}>
                   <Search />
+                  {console.log("COnfig es:", charts[selectedChart].config)}
                 </Grid>
               </Grid>
             ) : (
@@ -70,7 +72,7 @@ export default function single({ history }) {
               alignItems="flex-start"
             >
               {charts[selectedChart] &&
-                charts[selectedChart].config.map((chart, index) => {
+                charts[selectedChart].config.simple.map((chart, index) => {
                   return (
                     <Grid key={index} item xs={3}>
                       <Metric

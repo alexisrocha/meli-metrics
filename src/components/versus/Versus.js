@@ -12,11 +12,8 @@ import MBO from "../../../public/flags/MBO.png";
 import Avatar from "@material-ui/core/Avatar";
 import VersusChartContainer from "../versusChart/VersusChartContainer";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  addCountry,
-  deleteCountry,
-  sendToVersus,
-} from "../../redux/action-creator/Versus";
+import { addCountry, deleteCountry } from "../../redux/action-creator/Versus";
+import { sendToVersus } from "../../redux/action-creator/Charts";
 import { setLocation } from "../../redux/action-creator/Location";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
@@ -31,7 +28,7 @@ export default function versus() {
   const charts = useSelector((store) => store.chart.charts);
   const selectedChart = useSelector((store) => store.chart.selectedChart);
   const selectedCountries = useSelector(
-    (store) => store.versus.selectedCountries
+    (store) => store.chart.selectedCountries
   );
   const flags = {
     MLA: MLA,
@@ -52,16 +49,18 @@ export default function versus() {
 
   useEffect(() => {
     dispatch(setLocation("main"));
-    for (let i = 0; i < charts[selectedChart].config.length; i++) {
+    for (let i = 0; i < charts[selectedChart].config.simple.length; i++) {
       if (
-        !flagsSelected.includes(charts[selectedChart].config[i].dimension.site)
+        !flagsSelected.includes(
+          charts[selectedChart].config.simple[i].dimension.site
+        )
       )
         flagsSelected = [
           ...flagsSelected,
-          charts[selectedChart].config[i].dimension.site,
+          charts[selectedChart].config.simple[i].dimension.site,
         ];
     }
-    dispatch(sendToVersus(charts[selectedChart].config, flagsSelected));
+    dispatch(sendToVersus(charts[selectedChart].config.simple, flagsSelected));
   }, []);
 
   const changeCSS = () => {
@@ -151,7 +150,7 @@ export default function versus() {
       </Navbar>
       <div className="container">
         <SearchVersus />
-        <VersusChartContainer />
+        {/*  <VersusChartContainer /> */}
       </div>
     </>
   );

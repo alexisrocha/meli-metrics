@@ -9,13 +9,14 @@ import {
   CHANGE_NAME,
   CHANGE_METRIC_INFO,
   CHANGE_VISUALIZATION,
+  CHART_TO_VERSUS,
 } from "../constants";
 import axios from "axios";
 
 let host = "https://run.mocky.io/v3/";
 
 let url = {
-  "Buy Box - GMV": `0bb9fde4-c5c2-4a40-9630-466fec01b377`,
+  "Buy Box - GMV": `5ceb55d7-2f8b-44ee-818c-28c7fe46d36c`,
   "CBT - ASP(e) Billable": "6477bf45-b68e-45f3-83a5-1a798c517ac6",
   "Avg Shipping Time": "3af1379f-4676-4d4e-958f-d5fb9c379fd4",
   "Devices Sold": `5b620a5b-4941-4b65-acdb-02da3bebb863`,
@@ -35,6 +36,12 @@ let metricUrl = {
   "Unique Receivers": "a697f11b-4019-4cc9-a4ee-40966f35cc64",
   "Share GMV Buy Box": "373bf76d-4695-403a-9671-a519b3151923",
 };
+
+const chartToVersus = (list, listFlag) => ({
+  type: CHART_TO_VERSUS,
+  list,
+  listFlag,
+});
 
 const getChart = (charts) => ({
   type: GET_CHART,
@@ -177,5 +184,39 @@ export const changeMetricInfo = (
       comparation: [comparison],
     };
     dispatch(changeInfo(index, newChart));
+  };
+};
+
+export const sendToVersus = (list, listFlag) => {
+  console.log("List es:", list);
+  console.log("Listflags es:", listFlag);
+  let listVersus = [];
+  let diccionario = new Object();
+  let newListFlags = [];
+  if (listFlag.includes("MLA")) {
+    newListFlags.push("MLA");
+  }
+  if (listFlag.includes("MLB")) {
+    newListFlags.push("MLB");
+  }
+  if (listFlag.includes("MLM")) {
+    newListFlags.push("MLM");
+  }
+  listFlag = listFlag.filter((x) => x != "MLA" && x != "MLB" && x != "MLM");
+  let test = [...newListFlags, ...listFlag].slice(
+    0,
+    Math.min(listFlag.length + newListFlags.length, 4)
+  );
+
+  console.log("Test: ", test);
+  for (let i = 0; i < list.length; i++) {
+    listVersus.push({
+      ...list[i],
+      dimension: { ...list[i].dimension, site: test },
+    });
+  }
+
+  return (dispatch) => {
+    dispatch(chartToVersus(listVersus, test));
   };
 };
