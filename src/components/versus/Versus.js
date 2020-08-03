@@ -150,7 +150,7 @@ export default function versus() {
       </Navbar>
       <div className="container">
         <SearchVersus />
-        {/*  <VersusChartContainer /> */}
+        <VersusChartContainer />
       </div>
     </>
   );

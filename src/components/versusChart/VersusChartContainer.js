@@ -9,6 +9,23 @@ export default function VersusChartContainer() {
   const chartVersus = useSelector((store) => store.versus.chartVersus);
   const flags = useSelector((store) => store.versus.selectedCountries);
 
+  function replaceSite(array) {
+    let newArray = [];
+    for (let i = 0; i < array.length; i++) {
+      for (let j = 0; j < array[i].dimension.site.length; j++) {
+        let obj = new Object();
+        obj = {
+          ...array[i],
+          dimension: { ...obj.dimension, site: array[i].dimension.site[j] },
+        };
+        newArray.push(obj);
+        console.log("Obj es :", obj);
+      }
+    }
+
+    return newArray;
+  }
+
   function separarArray(array, numero) {
     let contador = 0;
     let arregloFinal = [];
@@ -28,7 +45,7 @@ export default function VersusChartContainer() {
   }
   let arrayDeCharts = [];
   if (flags.length > 0) {
-    arrayDeCharts = separarArray(chartVersus, flags.length);
+    arrayDeCharts = separarArray(replaceSite(chartVersus), flags.length);
   }
   useEffect(() => {}, [arrayDeCharts.length, flags.length]);
   return (
