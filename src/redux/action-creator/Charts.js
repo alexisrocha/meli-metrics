@@ -15,7 +15,7 @@ import axios from "axios";
 let host = "https://run.mocky.io/v3/";
 
 let url = {
-  "Buy Box - GMV": `0bb9fde4-c5c2-4a40-9630-466fec01b377`,
+  "Buy Box - GMV": `5d91b61c-241b-487d-b6bf-a897ed9f4d3e`,
   "CBT - ASP(e) Billable": "6477bf45-b68e-45f3-83a5-1a798c517ac6",
   "Avg Shipping Time": "3af1379f-4676-4d4e-958f-d5fb9c379fd4",
   "Devices Sold": `5b620a5b-4941-4b65-acdb-02da3bebb863`,
