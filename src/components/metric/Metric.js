@@ -91,62 +91,35 @@ export default function Metric({ idMetrica, chart, deleteId }) {
   const metricData = useSelector(
     (store) => store.metricData.metricData[idMetrica] ? store.metricData.metricData[idMetrica][chart.time_frame] : store.metricData.metricData[idMetrica])
   const dispatch = useDispatch();
-  const deleteCard = () => {
-    setOpenCard(true);
+  const deleteCard = () => setOpenCard(true)
+
+  const handleClickOpenDownload = () => setOpenDownload(true);
+
+  const handleClickOpenSettings = () => setOpenSetting(true);
+
+  const handleClickOpenInfo = () => setOpenInfo(true)
+
+  const handleCloseInfo = () => setOpenInfo(false)
+
+  const handleCloseDownload = () => setOpenDownload(false)
+
+  const handleCloseSettings = () => setOpenSetting(false)
+
+  const handleCloseCard = () => setOpenCard(false);
+
+  const reduceNumber = number => {
+    if (number > 1000000) return "$" +(number / 1000000).toFixed(2) + "M";
+    if (number < 1000000) return "$" + (number / 1000).toFixed(2) + "k";
   };
 
-  const handleClickOpenDownload = () => {
-    setOpenDownload(true);
-  };
-  const handleClickOpenSettings = () => {
-    setOpenSetting(true);
-  };
+  const formatPer = number => (number * 100).toFixed(2) + "%"
 
-  const handleClickOpenInfo = () => {
-    setOpenInfo(true);
-  };
+  const percentage = (arr, arr2) => ((arr[arr.length - 1] / arr2[arr2.length - 1] - 1) * 100).toFixed(0)
 
-  const handleCloseInfo = () => {
-    setOpenInfo(false);
-  };
-
-  const handleCloseDownload = () => {
-    setOpenDownload(false);
-  };
-
-  const handleCloseSettings = () => {
-    setOpenSetting(false);
-  };
-
-  const handleCloseCard = () => {
-    setOpenCard(false);
-  };
-
-  const dif = (arr, arr2) => {
-    return arr[arr.length - 1] - arr2[arr.length - 1];
-  };
-
-  const reduceNumber = (number) => {
-    if (number > 1000000) {
-      return (number / 1000000).toFixed(2) + "M";
-    }
-    if (number < 1000000) {
-      return (number / 1000).toFixed(2) + "k";
-    }
-  };
-
-  const percentage = (arr, arr2) => {
-    return ((arr[arr.length - 1] / arr2[arr2.length - 1] - 1) * 100).toFixed(0);
-  };
-
-  const changeCSS = () => {
-    setShadow(true);
-  };
-
-  const changeCSSOut = () => {
-    setShadow(false);
-  };
-
+  const changeCSS = () => setShadow(true);
+  
+  const changeCSSOut = () => setShadow(false);
+  
   const generateDate = () => {
     var data = new Date();
     var fecha = data.toString().slice(4, 25).split(" ");
@@ -200,12 +173,6 @@ export default function Metric({ idMetrica, chart, deleteId }) {
     "MERCADO ENVIOS": "#a9c534",
   };
 
-  let formatos = {
-    INTEG: "integ",
-    CUR_2: "cur2",
-    PERC_2: "perc2",
-    DEC_2: "dec2",
-  };
   const flags = {
     MLA: MLA,
     MLB: MLB,
@@ -217,12 +184,13 @@ export default function Metric({ idMetrica, chart, deleteId }) {
     MGT: MGT,
   };
 
-/*   const formatData = {
-    INTEG: 3algo,
-    CUR_2: 3algo,
+  const formatData = {
+    CUR_2: info=>reduceNumber(info),
+    PERC_2: info=>formatPer(info)
+    /* INTEG: 3algo,
     PERC_2: 3algo,
-    DEC_2: 3algo
-  } */
+    DEC_2: 3algo */
+  }
 
   var info = [];
   var shadowCssOn = "inset 0px -55px 62px -15px rgba(0,0,0,0.75)";
@@ -284,8 +252,7 @@ export default function Metric({ idMetrica, chart, deleteId }) {
                 {metric ? (
                   <strong style={{ color: colors[metric.group] }}>
                     {metricData
-                      ? "$" +
-                        reduceNumber(
+                      ? formatData[metric.format](
                           metricData.data[0].data[
                             metricData.data[0].data.length - 1
                           ]
@@ -331,9 +298,9 @@ export default function Metric({ idMetrica, chart, deleteId }) {
           </div>
 
           <p className="timeLapse">
-            YOY $
-            {metricData
-              ? reduceNumber(
+            YOY&nbsp;
+            {metricData && metric
+              ? formatData[metric.format](
                   metricData.data[1].data[metricData.data[1].data.length - 1]
                 )
               : 0}
