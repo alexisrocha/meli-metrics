@@ -13,7 +13,7 @@ let getMetric1 = {
     { code: "YOY", desc: "Last year" },
     { code: "MOM", desc: "Last Month" },
   ],
-  last_updated: '2020-06-30T16:09:01.728'
+  last_updated: "2020-06-30T16:09:01.728",
 };
 // https://run.mocky.io/v3/4af8049f-3477-4337-9853-bfe616f0d049
 
@@ -22,27 +22,33 @@ let getChart1 = {
   desc: "lorem ipsum",
   type: "simple",
   config: {
-  	simple: [
-  		{
+    simple: [
+      {
         metric_id: 1,
         time_frame: "60days",
-        dimension: { site: "MLA", subgroup: "All site" },
+        dimension: { site: ["MLA", "MLB"], subgroup: "All site" },
         comparation: ["YOY"],
-     	}
-  	],
-    versus: []
-  }
+      },
+      {
+        metric_id: 2,
+        time_frame: "60days",
+        dimension: { site: ["MLB", "MLB"], subgroup: "All site" },
+        comparation: ["YOY"],
+      },
+    ],
+    versus: [],
+  },
 };
 // link def https://run.mocky.io/v3/5ceb55d7-2f8b-44ee-818c-28c7fe46d36c
 
 let chartObj1 = {
   metric_id: 1,
-  time_frame: '60days',
+  time_frame: "60days",
   dimension: {
-      site: 'MLA',
-      subgroup: 'All site'
+    site: "MLA",
+    subgroup: "All site",
   },
-  comparation: [ 'YOY' ]
+  comparation: ["YOY"],
 };
 // https://run.mocky.io/v3/930ee191-8d1e-43b8-b7a7-0213a31eadb9
 
@@ -70,19 +76,18 @@ let getChart2 = {
   desc: "lorem ipsum",
   type: "simple",
   config: {
-  	simple: [
-  		{
+    simple: [
+      {
         metric_id: 2,
         time_frame: "60days",
         dimension: { site: "MLB", subgroup: "All site" },
         comparation: ["YOY"],
-     	}
-  	],
-    versus: []
-  }
+      },
+    ],
+    versus: [],
+  },
 };
 // link https://run.mocky.io/v3/cda9ed89-b4ac-40c5-9fd1-8bade2b96214
-
 
 let chartObj2 = {
   metric_id: 2,
@@ -109,7 +114,7 @@ let getMetric3 = {
     { code: "YOY", desc: "Last year" },
     { code: "MOM", desc: "Last Month" },
   ],
-  last_updated: '2020-06-30T16:09:01.728'
+  last_updated: "2020-06-30T16:09:01.728",
 };
 // old https://run.mocky.io/v3/65b7aa8e-9f35-4b24-82f5-334957cde795
 // new https://run.mocky.io/v3/0d901dc2-6024-48d9-97f3-5145408329b1
@@ -119,16 +124,16 @@ let getChart3 = {
   desc: "lorem ipsum",
   type: "simple",
   config: {
-  	simple: [
-  		{
+    simple: [
+      {
         metric_id: 3,
         time_frame: "60days",
         dimension: { site: "MLC", subgroup: "All site" },
         comparation: ["YOY"],
-     	}
-  	],
-    versus: []
-  }
+      },
+    ],
+    versus: [],
+  },
 };
 // new https://run.mocky.io/v3/ba806367-158d-4d3a-b9d3-c0c5d994544a
 
@@ -157,7 +162,7 @@ let getMetric4 = {
     { code: "YOY", desc: "Last year" },
     { code: "MOM", desc: "Last Month" },
   ],
-  last_updated: '2020-06-30T16:09:01.728'
+  last_updated: "2020-06-30T16:09:01.728",
 };
 // old https://run.mocky.io/v3/551c0751-e44b-4551-8ad7-4b489d545802
 // new https://run.mocky.io/v3/ff5a47cc-9dc9-4617-958c-c57c1ed66491
@@ -167,16 +172,16 @@ let getChart4 = {
   desc: "lorem ipsum",
   type: "simple",
   config: {
-  	simple: [
-  		{
+    simple: [
+      {
         metric_id: 4,
         time_frame: "60days",
         dimension: { site: "MLM", subgroup: "All site" },
         comparation: ["YOY"],
-     	}
-  	],
-    versus: []
-  }
+      },
+    ],
+    versus: [],
+  },
 };
 //new https://run.mocky.io/v3/3a77392e-e4a8-4936-bc7c-0d0a40277be1
 
@@ -185,7 +190,7 @@ let chartObj4 = {
   time_frame: "60days",
   dimension: { site: "MLM", subgroup: "All site" },
   comparation: ["YOY"],
-}
+};
 // https://run.mocky.io/v3/ce8ec606-5383-4169-a423-a2e5620c63c7
 
 // -------------------------------------------------------------------------------------//
@@ -213,16 +218,16 @@ let getChart5 = {
   desc: "lorem ipsum",
   type: "simple",
   config: {
-  	simple: [
-  		{
+    simple: [
+      {
         metric_id: 5,
         time_frame: "60days",
         dimension: { site: "MLM", subgroup: "All site" },
         comparation: ["YOY"],
-     	}
-  	],
-    versus: []
-  }
+      },
+    ],
+    versus: [],
+  },
 };
 // new https://run.mocky.io/v3/bcbcf3c7-1d74-40ae-afd2-276895c136a4
 
@@ -231,7 +236,7 @@ let chartObj5 = {
   time_frame: "60days",
   dimension: { site: "MLU", subgroup: "All site" },
   comparation: ["YOY"],
-}
+};
 // https://run.mocky.io/v3/60b3c552-d717-4330-a3be-dab187eb6f51
 
 // -------------------------------------------------------------------------------------//
@@ -251,7 +256,7 @@ let getMetric6 = {
     { code: "YOY", desc: "Last year" },
     { code: "MOM", desc: "Last Month" },
   ],
-  last_updated: '2020-06-30T16:09:01.728'
+  last_updated: "2020-06-30T16:09:01.728",
 };
 // old https://run.mocky.io/v3/565a1c9d-5ca7-43d9-a604-9d57258dbd21
 // new https://run.mocky.io/v3/cd10c0cc-4c88-4693-8025-8ee062a409f8
@@ -261,16 +266,16 @@ let getChart6 = {
   desc: "lorem ipsum",
   type: "simple",
   config: {
-  	simple: [
-  		{
+    simple: [
+      {
         metric_id: 6,
         time_frame: "60days",
         dimension: { site: "MLM", subgroup: "All site" },
         comparation: ["YOY"],
-     	}
-  	],
-    versus: []
-  }
+      },
+    ],
+    versus: [],
+  },
 };
 // new https://run.mocky.io/v3/7856f07a-199a-4b70-b8c0-03f8be410871
 
@@ -308,16 +313,16 @@ let getChart7 = {
   desc: "lorem ipsum",
   type: "simple",
   config: {
-  	simple: [
-  		{
+    simple: [
+      {
         metric_id: 7,
         time_frame: "60days",
         dimension: { site: "MLM", subgroup: "All site" },
         comparation: ["YOY"],
-     	}
-  	],
-    versus: []
-  }
+      },
+    ],
+    versus: [],
+  },
 };
 // new https://run.mocky.io/v3/49e79708-be54-4b07-9d45-bfd0f09a9df1
 
@@ -326,7 +331,7 @@ let chartObj7 = {
   time_frame: "60days",
   dimension: { site: "MLA", subgroup: "All site" },
   comparation: ["YOY"],
-}
+};
 // https://run.mocky.io/v3/a697f11b-4019-4cc9-a4ee-40966f35cc64
 
 // -------------------------------------------------------------------------------------//
@@ -346,7 +351,7 @@ let getMetric8 = {
     { code: "YOY", desc: "Last year" },
     { code: "MOM", desc: "Last Month" },
   ],
-  last_updated: '2020-06-30T16:09:01.728'
+  last_updated: "2020-06-30T16:09:01.728",
 };
 // old https://run.mocky.io/v3/c91e84d2-f505-403a-bde0-094a6c1d9059
 // new https://run.mocky.io/v3/2037837b-2caa-4a29-8ac2-48fef5e6ff5d
@@ -356,16 +361,16 @@ let getChart8 = {
   desc: "lorem ipsum",
   type: "simple",
   config: {
-  	simple: [
-  		{
+    simple: [
+      {
         metric_id: 8,
         time_frame: "60days",
         dimension: { site: "MLM", subgroup: "All site" },
         comparation: ["YOY"],
-     	}
-  	],
-    versus: []
-  }
+      },
+    ],
+    versus: [],
+  },
 };
 // new https://run.mocky.io/v3/a333e1af-2e4f-423b-b520-6b4ca1125bab
 
@@ -374,7 +379,7 @@ let chartObj8 = {
   time_frame: "60days",
   dimension: { site: "MLA", subgroup: "All site" },
   comparation: ["YOY"],
-}
+};
 //https://run.mocky.io/v3/373bf76d-4695-403a-9671-a519b3151923
 
 // -------------------------------------------------------------------------------------//
