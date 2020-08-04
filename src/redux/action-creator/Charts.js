@@ -100,14 +100,6 @@ export const changeView = (index, data) => ({
   data,
 });
 
-<<<<<<< HEAD
-||||||| merged common ancestors
-export const changeView = (index, data) => {
-  return (dispatch) => {
-    dispatch(changeVisualization(index, data));
-  };
-};
-=======
 const deleteRow = (metricID) => ({
   type: DELETE_ROW,
   metricID,
@@ -149,7 +141,6 @@ export const changeView = (index, data) => {
     dispatch(changeVisualization(index, data));
   };
 };
->>>>>>> 6ca634dc0c9f6e599c5d86c481b54a29e5398787
 
 export const fetchChart = (id, title) => {
   return (dispatch) =>
