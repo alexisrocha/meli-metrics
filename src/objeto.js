@@ -20,7 +20,7 @@ let getMetric1 = {
 let getChart1 = {
   title: "lorem",
   desc: "lorem ipsum",
-  type: "versus",
+  type: "simple",
   config: {
     simple: [
       {
@@ -39,7 +39,7 @@ let getChart1 = {
     versus: [],
   },
 };
-// link def https://run.mocky.io/v3/5d91b61c-241b-487d-b6bf-a897ed9f4d3e
+// link def https://run.mocky.io/v3/5ceb55d7-2f8b-44ee-818c-28c7fe46d36c
 
 let chartObj1 = {
   metric_id: 1,
@@ -74,7 +74,7 @@ let getMetric2 = {
 let getChart2 = {
   title: "lorem",
   desc: "lorem ipsum",
-  type: "versus",
+  type: "simple",
   config: {
     simple: [
       {
@@ -87,7 +87,7 @@ let getChart2 = {
     versus: [],
   },
 };
-// link https://run.mocky.io/v3/11dc4c39-1285-49bd-a824-f818ee5f788a
+// link https://run.mocky.io/v3/cda9ed89-b4ac-40c5-9fd1-8bade2b96214
 
 let chartObj2 = {
   metric_id: 2,
@@ -122,7 +122,7 @@ let getMetric3 = {
 let getChart3 = {
   title: "lorem",
   desc: "lorem ipsum",
-  type: "versus",
+  type: "simple",
   config: {
     simple: [
       {
@@ -135,7 +135,7 @@ let getChart3 = {
     versus: [],
   },
 };
-// new https://run.mocky.io/v3/bfb4c3f0-b079-44a1-9ce4-bc0080f3278f
+// new https://run.mocky.io/v3/ba806367-158d-4d3a-b9d3-c0c5d994544a
 
 let chartObj3 = {
   metric_id: 3,
@@ -170,7 +170,7 @@ let getMetric4 = {
 let getChart4 = {
   title: "lorem",
   desc: "lorem ipsum",
-  type: "versus",
+  type: "simple",
   config: {
     simple: [
       {
@@ -183,7 +183,7 @@ let getChart4 = {
     versus: [],
   },
 };
-//new https://run.mocky.io/v3/c8c817a3-c3fa-4515-98cb-23e9e8c2a16a
+//new https://run.mocky.io/v3/3a77392e-e4a8-4936-bc7c-0d0a40277be1
 
 let chartObj4 = {
   metric_id: 4,
@@ -216,7 +216,7 @@ let getMetric5 = {
 let getChart5 = {
   title: "lorem",
   desc: "lorem ipsum",
-  type: "versus",
+  type: "simple",
   config: {
     simple: [
       {
@@ -229,7 +229,7 @@ let getChart5 = {
     versus: [],
   },
 };
-// new https://run.mocky.io/v3/12dad2ea-fe96-4dc8-a48b-14856dda8f60
+// new https://run.mocky.io/v3/bcbcf3c7-1d74-40ae-afd2-276895c136a4
 
 let chartObj5 = {
   metric_id: 5,
@@ -264,7 +264,7 @@ let getMetric6 = {
 let getChart6 = {
   title: "lorem",
   desc: "lorem ipsum",
-  type: "versus",
+  type: "simple",
   config: {
     simple: [
       {
@@ -277,7 +277,7 @@ let getChart6 = {
     versus: [],
   },
 };
-// new https://run.mocky.io/v3/635c9bf8-22b6-4d73-bcd1-333bd0823af6
+// new https://run.mocky.io/v3/7856f07a-199a-4b70-b8c0-03f8be410871
 
 let chartObj6 = {
   metric_id: 6,
@@ -311,7 +311,7 @@ let getMetric7 = {
 let getChart7 = {
   title: "lorem",
   desc: "lorem ipsum",
-  type: "versus",
+  type: "simple",
   config: {
     simple: [
       {
@@ -324,7 +324,7 @@ let getChart7 = {
     versus: [],
   },
 };
-// new https://run.mocky.io/v3/63776ec5-3f20-40d5-957b-9f007c5c2a21
+// new https://run.mocky.io/v3/49e79708-be54-4b07-9d45-bfd0f09a9df1
 
 let chartObj7 = {
   metric_id: 7,
@@ -359,7 +359,7 @@ let getMetric8 = {
 let getChart8 = {
   title: "lorem",
   desc: "lorem ipsum",
-  type: "versus",
+  type: "simple",
   config: {
     simple: [
       {
@@ -372,7 +372,7 @@ let getChart8 = {
     versus: [],
   },
 };
-// new https://run.mocky.io/v3/3811f73b-bfc6-4269-9b09-8c03d7dbdfee
+// new https://run.mocky.io/v3/a333e1af-2e4f-423b-b520-6b4ca1125bab
 
 let chartObj8 = {
   metric_id: 8,
