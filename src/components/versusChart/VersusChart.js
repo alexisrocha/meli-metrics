@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Badge from "react-bootstrap/Badge";
 import VersusMetric from "../versusMetric/VersusMetric";
 import CloseIcon from "@material-ui/icons/Close";
-import { deleteMetrics } from "../../redux/action-creator/Versus";
+import { deleteMetrics } from "../../redux/action-creator/Charts";
 import "./versusContainer.scss";
 export default function VersusChart({ array }) {
   const metric = useSelector(

@@ -6,8 +6,11 @@ import VersusMetric from "../versusMetric/VersusMetric";
 import VersusChart from "./VersusChart";
 import "./versusContainer.scss";
 export default function VersusChartContainer() {
-  const chartVersus = useSelector((store) => store.versus.chartVersus);
-  const flags = useSelector((store) => store.versus.selectedCountries);
+  const selectedChart = useSelector((store) => store.chart.selectedChart);
+  const chartVersus = useSelector(
+    (store) => store.chart.charts[selectedChart].config.versus
+  );
+  const flags = useSelector((store) => store.chart.selectedCountries);
 
   function replaceSite(array) {
     let newArray = [];
@@ -19,7 +22,6 @@ export default function VersusChartContainer() {
           dimension: { ...obj.dimension, site: array[i].dimension.site[j] },
         };
         newArray.push(obj);
-        console.log("Obj es :", obj);
       }
     }
 

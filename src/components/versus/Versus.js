@@ -12,8 +12,11 @@ import MBO from "../../../public/flags/MBO.png";
 import Avatar from "@material-ui/core/Avatar";
 import VersusChartContainer from "../versusChart/VersusChartContainer";
 import { makeStyles } from "@material-ui/core/styles";
-import { addCountry, deleteCountry } from "../../redux/action-creator/Versus";
-import { sendToVersus } from "../../redux/action-creator/Charts";
+import {
+  addCountry,
+  deleteCountry,
+  sendToVersus,
+} from "../../redux/action-creator/Charts";
 import { setLocation } from "../../redux/action-creator/Location";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
@@ -24,7 +27,6 @@ export default function versus() {
   const [chartsVersus, setChartsVersus] = useState([]);
   const [indexItem, setIndex] = useState(null);
   const [shadow, setShadow] = useState(false);
-  const chartVersus = useSelector((store) => store.versus.chartVersus);
   const charts = useSelector((store) => store.chart.charts);
   const selectedChart = useSelector((store) => store.chart.selectedChart);
   const selectedCountries = useSelector(
@@ -42,8 +44,9 @@ export default function versus() {
   };
   const flagsArray = ["MLA", "MLB", "MLC", "MLM", "MLU", "MBO", "MCO", "MGT"];
   const dispatch = useDispatch();
-  const addToModal = (name) => {
-    dispatch(addCountry(name, chartVersus));
+  const addToModal = (name, list) => {
+    console.log("Versus component:", name, list);
+    dispatch(addCountry([...selectedCountries, name], list));
   };
   let flagsSelected = [];
 
@@ -70,8 +73,9 @@ export default function versus() {
   const changeCSSOut = () => {
     setShadow(false);
   };
-  const deleteName = (name) => {
-    dispatch(deleteCountry(name, chartVersus));
+  const deleteName = (name, list) => {
+    let newName = selectedCountries.filter((x) => x != name);
+    dispatch(deleteCountry(newName, list));
   };
   return (
     <>
@@ -103,7 +107,10 @@ export default function versus() {
                       }}
                       className="buttonDeleteNavbar"
                       onClick={() => {
-                        deleteName(country);
+                        deleteName(
+                          country,
+                          charts[selectedChart].config.versus
+                        );
                       }}
                     />
                   </Nav.Link>
@@ -134,7 +141,10 @@ export default function versus() {
                           key={item + index}
                           style={{ color: "grey" }}
                           onClick={() => {
-                            addToModal(item);
+                            addToModal(
+                              item,
+                              charts[selectedChart].config.versus
+                            );
                           }}
                         >
                           {item}

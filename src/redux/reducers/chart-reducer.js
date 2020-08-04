@@ -10,6 +10,10 @@ import {
   CHANGE_METRIC_INFO,
   CHANGE_VISUALIZATION,
   CHART_TO_VERSUS,
+  DELETE_ROW,
+  ADD_NAME,
+  DELETE_NAME,
+  ADD_CHART_TO_VERSUS,
 } from "../constants";
 import { changeChart } from "../action-creator/Charts";
 
@@ -127,6 +131,81 @@ export default (state = initialState, action) => {
         selectedCountries: action.listFlag,
         charts: newChartVersus,
       };
+    case DELETE_ROW:
+      let array = [];
+      let deleteRowList = state.charts[
+        state.selectedChart
+      ].config.versus.filter((x) => x.metric_id != action.metricID);
+
+      for (let i = 0; i < state.charts.length; i++) {
+        if (state.selectedChart == i) {
+          array[i] = {
+            ...state.charts[i],
+            config: { ...state.charts[i].config, versus: deleteRowList },
+          };
+        } else {
+          array[i] = { ...state.charts[i] };
+        }
+      }
+      return {
+        ...state,
+        charts: array,
+      };
+    case ADD_NAME:
+      let newArray = [];
+
+      for (let i = 0; i < state.charts.length; i++) {
+        if (state.selectedChart == i) {
+          newArray[i] = {
+            ...state.charts[i],
+            config: { ...state.charts[i].config, versus: action.newList },
+          };
+        } else {
+          newArray[i] = { ...state.charts[i] };
+        }
+      }
+      return {
+        ...state,
+        charts: newArray,
+        selectedCountries: action.flags,
+      };
+    case DELETE_NAME:
+      let newArrayDelete = [];
+
+      for (let i = 0; i < state.charts.length; i++) {
+        if (state.selectedChart == i) {
+          newArrayDelete[i] = {
+            ...state.charts[i],
+            config: { ...state.charts[i].config, versus: action.newList },
+          };
+        } else {
+          newArrayDelete[i] = { ...state.charts[i] };
+        }
+      }
+      return {
+        ...state,
+        charts: newArrayDelete,
+        selectedCountries: action.flags,
+      };
+    case ADD_CHART_TO_VERSUS:
+      let newListToAdd = [];
+      action.metric.dimension.site = state.selectedCountries;
+      console.log("ACtion metric es:", action.metric);
+      for (let i = 0; i < state.charts.length; i++) {
+        if (state.selectedChart == i) {
+          newListToAdd[i] = {
+            ...state.charts[i],
+            config: {
+              ...state.charts[i].config,
+              versus: [...state.charts[i].config.versus, action.metric],
+            },
+          };
+        } else {
+          newListToAdd[i] = { ...state.charts[i] };
+        }
+      }
+      return { ...state, charts: newListToAdd };
+
     default:
       return state;
   }

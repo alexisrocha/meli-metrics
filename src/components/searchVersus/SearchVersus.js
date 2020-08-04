@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Form } from "react-bootstrap";
 import SearchIcon from "@material-ui/icons/Search";
-import { addToVersus } from "../../redux/action-creator/Versus";
+import { addToVersus } from "../../redux/action-creator/Charts";
 import "../search/Search.scss";
 
 export default function Search() {

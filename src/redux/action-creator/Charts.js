@@ -10,6 +10,10 @@ import {
   CHANGE_METRIC_INFO,
   CHANGE_VISUALIZATION,
   CHART_TO_VERSUS,
+  DELETE_ROW,
+  ADD_NAME,
+  DELETE_NAME,
+  ADD_CHART_TO_VERSUS,
 } from "../constants";
 import axios from "axios";
 
@@ -95,6 +99,42 @@ const changeVisualization = (index, data) => ({
   index,
   data,
 });
+
+const deleteRow = (metricID) => ({
+  type: DELETE_ROW,
+  metricID,
+});
+
+const addName = (flags, newList) => ({
+  type: ADD_NAME,
+  flags,
+  newList,
+});
+
+const deleteName = (flags, newList) => ({
+  type: DELETE_NAME,
+  flags,
+  newList,
+});
+
+const addChartToVersus = (metric) => ({
+  type: ADD_CHART_TO_VERSUS,
+  metric,
+});
+
+export const addToVersus = (id) => {
+  return (dispatch) =>
+    axios
+      .get(host + metricUrl[id])
+      .then((res) => res.data)
+      .then((metric) => dispatch(addChartToVersus(metric)));
+};
+
+export const deleteMetrics = (metricID) => {
+  return (dispatch) => {
+    dispatch(deleteRow(metricID));
+  };
+};
 
 export const changeView = (index, data) => {
   return (dispatch) => {
@@ -218,5 +258,33 @@ export const sendToVersus = (list, listFlag) => {
 
   return (dispatch) => {
     dispatch(chartToVersus(listVersus, test));
+  };
+};
+
+export const addCountry = (flags, newList) => {
+  console.log("Flags: ", flags);
+  console.log;
+  let listVersus = [];
+  for (let i = 0; i < newList.length; i++) {
+    listVersus.push({
+      ...newList[i],
+      dimension: { ...newList[i].dimension, site: flags },
+    });
+  }
+  return (dispatch) => {
+    dispatch(addName(flags, listVersus));
+  };
+};
+
+export const deleteCountry = (flags, list) => {
+  let listVersus = [];
+  for (let i = 0; i < list.length; i++) {
+    listVersus.push({
+      ...list[i],
+      dimension: { ...list[i].dimension, site: flags },
+    });
+  }
+  return (dispatch) => {
+    dispatch(deleteName(flags, listVersus));
   };
 };
