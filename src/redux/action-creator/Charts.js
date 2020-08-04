@@ -41,12 +41,12 @@ const getChart = (charts) => ({
   charts,
 });
 
-const selectChart = (selectedChart) => ({
+export const chartSelect = (selectedChart) => ({
   type: SELECTED_CHART,
   selectedChart,
 });
 
-const deleteChart = (id) => ({
+export const deleteCharts = (id) => ({
   type: DELETE_CHART,
   id,
 });
@@ -56,12 +56,12 @@ const deleteMetric = (id) => ({
   id,
 });
 
-const copyChart = (id) => ({
+export const copyList = (id) => ({
   type: COPY_CHART,
   id,
 });
 
-const setSelectedChart = (selectedChart) => ({
+export const changeChart = (selectedChart) => ({
   type: SET_SELECTEDCHART,
   selectedChart,
 });
@@ -71,7 +71,7 @@ const addMetric = (metric) => ({
   metric,
 });
 
-const changeName = (index, newName) => ({
+export const changeTitle = (index, newName) => ({
   type: CHANGE_NAME,
   index,
   newName,
@@ -83,17 +83,12 @@ const changeInfo = (index, newChart) => ({
   newChart,
 });
 
-const changeVisualization = (index, data) => ({
+export const changeView = (index, data) => ({
   type: CHANGE_VISUALIZATION,
   index,
   data,
 });
 
-export const changeView = (index, data) => {
-  return (dispatch) => {
-    dispatch(changeVisualization(index, data));
-  };
-};
 
 export const fetchChart = (id, title) => {
   return (dispatch) =>
@@ -105,24 +100,6 @@ export const fetchChart = (id, title) => {
         return chart;
       })
       .then((charts) => dispatch(getChart(charts)));
-};
-
-export const chartSelect = (chart) => {
-  return (dispatch) => {
-    dispatch(selectChart(chart));
-  };
-};
-
-export const deleteCharts = (id) => {
-  return (dispatch) => {
-    dispatch(deleteChart(id));
-  };
-};
-
-export const changeChart = (selectChart) => {
-  return (dispatch) => {
-    dispatch(setSelectedChart(selectChart));
-  };
 };
 
 export const removeMetric = (id, selectedChart, chartLength) => {
@@ -138,24 +115,12 @@ export const removeMetric = (id, selectedChart, chartLength) => {
   }
 };
 
-export const copyList = (id) => {
-  return (dispatch) => {
-    dispatch(copyChart(id));
-  };
-};
-
 export const addMetricToChart = (id) => {
   return (dispatch) =>
     axios
       .get(host + metricUrl[id])
       .then((res) => res.data)
       .then((metric) => dispatch(addMetric(metric)));
-};
-
-export const changeTitle = (index, newName) => {
-  return (dispatch) => {
-    dispatch(changeName(index, newName));
-  };
 };
 
 export const changeMetricInfo = (
