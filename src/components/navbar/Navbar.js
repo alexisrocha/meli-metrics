@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Badge from "react-bootstrap/Badge";
 import { useSelector, useDispatch } from "react-redux";
 import { changeView } from "../../redux/action-creator/Charts";
+import { setLocation } from "../../redux/action-creator/Location";
 import "./Navbar.scss";
 
 export default function navbar() {
@@ -111,16 +112,20 @@ export default function navbar() {
                   My Charts
                 </Link>
               </Nav.Link>
-              <Nav.Link
+              <Nav.Link>
+                <Link
                 className="linkNavbar"
+                to="/alarms"
                 style={{
                   color: location == "alarms" ? "#449fd7" : "#9e9e9e",
                 }}
                 onClick={() => {
-                  setColor("alarms");
+                  setColor("kpis");
+                  dispatch(setLocation("alarms"))
                 }}
               >
-                My alarms
+                My Alarms
+              </Link>
               </Nav.Link>
             </div>
 

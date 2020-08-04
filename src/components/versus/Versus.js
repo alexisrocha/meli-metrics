@@ -16,7 +16,7 @@ import {
   addCountry,
   deleteCountry,
   sendToVersus,
-} from "../../redux/action-creator/Versus";
+} from "../../redux/action-creator/Charts";
 import { setLocation } from "../../redux/action-creator/Location";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
@@ -27,11 +27,10 @@ export default function versus() {
   const [chartsVersus, setChartsVersus] = useState([]);
   const [indexItem, setIndex] = useState(null);
   const [shadow, setShadow] = useState(false);
-  const chartVersus = useSelector((store) => store.versus.chartVersus);
   const charts = useSelector((store) => store.chart.charts);
   const selectedChart = useSelector((store) => store.chart.selectedChart);
   const selectedCountries = useSelector(
-    (store) => store.versus.selectedCountries
+    (store) => store.chart.selectedCountries
   );
   const flags = {
     MLA: MLA,
@@ -45,23 +44,26 @@ export default function versus() {
   };
   const flagsArray = ["MLA", "MLB", "MLC", "MLM", "MLU", "MBO", "MCO", "MGT"];
   const dispatch = useDispatch();
-  const addToModal = (name) => {
-    dispatch(addCountry(name, chartVersus));
+  const addToModal = (name, list) => {
+    console.log("Versus component:", name, list);
+    dispatch(addCountry([...selectedCountries, name], list));
   };
   let flagsSelected = [];
 
   useEffect(() => {
     dispatch(setLocation("main"));
-    for (let i = 0; i < charts[selectedChart].config.length; i++) {
+    for (let i = 0; i < charts[selectedChart].config.simple.length; i++) {
       if (
-        !flagsSelected.includes(charts[selectedChart].config[i].dimension.site)
+        !flagsSelected.includes(
+          charts[selectedChart].config.simple[i].dimension.site
+        )
       )
         flagsSelected = [
           ...flagsSelected,
-          charts[selectedChart].config[i].dimension.site,
+          charts[selectedChart].config.simple[i].dimension.site,
         ];
     }
-    dispatch(sendToVersus(charts[selectedChart].config, flagsSelected));
+    dispatch(sendToVersus(charts[selectedChart].config.simple, flagsSelected));
   }, []);
 
   const changeCSS = () => {
@@ -71,8 +73,9 @@ export default function versus() {
   const changeCSSOut = () => {
     setShadow(false);
   };
-  const deleteName = (name) => {
-    dispatch(deleteCountry(name, chartVersus));
+  const deleteName = (name, list) => {
+    let newName = selectedCountries.filter((x) => x != name);
+    dispatch(deleteCountry(newName, list));
   };
   return (
     <>
@@ -104,7 +107,10 @@ export default function versus() {
                       }}
                       className="buttonDeleteNavbar"
                       onClick={() => {
-                        deleteName(country);
+                        deleteName(
+                          country,
+                          charts[selectedChart].config.versus
+                        );
                       }}
                     />
                   </Nav.Link>
@@ -135,7 +141,10 @@ export default function versus() {
                           key={item + index}
                           style={{ color: "grey" }}
                           onClick={() => {
-                            addToModal(item);
+                            addToModal(
+                              item,
+                              charts[selectedChart].config.versus
+                            );
                           }}
                         >
                           {item}
