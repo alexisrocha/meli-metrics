@@ -112,9 +112,17 @@ export default function Metric({ idMetrica, chart, deleteId }) {
     if (number < 1000000) return "$" + (number / 1000).toFixed(2) + "k";
   };
 
-  const formatPer = number => (number * 100).toFixed(2) + "%"
+  const formatDec = number => (number).toFixed(2);
 
-  const percentage = (arr, arr2) => ((arr[arr.length - 1] / arr2[arr2.length - 1] - 1) * 100).toFixed(0)
+  const formatPer = number => (number * 100).toFixed(2) + "%";
+
+  const percentage = (arr, arr2) => ((arr / arr2 - 1) * 100).toFixed(0);
+
+  const percentageDif = (actual, lastYear) => percentage(actual, lastYear) + "%";
+
+  const ppDif = (actual, lastYear) => ((actual - lastYear) * 100).toFixed(0) + ' p.p';
+
+  const decDif = (actual, lastYear) => (actual - lastYear).toFixed(2);
 
   const changeCSS = () => setShadow(true);
   
@@ -186,10 +194,16 @@ export default function Metric({ idMetrica, chart, deleteId }) {
 
   const formatData = {
     CUR_2: info=>reduceNumber(info),
-    PERC_2: info=>formatPer(info)
-    /* INTEG: 3algo,
-    PERC_2: 3algo,
-    DEC_2: 3algo */
+    PERC_2: info=>formatPer(info),
+    INTEG: info=>reduceNumber(info),
+    DEC_2: info=>formatDec(info)
+  }
+
+  const formatDif = {
+    CUR_2: (actual, lastYear)=>percentageDif(actual, lastYear),
+    INTEG: (actual, lastYear)=>percentageDif(actual, lastYear),
+    PERC_2: (actual, lastYear)=>ppDif(actual, lastYear),
+    DEC_2: (actual, lastYear)=>decDif(actual, lastYear)
   }
 
   var info = [];
@@ -263,30 +277,24 @@ export default function Metric({ idMetrica, chart, deleteId }) {
               </h3>
             </div>
 
-            {metricData ? (
+            {metricData && metric ? (
               <>
-                {percentage(metricData.data[0].data, metricData.data[1].data) >
+                {(metricData.data[0].data[metricData.data[0].data.length - 1] - metricData.data[1].data[metricData.data[1].data.length - 1]) >
                 0 ? (
-                  <div className="positive porcentaje">
+                  <div className="positive porcentaje" style={{width: metric.format == 'PERC_2' ? '30%' : '25%'}}>
                     <ArrowDropUpIcon />
                     <div>
                       {metricData
-                        ? percentage(
-                            metricData.data[0].data,
-                            metricData.data[1].data
-                          ) + "%"
+                        ? formatDif[metric.format](metricData.data[0].data[metricData.data[0].data.length - 1], metricData.data[1].data[metricData.data[1].data.length - 1])
                         : 0}
                     </div>
                   </div>
                 ) : (
-                  <div className="negative porcentaje">
+                  <div className="negative porcentaje" style={{width: metric.format == 'PERC_2' ? '30%' : '25%'}}>
                     <ArrowDropDownIcon />
                     <div style={{ marginRight: "5px" }}>
                       {metricData
-                        ? percentage(
-                            metricData.data[0].data,
-                            metricData.data[1].data
-                          ) + "%"
+                        ? formatDif[metric.format](metricData.data[0].data[metricData.data[0].data.length - 1], metricData.data[1].data[metricData.data[1].data.length - 1])
                         : 0}
                     </div>
                   </div>
