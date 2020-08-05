@@ -21,13 +21,13 @@ let host = "https://run.mocky.io/v3/";
 
 let url = {
   "Buy Box - GMV": `5ceb55d7-2f8b-44ee-818c-28c7fe46d36c`,
-  "CBT - ASP(e) Billable": "6477bf45-b68e-45f3-83a5-1a798c517ac6",
-  "Avg Shipping Time": "3af1379f-4676-4d4e-958f-d5fb9c379fd4",
-  "Devices Sold": `5b620a5b-4941-4b65-acdb-02da3bebb863`,
-  "New Buyers": "25e5d4bf-fca9-4161-9175-72020548c29a",
-  "ASP per Shippment": "6c098f7d-aeb9-44e3-9dd3-40240b4c789b",
-  "Unique Receivers": "226724ff-5b90-4b39-9d4c-8a32139d8ade",
-  "Share GMV Buy Box": "0145f405-c88d-4aca-a056-12cc03e3c1a2",
+  "CBT - ASP(e) Billable": "ba806367-158d-4d3a-b9d3-c0c5d994544a",
+  "Avg Shipping Time": "3a77392e-e4a8-4936-bc7c-0d0a40277be1",
+  "Devices Sold": `cda9ed89-b4ac-40c5-9fd1-8bade2b96214`,
+  "New Buyers": "bcbcf3c7-1d74-40ae-afd2-276895c136a4",
+  "ASP per Shippment": "7856f07a-199a-4b70-b8c0-03f8be410871",
+  "Unique Receivers": "49e79708-be54-4b07-9d45-bfd0f09a9df1",
+  "Share GMV Buy Box": "373bf76d-4695-403a-9671-a519b3151923",
 };
 
 let metricUrl = {
@@ -52,12 +52,12 @@ const getChart = (charts) => ({
   charts,
 });
 
-export const chartSelect = (selectedChart) => ({
+const selectChart = (selectedChart) => ({
   type: SELECTED_CHART,
   selectedChart,
 });
 
-export const deleteCharts = (id) => ({
+const deleteChart = (id) => ({
   type: DELETE_CHART,
   id,
 });
@@ -67,12 +67,12 @@ const deleteMetric = (id) => ({
   id,
 });
 
-export const copyList = (id) => ({
+const copyChart = (id) => ({
   type: COPY_CHART,
   id,
 });
 
-export const changeChart = (selectedChart) => ({
+const setSelectedChart = (selectedChart) => ({
   type: SET_SELECTEDCHART,
   selectedChart,
 });
@@ -82,7 +82,7 @@ const addMetric = (metric) => ({
   metric,
 });
 
-export const changeTitle = (index, newName) => ({
+const changeName = (index, newName) => ({
   type: CHANGE_NAME,
   index,
   newName,
@@ -94,7 +94,7 @@ const changeInfo = (index, newChart) => ({
   newChart,
 });
 
-export const changeView = (index, data) => ({
+const changeVisualization = (index, data) => ({
   type: CHANGE_VISUALIZATION,
   index,
   data,
@@ -154,6 +154,24 @@ export const fetchChart = (id, title) => {
       .then((charts) => dispatch(getChart(charts)));
 };
 
+export const chartSelect = (chart) => {
+  return (dispatch) => {
+    dispatch(selectChart(chart));
+  };
+};
+
+export const deleteCharts = (id) => {
+  return (dispatch) => {
+    dispatch(deleteChart(id));
+  };
+};
+
+export const changeChart = (selectChart) => {
+  return (dispatch) => {
+    dispatch(setSelectedChart(selectChart));
+  };
+};
+
 export const removeMetric = (id, selectedChart, chartLength) => {
   if (id == 0 && chartLength == 1) {
     return (dispatch) => {
@@ -167,12 +185,24 @@ export const removeMetric = (id, selectedChart, chartLength) => {
   }
 };
 
+export const copyList = (id) => {
+  return (dispatch) => {
+    dispatch(copyChart(id));
+  };
+};
+
 export const addMetricToChart = (id) => {
   return (dispatch) =>
     axios
       .get(host + metricUrl[id])
       .then((res) => res.data)
       .then((metric) => dispatch(addMetric(metric)));
+};
+
+export const changeTitle = (index, newName) => {
+  return (dispatch) => {
+    dispatch(changeName(index, newName));
+  };
 };
 
 export const changeMetricInfo = (
