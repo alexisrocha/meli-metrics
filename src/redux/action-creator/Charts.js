@@ -14,6 +14,7 @@ import {
   ADD_NAME,
   DELETE_NAME,
   ADD_CHART_TO_VERSUS,
+  SET_SHADOW_TO_VERSUS,
 } from "../constants";
 import axios from "axios";
 
@@ -120,6 +121,11 @@ const deleteName = (flags, newList) => ({
 const addChartToVersus = (metric) => ({
   type: ADD_CHART_TO_VERSUS,
   metric,
+});
+
+const setShadowToVersus = (id) => ({
+  type: SET_SHADOW_TO_VERSUS,
+  id,
 });
 
 export const addToVersus = (id) => {
@@ -248,7 +254,6 @@ export const sendToVersus = (list, listFlag) => {
     Math.min(listFlag.length + newListFlags.length, 4)
   );
 
-  console.log("Test: ", test);
   for (let i = 0; i < list.length; i++) {
     listVersus.push({
       ...list[i],
@@ -262,8 +267,6 @@ export const sendToVersus = (list, listFlag) => {
 };
 
 export const addCountry = (flags, newList) => {
-  console.log("Flags: ", flags);
-  console.log;
   let listVersus = [];
   for (let i = 0; i < newList.length; i++) {
     listVersus.push({
@@ -286,5 +289,11 @@ export const deleteCountry = (flags, list) => {
   }
   return (dispatch) => {
     dispatch(deleteName(flags, listVersus));
+  };
+};
+
+export const shadowVersus = (id) => {
+  return (dispatch) => {
+    dispatch(setShadowToVersus(id));
   };
 };
