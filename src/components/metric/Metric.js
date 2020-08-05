@@ -107,7 +107,12 @@ export default function Metric({ idMetrica, chart, deleteId }) {
 
   const handleCloseCard = () => setOpenCard(false);
 
-  const reduceNumber = number => {
+  const reduceInteg = number => {
+    if (number > 1000000) return +(number / 1000000).toFixed(2) + "M";
+    if (number < 1000000) return (number / 1000).toFixed(2) + "k";
+  };
+
+  const reduceCur2 = number => {
     if (number > 1000000) return "$" +(number / 1000000).toFixed(2) + "M";
     if (number < 1000000) return "$" + (number / 1000).toFixed(2) + "k";
   };
@@ -193,9 +198,9 @@ export default function Metric({ idMetrica, chart, deleteId }) {
   };
 
   const formatData = {
-    CUR_2: info=>reduceNumber(info),
+    CUR_2: info=>reduceCur2(info),
     PERC_2: info=>formatPer(info),
-    INTEG: info=>reduceNumber(info),
+    INTEG: info=>reduceInteg(info),
     DEC_2: info=>formatDec(info)
   }
 
