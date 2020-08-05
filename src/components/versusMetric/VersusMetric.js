@@ -130,18 +130,22 @@ export default function Metric({ idMetrica, chart, deleteId }) {
     return arr[arr.length - 1] - arr2[arr.length - 1];
   };
 
-  const reduceNumber = (number) => {
-    if (number > 1000000) {
-      return (number / 1000000).toFixed(2) + "M";
-    }
-    if (number < 1000000) {
-      return (number / 1000).toFixed(2) + "k";
-    }
+  const reduceNumber = number => {
+    if (number > 1000000) return "$" +(number / 1000000).toFixed(2) + "M";
+    if (number < 1000000) return "$" + (number / 1000).toFixed(2) + "k";
   };
 
-  const percentage = (arr, arr2) => {
-    return ((arr[arr.length - 1] / arr2[arr2.length - 1] - 1) * 100).toFixed(0);
-  };
+  const formatDec = number => (number).toFixed(2);
+
+  const formatPer = number => (number * 100).toFixed(2) + "%";
+
+  const percentage = (arr, arr2) => ((arr / arr2 - 1) * 100).toFixed(0);
+
+  const percentageDif = (actual, lastYear) => percentage(actual, lastYear) + "%";
+
+  const ppDif = (actual, lastYear) => ((actual - lastYear) * 100).toFixed(0) + ' p.p';
+
+  const decDif = (actual, lastYear) => (actual - lastYear).toFixed(2);
 
   const changeCSS = (id) => {
     dispatch(shadowVersus(id));
@@ -159,12 +163,20 @@ export default function Metric({ idMetrica, chart, deleteId }) {
     "MERCADO ENVIOS": "#a9c534",
   };
 
-  let formatos = {
-    INTEG: "integ",
-    CUR_2: "cur2",
-    PERC_2: "perc2",
-    DEC_2: "dec2",
-  };
+  const formatData = {
+    CUR_2: info=>reduceNumber(info),
+    PERC_2: info=>formatPer(info),
+    INTEG: info=>reduceNumber(info),
+    DEC_2: info=>formatDec(info)
+  }
+
+  const formatDif = {
+    CUR_2: (actual, lastYear)=>percentageDif(actual, lastYear),
+    INTEG: (actual, lastYear)=>percentageDif(actual, lastYear),
+    PERC_2: (actual, lastYear)=>ppDif(actual, lastYear),
+    DEC_2: (actual, lastYear)=>decDif(actual, lastYear)
+  }
+
   var info = [];
   var shadowCssOn = "inset 0px -55px 62px -15px rgba(0,0,0,0.75)";
   var shadowCssOff = "inset 0px 0px 0px 0px rgba(0,0,0,0.75)";
@@ -217,12 +229,11 @@ export default function Metric({ idMetrica, chart, deleteId }) {
         >
           <div className="contenedorInfo">
             <div className="value" style={{ marginTop: "10px" }}>
-              <h3>
+            <h3>
                 {metric ? (
                   <strong style={{ color: colors[metric.group] }}>
                     {metricData
-                      ? "$" +
-                        reduceNumber(
+                      ? formatData[metric.format](
                           metricData.data[0].data[
                             metricData.data[0].data.length - 1
                           ]
@@ -233,30 +244,24 @@ export default function Metric({ idMetrica, chart, deleteId }) {
               </h3>
             </div>
 
-            {metricData ? (
+            {metricData && metric ? (
               <>
-                {percentage(metricData.data[0].data, metricData.data[1].data) >
+                {(metricData.data[0].data[metricData.data[0].data.length - 1] - metricData.data[1].data[metricData.data[1].data.length - 1]) >
                 0 ? (
-                  <div className="positive porcentaje">
+                  <div className="positive porcentaje" style={{width: metric.format == 'PERC_2' ? '30%' : '25%'}}>
                     <ArrowDropUpIcon />
                     <div>
                       {metricData
-                        ? percentage(
-                            metricData.data[0].data,
-                            metricData.data[1].data
-                          ) + "%"
+                        ? formatDif[metric.format](metricData.data[0].data[metricData.data[0].data.length - 1], metricData.data[1].data[metricData.data[1].data.length - 1])
                         : 0}
                     </div>
                   </div>
                 ) : (
-                  <div className="negative porcentaje">
+                  <div className="negative porcentaje" style={{width: metric.format == 'PERC_2' ? '30%' : '25%'}}>
                     <ArrowDropDownIcon />
                     <div style={{ marginRight: "5px" }}>
                       {metricData
-                        ? percentage(
-                            metricData.data[0].data,
-                            metricData.data[1].data
-                          ) + "%"
+                        ? formatDif[metric.format](metricData.data[0].data[metricData.data[0].data.length - 1], metricData.data[1].data[metricData.data[1].data.length - 1])
                         : 0}
                     </div>
                   </div>
@@ -268,9 +273,9 @@ export default function Metric({ idMetrica, chart, deleteId }) {
           </div>
 
           <p className="timeLapse">
-            YOY $
-            {metricData
-              ? reduceNumber(
+            YOY&nbsp;
+            {metricData && metric
+              ? formatData[metric.format](
                   metricData.data[1].data[metricData.data[1].data.length - 1]
                 )
               : 0}
