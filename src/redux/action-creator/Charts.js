@@ -28,7 +28,7 @@ let url = {
   "New Buyers": "bcbcf3c7-1d74-40ae-afd2-276895c136a4",
   "ASP per Shippment": "7856f07a-199a-4b70-b8c0-03f8be410871",
   "Unique Receivers": "49e79708-be54-4b07-9d45-bfd0f09a9df1",
-  "Share GMV Buy Box": "373bf76d-4695-403a-9671-a519b3151923",
+  "Share GMV Buy Box": "a333e1af-2e4f-423b-b520-6b4ca1125bab",
 };
 
 let metricUrl = {
