@@ -21,13 +21,13 @@ let host = "https://run.mocky.io/v3/";
 
 let url = {
   "Buy Box - GMV": `5ceb55d7-2f8b-44ee-818c-28c7fe46d36c`,
-  "CBT - ASP(e) Billable": "6477bf45-b68e-45f3-83a5-1a798c517ac6",
-  "Avg Shipping Time": "3af1379f-4676-4d4e-958f-d5fb9c379fd4",
-  "Devices Sold": `5b620a5b-4941-4b65-acdb-02da3bebb863`,
-  "New Buyers": "25e5d4bf-fca9-4161-9175-72020548c29a",
-  "ASP per Shippment": "6c098f7d-aeb9-44e3-9dd3-40240b4c789b",
-  "Unique Receivers": "226724ff-5b90-4b39-9d4c-8a32139d8ade",
-  "Share GMV Buy Box": "0145f405-c88d-4aca-a056-12cc03e3c1a2",
+  "CBT - ASP(e) Billable": "ba806367-158d-4d3a-b9d3-c0c5d994544a",
+  "Avg Shipping Time": "3a77392e-e4a8-4936-bc7c-0d0a40277be1",
+  "Devices Sold": `cda9ed89-b4ac-40c5-9fd1-8bade2b96214`,
+  "New Buyers": "bcbcf3c7-1d74-40ae-afd2-276895c136a4",
+  "ASP per Shippment": "7856f07a-199a-4b70-b8c0-03f8be410871",
+  "Unique Receivers": "49e79708-be54-4b07-9d45-bfd0f09a9df1",
+  "Share GMV Buy Box": "373bf76d-4695-403a-9671-a519b3151923",
 };
 
 let metricUrl = {
