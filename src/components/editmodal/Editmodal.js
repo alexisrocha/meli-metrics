@@ -7,10 +7,12 @@ import {
   Col,
   DropdownButton,
   Dropdown,
+  Form,
 } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { changeMetricInfo } from "../../redux/action-creator/Charts";
 import "./Editmodal.scss";
+import "../addmodal/Addmodal";
 
 export default function editmodal(props) {
   const dispatch = useDispatch();
@@ -32,6 +34,11 @@ export default function editmodal(props) {
   const [comparison, setComparison] = React.useState(
     props.chart.comparation[0]
   );
+  const [editar, setEditar] = React.useState(true);
+
+  const editarAlarma = () => {
+    setEditar(!editar);
+  };
 
   const unselected = {
     fontSize: "90%",
@@ -76,155 +83,203 @@ export default function editmodal(props) {
       </Modal.Header>
       <Modal.Body>
         <Container>
-          {/* Columna para EDITAR y ALARMA  */}
-          <Row>
-            <Col md={3} lg={3}></Col>
-            <Col xs={12} md={3} lg={3} className="editarSwitch">
-              <span>EDITAR</span>
-            </Col>
-            <Col xs={6} md={3} lg={3} className="editarSwitch">
-              <span style={{ color: "#cccccc" }}>ALARMA</span>
-            </Col>
-            <Col md={3} lg={3}></Col>
-          </Row>
-          {/* Columna para SITE y SUBGROUP */}
-          <Row>
-            <Col md={3} lg={3} className="dropdownSite">
-              <label style={{ color: "gray" }}>Site</label>
-              <DropdownButton id="dropdownMenuButton" size="sm" title={site}>
-                {metricOptions &&
-                  metricOptions.dimensions.site.map((elem, index) => {
-                    return (
-                      <Dropdown.Item
-                        eventKey={index + 1}
-                        onClick={() => {
-                          setSite(elem);
-                        }}
-                      >
-                        {elem}
-                      </Dropdown.Item>
-                    );
-                  })}
-              </DropdownButton>
-            </Col>
-            <Col md={3} lg={3} className="dropdownSubgroup">
-              <label style={{ color: "gray" }}>Subgroup</label>
-              <DropdownButton
-                id="dropdownMenuButton2"
-                size="sm"
-                title={subgroup}
-              >
-                {metricOptions &&
-                  metricOptions.dimensions.subgroup.map((elem, index) => {
-                    return (
-                      <Dropdown.Item
-                        eventKey={index + 1}
-                        onClick={() => {
-                          setSubgroup(elem);
-                        }}
-                      >
-                        {elem}
-                      </Dropdown.Item>
-                    );
-                  })}
-              </DropdownButton>
-            </Col>
-            <Col md={6} lg={20}></Col>
-          </Row>
+          {editar ? (
+            <Row>
+              <Col md={3} lg={3}></Col>
+              <Col xs={12} md={3} lg={3} className="editarSwitch">
+                <span onClick={editarAlarma}>EDITAR</span>
+              </Col>
+              <Col xs={6} md={3} lg={3} className="editarSwitch">
+                <span onClick={editarAlarma} style={{ color: "#cccccc" }}>
+                  ALARMA
+                </span>
+              </Col>
+              <Col md={3} lg={3}></Col>
+            </Row>
+          ) : (
+            <Row>
+              <Col md={3} lg={3}></Col>
+              <Col xs={12} md={3} lg={3} className="editarSwitch">
+                <span onClick={editarAlarma} style={{ color: "#cccccc" }}>
+                  EDITAR
+                </span>
+              </Col>
+              <Col xs={6} md={3} lg={3} className="editarSwitch">
+                <span onClick={editarAlarma}>ALARMA</span>
+              </Col>
+              <Col md={3} lg={3}></Col>
+            </Row>
+          )}
 
-          {/* Columna para TIMEFRAME  */}
-          <Row>
-            <Col xs={12} md={20} className="timeFrame">
-              <label style={{ color: "gray" }}>Time frame</label>
-              <div className="buttonModalComparacion">
-                {metricOptions &&
-                  metricOptions.time_frames.map((elem) => {
-                    if (elem.desc == props.chart.time_frame) {
-                      return (
-                        <Button
-                          style={
-                            timeFrameButton == elem.desc &&
-                            elem.desc == props.chart.time_frame
-                              ? selected
-                              : unselected
-                          }
-                          onClick={() => {
-                            setTimeFrame(elem.desc);
-                            setTimeFrameButton(elem.desc);
-                          }}
-                        >
-                          {elem.desc}
-                        </Button>
-                      );
-                    } else {
-                      return (
-                        <Button
-                          style={
-                            timeFrameButton == elem.desc ? selected : unselected
-                          }
-                          onClick={() => {
-                            setTimeFrame(elem.desc);
-                            setTimeFrameButton(elem.desc);
-                          }}
-                        >
-                          {elem.desc}
-                        </Button>
-                      );
-                    }
-                  })}
-              </div>
-            </Col>
-          </Row>
-          {/* Columna para COMPARACION  */}
-          <Row>
-            <Col xs={12} md={20} className="comparacion">
-              <label style={{ color: "gray", display: "block" }}>
-                Comparacion
-              </label>
-              <div className="buttonModalComparacion">
-                {metricOptions &&
-                  metricOptions.date_comp.map((elem, index) => {
-                    if (elem.code == props.chart.comparation[0]) {
-                      return (
-                        <Button
-                          style={
-                            comparationButton == elem.code &&
-                            elem.code == props.chart.comparation[0]
-                              ? selected
-                              : unselected
-                          }
-                          onClick={() => {
-                            setComparison(elem.code);
-                            setComparationButton(elem.code);
-                          }}
-                        >
-                          {elem.desc}
-                        </Button>
-                      );
-                    } else {
-                      return (
-                        <Button
-                          style={
-                            comparationButton == elem.code
-                              ? selected
-                              : unselected
-                          }
-                          onClick={() => {
-                            setComparison(elem.code);
-                            setComparationButton(elem.code);
-                          }}
-                        >
-                          {elem.desc}
-                        </Button>
-                      );
-                    }
-                  })}
-              </div>
-            </Col>
-          </Row>
+          {editar ? (
+            <React.Fragment>
+              <Row>
+                <Col md={3} lg={3} className="dropdownSite">
+                  <label style={{ color: "gray" }}>Site</label>
+                  <DropdownButton
+                    id="dropdownMenuButton"
+                    size="sm"
+                    title={site}
+                  >
+                    {metricOptions &&
+                      metricOptions.dimensions.site.map((elem, index) => {
+                        return (
+                          <Dropdown.Item
+                            eventKey={index + 1}
+                            onClick={() => {
+                              setSite(elem);
+                            }}
+                          >
+                            {elem}
+                          </Dropdown.Item>
+                        );
+                      })}
+                  </DropdownButton>
+                </Col>
+                <Col md={3} lg={3} className="dropdownSubgroup">
+                  <label style={{ color: "gray" }}>Subgroup</label>
+                  <DropdownButton
+                    id="dropdownMenuButton2"
+                    size="sm"
+                    title={subgroup}
+                  >
+                    {metricOptions &&
+                      metricOptions.dimensions.subgroup.map((elem, index) => {
+                        return (
+                          <Dropdown.Item
+                            eventKey={index + 1}
+                            onClick={() => {
+                              setSubgroup(elem);
+                            }}
+                          >
+                            {elem}
+                          </Dropdown.Item>
+                        );
+                      })}
+                  </DropdownButton>
+                </Col>
+                <Col md={6} lg={20}></Col>
+              </Row>
+
+              <Row>
+                <Col xs={12} md={20} className="timeFrame">
+                  <label style={{ color: "gray" }}>Time frame</label>
+                  <div className="buttonModalComparacion">
+                    {metricOptions &&
+                      metricOptions.time_frames.map((elem) => {
+                        if (elem.desc == props.chart.time_frame) {
+                          return (
+                            <Button
+                              style={
+                                timeFrameButton == elem.desc &&
+                                elem.desc == props.chart.time_frame
+                                  ? selected
+                                  : unselected
+                              }
+                              onClick={() => {
+                                setTimeFrame(elem.desc);
+                                setTimeFrameButton(elem.desc);
+                              }}
+                            >
+                              {elem.desc}
+                            </Button>
+                          );
+                        } else {
+                          return (
+                            <Button
+                              style={
+                                timeFrameButton == elem.desc
+                                  ? selected
+                                  : unselected
+                              }
+                              onClick={() => {
+                                setTimeFrame(elem.desc);
+                                setTimeFrameButton(elem.desc);
+                              }}
+                            >
+                              {elem.desc}
+                            </Button>
+                          );
+                        }
+                      })}
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12} md={20} className="comparacion">
+                  <label style={{ color: "gray", display: "block" }}>
+                    Comparacion
+                  </label>
+                  <div className="buttonModalComparacion">
+                    {metricOptions &&
+                      metricOptions.date_comp.map((elem, index) => {
+                        if (elem.code == props.chart.comparation[0]) {
+                          return (
+                            <Button
+                              style={
+                                comparationButton == elem.code &&
+                                elem.code == props.chart.comparation[0]
+                                  ? selected
+                                  : unselected
+                              }
+                              onClick={() => {
+                                setComparison(elem.code);
+                                setComparationButton(elem.code);
+                              }}
+                            >
+                              {elem.desc}
+                            </Button>
+                          );
+                        } else {
+                          return (
+                            <Button
+                              style={
+                                comparationButton == elem.code
+                                  ? selected
+                                  : unselected
+                              }
+                              onClick={() => {
+                                setComparison(elem.code);
+                                setComparationButton(elem.code);
+                              }}
+                            >
+                              {elem.desc}
+                            </Button>
+                          );
+                        }
+                      })}
+                  </div>
+                </Col>
+              </Row>
+            </React.Fragment>
+          ) : (
+            <Form autoComplete="off" className="formEditAlarm">
+              <span className="editAlarm">TRIGGER 1</span>
+              <Form.Group className="forminput">
+                <Form.Control placeholder="Period" id="inputSearch" />
+              </Form.Group>
+              <Form.Group className="forminput">
+                <Form.Control placeholder="Site" id="inputSearch" />
+              </Form.Group>
+              <Form.Group className="forminput">
+                <Form.Control placeholder="Subgroup" id="inputSearch" />
+              </Form.Group>
+              <Form.Group className="forminput">
+                <Form.Control placeholder="Type" id="inputSearch" />
+              </Form.Group>
+              <Form.Group className="forminput">
+                <Form.Control placeholder="Comparison" id="inputSearch" />
+              </Form.Group>
+              <Form.Group className="forminput">
+                <Form.Control placeholder="Absolute value" id="inputSearch" />
+              </Form.Group>
+              <span className="editAlarm2"> + TRIGGER </span>
+            </Form>
+          )}
         </Container>
       </Modal.Body>
-      <Modal.Footer>
+
+      <Modal.Footer className="closeModalEditAlarm">
         <span className="closeModal" onClick={props.onHide}>
           Cancel
         </span>

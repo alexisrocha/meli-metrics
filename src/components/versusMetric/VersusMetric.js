@@ -34,7 +34,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMetric } from "../../redux/action-creator/Metrics";
 import { fetchMetricData } from "../../redux/action-creator/MetricData";
-import { removeMetric } from "../../redux/action-creator/Charts";
+import { removeMetric, shadowVersus } from "../../redux/action-creator/Charts";
 import Editmodal from "../editmodal/Editmodal";
 import "../metric/Metric.scss";
 
@@ -88,9 +88,12 @@ export default function Metric({ idMetrica, chart, deleteId }) {
   const metric = useSelector((store) => store.metric.metric[idMetrica]);
   const charts = useSelector((store) => store.chart.charts);
   const selectedChart = useSelector((store) => store.chart.selectedChart);
-  const metricData = useSelector(
-    (store) => store.metricData.metricData[idMetrica] ? store.metricData.metricData[idMetrica][chart.time_frame] : store.metricData.metricData[idMetrica]
+  const metricData = useSelector((store) =>
+    store.metricData.metricData[idMetrica]
+      ? store.metricData.metricData[idMetrica][chart.time_frame]
+      : store.metricData.metricData[idMetrica]
   );
+  const metricId = useSelector((store) => store.chart.metricID);
   const dispatch = useDispatch();
   const deleteCard = () => {
     setOpenCard(true);
@@ -144,11 +147,13 @@ export default function Metric({ idMetrica, chart, deleteId }) {
 
   const decDif = (actual, lastYear) => (actual - lastYear).toFixed(2);
 
-  const changeCSS = () => {
+  const changeCSS = (id) => {
+    dispatch(shadowVersus(id));
     setShadow(true);
   };
 
   const changeCSSOut = () => {
+    dispatch(shadowVersus(-1));
     setShadow(false);
   };
 
@@ -175,10 +180,23 @@ export default function Metric({ idMetrica, chart, deleteId }) {
   var info = [];
   var shadowCssOn = "inset 0px -55px 62px -15px rgba(0,0,0,0.75)";
   var shadowCssOff = "inset 0px 0px 0px 0px rgba(0,0,0,0.75)";
+
   useEffect(() => {
+    if (metricId == idMetrica) {
+      setShadow(true);
+    }
+    if (metricId == -1) {
+      setShadow(false);
+    }
     dispatch(fetchMetric(idMetrica));
     dispatch(fetchMetricData(idMetrica, chart.time_frame));
-  }, [idMetrica, charts[selectedChart].length, info.length, chart.time_frame]);
+  }, [
+    metricId,
+    idMetrica,
+    charts[selectedChart].length,
+    info.length,
+    chart.time_frame,
+  ]);
 
   if (charts[selectedChart]) {
     info = charts[selectedChart].config;
@@ -275,7 +293,9 @@ export default function Metric({ idMetrica, chart, deleteId }) {
 
             <div
               className="buttonContainer"
-              onMouseOver={changeCSS}
+              onMouseOver={() => {
+                changeCSS(idMetrica);
+              }}
               onMouseLeave={changeCSSOut}
             >
               <div className="button" onClick={handleClickOpenInfo}>

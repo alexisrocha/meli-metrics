@@ -56,6 +56,7 @@ export default function VersusChart({ array }) {
       <div className="versusContainer">
         {array &&
           array.map((elem, index) => {
+            console.log("array es:", array);
             return (
               <VersusMetric
                 key={index}

@@ -14,6 +14,7 @@ import {
   ADD_NAME,
   DELETE_NAME,
   ADD_CHART_TO_VERSUS,
+  SET_SHADOW_TO_VERSUS,
 } from "../constants";
 import axios from "axios";
 
@@ -52,12 +53,12 @@ const getChart = (charts) => ({
   charts,
 });
 
-const selectChart = (selectedChart) => ({
+export const chartSelect = (selectedChart) => ({
   type: SELECTED_CHART,
   selectedChart,
 });
 
-const deleteChart = (id) => ({
+export const deleteCharts = (id) => ({
   type: DELETE_CHART,
   id,
 });
@@ -67,12 +68,12 @@ const deleteMetric = (id) => ({
   id,
 });
 
-const copyChart = (id) => ({
+export const copyList = (id) => ({
   type: COPY_CHART,
   id,
 });
 
-const setSelectedChart = (selectedChart) => ({
+export const changeChart = (selectedChart) => ({
   type: SET_SELECTEDCHART,
   selectedChart,
 });
@@ -82,7 +83,7 @@ const addMetric = (metric) => ({
   metric,
 });
 
-const changeName = (index, newName) => ({
+export const changeTitle = (index, newName) => ({
   type: CHANGE_NAME,
   index,
   newName,
@@ -94,13 +95,13 @@ const changeInfo = (index, newChart) => ({
   newChart,
 });
 
-const changeVisualization = (index, data) => ({
+export const changeView = (index, data) => ({
   type: CHANGE_VISUALIZATION,
   index,
   data,
 });
 
-const deleteRow = (metricID) => ({
+export const deleteMetrics = (metricID) => ({
   type: DELETE_ROW,
   metricID,
 });
@@ -122,24 +123,17 @@ const addChartToVersus = (metric) => ({
   metric,
 });
 
+export const shadowVersus = (id) => ({
+  type: SET_SHADOW_TO_VERSUS,
+  id,
+});
+
 export const addToVersus = (id) => {
   return (dispatch) =>
     axios
       .get(host + metricUrl[id])
       .then((res) => res.data)
       .then((metric) => dispatch(addChartToVersus(metric)));
-};
-
-export const deleteMetrics = (metricID) => {
-  return (dispatch) => {
-    dispatch(deleteRow(metricID));
-  };
-};
-
-export const changeView = (index, data) => {
-  return (dispatch) => {
-    dispatch(changeVisualization(index, data));
-  };
 };
 
 export const fetchChart = (id, title) => {
@@ -152,24 +146,6 @@ export const fetchChart = (id, title) => {
         return chart;
       })
       .then((charts) => dispatch(getChart(charts)));
-};
-
-export const chartSelect = (chart) => {
-  return (dispatch) => {
-    dispatch(selectChart(chart));
-  };
-};
-
-export const deleteCharts = (id) => {
-  return (dispatch) => {
-    dispatch(deleteChart(id));
-  };
-};
-
-export const changeChart = (selectChart) => {
-  return (dispatch) => {
-    dispatch(setSelectedChart(selectChart));
-  };
 };
 
 export const removeMetric = (id, selectedChart, chartLength) => {
@@ -185,24 +161,12 @@ export const removeMetric = (id, selectedChart, chartLength) => {
   }
 };
 
-export const copyList = (id) => {
-  return (dispatch) => {
-    dispatch(copyChart(id));
-  };
-};
-
 export const addMetricToChart = (id) => {
   return (dispatch) =>
     axios
       .get(host + metricUrl[id])
       .then((res) => res.data)
       .then((metric) => dispatch(addMetric(metric)));
-};
-
-export const changeTitle = (index, newName) => {
-  return (dispatch) => {
-    dispatch(changeName(index, newName));
-  };
 };
 
 export const changeMetricInfo = (
@@ -228,8 +192,6 @@ export const changeMetricInfo = (
 };
 
 export const sendToVersus = (list, listFlag) => {
-  console.log("List es:", list);
-  console.log("Listflags es:", listFlag);
   let listVersus = [];
   let diccionario = new Object();
   let newListFlags = [];
@@ -248,7 +210,6 @@ export const sendToVersus = (list, listFlag) => {
     Math.min(listFlag.length + newListFlags.length, 4)
   );
 
-  console.log("Test: ", test);
   for (let i = 0; i < list.length; i++) {
     listVersus.push({
       ...list[i],
@@ -262,8 +223,6 @@ export const sendToVersus = (list, listFlag) => {
 };
 
 export const addCountry = (flags, newList) => {
-  console.log("Flags: ", flags);
-  console.log;
   let listVersus = [];
   for (let i = 0; i < newList.length; i++) {
     listVersus.push({

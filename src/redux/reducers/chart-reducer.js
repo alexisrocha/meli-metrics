@@ -14,6 +14,7 @@ import {
   ADD_NAME,
   DELETE_NAME,
   ADD_CHART_TO_VERSUS,
+  SET_SHADOW_TO_VERSUS,
 } from "../constants";
 import { changeChart } from "../action-creator/Charts";
 
@@ -21,6 +22,7 @@ const initialState = {
   selectedCountries: [],
   charts: [],
   selectedChart: -1,
+  metricID: null,
 };
 
 export default (state = initialState, action) => {
@@ -190,7 +192,6 @@ export default (state = initialState, action) => {
     case ADD_CHART_TO_VERSUS:
       let newListToAdd = [];
       action.metric.dimension.site = state.selectedCountries;
-      console.log("ACtion metric es:", action.metric);
       for (let i = 0; i < state.charts.length; i++) {
         if (state.selectedChart == i) {
           newListToAdd[i] = {
@@ -205,6 +206,9 @@ export default (state = initialState, action) => {
         }
       }
       return { ...state, charts: newListToAdd };
+
+    case SET_SHADOW_TO_VERSUS:
+      return { ...state, metricID: action.id };
 
     default:
       return state;

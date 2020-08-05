@@ -11,6 +11,7 @@
 .editarSwitch {
   font-family: "Proxima Nova";
   text-align: center;
+  cursor: pointer;
 }
 
 .buttonModalComparacion {
@@ -49,4 +50,23 @@
   background-color: white !important;
   color: black !important;
   border: 0px solid white !important;
+}
+
+.editAlarm {
+  font-family: "Proxima Nova";
+  color: black !important;
+}
+
+.editAlarm2 {
+  font-family: "Proxima Nova";
+  color: #00a6dc !important;
+  cursor: pointer;
+}
+
+.formEditAlarm {
+  padding-top: 20px;
+}
+
+.closeModalEditAlarm {
+  padding-bottom: 20px;
 }
