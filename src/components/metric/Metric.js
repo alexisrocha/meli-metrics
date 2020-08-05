@@ -36,7 +36,10 @@ import { fetchMetric } from "../../redux/action-creator/Metrics";
 import { fetchMetricData } from "../../redux/action-creator/MetricData";
 import { removeMetric } from "../../redux/action-creator/Charts";
 import Editmodal from "../editmodal/Editmodal";
+import { Form } from "react-bootstrap";
 import "./Metric.scss";
+import "../editmodal/Editmodal.scss";
+import "../addmodal/Addmodal.scss";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -88,46 +91,51 @@ export default function Metric({ idMetrica, chart, deleteId }) {
   const metric = useSelector((store) => store.metric.metric[idMetrica]);
   const charts = useSelector((store) => store.chart.charts);
   const selectedChart = useSelector((store) => store.chart.selectedChart);
-  const metricData = useSelector(
-    (store) => store.metricData.metricData[idMetrica] ? store.metricData.metricData[idMetrica][chart.time_frame] : store.metricData.metricData[idMetrica])
+  const metricData = useSelector((store) =>
+    store.metricData.metricData[idMetrica]
+      ? store.metricData.metricData[idMetrica][chart.time_frame]
+      : store.metricData.metricData[idMetrica]
+  );
   const dispatch = useDispatch();
-  const deleteCard = () => setOpenCard(true)
+  const deleteCard = () => setOpenCard(true);
 
   const handleClickOpenDownload = () => setOpenDownload(true);
 
   const handleClickOpenSettings = () => setOpenSetting(true);
 
-  const handleClickOpenInfo = () => setOpenInfo(true)
+  const handleClickOpenInfo = () => setOpenInfo(true);
 
-  const handleCloseInfo = () => setOpenInfo(false)
+  const handleCloseInfo = () => setOpenInfo(false);
 
-  const handleCloseDownload = () => setOpenDownload(false)
+  const handleCloseDownload = () => setOpenDownload(false);
 
-  const handleCloseSettings = () => setOpenSetting(false)
+  const handleCloseSettings = () => setOpenSetting(false);
 
   const handleCloseCard = () => setOpenCard(false);
 
-  const reduceNumber = number => {
-    if (number > 1000000) return "$" +(number / 1000000).toFixed(2) + "M";
+  const reduceNumber = (number) => {
+    if (number > 1000000) return "$" + (number / 1000000).toFixed(2) + "M";
     if (number < 1000000) return "$" + (number / 1000).toFixed(2) + "k";
   };
 
-  const formatDec = number => (number).toFixed(2);
+  const formatDec = (number) => number.toFixed(2);
 
-  const formatPer = number => (number * 100).toFixed(2) + "%";
+  const formatPer = (number) => (number * 100).toFixed(2) + "%";
 
   const percentage = (arr, arr2) => ((arr / arr2 - 1) * 100).toFixed(0);
 
-  const percentageDif = (actual, lastYear) => percentage(actual, lastYear) + "%";
+  const percentageDif = (actual, lastYear) =>
+    percentage(actual, lastYear) + "%";
 
-  const ppDif = (actual, lastYear) => ((actual - lastYear) * 100).toFixed(0) + ' p.p';
+  const ppDif = (actual, lastYear) =>
+    ((actual - lastYear) * 100).toFixed(0) + " p.p";
 
   const decDif = (actual, lastYear) => (actual - lastYear).toFixed(2);
 
   const changeCSS = () => setShadow(true);
-  
+
   const changeCSSOut = () => setShadow(false);
-  
+
   const generateDate = () => {
     var data = new Date();
     var fecha = data.toString().slice(4, 25).split(" ");
@@ -193,18 +201,18 @@ export default function Metric({ idMetrica, chart, deleteId }) {
   };
 
   const formatData = {
-    CUR_2: info=>reduceNumber(info),
-    PERC_2: info=>formatPer(info),
-    INTEG: info=>reduceNumber(info),
-    DEC_2: info=>formatDec(info)
-  }
+    CUR_2: (info) => reduceNumber(info),
+    PERC_2: (info) => formatPer(info),
+    INTEG: (info) => reduceNumber(info),
+    DEC_2: (info) => formatDec(info),
+  };
 
   const formatDif = {
-    CUR_2: (actual, lastYear)=>percentageDif(actual, lastYear),
-    INTEG: (actual, lastYear)=>percentageDif(actual, lastYear),
-    PERC_2: (actual, lastYear)=>ppDif(actual, lastYear),
-    DEC_2: (actual, lastYear)=>decDif(actual, lastYear)
-  }
+    CUR_2: (actual, lastYear) => percentageDif(actual, lastYear),
+    INTEG: (actual, lastYear) => percentageDif(actual, lastYear),
+    PERC_2: (actual, lastYear) => ppDif(actual, lastYear),
+    DEC_2: (actual, lastYear) => decDif(actual, lastYear),
+  };
 
   var info = [];
   var shadowCssOn = "inset 0px -55px 62px -15px rgba(0,0,0,0.75)";
@@ -217,7 +225,6 @@ export default function Metric({ idMetrica, chart, deleteId }) {
   if (charts[selectedChart]) {
     info = charts[selectedChart].config;
   }
-
 
   return (
     <>
@@ -279,22 +286,43 @@ export default function Metric({ idMetrica, chart, deleteId }) {
 
             {metricData && metric ? (
               <>
-                {(metricData.data[0].data[metricData.data[0].data.length - 1] - metricData.data[1].data[metricData.data[1].data.length - 1]) >
+                {metricData.data[0].data[metricData.data[0].data.length - 1] -
+                  metricData.data[1].data[metricData.data[1].data.length - 1] >
                 0 ? (
-                  <div className="positive porcentaje" style={{width: metric.format == 'PERC_2' ? '30%' : '25%'}}>
+                  <div
+                    className="positive porcentaje"
+                    style={{ width: metric.format == "PERC_2" ? "30%" : "25%" }}
+                  >
                     <ArrowDropUpIcon />
                     <div>
                       {metricData
-                        ? formatDif[metric.format](metricData.data[0].data[metricData.data[0].data.length - 1], metricData.data[1].data[metricData.data[1].data.length - 1])
+                        ? formatDif[metric.format](
+                            metricData.data[0].data[
+                              metricData.data[0].data.length - 1
+                            ],
+                            metricData.data[1].data[
+                              metricData.data[1].data.length - 1
+                            ]
+                          )
                         : 0}
                     </div>
                   </div>
                 ) : (
-                  <div className="negative porcentaje" style={{width: metric.format == 'PERC_2' ? '30%' : '25%'}}>
+                  <div
+                    className="negative porcentaje"
+                    style={{ width: metric.format == "PERC_2" ? "30%" : "25%" }}
+                  >
                     <ArrowDropDownIcon />
                     <div style={{ marginRight: "5px" }}>
                       {metricData
-                        ? formatDif[metric.format](metricData.data[0].data[metricData.data[0].data.length - 1], metricData.data[1].data[metricData.data[1].data.length - 1])
+                        ? formatDif[metric.format](
+                            metricData.data[0].data[
+                              metricData.data[0].data.length - 1
+                            ],
+                            metricData.data[1].data[
+                              metricData.data[1].data.length - 1
+                            ]
+                          )
                         : 0}
                     </div>
                   </div>
@@ -404,10 +432,29 @@ export default function Metric({ idMetrica, chart, deleteId }) {
             aria-describedby="alert-dialog-slide-description"
           >
             <DialogTitle id="alert-dialog-slide-title">{"Info"}</DialogTitle>
-            <DialogContent>
-              <DialogContentText id="alert-dialog-slide-description">
-                This is for Info
-              </DialogContentText>
+            <DialogContent id=" dialogContentForInfo">
+              <Form autoComplete="off" className="formEditAlarm">
+                <span className="editAlarm">TRIGGER 1</span>
+                <Form.Group className="forminput">
+                  <Form.Control placeholder="Period" id="inputSearch" />
+                </Form.Group>
+                <Form.Group className="forminput">
+                  <Form.Control placeholder="Site" id="inputSearch" />
+                </Form.Group>
+                <Form.Group className="forminput">
+                  <Form.Control placeholder="Subgroup" id="inputSearch" />
+                </Form.Group>
+                <Form.Group className="forminput">
+                  <Form.Control placeholder="Type" id="inputSearch" />
+                </Form.Group>
+                <Form.Group className="forminput">
+                  <Form.Control placeholder="Comparison" id="inputSearch" />
+                </Form.Group>
+                <Form.Group className="forminput">
+                  <Form.Control placeholder="Absolute value" id="inputSearch" />
+                </Form.Group>
+                <span className="editAlarm2"> + TRIGGER </span>
+              </Form>
             </DialogContent>
             <DialogActions>
               <Button onClick={handleCloseInfo} color="primary">
