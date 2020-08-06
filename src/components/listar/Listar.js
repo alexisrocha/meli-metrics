@@ -276,7 +276,7 @@ export default function Listar() {
                 onMouseOver={() => setOver("in", index)}
                 onMouseLeave={() => setOver("out", index)}
               >
-                <Iconos listaMetricas={item.config} />
+                <Iconos listaMetricas={item.config.simple} />
                 <div>
                   <OverlayTrigger
                     placement="left"

@@ -114,22 +114,27 @@ export default function navbar() {
               </Nav.Link>
               <Nav.Link>
                 <Link
-                className="linkNavbar"
-                to="/alarms"
-                style={{
-                  color: location == "alarms" ? "#449fd7" : "#9e9e9e",
-                }}
-                onClick={() => {
-                  setColor("kpis");
-                  dispatch(setLocation("alarms"))
-                }}
-              >
-                My Alarms
-              </Link>
+                  className="linkNavbar"
+                  to="/alarms"
+                  style={{
+                    color: location == "alarms" ? "#449fd7" : "#9e9e9e",
+                  }}
+                  onClick={() => {
+                    setColor("kpis");
+                    dispatch(setLocation("alarms"));
+                  }}
+                >
+                  My Alarms
+                </Link>
               </Nav.Link>
             </div>
 
-            {!charts.length > 0 || location == "list" || location == "alarms" ? (
+
+
+
+            {!charts.length > 0 ||
+            location == "list" ||
+            location == "alarms" ? (
               <div style={{ width: 253, marginRight: "15px" }}></div>
             ) : (
               <div className="divVisualizacion">
