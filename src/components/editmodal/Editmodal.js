@@ -10,7 +10,10 @@ import {
   Form,
 } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { changeMetricInfo } from "../../redux/action-creator/Charts";
+import {
+  changeMetricInfo,
+  changeTimeFrame,
+} from "../../redux/action-creator/Charts";
 import "./Editmodal.scss";
 import "../addmodal/Addmodal";
 
@@ -19,8 +22,12 @@ export default function editmodal(props) {
   const metricOptions = useSelector(
     (store) => store.metric.metric[props.idMetrica]
   );
+  const charts = useSelector((store) => store.chart.charts);
+  const selectedChart = useSelector((store) => store.chart.selectedChart);
   const location = useSelector((store) => store.location.location);
-
+  const selectedCountries = useSelector(
+    (store) => store.chart.selectedCountries
+  );
   const [timeFrameButton, setTimeFrameButton] = React.useState(
     props.chart.time_frame
   );
@@ -55,16 +62,27 @@ export default function editmodal(props) {
   };
 
   const sendData = () => {
-    dispatch(
-      changeMetricInfo(
-        props.index,
-        props.chart.metric_id,
-        site,
-        subgroup,
-        timeFrame,
-        comparison
-      )
-    );
+    if (location == "versus") {
+      dispatch(
+        changeTimeFrame(
+          selectedCountries,
+          charts[selectedChart].config.versus,
+          timeFrame,
+          props.chart.metric_id
+        )
+      );
+    } else {
+      dispatch(
+        changeMetricInfo(
+          props.index,
+          props.chart.metric_id,
+          site,
+          subgroup,
+          timeFrame,
+          comparison
+        )
+      );
+    }
   };
 
   return (
@@ -93,11 +111,11 @@ export default function editmodal(props) {
             <Row>
               <Col md={3} lg={3}></Col>
               <Col xs={12} md={3} lg={3} className="editarSwitch">
-                <span onClick={editarAlarma}>EDITAR</span>
+                <span onClick={editarAlarma}>EDIT</span>
               </Col>
               <Col xs={6} md={3} lg={3} className="editarSwitch">
                 <span onClick={editarAlarma} style={{ color: "#cccccc" }}>
-                  ALARMA
+                  ALARM
                 </span>
               </Col>
               <Col md={3} lg={3}></Col>
@@ -122,47 +140,93 @@ export default function editmodal(props) {
               <Row>
                 <Col md={3} lg={3} className="dropdownSite">
                   <label style={{ color: "gray" }}>Site</label>
-                  <DropdownButton
-                    id="dropdownMenuButton"
-                    size="sm"
-                    title={site}
-                  >
-                    {metricOptions &&
-                      metricOptions.dimensions.site.map((elem, index) => {
-                        return (
-                          <Dropdown.Item
-                            eventKey={index + 1}
-                            onClick={() => {
-                              setSite(elem);
-                            }}
-                          >
-                            {elem}
-                          </Dropdown.Item>
-                        );
-                      })}
-                  </DropdownButton>
+                  {location == "versus" ? (
+                    <DropdownButton
+                      disabled={true}
+                      id="dropdownMenuButton"
+                      size="sm"
+                      title={site}
+                    >
+                      {metricOptions &&
+                        metricOptions.dimensions.site.map((elem, index) => {
+                          return (
+                            <Dropdown.Item
+                              eventKey={index + 1}
+                              onClick={() => {
+                                setSite(elem);
+                              }}
+                            >
+                              {elem}
+                            </Dropdown.Item>
+                          );
+                        })}
+                    </DropdownButton>
+                  ) : (
+                    <DropdownButton
+                      id="dropdownMenuButton"
+                      size="sm"
+                      title={site}
+                    >
+                      {metricOptions &&
+                        metricOptions.dimensions.site.map((elem, index) => {
+                          return (
+                            <Dropdown.Item
+                              eventKey={index + 1}
+                              onClick={() => {
+                                setSite(elem);
+                              }}
+                            >
+                              {elem}
+                            </Dropdown.Item>
+                          );
+                        })}
+                    </DropdownButton>
+                  )}
                 </Col>
                 <Col md={3} lg={3} className="dropdownSubgroup">
                   <label style={{ color: "gray" }}>Subgroup</label>
-                  <DropdownButton
-                    id="dropdownMenuButton2"
-                    size="sm"
-                    title={subgroup}
-                  >
-                    {metricOptions &&
-                      metricOptions.dimensions.subgroup.map((elem, index) => {
-                        return (
-                          <Dropdown.Item
-                            eventKey={index + 1}
-                            onClick={() => {
-                              setSubgroup(elem);
-                            }}
-                          >
-                            {elem}
-                          </Dropdown.Item>
-                        );
-                      })}
-                  </DropdownButton>
+                  {location == "versus" ? (
+                    <DropdownButton
+                      disabled={true}
+                      id="dropdownMenuButton2"
+                      size="sm"
+                      title={subgroup}
+                    >
+                      {metricOptions &&
+                        metricOptions.dimensions.subgroup.map((elem, index) => {
+                          return (
+                            <Dropdown.Item
+                              eventKey={index + 1}
+                              onClick={() => {
+                                setSubgroup(elem);
+                              }}
+                            >
+                              {elem}
+                            </Dropdown.Item>
+                          );
+                        })}
+                    </DropdownButton>
+                  ) : (
+                    <DropdownButton
+                      id="dropdownMenuButton2"
+                      size="sm"
+                      title={subgroup}
+                    >
+                      {metricOptions &&
+                        metricOptions.dimensions.subgroup.map((elem, index) => {
+                          return (
+                            <Dropdown.Item
+                              eventKey={index + 1}
+                              onClick={() => {
+                                setSubgroup(elem);
+                              }}
+                            >
+                              {elem}
+                            </Dropdown.Item>
+                          );
+                        })}
+                    </DropdownButton>
+                  )}
                 </Col>
                 <Col md={6} lg={20}></Col>
               </Row>
