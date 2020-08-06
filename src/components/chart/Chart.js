@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Line } from "react-chartjs-2";
 import "./Chart.scss";
 
-export default ({ metricData, color }) => {
+export default ({ metricData, color, metricID }) => {
   const [chartData, setChartData] = useState([]);
-
+  console.log("ME estoy renderizando");
   const chart = () => {
     setChartData({
       labels: metricData.labels,
@@ -26,81 +26,134 @@ export default ({ metricData, color }) => {
       ],
     });
   };
+
   useEffect(() => {
     chart();
   }, [chartData.length, metricData.labels]);
 
   return (
     <div className="chart" style={{ height: "100px" }}>
-      <Line
-        data={chartData}
-        options={{
-          tooltips: {
-            mode: 'x',
-            intersect: false,
-            displayColors: false,
-            callbacks: {
-              label:function(tooltipItem, data) {
-                if(tooltipItem.datasetIndex == 0) {
-                  return "$" + Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
-                    return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-                  });
-                }else{
-                  let percentage = Math.trunc(((data.datasets[0].data[tooltipItem.index]-Number(tooltipItem.yLabel))/data.datasets[0].data[tooltipItem.index]) *100);
-                  if(percentage > 0)return "YOY " + '▲ ' + percentage + "%";
-                  return "YOY " + '▼ ' + percentage + "%";
-                }
-                
+      {metricID != -1 ? (
+        <Line
+          data={chartData}
+          options={{
+            tooltips: {
+              hover: {
+                animationDuration: 0,
               },
-              labelColor: function(tooltipItem, chart){
-                if (tooltipItem.datasetIndex == 0) {
-                  return {
-                    borderColor: color,
-                    backgroundColor: color
+              mode: "x",
+              intersect: false,
+              displayColors: false,
+              callbacks: {
+                label: function (tooltipItem, data) {
+                  if (tooltipItem.datasetIndex == 0) {
+                    return (
+                      "$" +
+                      Number(tooltipItem.yLabel)
+                        .toFixed(0)
+                        .replace(/./g, function (c, i, a) {
+                          return i > 0 && c !== "." && (a.length - i) % 3 === 0
+                            ? "," + c
+                            : c;
+                        })
+                    );
+                  } else {
+                    let percentage = Math.trunc(
+                      ((data.datasets[0].data[tooltipItem.index] -
+                        Number(tooltipItem.yLabel)) /
+                        data.datasets[0].data[tooltipItem.index]) *
+                        100
+                    );
+                    if (percentage > 0) return "YOY " + "▲ " + percentage + "%";
+                    return "YOY " + "▼ " + percentage + "%";
                   }
-                }else {
-                  return {
-                    borderColor: '#e6e6e6',
-                    backgroundColor: '#e6e6e6'
+                },
+                labelColor: function (tooltipItem, chart) {
+                  if (tooltipItem.datasetIndex == 0) {
+                    return {
+                      borderColor: color,
+                      backgroundColor: color,
+                    };
+                  } else {
+                    return {
+                      borderColor: "#e6e6e6",
+                      backgroundColor: "#e6e6e6",
+                    };
                   }
-                }
-                ;
-              }
-            }
-          }, 
-          scales: {
-            yAxes: [
-              {
-                gridLines: {
-                  display: false,
-                },
-                ticks: {
-                  display: false,
                 },
               },
-            ],
-            xAxes: [
-              {
-                gridLines: {
-                  display: false,
-                },
-                ticks: {
-                  display: false,
-                },
-              },
-            ],
-          },
-          elements: {
-            point: {
-              radius: 0,
             },
-          },
-          legend: {
-            display: false,
-          },
-          maintainAspectRatio: false,
-        }}
-      />
+            scales: {
+              yAxes: [
+                {
+                  gridLines: {
+                    display: false,
+                  },
+                  ticks: {
+                    display: false,
+                  },
+                },
+              ],
+              xAxes: [
+                {
+                  gridLines: {
+                    display: false,
+                  },
+                  ticks: {
+                    display: false,
+                  },
+                },
+              ],
+            },
+            elements: {
+              point: {
+                radius: 0,
+              },
+            },
+            legend: {
+              display: false,
+            },
+            maintainAspectRatio: false,
+          }}
+        />
+      ) : (
+        <Line
+          data={chartData}
+          options={{
+            scales: {
+              yAxes: [
+                {
+                  gridLines: {
+                    display: false,
+                  },
+                  ticks: {
+                    display: false,
+                  },
+                },
+              ],
+              xAxes: [
+                {
+                  gridLines: {
+                    display: false,
+                  },
+                  ticks: {
+                    display: false,
+                  },
+                },
+              ],
+            },
+            elements: {
+              point: {
+                radius: 0,
+              },
+            },
+            legend: {
+              display: false,
+            },
+            maintainAspectRatio: false,
+          }}
+        />
+      )}
     </div>
   );
 };
