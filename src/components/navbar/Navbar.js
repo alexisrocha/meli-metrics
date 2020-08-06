@@ -129,6 +129,9 @@ export default function navbar() {
               </Nav.Link>
             </div>
 
+
+
+
             {!charts.length > 0 ||
             location == "list" ||
             location == "alarms" ? (
