@@ -37,6 +37,7 @@ import { fetchMetricData } from "../../redux/action-creator/MetricData";
 import { removeMetric } from "../../redux/action-creator/Charts";
 import Editmodal from "../editmodal/Editmodal";
 import { Form } from "react-bootstrap";
+import fileDownload from "js-file-download";
 import "./Metric.scss";
 import "../editmodal/Editmodal.scss";
 import "../addmodal/Addmodal.scss";
@@ -109,18 +110,48 @@ export default function Metric({ idMetrica, chart, deleteId }) {
 
   const handleCloseDownload = () => setOpenDownload(false);
 
+  const objectToCSV = (headers, values) => {
+    let CSV = headers + '\n';
+    for(let i = 0; i < Object.keys(values).length; i++) {
+      CSV += values[i].join(';') + '\n'
+    }
+    fileDownload(CSV, `${metric.name}.csv`);
+  };
+
+  const handleDownload = () => {
+    let CSVheaders =
+      "KPI_GROUP;KPI_SUBGROUP;KPI_NAME;KPI_DISPLAY_NAME;SIT_SITE_ID;DATE_VALUE;DATE_AGG;VALUE_ACT;VALUE_LY;FORMATTER";
+    let CSVvalues = {};
+    for (let i = 0; i < metricData.labels.length; i++) {
+      CSVvalues[i] = [];
+      CSVvalues[i].push(
+        metric.group,
+        metric.dimensions.subgroup[0],
+        metric.name,
+        metric.display_name,
+        chart.dimension.site,
+        metricData.labels[i],
+        chart.time_frame,
+        metricData.data[0].data[i],
+        metricData.data[1].data[i],
+        metric.format
+      );
+    }
+    objectToCSV(CSVheaders, CSVvalues)
+    setOpenDownload(false);
+  };
+
   const handleCloseSettings = () => setOpenSetting(false);
 
   const handleCloseCard = () => setOpenCard(false);
 
-
-  const reduceInteg = number => {
+  const reduceInteg = (number) => {
     if (number > 1000000) return (number / 1000000).toFixed(2) + "M";
     if (number < 1000000) return (number / 1000).toFixed(2) + "k";
   };
 
-  const reduceCur2 = number => {
-    if (number > 1000000) return "$" +(number / 1000000).toFixed(2) + "M";
+  const reduceCur2 = (number) => {
+    if (number > 1000000) return "$" + (number / 1000000).toFixed(2) + "M";
     if (number < 1000000) return "$" + (number / 1000).toFixed(2) + "k";
   };
 
@@ -207,13 +238,11 @@ export default function Metric({ idMetrica, chart, deleteId }) {
   };
 
   const formatData = {
-
-    CUR_2: info=>reduceCur2(info),
-    PERC_2: info=>formatPer(info),
-    INTEG: info=>reduceInteg(info),
-    DEC_2: info=>formatDec(info)
-  }
-
+    CUR_2: (info) => reduceCur2(info),
+    PERC_2: (info) => formatPer(info),
+    INTEG: (info) => reduceInteg(info),
+    DEC_2: (info) => formatDec(info),
+  };
 
   const formatDif = {
     CUR_2: (actual, lastYear) => percentageDif(actual, lastYear),
@@ -492,7 +521,7 @@ export default function Metric({ idMetrica, chart, deleteId }) {
               <Button onClick={handleCloseDownload} color="primary">
                 No
               </Button>
-              <Button onClick={handleCloseDownload} color="primary">
+              <Button onClick={handleDownload} color="primary">
                 Yes
               </Button>
             </DialogActions>

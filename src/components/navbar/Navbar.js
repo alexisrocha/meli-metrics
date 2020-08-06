@@ -129,7 +129,7 @@ export default function navbar() {
               </Nav.Link>
             </div>
 
-            {!charts.length > 0 || location == "list" ? (
+            {!charts.length > 0 || location == "list" || location == "alarms" ? (
               <div style={{ width: 253, marginRight: "15px" }}></div>
             ) : (
               <div className="divVisualizacion">
