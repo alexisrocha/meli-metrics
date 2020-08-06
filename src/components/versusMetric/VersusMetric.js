@@ -77,7 +77,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //Aca abajo deberia recibir por props un array de metricas.
-export default function Metric({ idMetrica, chart, deleteId }) {
+export default function Metric({
+  idMetrica,
+  chart,
+  deleteId,
+  setMetricID,
+  metricID,
+}) {
   const classes = useStyles();
   const [modalShow, setModalShow] = React.useState(false);
   const [openInfo, setOpenInfo] = React.useState(false);
@@ -93,7 +99,6 @@ export default function Metric({ idMetrica, chart, deleteId }) {
       ? store.metricData.metricData[idMetrica][chart.time_frame]
       : store.metricData.metricData[idMetrica]
   );
-  const metricId = useSelector((store) => store.chart.metricID);
   const dispatch = useDispatch();
   const deleteCard = () => {
     setOpenCard(true);
@@ -130,6 +135,7 @@ export default function Metric({ idMetrica, chart, deleteId }) {
     return arr[arr.length - 1] - arr2[arr.length - 1];
   };
 
+
   const reduceInteg = number => {
     if (number > 1000000) return +(number / 1000000).toFixed(2) + "M";
     if (number < 1000000) return (number / 1000).toFixed(2) + "k";
@@ -140,25 +146,27 @@ export default function Metric({ idMetrica, chart, deleteId }) {
     if (number < 1000000) return "$" + (number / 1000).toFixed(2) + "k";
   };
 
-  const formatDec = number => (number).toFixed(2);
+  const formatDec = (number) => number.toFixed(2);
 
-  const formatPer = number => (number * 100).toFixed(2) + "%";
+  const formatPer = (number) => (number * 100).toFixed(2) + "%";
 
   const percentage = (arr, arr2) => ((arr / arr2 - 1) * 100).toFixed(0);
 
-  const percentageDif = (actual, lastYear) => percentage(actual, lastYear) + "%";
+  const percentageDif = (actual, lastYear) =>
+    percentage(actual, lastYear) + "%";
 
-  const ppDif = (actual, lastYear) => ((actual - lastYear) * 100).toFixed(0) + ' p.p';
+  const ppDif = (actual, lastYear) =>
+    ((actual - lastYear) * 100).toFixed(0) + " p.p";
 
   const decDif = (actual, lastYear) => (actual - lastYear).toFixed(2);
 
   const changeCSS = (id) => {
-    dispatch(shadowVersus(id));
+    setMetricID(id);
+
     setShadow(true);
   };
 
   const changeCSSOut = () => {
-    dispatch(shadowVersus(-1));
     setShadow(false);
   };
 
@@ -169,38 +177,41 @@ export default function Metric({ idMetrica, chart, deleteId }) {
   };
 
   const formatData = {
+
+
     CUR_2: info=>reduceCur2(info),
     PERC_2: info=>formatPer(info),
     INTEG: info=>reduceInteg(info),
     DEC_2: info=>formatDec(info)
   }
 
+
   const formatDif = {
-    CUR_2: (actual, lastYear)=>percentageDif(actual, lastYear),
-    INTEG: (actual, lastYear)=>percentageDif(actual, lastYear),
-    PERC_2: (actual, lastYear)=>ppDif(actual, lastYear),
-    DEC_2: (actual, lastYear)=>decDif(actual, lastYear)
-  }
+    CUR_2: (actual, lastYear) => percentageDif(actual, lastYear),
+    INTEG: (actual, lastYear) => percentageDif(actual, lastYear),
+    PERC_2: (actual, lastYear) => ppDif(actual, lastYear),
+    DEC_2: (actual, lastYear) => decDif(actual, lastYear),
+  };
 
   var info = [];
   var shadowCssOn = "inset 0px -55px 62px -15px rgba(0,0,0,0.75)";
   var shadowCssOff = "inset 0px 0px 0px 0px rgba(0,0,0,0.75)";
 
   useEffect(() => {
-    if (metricId == idMetrica) {
+    if (metricID == idMetrica) {
       setShadow(true);
     }
-    if (metricId == -1) {
+    if (metricID == -1) {
       setShadow(false);
     }
     dispatch(fetchMetric(idMetrica));
     dispatch(fetchMetricData(idMetrica, chart.time_frame));
   }, [
-    metricId,
     idMetrica,
     charts[selectedChart].length,
     info.length,
     chart.time_frame,
+    metricID,
   ]);
 
   if (charts[selectedChart]) {
@@ -234,7 +245,7 @@ export default function Metric({ idMetrica, chart, deleteId }) {
         >
           <div className="contenedorInfo">
             <div className="value" style={{ marginTop: "10px" }}>
-            <h3>
+              <h3>
                 {metric ? (
                   <strong style={{ color: colors[metric.group] }}>
                     {metricData
@@ -251,22 +262,43 @@ export default function Metric({ idMetrica, chart, deleteId }) {
 
             {metricData && metric ? (
               <>
-                {(metricData.data[0].data[metricData.data[0].data.length - 1] - metricData.data[1].data[metricData.data[1].data.length - 1]) >
+                {metricData.data[0].data[metricData.data[0].data.length - 1] -
+                  metricData.data[1].data[metricData.data[1].data.length - 1] >
                 0 ? (
-                  <div className="positive porcentaje" style={{width: metric.format == 'PERC_2' ? '30%' : '25%'}}>
+                  <div
+                    className="positive porcentaje"
+                    style={{ width: metric.format == "PERC_2" ? "30%" : "25%" }}
+                  >
                     <ArrowDropUpIcon />
                     <div>
                       {metricData
-                        ? formatDif[metric.format](metricData.data[0].data[metricData.data[0].data.length - 1], metricData.data[1].data[metricData.data[1].data.length - 1])
+                        ? formatDif[metric.format](
+                            metricData.data[0].data[
+                              metricData.data[0].data.length - 1
+                            ],
+                            metricData.data[1].data[
+                              metricData.data[1].data.length - 1
+                            ]
+                          )
                         : 0}
                     </div>
                   </div>
                 ) : (
-                  <div className="negative porcentaje" style={{width: metric.format == 'PERC_2' ? '30%' : '25%'}}>
+                  <div
+                    className="negative porcentaje"
+                    style={{ width: metric.format == "PERC_2" ? "30%" : "25%" }}
+                  >
                     <ArrowDropDownIcon />
                     <div style={{ marginRight: "5px" }}>
                       {metricData
-                        ? formatDif[metric.format](metricData.data[0].data[metricData.data[0].data.length - 1], metricData.data[1].data[metricData.data[1].data.length - 1])
+                        ? formatDif[metric.format](
+                            metricData.data[0].data[
+                              metricData.data[0].data.length - 1
+                            ],
+                            metricData.data[1].data[
+                              metricData.data[1].data.length - 1
+                            ]
+                          )
                         : 0}
                     </div>
                   </div>

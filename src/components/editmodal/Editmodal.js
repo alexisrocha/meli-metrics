@@ -19,6 +19,7 @@ export default function editmodal(props) {
   const metricOptions = useSelector(
     (store) => store.metric.metric[props.idMetrica]
   );
+  const location = useSelector((store) => store.location.location);
 
   const [timeFrameButton, setTimeFrameButton] = React.useState(
     props.chart.time_frame
@@ -83,6 +84,11 @@ export default function editmodal(props) {
       </Modal.Header>
       <Modal.Body>
         <Container>
+          {location == "versus" ? (
+            <div className="infoWarning">
+              El cambio que hagas aplica a todas las cards de la misma fila
+            </div>
+          ) : null}
           {editar ? (
             <Row>
               <Col md={3} lg={3}></Col>

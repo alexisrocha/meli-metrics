@@ -31,6 +31,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import CloseIcon from "@material-ui/icons/Close";
+import TextField from "@material-ui/core/TextField";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMetric } from "../../redux/action-creator/Metrics";
 import { fetchMetricData } from "../../redux/action-creator/MetricData";
@@ -433,43 +434,40 @@ export default function Metric({ idMetrica, chart, deleteId }) {
 
           {/*Dialog for InfoIcon*/}
           <Dialog
+            maxWidth={"sm"}
+            fullWidth={true}
             open={openInfo}
             TransitionComponent={Transition}
             onClose={handleCloseInfo}
             aria-labelledby="alert-dialog-slide-title"
             aria-describedby="alert-dialog-slide-description"
           >
-            <DialogTitle id="alert-dialog-slide-title">{"Info"}</DialogTitle>
-            <DialogContent id=" dialogContentForInfo">
-              <Form autoComplete="off" className="formEditAlarm">
-                <span className="editAlarm">TRIGGER 1</span>
-                <Form.Group className="forminput">
-                  <Form.Control placeholder="Period" id="inputSearch" />
-                </Form.Group>
-                <Form.Group className="forminput">
-                  <Form.Control placeholder="Site" id="inputSearch" />
-                </Form.Group>
-                <Form.Group className="forminput">
-                  <Form.Control placeholder="Subgroup" id="inputSearch" />
-                </Form.Group>
-                <Form.Group className="forminput">
-                  <Form.Control placeholder="Type" id="inputSearch" />
-                </Form.Group>
-                <Form.Group className="forminput">
-                  <Form.Control placeholder="Comparison" id="inputSearch" />
-                </Form.Group>
-                <Form.Group className="forminput">
-                  <Form.Control placeholder="Absolute value" id="inputSearch" />
-                </Form.Group>
-                <span className="editAlarm2"> + TRIGGER </span>
-              </Form>
+            <DialogTitle>{"Info"}</DialogTitle>
+            <DialogContent>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                {metric &&
+                  Object.keys(metric).map(function (key, index) {
+                    if (typeof metric[key] == "string") {
+                      return (
+                        <>
+                          <TextField
+                            disabled
+                            id="outlined-disabled"
+                            label={key.toUpperCase().replace("_", " ")}
+                            defaultValue="Hello World"
+                            variant="outlined"
+                            defaultValue={metric[key]}
+                            style={{ marginBottom: 20, color: "black" }}
+                          />
+                        </>
+                      );
+                    }
+                  })}
+              </div>
             </DialogContent>
             <DialogActions>
               <Button onClick={handleCloseInfo} color="primary">
-                Disagree
-              </Button>
-              <Button onClick={handleCloseInfo} color="primary">
-                Agree
+                Ok
               </Button>
             </DialogActions>
           </Dialog>

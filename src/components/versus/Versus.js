@@ -51,7 +51,7 @@ export default function versus() {
   let flagsSelected = [];
 
   useEffect(() => {
-    dispatch(setLocation("main"));
+    dispatch(setLocation("versus"));
     for (let i = 0; i < charts[selectedChart].config.simple.length; i++) {
       if (
         !flagsSelected.includes(
