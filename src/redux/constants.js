@@ -19,4 +19,4 @@ export const ADD_CHART_TO_VERSUS = "ADD_CHART_TO_VERSUS";
 export const DELETE_ROW = "DELETE_ROW";
 export const SET_SHADOW_TO_VERSUS = "SET_SHADOW_TO_VERSUS";
 export const ADD_ALARM = "ADD_ALARM";
-
+export const DELETE_ALARM = "DELETE_ALARM";
