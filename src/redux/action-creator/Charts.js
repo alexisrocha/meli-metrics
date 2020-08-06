@@ -235,6 +235,26 @@ export const addCountry = (flags, newList) => {
   };
 };
 
+export const changeTimeFrame = (flags, newList, newTimeFrame, metricID) => {
+  console.log("New list es:", newList);
+  console.log("Metric ID:", metricID);
+  let listVersus = [];
+  for (let i = 0; i < newList.length; i++) {
+    if (newList[i].metric_id == metricID) {
+      listVersus.push({
+        ...newList[i],
+        time_frame: newTimeFrame,
+        dimension: { ...newList[i].dimension, site: flags },
+      });
+    } else {
+      listVersus.push({ ...newList[i] });
+    }
+  }
+  return (dispatch) => {
+    dispatch(addName(flags, listVersus));
+  };
+};
+
 export const deleteCountry = (flags, list) => {
   let listVersus = [];
   for (let i = 0; i < list.length; i++) {
