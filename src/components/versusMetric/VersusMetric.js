@@ -16,6 +16,7 @@ import MLU from "../../../public/flags/MLU.png";
 import MCO from "../../../public/flags/MCO.png";
 import MGT from "../../../public/flags/MGT.png";
 import MBO from "../../../public/flags/MBO.png";
+import TextField from "@material-ui/core/TextField";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import SettingsIcon from "@material-ui/icons/Settings";
 import GetAppIcon from "@material-ui/icons/GetApp";
@@ -125,9 +126,9 @@ export default function Metric({
   };
 
   const objectToCSV = (headers, values) => {
-    let CSV = headers + '\n';
-    for(let i = 0; i < Object.keys(values).length; i++) {
-      CSV += values[i].join(';') + '\n'
+    let CSV = headers + "\n";
+    for (let i = 0; i < Object.keys(values).length; i++) {
+      CSV += values[i].join(";") + "\n";
     }
     fileDownload(CSV, `${metric.name}.csv`);
   };
@@ -151,7 +152,7 @@ export default function Metric({
         metric.format
       );
     }
-    objectToCSV(CSVheaders, CSVvalues)
+    objectToCSV(CSVheaders, CSVvalues);
     setOpenDownload(false);
   };
 
@@ -427,24 +428,48 @@ export default function Metric({
 
           {/*Dialog for InfoIcon*/}
           <Dialog
+            maxWidth={"xs"}
+            fullWidth={true}
             open={openInfo}
             TransitionComponent={Transition}
             onClose={handleCloseInfo}
             aria-labelledby="alert-dialog-slide-title"
             aria-describedby="alert-dialog-slide-description"
           >
-            <DialogTitle id="alert-dialog-slide-title">{"Info"}</DialogTitle>
+            <DialogTitle className="dialogInfoTitle">{"Info"}</DialogTitle>
             <DialogContent>
-              <DialogContentText id="alert-dialog-slide-description">
-                This is for Info
-              </DialogContentText>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                {metric &&
+                  Object.keys(metric).map(function (key, index) {
+                    if (typeof metric[key] == "string") {
+                      return (
+                        <>
+                          <TextField
+                            disabled
+                            id="outlined-disabled"
+                            label={key.toUpperCase().replace("_", " ")}
+                            defaultValue="Hello World"
+                            variant="outlined"
+                            defaultValue={metric[key]}
+                            style={{ marginBottom: 20, color: "black" }}
+                          />
+                        </>
+                      );
+                    }
+                  })}
+              </div>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleCloseInfo} color="primary">
-                Disagree
-              </Button>
-              <Button onClick={handleCloseInfo} color="primary">
-                Agree
+              <Button
+                onClick={handleCloseInfo}
+                style={{
+                  fontFamily: "Proxima Nova",
+                  backgroundColor: "white",
+                  color: "#449fd7",
+                  border: "0px solid white",
+                }}
+              >
+                Ok
               </Button>
             </DialogActions>
           </Dialog>
