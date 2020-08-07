@@ -496,7 +496,7 @@ export default function Metric({ idMetrica, chart, deleteId }) {
               </div>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleCloseInfo} color="primary">
+              <Button onClick={handleCloseInfo} style={{fontFamily: "Proxima Nova", backgroundColor: "white", color:"#449fd7", border:"0px solid white"}}>
                 Ok
               </Button>
             </DialogActions>
