@@ -130,6 +130,10 @@ export default function Alarm({ metricId, triggers, index }) {
   const metric = useSelector((store) => store.metric.metric[metricId]);
   useEffect(() => {
     dispatch(fetchMetric(metricId));
+
+    return () => {
+      handleCloseSuccess();
+    };
   }, []);
 
   const checkData = () => {
