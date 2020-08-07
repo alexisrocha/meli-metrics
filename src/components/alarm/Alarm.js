@@ -7,7 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMetric } from "../../redux/action-creator/Metrics";
 import "../alarms/Alarms.scss";
-import { deleteAlarm } from "../../redux/action-creator/Alarms";
+import { deleteAlarm, editAlarm } from "../../redux/action-creator/Alarms";
 import TextField from "@material-ui/core/TextField";
 import SaveIcon from "@material-ui/icons/Save";
 import ModalAlarms from "../modalAlarms/ModalAlarms";
@@ -46,14 +46,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 import "../editmodal/Editmodal.scss";
-
+import { addAlarm } from "../../redux/action-creator/Alarms";
 export default function Alarm({ metricId, triggers, index }) {
   const dispatch = useDispatch();
   const [openInfo, setOpenInfo] = React.useState(false);
-  const handleClickOpenInfo = (params) => {
-    setData(params);
+  const handleClickOpenInfo = (params, index) => {
+    setIndexTrigger(index);
+    if (params.trigger_type == "target") {
+      setTime(params.trigger_type);
+      setComparisonOperator(params.config.comparison_operator);
+      setComparisonValue(params.config.value);
+      setSiteComparison(params.config.dimension.site);
+      setSubgroupComparison(params.config.dimension.subgroup);
+    }
+
     setOpenInfo(true);
   };
+  const [indexTrigger, setIndexTrigger] = React.useState(null);
   const [data, setData] = React.useState(null);
   const classes = useStyles();
   const handleCloseInfo = () => setOpenInfo(false);
@@ -126,21 +135,22 @@ export default function Alarm({ metricId, triggers, index }) {
   const checkData = () => {
     if (type == "target") {
       if (
-        period != null &&
         comparisonOperator != null &&
-        comparisonValue != null
+        comparisonValue != null &&
+        siteComparison != null &&
+        subgroupComparison != null
       ) {
         let obj = new Object();
         (obj.trigger_type = "target"),
           (obj.config = {
             dimension: {
-              site: site,
-              subgroup: subgroup,
+              site: siteComparison,
+              subgroup: subgroupComparison,
             },
             comparison_operator: comparisonOperator,
             value: comparisonValue,
           });
-        dispatch(addAlarm(props.idMetrica, obj));
+        dispatch(editAlarm(index, obj, indexTrigger));
         resetData();
         handleClickSuccess();
       } else {
@@ -177,7 +187,7 @@ export default function Alarm({ metricId, triggers, index }) {
             },
             type: "percentage",
           });
-        dispatch(addAlarm(props.idMetrica, obj));
+        dispatch(editAlarm(index, obj, indexTrigger));
         resetData();
         handleClickSuccess();
       }
@@ -232,7 +242,7 @@ export default function Alarm({ metricId, triggers, index }) {
             <EditIcon
               style={{ marginRight: 10 }}
               onClick={() => {
-                handleClickOpenInfo(trigger);
+                handleClickOpenInfo(trigger, index);
               }}
             />
             <DeleteIcon
@@ -286,43 +296,23 @@ export default function Alarm({ metricId, triggers, index }) {
                 <DropdownButton
                   id="dropdownMenuButton"
                   size="sm"
-                  title={period || "Period"}
+                  title={siteComparison || "Site"}
                   style={{ marginBottom: 10 }}
                 >
-                  <Dropdown.Item
-                    eventKey={0}
-                    onClick={() => {
-                      setPeriod("D-1 vs D-1 LM");
-                    }}
-                  >
-                    D-1 vs D-1 LM
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    eventKey={1}
-                    onClick={() => {
-                      setPeriod("D-1 vs D-1 LW");
-                    }}
-                  >
-                    D-1 vs D-1 LW
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    eventKey={2}
-                    onClick={() => {
-                      setPeriod("MTD vs MTD LM");
-                    }}
-                  >
-                    MTD vs MTD LM
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    eventKey={3}
-                    onClick={() => {
-                      setPeriod("YTD vs YTD LY");
-                    }}
-                  >
-                    YTD vs YTD LY
-                  </Dropdown.Item>
+                  {sites &&
+                    sites.map((data, index) => {
+                      return (
+                        <Dropdown.Item
+                          eventKey={index}
+                          onClick={() => {
+                            setSiteComparison(data);
+                          }}
+                        >
+                          {data}
+                        </Dropdown.Item>
+                      );
+                    })}
                 </DropdownButton>
-
                 <DropdownButton
                   id="dropdownMenuButton"
                   size="sm"

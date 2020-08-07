@@ -1,4 +1,4 @@
-import { ADD_ALARM, DELETE_ALARM } from "../constants";
+import { ADD_ALARM, DELETE_ALARM, EDIT_ALARM } from "../constants";
 
 const inicialState = {
   alarms: [],
@@ -6,6 +6,27 @@ const inicialState = {
 
 export default (state = inicialState, action) => {
   switch (action.type) {
+    case EDIT_ALARM: {
+      let newArrayAlarms = [];
+      let newAlarmsEdit = [];
+
+      for (let i = 0; i < state.alarms.length; i++) {
+        if (i == action.metricID) {
+          for (let z = 0; z < state.alarms[i].triggers.length; z++) {
+            if (z == action.triggerID) {
+              newArrayAlarms = [...newArrayAlarms, action.alarm];
+            } else {
+              newArrayAlarms = [...newArrayAlarms, state.alarms[i].triggers[z]];
+            }
+          }
+          newAlarmsEdit[i] = { ...state.alarms[i], triggers: newArrayAlarms };
+        } else {
+          newAlarmsEdit[i] = { ...state.alarms[i] };
+        }
+      }
+
+      return { ...state, alarms: newAlarmsEdit };
+    }
     case ADD_ALARM:
       let array = [];
       let indexPosition = null;
@@ -37,33 +58,20 @@ export default (state = inicialState, action) => {
     case DELETE_ALARM: {
       let newArray = [];
       let newAlarms = [];
-      console.log("Entro al reducer con:", action);
+
       for (let i = 0; i < state.alarms.length; i++) {
-        console.log("Dentro del primer for:", state);
         if (state.alarms[i].metric_id == action.metricID) {
-          console.log("Entro en el primer if");
           for (let z = 0; z < state.alarms[i].triggers.length; z++) {
-            console.log("Entro en el segundo for:", state);
             if (z != action.idTriggers) {
-              console.log(
-                "Entro al if con:",
-                state.alarms[i].triggers[z],
-                " y idTrigger:",
-                action.idTriggers
-              );
               newArray = [...newArray, state.alarms[i].triggers[z]];
-              console.log("New array despues de la asignacion", newArray);
             }
           }
           newAlarms[i] = { ...state.alarms[i], triggers: newArray };
-          console.log("New alarms:", newAlarms);
         } else {
-          console.log("En el else:", newAlarms);
           newAlarms[i] = { ...state.alarms[i] };
         }
       }
-      console.log("Antes del return", state, alarms);
-      console.log("New alarms antes del return:", newAlarms);
+
       return { ...state, alarms: newAlarms };
     }
     default:
