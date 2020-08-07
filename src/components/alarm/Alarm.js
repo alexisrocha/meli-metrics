@@ -227,14 +227,14 @@ export default function Alarm({ metricId, triggers, index }) {
         <Grid xs={2} className="nameOption">
           <span>{metric.name}</span>
         </Grid>
-        <Grid xs={2} className="titles">
-          <span>Type</span>
-        </Grid>
         <Grid xs={1} className="titles">
           <span>Site</span>
         </Grid>
         <Grid xs={2} className="titles">
-          <span>Comparisson</span>
+          <span>Subgroup</span>
+        </Grid>
+        <Grid xs={3} className="titles">
+          <span>Description</span>
         </Grid>
         <Grid xs={3}></Grid>
       </Grid>
@@ -249,23 +249,24 @@ export default function Alarm({ metricId, triggers, index }) {
           <Grid xs={2} className="dataOption">
             <span className="triggerRegular">{"Trigger " + (index + 1)}</span>
           </Grid>
-          <Grid xs={2} className="dataOption">
-            <span>{trigger.trigger_type}</span>
-          </Grid>
           <Grid xs={1} className="dataOption">
             <span>{trigger.config.dimension.site}</span>
           </Grid>
           <Grid xs={2} className="dataOption">
-            <span>{trigger.config.value}</span>
+            <span>{trigger.config.dimension.subgroup}</span>
+          </Grid>
+          <Grid xs={3} className="dataOption">
+            <span>{trigger.trigger_type == "comparison" ? (trigger.config.period.period_desc + " " + trigger.config.comparison_operator + " " + trigger.config.value + "%"): ("Target value " + trigger.config.comparison_operator + " " + + trigger.config.value)}</span>
           </Grid>
           <Grid xs={1} className="dataOption icons">
             <EditIcon
-              style={{ marginRight: 10 }}
+              style={{ marginRight: 10, cursor: "pointer" }}
               onClick={() => {
                 handleClickOpenInfo(trigger, index);
               }}
             />
             <DeleteIcon
+            style={{ cursor: "pointer" }}
               onClick={() => {
                 dispatch(deleteAlarm(metricId, index));
               }}

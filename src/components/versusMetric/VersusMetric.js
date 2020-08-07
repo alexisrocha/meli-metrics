@@ -435,8 +435,9 @@ export default function Metric({
             onClose={handleCloseInfo}
             aria-labelledby="alert-dialog-slide-title"
             aria-describedby="alert-dialog-slide-description"
+            id="infoModal"
           >
-            <DialogTitle className="dialogInfoTitle">{"Info"}</DialogTitle>
+            <DialogTitle id="infoTitle" className="dialogInfoTitle">{"Info"}</DialogTitle>
             <DialogContent>
               <div style={{ display: "flex", flexDirection: "column" }}>
                 {metric &&
@@ -481,6 +482,7 @@ export default function Metric({
             onClose={handleCloseDownload}
             aria-labelledby="alert-dialog-slide-title"
             aria-describedby="alert-dialog-slide-description"
+            className="dialogDownloadCSV"
           >
             <DialogTitle id="alert-dialog-slide-title">Download</DialogTitle>
             <DialogContent>
@@ -489,10 +491,10 @@ export default function Metric({
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleCloseDownload} color="primary">
+              <Button onClick={handleCloseDownload} className="buttonDowloadCSV">
                 No
               </Button>
-              <Button onClick={handleDownload} color="primary">
+              <Button onClick={handleDownload} className="buttonDowloadCSV">
                 Yes
               </Button>
             </DialogActions>
