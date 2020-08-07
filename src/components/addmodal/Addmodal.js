@@ -143,7 +143,7 @@ export default function addmodal(props) {
 
       <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
         <Alert severity="error" onClose={handleClose}>
-          ¡Todos los campos deben estar completos!
+          All fields must be complete!
         </Alert>
       </Snackbar>
 
@@ -153,7 +153,7 @@ export default function addmodal(props) {
         onClose={handleCloseMaxLength}
       >
         <Alert severity="warning" onClose={handleCloseMaxLength}>
-          La longitud maxima es de 30 caracteres!
+          The maximum length is 30 characters!
         </Alert>
       </Snackbar>
     </Modal>

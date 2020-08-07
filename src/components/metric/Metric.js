@@ -112,9 +112,9 @@ export default function Metric({ idMetrica, chart, deleteId }) {
   const handleCloseDownload = () => setOpenDownload(false);
 
   const objectToCSV = (headers, values) => {
-    let CSV = headers + '\n';
-    for(let i = 0; i < Object.keys(values).length; i++) {
-      CSV += values[i].join(';') + '\n'
+    let CSV = headers + "\n";
+    for (let i = 0; i < Object.keys(values).length; i++) {
+      CSV += values[i].join(";") + "\n";
     }
     fileDownload(CSV, `${metric.name}.csv`);
   };
@@ -138,7 +138,7 @@ export default function Metric({ idMetrica, chart, deleteId }) {
         metric.format
       );
     }
-    objectToCSV(CSVheaders, CSVvalues)
+    objectToCSV(CSVheaders, CSVvalues);
     setOpenDownload(false);
   };
 
@@ -463,7 +463,7 @@ export default function Metric({ idMetrica, chart, deleteId }) {
 
           {/*Dialog for InfoIcon*/}
           <Dialog
-            maxWidth={"sm"}
+            maxWidth={"xs"}
             fullWidth={true}
             open={openInfo}
             TransitionComponent={Transition}
@@ -471,7 +471,7 @@ export default function Metric({ idMetrica, chart, deleteId }) {
             aria-labelledby="alert-dialog-slide-title"
             aria-describedby="alert-dialog-slide-description"
           >
-            <DialogTitle>{"Info"}</DialogTitle>
+            <DialogTitle className="dialogInfoTitle">{"Info"}</DialogTitle>
             <DialogContent>
               <div style={{ display: "flex", flexDirection: "column" }}>
                 {metric &&
@@ -508,18 +508,22 @@ export default function Metric({ idMetrica, chart, deleteId }) {
             onClose={handleCloseDownload}
             aria-labelledby="alert-dialog-slide-title"
             aria-describedby="alert-dialog-slide-description"
+            className="dialogDownloadCSV"
           >
             <DialogTitle id="alert-dialog-slide-title">Download</DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-slide-description">
-                Are you sure you want to download data in a csv format?
+                Are you sure you want to download data in a CSV format?
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleCloseDownload} color="primary">
+              <Button
+                onClick={handleCloseDownload}
+                className="buttonDowloadCSV"
+              >
                 No
               </Button>
-              <Button onClick={handleDownload} color="primary">
+              <Button onClick={handleDownload} className="buttonDowloadCSV">
                 Yes
               </Button>
             </DialogActions>
