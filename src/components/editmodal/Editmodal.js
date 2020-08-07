@@ -162,10 +162,7 @@ export default function editmodal(props) {
   };
   const checkData = () => {
     if (type == "target") {
-      if (
-        comparisonOperator != null &&
-        comparisonValue != null
-      ) {
+      if (comparisonOperator != null && comparisonValue != null) {
         let obj = new Object();
         (obj.trigger_type = "target"),
           (obj.config = {
@@ -460,7 +457,9 @@ export default function editmodal(props) {
             </React.Fragment>
           ) : (
             <div>
-              <span className="editAlarm">TRIGGER 1</span>
+              <span className="editAlarm" style={{ marginBottom: 10 }}>
+                TRIGGER{" "}
+              </span>
               <DropdownButton
                 id="dropdownMenuButton"
                 size="sm"
@@ -491,6 +490,50 @@ export default function editmodal(props) {
                   <DropdownButton
                     id="dropdownMenuButton"
                     size="sm"
+                    title={siteComparison || "Site"}
+                    style={{ marginBottom: 10 }}
+                    className="editOption"
+                  >
+                    {sites &&
+                      sites.map((data, index) => {
+                        return (
+                          <Dropdown.Item
+                            eventKey={index}
+                            onClick={() => {
+                              setSiteComparison(data);
+                            }}
+                          >
+                            {data}
+                          </Dropdown.Item>
+                        );
+                      })}
+                  </DropdownButton>
+
+                  <DropdownButton
+                    id="dropdownMenuButton"
+                    size="sm"
+                    title={subgroupComparison || "Subgroup"}
+                    style={{ marginBottom: 10 }}
+                    className="editOption"
+                  >
+                    {subSites &&
+                      subSites.map((data, index) => {
+                        return (
+                          <Dropdown.Item
+                            eventKey={index}
+                            onClick={() => {
+                              setSubgroupComparison(data);
+                            }}
+                          >
+                            {data}
+                          </Dropdown.Item>
+                        );
+                      })}
+                  </DropdownButton>
+
+                  <DropdownButton
+                    id="dropdownMenuButton"
+                    size="sm"
                     title={comparisonOperator || "Target value"}
                     style={{ marginBottom: 10 }}
                     className="editOption"
@@ -512,7 +555,6 @@ export default function editmodal(props) {
                       Lower than
                     </Dropdown.Item>
                   </DropdownButton>
-
                   <Form.Label>Value</Form.Label>
                   <Form.Control
                     type="number"
