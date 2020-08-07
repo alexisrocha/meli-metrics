@@ -24,7 +24,9 @@ export default function Alarms() {
           }
         })
       ) : (
-        <p>Add something first</p>
+        <p id="noAlarms">
+        There are no alarms to display
+        </p>
       )}
     </div>
   );
