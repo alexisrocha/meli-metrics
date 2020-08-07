@@ -387,6 +387,7 @@ export default function Metric({ idMetrica, chart, deleteId }) {
                   metricData={metricData}
                   color={colors[metric.group]}
                   className="chart"
+                  format={metric.format}
                 />
               ) : null}
             </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Line } from "react-chartjs-2";
 import "./Chart.scss";
 
-export default ({ metricData, color, metricID }) => {
+export default ({ metricData, color, metricID, format }) => {
   const [chartData, setChartData] = useState([]);
   console.log("ME estoy renderizando");
   const chart = () => {
@@ -46,7 +46,7 @@ export default ({ metricData, color, metricID }) => {
               displayColors: false,
               callbacks: {
                 label: function (tooltipItem, data) {
-                  if (tooltipItem.datasetIndex == 0) {
+                  if (tooltipItem.datasetIndex == 0 && format == 'CUR_2') {
                     return (
                       "$" +
                       Number(tooltipItem.yLabel)
@@ -57,7 +57,21 @@ export default ({ metricData, color, metricID }) => {
                             : c;
                         })
                     );
-                  } else {
+                  } else if(tooltipItem.datasetIndex == 0 && format == 'INTEG'){
+                    return (
+                      Number(tooltipItem.yLabel)
+                        .toFixed(0)
+                        .replace(/./g, function (c, i, a) {
+                          return i > 0 && c !== "." && (a.length - i) % 3 === 0
+                            ? "," + c
+                            : c;
+                        })
+                    );
+                  } else if(tooltipItem.datasetIndex == 0 && format == 'DEC_2'){
+                    return Number(tooltipItem.yLabel)
+                  }else if(tooltipItem.datasetIndex == 0 && format == 'PERC_2'){
+                    return ((Number(tooltipItem.yLabel)*100).toFixed(2) + '%')
+                  }else {
                     let percentage = Math.trunc(
                       ((data.datasets[0].data[tooltipItem.index] -
                         Number(tooltipItem.yLabel)) /
