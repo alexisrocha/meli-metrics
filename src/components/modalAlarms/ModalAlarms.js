@@ -216,7 +216,7 @@ export default function editmodal(props) {
         <Container>
           {location == "versus" ? (
             <div className="infoWarning">
-              El cambio que hagas aplica a todas las cards de la misma fila
+              The change you make applies to all cards in the same row
             </div>
           ) : null}
           {editar ? (

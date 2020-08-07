@@ -126,6 +126,20 @@
 #dialogContentForInfo {
   width: 75%;
 }
+
 #outlined-disabled-label {
   color: black;
+}
+
+.buttonDowloadCSV {
+  color: #449fd7 !important;
+  font-family: "Proxima Nova" !important;
+}
+
+.dialogDownloadCSV div {
+  border-radius: 15px !important;
+}
+
+.dialogInfoTitle {
+  font-family: "Proxima Nova" !important;
 }

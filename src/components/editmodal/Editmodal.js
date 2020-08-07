@@ -162,10 +162,7 @@ export default function editmodal(props) {
   };
   const checkData = () => {
     if (type == "target") {
-      if (
-        comparisonOperator != null &&
-        comparisonValue != null
-      ) {
+      if (comparisonOperator != null && comparisonValue != null) {
         let obj = new Object();
         (obj.trigger_type = "target"),
           (obj.config = {
@@ -240,7 +237,7 @@ export default function editmodal(props) {
         <Container>
           {location == "versus" ? (
             <div className="infoWarning">
-              El cambio que hagas aplica a todas las cards de la misma fila
+              The change you make applies to all cards in the same row
             </div>
           ) : null}
           {editar ? (
@@ -265,7 +262,7 @@ export default function editmodal(props) {
                 </span>
               </Col>
               <Col xs={6} md={3} lg={3} className="editarSwitch">
-                <span onClick={editarAlarma}>ALARMA</span>
+                <span onClick={editarAlarma}>ALARM</span>
               </Col>
               <Col md={3} lg={3}></Col>
             </Row>
