@@ -14,8 +14,7 @@ import {
   changeMetricInfo,
   changeTimeFrame,
 } from "../../redux/action-creator/Charts";
-import "./Editmodal.scss";
-import "../addmodal/Addmodal";
+import "../editmodal/Editmodal.scss";
 import TextField from "@material-ui/core/TextField";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -120,30 +119,6 @@ export default function editmodal(props) {
     marginRight: "10px",
   };
 
-  const sendData = () => {
-    if (location == "versus") {
-      dispatch(
-        changeTimeFrame(
-          selectedCountries,
-          charts[selectedChart].config.versus,
-          timeFrame,
-          props.chart.metric_id
-        )
-      );
-    } else {
-      dispatch(
-        changeMetricInfo(
-          props.index,
-          props.chart.metric_id,
-          site,
-          subgroup,
-          timeFrame,
-          comparison
-        )
-      );
-    }
-  };
-
   const changeComparisonValue = (e) => {
     if (Number(e.target.value).toString() == "NaN") {
       setComparisonValue(e.target.value.slice(0, -1));
@@ -163,6 +138,7 @@ export default function editmodal(props) {
   const checkData = () => {
     if (type == "target") {
       if (
+        period != null &&
         comparisonOperator != null &&
         comparisonValue != null
       ) {
@@ -261,7 +237,7 @@ export default function editmodal(props) {
               <Col md={3} lg={3}></Col>
               <Col xs={12} md={3} lg={3} className="editarSwitch">
                 <span onClick={editarAlarma} style={{ color: "#cccccc" }}>
-                  EDIT
+                  EDITAR
                 </span>
               </Col>
               <Col xs={6} md={3} lg={3} className="editarSwitch">
@@ -414,7 +390,7 @@ export default function editmodal(props) {
               <Row>
                 <Col xs={12} md={20} className="comparacion">
                   <label style={{ color: "gray", display: "block" }}>
-                    Comparison
+                    Comparacion
                   </label>
                   <div className="buttonModalComparacion">
                     {metricOptions &&
@@ -466,7 +442,6 @@ export default function editmodal(props) {
                 size="sm"
                 title={type[0].toUpperCase() + type.substring(1)}
                 style={{ marginBottom: 10 }}
-                className="editOption"
               >
                 <Dropdown.Item
                   eventKey={0}
@@ -491,9 +466,48 @@ export default function editmodal(props) {
                   <DropdownButton
                     id="dropdownMenuButton"
                     size="sm"
-                    title={comparisonOperator || "Target value"}
+                    title={period || "Period"}
                     style={{ marginBottom: 10 }}
-                    className="editOption"
+                  >
+                    <Dropdown.Item
+                      eventKey={0}
+                      onClick={() => {
+                        setPeriod("D-1 vs D-1 LM");
+                      }}
+                    >
+                      D-1 vs D-1 LM
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      eventKey={1}
+                      onClick={() => {
+                        setPeriod("D-1 vs D-1 LW");
+                      }}
+                    >
+                      D-1 vs D-1 LW
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      eventKey={2}
+                      onClick={() => {
+                        setPeriod("MTD vs MTD LM");
+                      }}
+                    >
+                      MTD vs MTD LM
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      eventKey={3}
+                      onClick={() => {
+                        setPeriod("YTD vs YTD LY");
+                      }}
+                    >
+                      YTD vs YTD LY
+                    </Dropdown.Item>
+                  </DropdownButton>
+
+                  <DropdownButton
+                    id="dropdownMenuButton"
+                    size="sm"
+                    title={comparisonOperator || "Comparison"}
+                    style={{ marginBottom: 10 }}
                   >
                     <Dropdown.Item
                       eventKey={0}
@@ -513,7 +527,7 @@ export default function editmodal(props) {
                     </Dropdown.Item>
                   </DropdownButton>
 
-                  <Form.Label>Value</Form.Label>
+                  <Form.Label>Comparison</Form.Label>
                   <Form.Control
                     type="number"
                     placeholder="5%"
@@ -531,7 +545,6 @@ export default function editmodal(props) {
                     size="sm"
                     title={period || "Period"}
                     style={{ marginBottom: 10 }}
-                    className="editOption"
                   >
                     <Dropdown.Item
                       eventKey={0}
@@ -572,7 +585,6 @@ export default function editmodal(props) {
                     size="sm"
                     title={siteComparison || "Site"}
                     style={{ marginBottom: 10 }}
-                    className="editOption"
                   >
                     {sites &&
                       sites.map((data, index) => {
@@ -594,7 +606,6 @@ export default function editmodal(props) {
                     size="sm"
                     title={subgroupComparison || "Subgroup"}
                     style={{ marginBottom: 10 }}
-                    className="editOption"
                   >
                     {subSites &&
                       subSites.map((data, index) => {
@@ -616,7 +627,6 @@ export default function editmodal(props) {
                     size="sm"
                     title={comparisonOperator || "Comparison"}
                     style={{ marginBottom: 10 }}
-                    className="editOption"
                   >
                     <Dropdown.Item
                       eventKey={0}
@@ -678,22 +688,6 @@ export default function editmodal(props) {
           )}
         </Container>
       </Modal.Body>
-
-      <Modal.Footer className="closeModalEditAlarm">
-        <span className="closeModal" onClick={props.onHide}>
-          Cancel
-        </span>
-        <span
-          className="closeModal"
-          onClick={() => {
-            props.onHide();
-            sendData();
-            checkData();
-          }}
-        >
-          Done
-        </span>
-      </Modal.Footer>
     </Modal>
   );
 }
