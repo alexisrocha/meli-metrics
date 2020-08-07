@@ -14,8 +14,7 @@ import {
   changeMetricInfo,
   changeTimeFrame,
 } from "../../redux/action-creator/Charts";
-import "./Editmodal.scss";
-import "../addmodal/Addmodal";
+import "../editmodal/Editmodal.scss";
 import TextField from "@material-ui/core/TextField";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -118,30 +117,6 @@ export default function editmodal(props) {
   const selected = {
     fontSize: "90%",
     marginRight: "10px",
-  };
-
-  const sendData = () => {
-    if (location == "versus") {
-      dispatch(
-        changeTimeFrame(
-          selectedCountries,
-          charts[selectedChart].config.versus,
-          timeFrame,
-          props.chart.metric_id
-        )
-      );
-    } else {
-      dispatch(
-        changeMetricInfo(
-          props.index,
-          props.chart.metric_id,
-          site,
-          subgroup,
-          timeFrame,
-          comparison
-        )
-      );
-    }
   };
 
   const changeComparisonValue = (e) => {
@@ -713,21 +688,6 @@ export default function editmodal(props) {
           )}
         </Container>
       </Modal.Body>
-
-      <Modal.Footer className="closeModalEditAlarm">
-        <span className="closeModal" onClick={props.onHide}>
-          Cancel
-        </span>
-        <span
-          className="closeModal"
-          onClick={() => {
-            props.onHide();
-            sendData();
-          }}
-        >
-          Done
-        </span>
-      </Modal.Footer>
     </Modal>
   );
 }
