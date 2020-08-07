@@ -11,7 +11,12 @@ export default function Alarms() {
   const list = useSelector((store) => store.alarm.alarms);
   return (
     <div id="alarms" className="container">
-      {metric && list.length ? (
+      {metric &&
+      list
+        .map((elem) => {
+          return elem.triggers.length;
+        })
+        .filter((x) => x > 0).length ? (
         list.map((alarm, index) => {
           if (alarm.triggers.length) {
             return (
@@ -24,9 +29,7 @@ export default function Alarms() {
           }
         })
       ) : (
-        <p id="noAlarms">
-        There are no alarms to display
-        </p>
+        <p id="noAlarms">There are no alarms to display</p>
       )}
     </div>
   );
