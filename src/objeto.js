@@ -293,12 +293,12 @@ let chartObj6 = {
 let getMetric7 = {
   name: "Unique Receivers",
   display_name: "Unique Receivers",
-  group: "MERCADO PAGO",
+  group: "MERCADO ENVIOS",
   description: "Una descripcion de la metrica",
   format: "INTEG",
   dimensions: {
     site: ["MLA", "MLB", "MLC", "MCO", "MLM", "MLU", "MGT", "MBO"],
-    subgroup: ["All site", "entretainment", "vehicles"],
+    subgroup: ["All site", "entertainment", "vehicles"],
   },
   time_frames: [{ desc: "60days" }, { desc: "12months" }, { desc: "4weeks" }],
   date_comp: [
@@ -306,7 +306,8 @@ let getMetric7 = {
     { code: "MOM", desc: "Last Month" },
   ],
 };
-// https://run.mocky.io/v3/8a0f81b7-4ad5-4f0d-989b-180f7ecb8e17
+// new https://run.mocky.io/v3/04bf2482-2a82-4dd2-9727-c17e1cf8efdd
+// old https://run.mocky.io/v3/8a0f81b7-4ad5-4f0d-989b-180f7ecb8e17
 
 let getChart7 = {
   title: "lorem",
