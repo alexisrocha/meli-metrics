@@ -7,9 +7,12 @@ import Grid from "@material-ui/core/Grid";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMetric } from "../../redux/action-creator/Metrics";
 import "../alarms/Alarms.scss";
+import { deleteAlarm } from "../../redux/action-creator/Alarms";
 
-export default function Alarm({ metricId, triggers }) {
+export default function Alarm({ metricId, triggers, index }) {
   const dispatch = useDispatch();
+  console.log("MetricID:", metricId);
+  console.log("Index:", index);
   const metric = useSelector((store) => store.metric.metric[metricId]);
   useEffect(() => {
     dispatch(fetchMetric(metricId));
@@ -23,11 +26,11 @@ export default function Alarm({ metricId, triggers }) {
         className="triggerOptions"
       >
         <Grid xs={2}></Grid>
-        <Grid xs={2}>
+        <Grid xs={2} className="nameOption">
           <span>{metric.name}</span>
         </Grid>
         <Grid xs={2} className="titles">
-          <span>Period</span>
+          <span>Type</span>
         </Grid>
         <Grid xs={1} className="titles">
           <span>Site</span>
@@ -49,17 +52,21 @@ export default function Alarm({ metricId, triggers }) {
             <span className="triggerRegular">{"Trigger " + (index + 1)}</span>
           </Grid>
           <Grid xs={2} className="dataOption">
-            <span>{trigger.config.dimension.site}</span>
+            <span>{trigger.trigger_type}</span>
           </Grid>
           <Grid xs={1} className="dataOption">
-            <span>{trigger.trigger_type}</span>
+            <span>{trigger.config.dimension.site}</span>
           </Grid>
           <Grid xs={2} className="dataOption">
             <span>{trigger.config.value}</span>
           </Grid>
-          <Grid xs={1} className="dataOption icons" >
-            <EditIcon />
-            <DeleteIcon />
+          <Grid xs={1} className="dataOption icons">
+            <EditIcon style={{ marginRight: 10 }} />
+            <DeleteIcon
+              onClick={() => {
+                dispatch(deleteAlarm(metricId, index));
+              }}
+            />
           </Grid>
           <Grid xs={2}></Grid>
         </Grid>

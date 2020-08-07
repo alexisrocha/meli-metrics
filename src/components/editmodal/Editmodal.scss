@@ -43,7 +43,9 @@
 #dropdownMenuButton {
   background-color: white !important;
   color: black !important;
-  border: 0px solid white !important;
+  width: 100%;
+  text-align: left !important;
+  border: 1px solid white !important;
 }
 
 #dropdownMenuButton2 {
@@ -69,4 +71,23 @@
 
 .closeModalEditAlarm {
   padding-bottom: 20px;
+}
+
+.infoWarning {
+  height: 40px;
+  font-size: 90%;
+  color: #68aec8;
+  background-color: #c4edfd;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 23px;
+}
+
+.editOption{
+  width: 100%;
+  text-align: left !important;
+  border: 1px solid #cccccc !important;
 }

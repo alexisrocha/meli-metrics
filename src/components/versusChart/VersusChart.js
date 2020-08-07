@@ -6,6 +6,8 @@ import CloseIcon from "@material-ui/icons/Close";
 import { deleteMetrics } from "../../redux/action-creator/Charts";
 import "./versusContainer.scss";
 export default function VersusChart({ array }) {
+  const [metricID, setMetricID] = React.useState(null);
+
   const metric = useSelector(
     (store) => store.metric.metric[array[0].metric_id]
   );
@@ -59,6 +61,8 @@ export default function VersusChart({ array }) {
             console.log("array es:", array);
             return (
               <VersusMetric
+                metricID={metricID}
+                setMetricID={setMetricID}
                 key={index}
                 idMetrica={elem.metric_id}
                 deleteId={index}
