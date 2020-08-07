@@ -50,14 +50,30 @@ import { addAlarm } from "../../redux/action-creator/Alarms";
 export default function Alarm({ metricId, triggers, index }) {
   const dispatch = useDispatch();
   const [openInfo, setOpenInfo] = React.useState(false);
+  const [paramsData, setParamsData] = React.useState(null);
+  const sitesToMap = useSelector(
+    (store) => store.metric.metric[metricId].dimensions.sites
+  );
+
+  const subGroupToMap = useSelector(
+    (store) => store.metric.metric[metricId].dimensions.subgroup
+  );
   const handleClickOpenInfo = (params, index) => {
     setIndexTrigger(index);
+
     if (params.trigger_type == "target") {
       setTime(params.trigger_type);
       setComparisonOperator(params.config.comparison_operator);
       setComparisonValue(params.config.value);
       setSiteComparison(params.config.dimension.site);
       setSubgroupComparison(params.config.dimension.subgroup);
+    } else {
+      setTime(params.trigger_type);
+      setComparisonOperator(params.config.comparison_operator);
+      setComparisonValue(params.config.value);
+      setSiteComparison(params.config.dimension.site);
+      setSubgroupComparison(params.config.dimension.subgroup);
+      setPeriod(params.config.period.period_desc);
     }
 
     setOpenInfo(true);
@@ -421,8 +437,8 @@ export default function Alarm({ metricId, triggers, index }) {
                   title={subgroupComparison || "Subgroup"}
                   style={{ marginBottom: 10 }}
                 >
-                  {subSites &&
-                    subSites.map((data, index) => {
+                  {subGroupToMap &&
+                    subGroupToMap.map((data, index) => {
                       return (
                         <Dropdown.Item
                           eventKey={index}
@@ -493,7 +509,12 @@ export default function Alarm({ metricId, triggers, index }) {
               checkData();
               handleCloseInfo();
             }}
-            style={{fontFamily: "Proxima Nova", backgroundColor: "white", color:"#449fd7", border:"0px solid white"}}
+            style={{
+              fontFamily: "Proxima Nova",
+              backgroundColor: "white",
+              color: "#449fd7",
+              border: "0px solid white",
+            }}
           >
             Save
           </Button>
