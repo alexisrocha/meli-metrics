@@ -493,7 +493,7 @@ export default function Alarm({ metricId, triggers, index }) {
               checkData();
               handleCloseInfo();
             }}
-            color="primary"
+            style={{fontFamily: "Proxima Nova", backgroundColor: "white", color:"#449fd7", border:"0px solid white"}}
           >
             Save
           </Button>

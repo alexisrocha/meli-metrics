@@ -678,7 +678,7 @@ export default function editmodal(props) {
                     </Dropdown.Item>
                   </DropdownButton>
 
-                  <Form.Label>Comparison</Form.Label>
+                  <Form.Label>Comparison value</Form.Label>
                   <Form.Control
                     type="number"
                     placeholder="5%"
