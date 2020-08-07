@@ -36,6 +36,7 @@ import { fetchMetric } from "../../redux/action-creator/Metrics";
 import { fetchMetricData } from "../../redux/action-creator/MetricData";
 import { removeMetric, shadowVersus } from "../../redux/action-creator/Charts";
 import Editmodal from "../editmodal/Editmodal";
+import fileDownload from "js-file-download";
 import "../metric/Metric.scss";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -120,6 +121,37 @@ export default function Metric({
   };
 
   const handleCloseDownload = () => {
+    setOpenDownload(false);
+  };
+
+  const objectToCSV = (headers, values) => {
+    let CSV = headers + '\n';
+    for(let i = 0; i < Object.keys(values).length; i++) {
+      CSV += values[i].join(';') + '\n'
+    }
+    fileDownload(CSV, `${metric.name}.csv`);
+  };
+
+  const handleDownload = () => {
+    let CSVheaders =
+      "KPI_GROUP;KPI_SUBGROUP;KPI_NAME;KPI_DISPLAY_NAME;SIT_SITE_ID;DATE_VALUE;DATE_AGG;VALUE_ACT;VALUE_LY;FORMATTER";
+    let CSVvalues = {};
+    for (let i = 0; i < metricData.labels.length; i++) {
+      CSVvalues[i] = [];
+      CSVvalues[i].push(
+        metric.group,
+        metric.dimensions.subgroup[0],
+        metric.name,
+        metric.display_name,
+        chart.dimension.site,
+        metricData.labels[i],
+        chart.time_frame,
+        metricData.data[0].data[i],
+        metricData.data[1].data[i],
+        metric.format
+      );
+    }
+    objectToCSV(CSVheaders, CSVvalues)
     setOpenDownload(false);
   };
 
@@ -434,7 +466,7 @@ export default function Metric({
               <Button onClick={handleCloseDownload} color="primary">
                 No
               </Button>
-              <Button onClick={handleCloseDownload} color="primary">
+              <Button onClick={handleDownload} color="primary">
                 Yes
               </Button>
             </DialogActions>
