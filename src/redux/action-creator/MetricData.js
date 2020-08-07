@@ -12,7 +12,7 @@ let url60 = {
   5: "763a58b9-ef20-4863-801a-6069f5916dc6",
   6: "5f8f6696-b594-434e-9553-87e8f531f373",
   7: "a6209efd-db91-4904-b817-a916836dec85",
-  8: "31409546-41a8-467a-a96b-27899ec667ff"
+  8: "a87e0162-954d-4c99-a0c3-6c7188f5baa0"
 };
 let url12 = {
   1: `4a691a71-4bfa-4e56-8cd2-007d7e20404b`,
@@ -22,7 +22,7 @@ let url12 = {
   5: "ff996f39-c774-411f-ba96-fe8ffb64d331",
   6: "eb5f1c4c-a6eb-452f-ad93-80b4b23a50fd",
   7: "91bbbd73-bd82-4418-a2fb-23d1e572c90a",
-  8: "90834ac6-afca-42fb-b14e-588aa2f33e35"
+  8: "7ff3039b-0176-44e0-b018-11d14e4989b2"
 };
 let url4 = {
   1: `c3fd409a-a428-4e86-accb-1ad29687cb76`,
@@ -32,7 +32,7 @@ let url4 = {
   5: "fe04d30b-9bd6-47f2-b969-6f76f2a5cefa",
   6: "ff7e2746-aa2c-42c6-9bc2-51dd4b23ca8f",
   7: "6df298fc-633d-4159-bc6c-fd2c8cb5dab3",
-  8: "33544fbe-5bca-40e4-ae59-a083c4f63bed"
+  8: "0a842b8f-e515-4dfd-b45e-3e04008fcb4c"
 };
 let url = {
   "60days": url60,

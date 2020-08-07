@@ -354,6 +354,7 @@ export default function Metric({
                   color={colors[metric.group]}
                   className="chart"
                   metricID={metricID}
+                  format={metric.format}
                 />
               ) : null}
             </div>
