@@ -191,21 +191,33 @@ export default (state = initialState, action) => {
       };
     case ADD_CHART_TO_VERSUS:
       let newListToAdd = [];
-      action.metric.dimension.site = state.selectedCountries;
-      for (let i = 0; i < state.charts.length; i++) {
-        if (state.selectedChart == i) {
-          newListToAdd[i] = {
-            ...state.charts[i],
-            config: {
-              ...state.charts[i].config,
-              versus: [...state.charts[i].config.versus, action.metric],
-            },
-          };
-        } else {
-          newListToAdd[i] = { ...state.charts[i] };
+      let idToFilter = action.metric.metric_id;
+      console.log("Llego al reducer con:", action);
+      console.log("El state es:", state);
+
+      if (
+        state.charts[state.selectedChart].config.versus.filter(
+          (x) => x.metric_id == idToFilter
+        ).length == 0
+      ) {
+        action.metric.dimension.site = state.selectedCountries;
+        for (let i = 0; i < state.charts.length; i++) {
+          if (state.selectedChart == i) {
+            newListToAdd[i] = {
+              ...state.charts[i],
+              config: {
+                ...state.charts[i].config,
+                versus: [...state.charts[i].config.versus, action.metric],
+              },
+            };
+          } else {
+            newListToAdd[i] = { ...state.charts[i] };
+          }
         }
+        return { ...state, charts: newListToAdd };
+      } else {
+        return { ...state };
       }
-      return { ...state, charts: newListToAdd };
 
     case SET_SHADOW_TO_VERSUS:
       return { ...state, metricID: action.id };

@@ -55,7 +55,10 @@ export default function navbar() {
                     className="linkNavbar"
                     to="/"
                     style={{
-                      color: location == "main" ? "#449fd7" : "#9e9e9e",
+                      color:
+                        location == "main" || location == "versus"
+                          ? "#449fd7"
+                          : "#9e9e9e",
                     }}
                     onClick={() => {
                       setColor("title");
@@ -72,7 +75,10 @@ export default function navbar() {
                       className="linkNavbar"
                       to="/"
                       style={{
-                        color: location == "main" ? "#449fd7" : "#9e9e9e",
+                        color:
+                          location == "main" || location == "versus"
+                            ? "#449fd7"
+                            : "#9e9e9e",
                       }}
                       onClick={() => {
                         setColor("title");
@@ -87,7 +93,10 @@ export default function navbar() {
                       className="linkNavbar"
                       to="/versus"
                       style={{
-                        color: location == "main" ? "#449fd7" : "#9e9e9e",
+                        color:
+                          location == "main" || location == "versus"
+                            ? "#449fd7"
+                            : "#9e9e9e",
                       }}
                       onClick={() => {
                         setColor("title");
@@ -128,9 +137,6 @@ export default function navbar() {
                 </Link>
               </Nav.Link>
             </div>
-
-
-
 
             {!charts.length > 0 ||
             location == "list" ||

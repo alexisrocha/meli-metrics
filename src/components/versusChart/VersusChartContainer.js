@@ -50,12 +50,14 @@ export default function VersusChartContainer() {
     arrayDeCharts = separarArray(replaceSite(chartVersus), flags.length);
   }
   useEffect(() => {}, [arrayDeCharts.length, flags.length]);
+  console.log("Array de charts:", arrayDeCharts);
   return (
     <div>
-      {arrayDeCharts.length ?
-        (arrayDeCharts.map((chart, index) => {
-          return <VersusChart array={chart} />;
-        })): (null)}
+      {arrayDeCharts.length
+        ? arrayDeCharts.map((chart, index) => {
+            return <VersusChart array={chart} />;
+          })
+        : null}
     </div>
   );
 }
