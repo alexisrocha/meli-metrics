@@ -471,8 +471,9 @@ export default function Metric({ idMetrica, chart, deleteId }) {
             onClose={handleCloseInfo}
             aria-labelledby="alert-dialog-slide-title"
             aria-describedby="alert-dialog-slide-description"
+            id="infoModal"
           >
-            <DialogTitle className="dialogInfoTitle">{"Info"}</DialogTitle>
+            <DialogTitle id="infoTitle" className="dialogInfoTitle">{"Info"}</DialogTitle>
             <DialogContent>
               <div style={{ display: "flex", flexDirection: "column" }}>
                 {metric &&
