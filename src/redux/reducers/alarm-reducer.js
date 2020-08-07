@@ -37,18 +37,33 @@ export default (state = inicialState, action) => {
     case DELETE_ALARM: {
       let newArray = [];
       let newAlarms = [];
+      console.log("Entro al reducer con:", action);
       for (let i = 0; i < state.alarms.length; i++) {
+        console.log("Dentro del primer for:", state);
         if (state.alarms[i].metric_id == action.metricID) {
-          for (let z = 0; z < state.alarms[i].length; z++) {
-            if (state.alarms[i].triggers[z] != action.idTriggers) {
-              newArray.push(state.alarms[i].triggers[z]);
+          console.log("Entro en el primer if");
+          for (let z = 0; z < state.alarms[i].triggers.length; z++) {
+            console.log("Entro en el segundo for:", state);
+            if (z != action.idTriggers) {
+              console.log(
+                "Entro al if con:",
+                state.alarms[i].triggers[z],
+                " y idTrigger:",
+                action.idTriggers
+              );
+              newArray = [...newArray, state.alarms[i].triggers[z]];
+              console.log("New array despues de la asignacion", newArray);
             }
           }
           newAlarms[i] = { ...state.alarms[i], triggers: newArray };
+          console.log("New alarms:", newAlarms);
         } else {
-          newAlarms[i] == state.alarms[i];
+          console.log("En el else:", newAlarms);
+          newAlarms[i] = { ...state.alarms[i] };
         }
       }
+      console.log("Antes del return", state, alarms);
+      console.log("New alarms antes del return:", newAlarms);
       return { ...state, alarms: newAlarms };
     }
     default:
