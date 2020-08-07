@@ -52,10 +52,10 @@ export default function VersusChartContainer() {
   useEffect(() => {}, [arrayDeCharts.length, flags.length]);
   return (
     <div>
-      {arrayDeCharts.length &&
-        arrayDeCharts.map((chart, index) => {
+      {arrayDeCharts.length ?
+        (arrayDeCharts.map((chart, index) => {
           return <VersusChart array={chart} />;
-        })}
+        })): (null)}
     </div>
   );
 }

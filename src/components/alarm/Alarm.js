@@ -26,7 +26,7 @@ export default function Alarm({ metricId, triggers, index }) {
         className="triggerOptions"
       >
         <Grid xs={2}></Grid>
-        <Grid xs={2}>
+        <Grid xs={2} className="nameOption">
           <span>{metric.name}</span>
         </Grid>
         <Grid xs={2} className="titles">
