@@ -19,7 +19,7 @@ Para instalar y correr este proyecto ejecute
 ```bash
 npm run build
 ```
-## Vistas finales: 
+## Vistas: 
 * [Vista Home](https://github.com/alexisrocha/MeliMetrics/blob/dev/screenshots/vista-home.png)
 * [Vista Home con metricas](https://github.com/alexisrocha/MeliMetrics/blob/dev/screenshots/vista-home-metricas.png)
 * [Vista Versus](https://github.com/alexisrocha/MeliMetrics/blob/dev/screenshots/vista-versus.png)
