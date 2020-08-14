@@ -15,7 +15,15 @@ Este MVP fue nuestra primera practica profesional realizada durante la cursada d
 * [Chart JS](https://www.chartjs.org/) - Gráficos JavaScript animados e interactivos en el sitio web.
 
 ## Instalacion:
-Para instalar y correr este proyecto ejecute
+* Clonar el proyecto 
+```bash
+git clone https://github.com/alexisrocha/meli-metrics
+```
+* Instalar las dependencias
+```bash
+npm install
+```
+* Correr este proyecto ejecute
 ```bash
 npm run build
 ```
