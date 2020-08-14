@@ -23,7 +23,7 @@ git clone https://github.com/alexisrocha/meli-metrics
 ```bash
 npm install
 ```
-* Correr este proyecto ejecute
+* Para correr este proyecto ejecute
 ```bash
 npm run build
 ```
