@@ -20,7 +20,7 @@ Para instalar y correr este proyecto ejecute
 npm run build
 ```
 ## Vista previa: 
-* Vista previa Home: https://github.com/alexisrocha/MeliMetrics/blob/dev/screenshots/vista-home.png
+* [Vista previa Home](https://github.com/alexisrocha/MeliMetrics/blob/dev/screenshots/vista-home.png)
 * Vista previa Home con metricas: https://github.com/alexisrocha/MeliMetrics/blob/dev/screenshots/vista-home-metricas.png
 * Vista previa Versus: https://github.com/alexisrocha/MeliMetrics/blob/dev/screenshots/vista-versus.png
 * Vista previa My Charts: https://github.com/alexisrocha/MeliMetrics/blob/dev/screenshots/vista-mycharts.png
