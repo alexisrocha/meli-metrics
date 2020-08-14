@@ -19,12 +19,12 @@ Para instalar y correr este proyecto ejecute
 ```bash
 npm run build
 ```
-## Vista previa: 
-* [Vista previa Home](https://github.com/alexisrocha/MeliMetrics/blob/dev/screenshots/vista-home.png)
-* Vista previa Home con metricas: https://github.com/alexisrocha/MeliMetrics/blob/dev/screenshots/vista-home-metricas.png
-* Vista previa Versus: https://github.com/alexisrocha/MeliMetrics/blob/dev/screenshots/vista-versus.png
-* Vista previa My Charts: https://github.com/alexisrocha/MeliMetrics/blob/dev/screenshots/vista-mycharts.png
-* Vista previa My Alarms: https://github.com/alexisrocha/MeliMetrics/blob/dev/screenshots/vista-myalarms.png
+## Vistas finales: 
+* [Vista Home](https://github.com/alexisrocha/MeliMetrics/blob/dev/screenshots/vista-home.png)
+* [Vista Home con metricas](https://github.com/alexisrocha/MeliMetrics/blob/dev/screenshots/vista-home-metricas.png)
+* [Vista Versus](https://github.com/alexisrocha/MeliMetrics/blob/dev/screenshots/vista-versus.png)
+* [Vista My Charts](https://github.com/alexisrocha/MeliMetrics/blob/dev/screenshots/vista-mycharts.png)
+* [Vista My Alarms](https://github.com/alexisrocha/MeliMetrics/blob/dev/screenshots/vista-myalarms.png)
 
 ## Encargados de llevar a cabo el proyecto:
 * Alexis Rocha -> [Alex](https://github.com/alexisrocha)
